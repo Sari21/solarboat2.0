@@ -9,7 +9,8 @@ import java.util.Date;
 @Entity
 @Table
 public class News {
-    @Id @GeneratedValue(strategy= GenerationType.IDENTITY) long id;
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long id;
     private long date;
     private String title;
     private String content;

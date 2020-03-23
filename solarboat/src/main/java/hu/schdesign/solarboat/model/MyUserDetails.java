@@ -16,6 +16,7 @@ public class MyUserDetails implements UserDetails {
     private boolean active;
     private List<GrantedAuthority> authorities;
 
+
     public MyUserDetails(User user) {
         this.userName = user.getUsername();
         this.password = user.getPassword();
@@ -23,11 +24,17 @@ public class MyUserDetails implements UserDetails {
         this.authorities = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+        for (GrantedAuthority g : authorities
+             ) {
+
+        System.out.println(g);
+        }
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+
     }
 
     @Override
