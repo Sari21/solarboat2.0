@@ -14,13 +14,16 @@ import java.util.Optional;
 @RestController
 public class NewsController {
     private final NewsService newsService;
+
     public NewsController(NewsService newsService){
         this.newsService = newsService;
     }
+
     @PostMapping(consumes = "application/json", produces = "application/json")
     public void addNews(@RequestBody News news){
         newsService.addNews(news);
     }
+
     @GetMapping
     public List<News> getAllNews(){
         Iterable<News> it = newsService.getAllNews();
@@ -30,14 +33,17 @@ public class NewsController {
         }
         return list;
     }
+
     @GetMapping(path = "{id}")
     public Optional<News> getNewsById(@PathVariable("id") long id) {
         return newsService.getNewsById(id);
     }
+
     @DeleteMapping(path = "{id}")
     public void deleteNewsById(@PathVariable("id") long id){
         newsService.deleteNewsById(id);
     }
+
     @PutMapping()
     public void modifyNewsById( @RequestBody News news){
         newsService.modifyNewsById(news);
