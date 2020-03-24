@@ -1,8 +1,6 @@
 package hu.schdesign.solarboat.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.util.Date;
 
