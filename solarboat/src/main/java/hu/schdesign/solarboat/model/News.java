@@ -8,7 +8,7 @@ import java.util.Date;
 @Table
 public class News {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private long date;
     private String title;
     private String content;
@@ -26,11 +26,12 @@ public class News {
         this.content = content;
         this.picture = picture;
         Date currentDate = new Date();
-        this.date = currentDate.getTime();
+
+        System.out.println(title);
     }
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

@@ -39,11 +39,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-               // .antMatchers("/**").permitAll()
-                .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/**").permitAll()
+                /*.antMatchers("/admin").hasAuthority("ADMIN")
                 .antMatchers("/user").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/", "/welcome" /*, "static/css", "static/js"*/).permitAll()
-                .and().formLogin();
+                .antMatchers("/", "/welcome" *//*, "static/css", "static/js"*//*).permitAll()
+               */ .and().formLogin();
     }
 
     @Bean

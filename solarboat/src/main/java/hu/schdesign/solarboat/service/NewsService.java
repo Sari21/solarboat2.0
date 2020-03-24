@@ -15,18 +15,19 @@ public class NewsService {
     public NewsService(NewsRepository newsRepository){
         this.newsRepository = newsRepository;
     }
-    public void addNews(News news){
-        newsRepository.save(news);
+
+    public News addNews(News news){
+        return newsRepository.save(news);
     }
     public Iterable<News> getAllNews() {return newsRepository.findAll();}
-    public Optional<News> getNewsById(long id){
-        return newsRepository.findById((int)id);
+    public Optional<News> getNewsById(Long id){
+        return newsRepository.findById(id);
     }
-    public void deleteNewsById(long id){
-        newsRepository.deleteById((int)id);
+    public void deleteNewsById(Long id){
+        newsRepository.deleteById(id);
     }
-    public void modifyNewsById(News news){
-        News n = newsRepository.findById((int)news.getId()).get();
+    public void updateNewsById(News news){
+        News n = newsRepository.findById( news.getId()).get();
         n.setContent(news.getContent());
         n.setDate();
         n.setPicture(news.getPicture());
