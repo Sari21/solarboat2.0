@@ -1,20 +1,21 @@
 package hu.schdesign.solarboat.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hu.schdesign.solarboat.SponsorEnumConverter;
 
 import javax.persistence.*;
 
-@Entity
-@Table
+
 public class Sponsor {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String link;
     private String picture;
+    @Convert(converter = SponsorEnumConverter.class)
     private SponsorGroup group;
-    private int row;
+    private long row;
 
     public Sponsor(@JsonProperty("name") String name,
                    @JsonProperty("link") String link,
@@ -64,15 +65,21 @@ public class Sponsor {
         return group;
     }
 
+
+
     public void setGroup(SponsorGroup group) {
         this.group = group;
     }
 
-    public int getRow() {
+
+    public long getRow() {
         return row;
     }
 
     public void setRow(int row) {
         this.row = row;
+    }
+    public long getId(){
+        return id;
     }
 }

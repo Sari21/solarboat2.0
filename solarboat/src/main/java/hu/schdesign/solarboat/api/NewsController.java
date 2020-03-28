@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.api;
 import hu.schdesign.solarboat.dao.NewsRepository;
 import hu.schdesign.solarboat.model.News;
 import hu.schdesign.solarboat.service.NewsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,17 +16,19 @@ import java.util.Optional;
 public class NewsController {
     private final NewsService newsService;
 
+    @Autowired
     public NewsController(NewsService newsService){
         this.newsService = newsService;
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public void addNews(@RequestBody News news){
-        newsService.addNews(news);
+    public News addNews(@RequestBody News news){
+        return newsService.addNews(news);
     }
 
     @GetMapping
     public List<News> getAllNews(){
+
         Iterable<News> it = newsService.getAllNews();
         List<News> list = new ArrayList<>();
         for(News s : it){
@@ -35,17 +38,17 @@ public class NewsController {
     }
 
     @GetMapping(path = "{id}")
-    public Optional<News> getNewsById(@PathVariable("id") long id) {
+    public Optional<News> getNewsById(@PathVariable("id") Long id) {
         return newsService.getNewsById(id);
     }
 
     @DeleteMapping(path = "{id}")
-    public void deleteNewsById(@PathVariable("id") long id){
+    public void deleteNewsById(@PathVariable("id") Long id){
         newsService.deleteNewsById(id);
     }
 
     @PutMapping()
-    public void modifyNewsById( @RequestBody News news){
-        newsService.modifyNewsById(news);
+    public void updateNewsById( @RequestBody News news){
+        newsService.updateNewsById(news);
     }
 }
