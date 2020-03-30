@@ -27,11 +27,11 @@ public class NewsService {
         newsRepository.deleteById(id);
     }
     public void updateNewsById(News news){
-        News n = newsRepository.findById( news.getId()).get();
+       /* News n = newsRepository.findById( news.getId()).get();
         n.setContent(news.getContent());
         n.setDate();
         n.setPicture(news.getPicture());
-        n.setTitle(news.getTitle());
-        newsRepository.save(n);
+        n.setTitle(news.getTitle());*/
+        newsRepository.save(news);
     }
 }
