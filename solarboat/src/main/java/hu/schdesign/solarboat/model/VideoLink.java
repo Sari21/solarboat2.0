@@ -29,4 +29,7 @@ public class VideoLink {
         this.link = link;
     }
 
+    public long getId() {
+        return id;
+    }
 }

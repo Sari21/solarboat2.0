@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/videolink")
+@RequestMapping("api/videolink")
 public class VideoLinkController {
 
     VideoLinkService videoLinkService;

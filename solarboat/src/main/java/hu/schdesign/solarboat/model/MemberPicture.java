@@ -23,6 +23,10 @@ public class MemberPicture {
         this.team = null;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getPicture() {
         return picture;
     }

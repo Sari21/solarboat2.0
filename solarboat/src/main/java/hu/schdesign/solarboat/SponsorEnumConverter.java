@@ -6,26 +6,26 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Convert;
 
 @Convert
-public class SponsorEnumConverter implements AttributeConverter<SponsorGroup, String> {
+public class SponsorEnumConverter implements AttributeConverter<SponsorGroup, Integer> {
     @Override
-    public String convertToDatabaseColumn(SponsorGroup sg){
+    public Integer convertToDatabaseColumn(SponsorGroup sg){
         if(sg == null)
             return null;
         switch (sg) {
             case MAIN:
-                return "MAIN";
+                return 0;
 
             case TOP:
-                return "TOP";
+                return 1;
 
             case OTHER:
-                return "OTHER";
+                return 2;
 
             case PARTNER:
-                return "PARTNER";
+                return 3;
 
             case UNI:
-                return "UNI";
+                return 4;
 
             default:
                 throw new IllegalArgumentException(sg + " not supported.");
@@ -33,25 +33,25 @@ public class SponsorEnumConverter implements AttributeConverter<SponsorGroup, St
     }
 
     @Override
-    public SponsorGroup convertToEntityAttribute(String string) {
+    public SponsorGroup convertToEntityAttribute(Integer string) {
 
             if (string == null)
                 return null;
 
             switch (string) {
-                case "MAIN":
+                case 0:
                     return SponsorGroup.MAIN;
 
-                case "TOP":
+                case 1:
                     return SponsorGroup.TOP;
 
-                case "OTHER":
+                case 2:
                     return SponsorGroup.OTHER;
 
-                case "PARTNER":
+                case 3:
                     return SponsorGroup.PARTNER;
 
-                case "UNI":
+                case 4:
                     return SponsorGroup.UNI;
 
                 default:

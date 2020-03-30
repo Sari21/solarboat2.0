@@ -26,12 +26,7 @@ public class NewsService {
     public void deleteNewsById(Long id){
         newsRepository.deleteById(id);
     }
-    public void updateNewsById(News news){
-       /* News n = newsRepository.findById( news.getId()).get();
-        n.setContent(news.getContent());
-        n.setDate();
-        n.setPicture(news.getPicture());
-        n.setTitle(news.getTitle());*/
+    public void updateNews(News news){
         newsRepository.save(news);
     }
 }
