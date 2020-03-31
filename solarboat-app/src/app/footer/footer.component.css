@@ -1,0 +1,56 @@
+*{
+    background-color: #1B262F;
+}
+#footer {
+    width: 100%;
+    color: white;
+}
+
+.contact {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    font-size: 2rem;
+}
+
+.cont {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+}
+
+i.fas {
+    padding: 2%;
+}
+
+a:hover img, i.fas:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+a, a:hover {
+    color: white;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.links {
+    padding-top: 2%;
+}
+
+@media only screen and (max-width: 768px) {
+    i.fab, i.fas {
+        padding: 5%;
+    }
+}

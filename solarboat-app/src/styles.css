@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: KelsonSans-Light;
+    src: url(assets/fonts/KelsonSans-Light.otf) format("opentype");
+}
+@font-face {
+    font-family: KelsonSans-Bold;
+    src: url(assets/fonts/KelsonSans-Bold.otf) format("opentype");
+}
+@font-face {
+    font-family: KelsonSans-Normal;
+    src: url(assets/fonts/KelsonSans-Normal.otf) format("opentype");
+}
+
+* {
+    font-family: 'KelsonSans-Light', 'KelsonSans-Bold', 'KelsonSans-Normal';
+}
+
+/*  h0 - title
+    h1 - összes cím
+    h2 - gombok, header feliratai,
+    h3
+*/
+h1{
+    font-family: 'KelsonSans-Light';
+    letter-spacing: 7px;
+    text-transform: uppercase;
+}
