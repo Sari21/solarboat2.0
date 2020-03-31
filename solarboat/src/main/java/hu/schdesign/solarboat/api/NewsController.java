@@ -49,6 +49,6 @@ public class NewsController {
 
     @PutMapping()
     public void updateNewsById( @RequestBody News news){
-        newsService.updateNewsById(news);
+        newsService.updateNews(news);
     }
 }

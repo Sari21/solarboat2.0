@@ -4,37 +4,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.schdesign.solarboat.SponsorEnumConverter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-
+@Entity
+@Table()
 public class Sponsor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String link;
     private String picture;
-    @Convert(converter = SponsorEnumConverter.class)
-    private SponsorGroup group;
-    private long row;
+    private  int rowNumb;
+    private SponsorGroup groupId;
 
-    public Sponsor(@JsonProperty("name") String name,
-                   @JsonProperty("link") String link,
-                   @JsonProperty("picture") String picture,
-                   @JsonProperty("group") SponsorGroup group,
-                   @JsonProperty("row") int row) {
+
+    public Sponsor(@JsonProperty("name") String name, @JsonProperty("link") String link,
+                   @JsonProperty("group") SponsorGroup group, @JsonProperty("picture") String picture, @JsonProperty("row") int rowNumb){
         this.name = name;
         this.link = link;
         this.picture = picture;
-        this.group = group;
-        this.row = row;
+        this.groupId = group;
+        this.rowNumb = rowNumb;
+
     }
 
     public Sponsor() {
         this.name = null;
         this.link = null;
         this.picture = null;
-        this.group = null;
-        this.row = 0;
+        this.groupId = null;
+        this.rowNumb = 0;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -62,24 +66,16 @@ public class Sponsor {
     }
 
     public SponsorGroup getGroup() {
-        return group;
+        return groupId;
     }
-
-
 
     public void setGroup(SponsorGroup group) {
-        this.group = group;
+        this.groupId = group;
+    }
+
+    public int getRow() {
+        return rowNumb;
     }
 
 
-    public long getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-    public long getId(){
-        return id;
-    }
 }
