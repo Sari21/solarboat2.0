@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,27 +12,26 @@ public class TeamList {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
-   // private User members;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Member> members;
     private boolean isLeader;
 
-    public TeamList(@JsonProperty("member") User member, boolean isLeader) {
-        //this.member = member;
+    public TeamList(@JsonProperty("member") ArrayList<Member> members, boolean isLeader) {
+        this.members = members;
         this.isLeader = isLeader;
     }
     public TeamList() {
-        //this.member = null;
+        this.members = null;
         this.isLeader = false;
     }
 
-  /*  public User getMember() {
-        return member;
+    public long getId() {
+        return id;
     }
 
-    public void setMember(User member) {
-        this.member = member;
+    public List<Member> getMembers() {
+        return members;
     }
-    */
-
 
     public boolean isLeader() {
         return isLeader;
