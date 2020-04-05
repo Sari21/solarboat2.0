@@ -23,6 +23,7 @@ public class News {
         this.content_en = null;
         this.picture = null;
         this.date = 0;
+
     }
 
     public News(@JsonProperty("title_hu")String title_hu, @JsonProperty("content_hu") String content_hu, @JsonProperty("title_en")String title_en, @JsonProperty("content_en") String content_en, @JsonProperty("picture") String picture){
@@ -32,7 +33,6 @@ public class News {
         this.content_en = content_en;
         this.picture = picture;
         Date currentDate = new Date();
-
     }
 
 

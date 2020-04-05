@@ -34,6 +34,13 @@ public class Team {
     public Team() {
     }
 
+    public boolean addMember(Member member){
+        return this.members.add(member);
+    }
+    public boolean deleteMember(Member member){
+        return this.members.remove(member);
+    }
+
     public long getId() {
         return id;
     }

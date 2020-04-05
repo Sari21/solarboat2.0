@@ -10,10 +10,12 @@ import java.util.Optional;
 @Service
 public class MemberService {
     private MemberRepository memberRepository;
+
     @Autowired
     MemberService(MemberRepository memberRepository){
         this.memberRepository = memberRepository;
     }
+
     public Member addMember(Member member) { return memberRepository.save(member); }
     public Iterable<Member> getAllMembers() { return memberRepository.findAll(); }
     public Optional<Member> getMemberById(Long id) {

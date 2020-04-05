@@ -20,10 +20,12 @@ public class MemberController {
     public MemberController(MemberService memberService){
         this.memberService = memberService;
     }
+
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public Member addMember(Member member){
+    public Member addMember(@RequestBody Member member){
         return memberService.addMember(member);
     }
+
     @GetMapping
     public List<Member> getAllMembers(){
         Iterable<Member> it = memberService.getAllMembers();
@@ -33,12 +35,13 @@ public class MemberController {
         }
         return list;
     }
+
     @GetMapping(path="{id}")
     public Optional<Member> getMemberById(@PathVariable("id") Long id){
         return memberService.getMemberById(id);
     }
     @PutMapping
-    public Member updateMember(Member member){
+    public Member updateMember(@RequestBody Member member){
         return memberService.updateMember(member);
     }
     @DeleteMapping(path="{id}")

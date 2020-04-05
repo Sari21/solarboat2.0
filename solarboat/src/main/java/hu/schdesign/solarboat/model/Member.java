@@ -28,6 +28,12 @@ public class Member {
     }
 
     public Member() {
+        this.firstName = null;
+        this.lastName = null;
+        this.job_hu = null;
+        this.job_en = null;
+        this.picture = null;
+        this.linkedin = null;
     }
 
     public Long getId() {
@@ -81,4 +87,6 @@ public class Member {
     public void setLinkedin(String linkedin) {
         this.linkedin = linkedin;
     }
+
+
 }
