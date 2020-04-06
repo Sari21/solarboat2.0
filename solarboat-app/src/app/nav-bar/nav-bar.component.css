@@ -1,0 +1,22 @@
+a.nav-link{
+    font-family: 'KelsonSans-Bold';
+    letter-spacing: 7px;
+    text-transform: uppercase;
+}
+nav.navbar.navbar-expand-lg{
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: rgba(233, 236, 239, 0.2);
+}
+.navbar-brand img{
+    width: 200px;
+}
+nav.navbar.navbar-expand-lg.nav-moving{
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #ffffff;
+    height: 8%;
+}
+.navbar-brand.nav-moving img{
+    height: 8%;
+}
