@@ -1,0 +1,119 @@
+div.mainpage-news{
+    background-image: url("/assets/mainpage/news/bg.png");
+    background-color: #283A43;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+
+}
+.jumbotron {
+    background: none;
+    margin-bottom: 0;
+}
+h1.title{
+    color: white;
+}
+
+a.btn, button.btn{
+    display:inline-block;
+    font-size:1rem;
+    font-weight:800;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    padding:19px 35px;
+    border:1px solid #000;
+    text-align:center;
+    position:relative;
+    -webkit-transition:color 0.3s ease-out;
+    transition:color 0.3s ease-out
+}
+a.btn span, button.btnspan{
+    display:inline-block;
+    z-index:2;
+    position:relative
+}
+a.btn:before,button.btn:before{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    bottom:0;
+    content:'';
+    display:block;
+    -webkit-transform:scaleX(0);
+    transform:scaleX(0);
+    -webkit-transition:-webkit-transform 0.3s ease-in-out;
+    transition:-webkit-transform 0.3s ease-in-out;
+    transition:transform 0.3s ease-in-out;
+    transition:transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    background:#000
+}
+a.btn:hover,button.btn:hover{
+    text-decoration:none;
+    color:#fff
+}
+a.btn:hover span, button.btn:hover span
+{-webkit-animation:btn-anim 0.3s ease-out;
+    animation:btn-anim 0.3s ease-out
+}
+a.btn:hover:before,button.btn:hover:before {
+    -webkit-transform:scaleX(1);
+    transform:scaleX(1)
+}
+a.btn.white,button.btn.white{
+    border-color:#fff;
+    color:#fff
+}
+a.btn.white:before,button.btn.white:before{
+    background:#fff
+}
+a.btn.white:hover,button.btn.white:hover{
+    color:#000
+}
+@-webkit-keyframes btn-anim{
+    from{
+        -webkit-transform:translateX(0);
+        transform:translateX(0);
+        opacity:1
+    }
+    49%{
+        -webkit-transform:translateX(10px);
+        transform:translateX(10px);
+        opacity:0
+    }
+    51%{
+        -webkit-transform:translateX(-10px);
+        transform:translateX(-10px);
+        opacity:0
+    }
+    to{
+        -webkit-transform:translateX(0);
+        transform:translateX(0);
+        opacity:1
+    }
+}
+@keyframes btn-anim{
+    from{
+        -webkit-transform:translateX(0);
+        transform:translateX(0);
+        opacity:1
+    }
+    49%{
+        -webkit-transform:translateX(10px);
+        transform:translateX(10px);
+        opacity:0
+    }
+    51%{
+        -webkit-transform:translateX(-10px);
+        transform:translateX(-10px);
+        opacity:0
+    }
+    to{
+        -webkit-transform:translateX(0);
+        transform:translateX(0);
+        opacity:1
+    }
+}
