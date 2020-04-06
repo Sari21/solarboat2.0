@@ -1,19 +1,21 @@
 <div id="footer">
     <div class="contact text-center pt-5">
-        <h1 class="cont2 pt-5">Elérhetőségek</h1>
+        <h1 class="title pt-5 mb-5">Elérhetőségek</h1>
         <div class="col-12 col-md-12">
-            <button title="info@solarboatteam.hu" type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="info@solarboatteam.hu">
-                Tooltip on top
-            </button>
-            <button title="+36-30-73-16-221" type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="+36-30-73-16-221">
-                Tooltip on top
-            </button>
-            <mdb-icon fab icon="500px"></mdb-icon>
-            <a href="https://www.instagram.com/bme_solar_team/?hl=hu" target="blank">
-                <i title="instagram" class="fab fa-instagram fa-3x col-3 col-sm-2 col-md-1"></i>
+
+            <a (click)="tooltip.toggle()" title="info@solarboatteam.hu" class="col-3 col-sm-2 col-md-1 mr-2" placement="top" >
+                <mat-icon aria-hidden="false" aria-label="Example home icon" #tooltip="matTooltip"
+                          matTooltip="info@solarboatteam.hu"
+                          matTooltipPosition="right">mail</mat-icon>
             </a>
-            <a href="https://www.facebook.com/BMEsolar/" target="blank">
-                <i title="facebook" class="fab fa-facebook-square fa-3x col-3 col-sm-2 col-md-1"></i>
+            <a title="+36-30-73-16-221" class="col-3 col-sm-2 col-md-1 mr-2" placement="top" ngbTooltip="+36-30-73-16-221">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">phone</mat-icon>
+            </a>
+            <a href="https://www.instagram.com/bme_solar_team/?hl=hu" class="col-3 col-sm-2 col-md-1 mr-2"target="blank">
+                <i title="instagram" class="fab fa-instagram fa-3x"></i>
+            </a>
+            <a href="https://www.facebook.com/BMEsolar/" target="blank" class="col-3 col-sm-2 col-md-1 mr-2">
+                <i title="facebook" class="fab fa-facebook-square fa-3x "></i>
             </a>
         </div>
     </div>

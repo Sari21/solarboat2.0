@@ -1,9 +1,9 @@
-*{
-    background-color: #1B262F;
-}
+
 #footer {
     width: 100%;
     color: white;
+    background-color: #1B262F;
+
 }
 
 .contact {
@@ -13,29 +13,10 @@
     flex-direction: column;
 }
 
-.icon {
-    font-size: 2rem;
+.mat-icon {
+    transform: scale(1.7);
 }
 
-.cont {
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-}
-
-h2 {
-    display: flex;
-    align-items: center;
-}
-
-i.fas {
-    padding: 2%;
-}
-
-a:hover img, i.fas:hover {
-    opacity: 0.7;
-    cursor: pointer;
-}
 
 a, a:hover {
     color: white;
@@ -43,14 +24,11 @@ a, a:hover {
 
 a:hover {
     opacity: 0.7;
+    cursor: pointer;
 }
 
 .links {
     padding-top: 2%;
 }
 
-@media only screen and (max-width: 768px) {
-    i.fab, i.fas {
-        padding: 5%;
-    }
-}
+

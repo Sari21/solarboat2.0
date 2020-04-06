@@ -1,0 +1,15 @@
+div.aboutus{
+    background-color: #F3F4F4;
+}
+.jumbotron {
+    background: none
+}
+.description p{
+    font-family: 'Helvetica';
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+img{
+    height: 100%;
+}
+
