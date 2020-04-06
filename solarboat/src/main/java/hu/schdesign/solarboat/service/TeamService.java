@@ -28,17 +28,19 @@ public class TeamService {
         if (optMemb != null) {
             Optional<Team> optTeam = teamRepository.findById(teamId);
             if(optTeam != null){
-                optTeam.get().addMember(optMemb.get());
-                return teamRepository.save(optTeam.get());
+                if(!optTeam.get().isMember(optMemb.get())) {
+                    optTeam.get().addMember(optMemb.get());
+                    return teamRepository.save(optTeam.get());
+                }
             }
         }
          return null;
     }
     public Team deleteMember(Long teamId, Long memberId){
         Optional<Member> optMemb = memberRepository.findById(memberId);
-        if (optMemb != null) {
+        if (optMemb.isPresent()) {
             Optional<Team> optTeam = teamRepository.findById(teamId);
-            if(optTeam != null){
+            if(optTeam.isPresent()){
                 optTeam.get().deleteMember(optMemb.get());
                 return teamRepository.save(optTeam.get());
             }
@@ -47,10 +49,21 @@ public class TeamService {
     }
     public Team updateDescription(Long id, String desc_hu, String desc_en){
         Optional<Team> optTeam = teamRepository.findById(id);
-        if(optTeam != null){
+        if(optTeam.isPresent()){
             optTeam.get().setDescription_en(desc_en);
             optTeam.get().setDescription_hu(desc_hu);
             return teamRepository.save(optTeam.get());
+        }
+        return null;
+    }
+    public Team updateLeader(Long teamId, Long memberId){
+        Optional<Member> optMemb = memberRepository.findById(memberId);
+        if (optMemb.isPresent()) {
+            Optional<Team> optTeam = teamRepository.findById(teamId);
+            if (optTeam.isPresent()) {
+                optTeam.get().setLeader(optMemb.get());
+                return teamRepository.save(optTeam.get());
+            }
         }
         return null;
     }

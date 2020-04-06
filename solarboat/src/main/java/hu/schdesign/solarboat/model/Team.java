@@ -13,9 +13,9 @@ public class Team {
     private long id;
     private String name_hu;
     private String name_en;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Member> members;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL)
     private Member leader;
     private String description_hu;
     private String description_en;
@@ -41,6 +41,9 @@ public class Team {
         return this.members.remove(member);
     }
 
+    public boolean isMember(Member member){
+        return members.contains(member);
+    }
     public long getId() {
         return id;
     }

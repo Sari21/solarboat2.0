@@ -46,6 +46,10 @@ public class TeamController {
        }
        return null;
     }
+    @PutMapping(path = "{teamId}/leader/{memberId}")
+    public Team updateLeader(@PathVariable("teamId") Long teamId, @PathVariable("memberId") Long memberId){
+        return this.teamService.updateLeader(teamId, memberId);
+    }
 
 
 }
