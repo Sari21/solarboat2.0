@@ -1,12 +1,13 @@
 package hu.schdesign.solarboat.model.Boat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hu.schdesign.solarboat.csv.CsvPrintable;
 
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Battery {
+public class Battery implements CsvPrintable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -14,6 +15,7 @@ public class Battery {
     private final int _out;
     private final int SoC;
     private final int temp;
+    public static final char CSV_SEPARATOR = ';';
 
     public Battery(@JsonProperty("in") int in, @JsonProperty("out") int out, @JsonProperty("soC") int soC, @JsonProperty("temp") int temp) {
         this._in = in;
@@ -47,5 +49,13 @@ public class Battery {
 
     public int getTemp() {
         return temp;
+    }
+
+    @Override
+    public String printCsv() {
+        return new StringBuilder().append(this._in).append(CSV_SEPARATOR)
+                .append(this._out).append(CSV_SEPARATOR)
+                .append(this.SoC).append(CSV_SEPARATOR)
+                .append(this.temp).toString();
     }
 }

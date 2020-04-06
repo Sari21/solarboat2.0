@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("api/achievements")
+@RequestMapping("api/achievement")
 @RestController
 public class AchievementController {
     private AchievementService achievementService;

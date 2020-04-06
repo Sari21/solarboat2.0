@@ -1,10 +1,16 @@
 package hu.schdesign.solarboat.api;
 
+import hu.schdesign.solarboat.UploadFileResponse;
 import hu.schdesign.solarboat.dao.NewsRepository;
 import hu.schdesign.solarboat.model.News;
+import hu.schdesign.solarboat.service.FileStorageService;
 import hu.schdesign.solarboat.service.NewsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +21,20 @@ import java.util.Optional;
 @RestController
 public class NewsController {
     private final NewsService newsService;
+    private FileStorageService fileStorageService;
+    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
+
 
     @Autowired
     public NewsController(NewsService newsService){
         this.newsService = newsService;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public News addNews(@RequestBody News news){
+    @PostMapping(consumes = "application/json")
+    public News addNews( @RequestBody News news ){
+
         return newsService.addNews(news);
+
     }
 
     @GetMapping

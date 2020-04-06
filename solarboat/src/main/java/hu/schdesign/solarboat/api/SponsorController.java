@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
-@RequestMapping("api/sponsors")
+@RequestMapping("api/sponsor")
 @RestController
 public class SponsorController {
     private final SponsorService sponsorService;
