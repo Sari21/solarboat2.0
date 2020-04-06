@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsPreviewComponent implements OnInit {
 
-  constructor() { }
+    news: string;
+
+  constructor() {
+    this.news = 'Csatlakozás';
+}
 
   ngOnInit(): void {
+
   }
 
 }
