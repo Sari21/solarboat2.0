@@ -20,11 +20,13 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileStorageService {
 
-    private final Path fileStorageLocation;
+    private  Path fileStorageLocation;
+    private final String path;
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
-        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
+        this.path = fileStorageProperties.getUploadDir();
+        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir() )
                 .toAbsolutePath().normalize();
 
         try {
@@ -34,7 +36,14 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    public String storeFile(MultipartFile file, String path) {
+        this.fileStorageLocation = Paths.get(this.path + "/" + path )
+                .toAbsolutePath().normalize();
+        try {
+            Files.createDirectories(this.fileStorageLocation);
+        } catch (Exception ex) {
+            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
