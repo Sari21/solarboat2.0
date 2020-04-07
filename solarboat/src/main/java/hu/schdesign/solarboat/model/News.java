@@ -2,6 +2,7 @@ package hu.schdesign.solarboat.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -15,10 +16,15 @@ public class News {
     private Long id;
     //private Date date;
     private LocalDateTime date;
+    @NotNull
     private String title_hu;
+    @NotNull
     private String content_hu;
+    @NotNull
     private String title_en;
+    @NotNull
     private String content_en;
+    @NotNull
     private String picture;
 
     public News(){
@@ -63,7 +69,7 @@ public class News {
     }
 
     public String getDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         return dtf.format(date);
     }
 

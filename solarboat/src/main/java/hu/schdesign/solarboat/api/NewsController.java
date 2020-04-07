@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class NewsController {
     }
 
     @PostMapping(consumes = "application/json")
-    public News addNews( @RequestBody News news ){
+    public News addNews( @Valid @RequestBody News news ){
 
         return newsService.addNews(news);
 
@@ -56,7 +57,7 @@ public class NewsController {
     }
 
     @PutMapping()
-    public void updateNewsById( @RequestBody News news){
+    public void updateNewsById(@Valid @RequestBody News news){
         newsService.updateNews(news);
     }
 }
