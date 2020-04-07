@@ -17,9 +17,10 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { MainpageNewsComponent } from './mainpage-news/mainpage-news.component';
 import { NewsPreviewComponent } from './news-preview/news-preview.component';
 import { CoverComponent } from './cover/cover.component';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
-  declarations: [AppComponent, MainpageComponent, TeamComponent, FooterComponent, NavBarComponent, AboutusComponent, MainpageNewsComponent, NewsPreviewComponent, CoverComponent],
+  declarations: [AppComponent, MainpageComponent, TeamComponent, FooterComponent, NavBarComponent, AboutusComponent, MainpageNewsComponent, NewsPreviewComponent, CoverComponent, NewsComponent],
   // tslint:disable-next-line:max-line-length
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, NgbModule, MatTooltipModule, MatIconModule, BrowserAnimationsModule, MDBBootstrapModule ],
   bootstrap: [AppComponent],
