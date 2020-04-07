@@ -36,7 +36,7 @@ public class DataGroupController {
         DataGroup dg = new DataGroup();
         return dataGroupService.startDataGroup(dg);
     }
-    @GetMapping(path = "all")
+    @GetMapping
     public Iterable<DataGroup> getAllDataGroups(){
         return dataGroupService.getAllDataGroups();
     }
@@ -52,7 +52,7 @@ public class DataGroupController {
     public Iterable<DataGroup> getLastFiveDataGroups(){
         return dataGroupService.getLastFiveGroups();
     }
-    @DeleteMapping(path = "all")
+    @DeleteMapping
     public void deleteAllDataGroups(){
         dataGroupService.deleteAll();
     }
@@ -66,76 +66,15 @@ public class DataGroupController {
     }
 
     @GetMapping(path = "export")
-    public void exportCSV(HttpServletResponse response) throws Exception {
-
-        //set file name and content type
-        String filename = "boatdata.csv";
-
-        response.setContentType("text/csv");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + filename + "\"");
-
-        char CSV_SEPARATOR = ';'; // it could be a comma or a semi colon
-        Iterable<DataGroup> it = dataGroupService.getAllDataGroups();
-        ArrayList<DataGroup> list = new ArrayList<>();
-        for (DataGroup b : it) {
-            list.add(b);
-        }
-
-
-
-
-        //ArrayList<String> list = new ArrayList<>();
-        //list.add("alma");
-        //list.add("körte");
-        /*
-        Iterable<BoatData> it = boatDataService.getAllData();
-        ArrayList<BoatData> list = new ArrayList<>();
-        for (BoatData b : it) {
-            list.add(b);
-        }*/
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("my_file.csv"))) {
-            writer.append("id").append(CSV_SEPARATOR)
-                    .append("date").append(CSV_SEPARATOR)
-                    .append("tilt_x").append(CSV_SEPARATOR)
-                    .append("tilt_y").append(CSV_SEPARATOR)
-                    .append("tilt_z").append(CSV_SEPARATOR)
-                    .append("acceleration_x").append(CSV_SEPARATOR)
-                    .append("acceleration_y").append(CSV_SEPARATOR)
-                    .append("acceleration_z").append(CSV_SEPARATOR)
-                    .append("compass_x").append(CSV_SEPARATOR)
-                    .append("compass_y").append(CSV_SEPARATOR)
-                    .append("compass_z").append(CSV_SEPARATOR)
-                    .append("motor_RpM").append(CSV_SEPARATOR)
-                    .append("motor_temp").append(CSV_SEPARATOR)
-                    .append("battery_in").append(CSV_SEPARATOR)
-                    .append("battery_out").append(CSV_SEPARATOR)
-                    .append("battery_SoC").append(CSV_SEPARATOR)
-                    .append("battery_temp").append(CSV_SEPARATOR)
-                    .append("error_source").append(CSV_SEPARATOR)
-                    .append("error_message").append(CSV_SEPARATOR)
-                    .append("ExtraTemps").append(System.lineSeparator());
-            list.forEach(data -> {
-                try {
-                    writer.append(data.printCsv());
-
-                   // writer.append(data.printCsv());
-                            /*
-                            .append(""+person.getAcceleration().getX()).append(CSV_SEPARATOR)
-                            .append(""+person.getAcceleration().getY()).append(CSV_SEPARATOR)
-                            .append(""+person.getAcceleration().getZ()).append(CSV_SEPARATOR)
-                            .append(""+person.getBattery().getIn()).append(CSV_SEPARATOR)
-                            .append(""+person.getBattery().getOut()).append(CSV_SEPARATOR)
-                            .append(""+person.getBattery().getSoC()).append(CSV_SEPARATOR).append(System.lineSeparator());*/
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public void exportAll(HttpServletResponse response) throws Exception {
+        dataGroupService.exportAll(response);
     }
-
+    @GetMapping(path ="export/{id}")
+    public void exportById(@PathVariable("id") Long id, HttpServletResponse response) throws Exception {
+        dataGroupService.exportById(id, response);
+    }
+    @GetMapping(path = "export/lastfive")
+    public void exportLastFive(HttpServletResponse response) throws Exception {
+        dataGroupService.exportLastFive(response);
+    }
 }
