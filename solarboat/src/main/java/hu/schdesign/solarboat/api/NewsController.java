@@ -21,9 +21,6 @@ import java.util.Optional;
 @RestController
 public class NewsController {
     private final NewsService newsService;
-    private FileStorageService fileStorageService;
-    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
-
 
     @Autowired
     public NewsController(NewsService newsService){

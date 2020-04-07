@@ -2,6 +2,10 @@ package hu.schdesign.solarboat.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -9,7 +13,8 @@ import java.util.Date;
 public class News {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private long date;
+    //private Date date;
+    private LocalDateTime date;
     private String title_hu;
     private String content_hu;
     private String title_en;
@@ -22,7 +27,7 @@ public class News {
         this.title_en = null;
         this.content_en = null;
         this.picture = null;
-        this.date = 0;
+        this.date = null;
 
     }
 
@@ -32,7 +37,9 @@ public class News {
         this.title_en = title_en;
         this.content_en = content_en;
         this.picture = picture;
-        Date currentDate = new Date();
+       // this.date = new Date();
+        this.date = LocalDateTime.now();
+
     }
 
 
@@ -40,15 +47,25 @@ public class News {
         return id;
     }
 
-    public long getDate() {
-        return date;
+    /*public Date getDate() {
+       return this.date;
+
     }
 
     public void setDate() {
-        Date currentDate = new Date();
-        this.date = currentDate.getTime();
+        this.date = new Date();
     }
 
+     */
+
+    public void setDate() {
+        this.date = LocalDateTime.now();
+    }
+
+    public String getDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return dtf.format(date);
+    }
 
     public String getPicture() {
         return picture;
