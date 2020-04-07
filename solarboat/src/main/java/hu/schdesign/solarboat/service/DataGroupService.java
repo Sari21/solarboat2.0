@@ -86,8 +86,9 @@ public class DataGroupService {
         char CSV_SEPARATOR = ';'; // it could be a comma or a semi colon
 
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("my_file.csv"))) {
-            writer.append("id").append(CSV_SEPARATOR)
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./src/main/resources/uploaded/boatdata.csv"))) {
+            writer.append("groupid").append(CSV_SEPARATOR)
+                    .append("dataid").append(CSV_SEPARATOR)
                     .append("date").append(CSV_SEPARATOR)
                     .append("tilt_x").append(CSV_SEPARATOR)
                     .append("tilt_y").append(CSV_SEPARATOR)
