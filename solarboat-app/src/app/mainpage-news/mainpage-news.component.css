@@ -1,0 +1,20 @@
+div.mainpage-news{
+    background-image: url("/assets/mainpage/news/bg.png");
+    background-color: #283A43;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+
+}
+.jumbotron {
+    background: none;
+    margin-bottom: 0;
+}
+h1.title{
+    color: white;
+}
+
+
+
+
