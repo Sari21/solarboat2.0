@@ -1,0 +1,91 @@
+div.cover{
+
+    background-image: linear-gradient(to bottom, rgba(27,38,47,0) 80%, rgba(27,38,47,1)), url("/assets/mainpage/laptop-uj.png");
+    background-color: #283A43;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+
+}
+h1.h0.title{
+    font-family: 'KelsonSans-Bold';
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 5rem;
+    margin: 0;
+    color: white;
+    line-height: 130%;
+    text-shadow: 2px 2px 5px slategrey;
+    padding-bottom: 3%;
+}
+.jumbotron {
+     background: none;
+     margin: 0;
+ }
+.row.title {
+    padding-top: 5%;
+}
+p{
+    font-family: 'Helvetica';
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: white;
+    text-shadow: 2px 2px 5px lightslategrey;
+}
+
+/* animated sun icon*/
+.icon {
+    display: block;
+    width: 12em;
+    height: 10em;
+    font-size: 1em; /* control icon size here */
+    margin:0;
+    padding:0;
+}
+
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    margin: -1.25em;
+    background: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.375em #fff;
+    animation: spin 12s infinite linear;
+}
+.rays {
+    position: absolute;
+    top: -2em;
+    left: 50%;
+    display: block;
+    width: 0.375em;
+    height: 1.125em;
+    margin-left: -0.1875em;
+    background: #fff;
+    border-radius: 0.25em;
+    box-shadow: 0 5.375em #fff;
+}
+.rays:before,
+.rays:after {
+    content: '';
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    display: block;
+    width: 0.375em;
+    height: 1.125em;
+    transform: rotate(60deg);
+    transform-origin: 50% 3.25em;
+    background: #fff;
+    border-radius: 0.25em;
+    box-shadow: 0 5.375em #fff;
+}
+.rays:before {
+    transform: rotate(120deg);
+}
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
