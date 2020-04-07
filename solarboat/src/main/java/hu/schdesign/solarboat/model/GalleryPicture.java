@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -10,8 +11,11 @@ public class GalleryPicture {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+    @NotNull
     private String picture;
+    @NotNull
     private String title_hu;
+    @NotNull
     private String title_en;
 
     public GalleryPicture(@JsonProperty("title_hu")String title_hu,
@@ -22,6 +26,10 @@ public class GalleryPicture {
         this.title_en = title_en;
     }
     public GalleryPicture() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getPicture() {
