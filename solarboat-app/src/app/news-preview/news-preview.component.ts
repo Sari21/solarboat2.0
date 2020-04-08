@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {News} from '../model/news';
 
 @Component({
   selector: 'app-news-preview',
@@ -7,10 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsPreviewComponent implements OnInit {
 
-    news: string;
 
+  @Input() news: News;
   constructor() {
-    this.news = 'Csatlakozás';
 }
 
   ngOnInit(): void {

@@ -44,6 +44,9 @@ img {
     max-height: 25em;
     display: block;
 }
+.text-wrap{
+    width:30rem;
+}
 
 /* animated arrow */
 .read-more{
