@@ -59,17 +59,13 @@ public class DataGroupController {
     public Optional<DataGroup> getDataGroupById(Long id){
         return dataGroupService.getDataGroupById(id);
     }
-    @GetMapping(path = "last5")
-    public Iterable<DataGroup> getLastFiveDataGroups(){
-        return dataGroupService.getLastFiveGroups();
-    }
-    @DeleteMapping
+        @DeleteMapping
     public void deleteAllDataGroups(){
         dataGroupService.deleteAll();
     }
-    @DeleteMapping(path = "first10")
-    public void deleteFirstTenDataGroups(){
-        dataGroupService.deleteFirstTen();
+    @DeleteMapping(path = "first")
+    public void deleteFirstDataGroups(){
+        dataGroupService.deleteFirst();
     }
     @DeleteMapping(path = "{id}")
     public void deleteDataGroupById(@PathVariable("id") Long id){
@@ -82,8 +78,8 @@ public class DataGroupController {
         return exportFile(request);
     }
     @GetMapping(path = "export/lastfive")
-    public ResponseEntity<Resource> exportLastFive(HttpServletResponse response, HttpServletRequest request) throws Exception {
-        dataGroupService.exportLastFive(response);
+    public ResponseEntity<Resource> exportLast(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        dataGroupService.exportLast(response);
         return exportFile(request);
     }
     @GetMapping(path = "export")

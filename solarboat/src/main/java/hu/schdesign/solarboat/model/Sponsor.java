@@ -2,6 +2,8 @@ package hu.schdesign.solarboat.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.schdesign.solarboat.SponsorEnumConverter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,10 +14,16 @@ public class Sponsor {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String link;
+    @NotNull
+    @Value("String value")
     private String picture;
+    @NotNull
     private  int rowNumb;
+    @NotNull
     private SponsorGroup groupId;
 
 

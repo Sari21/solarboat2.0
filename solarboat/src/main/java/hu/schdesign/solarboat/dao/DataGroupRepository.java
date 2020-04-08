@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface DataGroupRepository extends CrudRepository<DataGroup, Long> {
     Optional<DataGroup> findByDate(LocalDateTime date);
     Optional<DataGroup> findTopByOrderByIdDesc();
-    Iterable<DataGroup> findTop5ByOrderByIdDesc();
-    Iterable<DataGroup> deleteTop5ByOrderByIdAsc();
+   // Iterable<DataGroup> findTop5ByOrderByIdDesc();
+    Optional<DataGroup> deleteTopByOrderByIdAsc();
 }
