@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -15,7 +16,7 @@ public class News {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     //private Date date;
-    private LocalDateTime date;
+    private LocalDate date;
     @NotNull
     private String title_hu;
     @NotNull
@@ -44,7 +45,7 @@ public class News {
         this.content_en = content_en;
         this.picture = picture;
        // this.date = new Date();
-        this.date = LocalDateTime.now();
+        this.date = LocalDate.now();
 
     }
 
@@ -65,11 +66,11 @@ public class News {
      */
 
     public void setDate() {
-        this.date = LocalDateTime.now();
+        this.date = LocalDate.now();
     }
 
     public String getDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
         return dtf.format(date);
     }
 
