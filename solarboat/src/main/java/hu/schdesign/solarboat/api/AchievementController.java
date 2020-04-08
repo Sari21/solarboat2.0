@@ -6,6 +6,7 @@ import hu.schdesign.solarboat.service.AchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,11 +36,11 @@ public class AchievementController {
     }
 
     @PutMapping()
-    public void updateAchievementById( @RequestBody Achievement achievement){
+    public void updateAchievementById(@Valid @RequestBody Achievement achievement){
         achievementService.updateAchievement(achievement);
     }
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public Achievement addAchievement(@RequestBody Achievement achievement){
+    public Achievement addAchievement(@Valid @RequestBody Achievement achievement){
         return achievementService.addAchievment(achievement);
     }
 

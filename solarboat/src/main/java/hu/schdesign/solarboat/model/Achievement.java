@@ -1,8 +1,11 @@
 package hu.schdesign.solarboat.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -11,36 +14,23 @@ public class Achievement {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
-    private String date;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy.MM.dd")
+    private LocalDate date;
+    @NotNull
     private String title_hu;
+    @NotNull
     private String title_en;
+    @NotNull
     private String description_hu;
+    @NotNull
     private String description_en;
+    @NotNull
     private String location_hu;
+    @NotNull
     private String location_en;
+    @NotNull
     private String picture;
-
-    public long getId() {
-        return id;
-    }
-
-    public String getTitle_hu() {
-        return title_hu;
-    }
-
-    public void setTitle_hu(String title_hu) {
-        this.title_hu = title_hu;
-    }
-
-    public String getTitle_en() {
-        return title_en;
-    }
-
-    public void setTitle_en(String title_en) {
-        this.title_en = title_en;
-    }
-
-
 
     public Achievement(@JsonProperty("title_hu") String title_hu,
                        @JsonProperty("title_en") String title_en,
@@ -49,7 +39,7 @@ public class Achievement {
                        @JsonProperty("description_en") String description_en,
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
-                       @JsonProperty("date") String date) {
+                       @JsonProperty("date") LocalDate date) {
         this.title_hu=title_hu;
         this.title_en=title_en;
         this.description_hu = description_hu;
@@ -64,11 +54,11 @@ public class Achievement {
 
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -110,5 +100,24 @@ public class Achievement {
 
     public void setLocation_en(String location_en) {
         this.location_en = location_en;
+    }
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle_hu() {
+        return title_hu;
+    }
+
+    public void setTitle_hu(String title_hu) {
+        this.title_hu = title_hu;
+    }
+
+    public String getTitle_en() {
+        return title_en;
+    }
+
+    public void setTitle_en(String title_en) {
+        this.title_en = title_en;
     }
 }

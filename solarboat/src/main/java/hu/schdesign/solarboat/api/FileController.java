@@ -14,19 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
-public class ImageController {
+public class FileController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     private FileStorageService fileStorageService;
     @Autowired
-    ImageController(FileStorageService fileStorageService){
+    FileController(FileStorageService fileStorageService){
         this.fileStorageService = fileStorageService;
     }
 
