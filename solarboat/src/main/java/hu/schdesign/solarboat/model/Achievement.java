@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -54,8 +55,9 @@ public class Achievement {
 
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        return dtf.format(date);
     }
 
     public void setDate(LocalDate date) {
