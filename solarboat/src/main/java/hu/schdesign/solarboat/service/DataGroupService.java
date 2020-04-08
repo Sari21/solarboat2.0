@@ -1,22 +1,17 @@
 package hu.schdesign.solarboat.service;
 
 import hu.schdesign.solarboat.dao.DataGroupRepository;
-import hu.schdesign.solarboat.dao.NewsRepository;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.OptionalDouble;
 
 @Service
 public class DataGroupService {
@@ -32,9 +27,8 @@ public class DataGroupService {
     public Iterable<DataGroup> getAllDataGroups(){return dataGroupRepository.findAll();}
     public Optional<DataGroup> getLastDataGroup(){return dataGroupRepository.findTopByOrderByIdDesc();}
     public Optional<DataGroup> getDataGroupById(Long id){return dataGroupRepository.findById(id);}
-    public Iterable<DataGroup> getLastFiveGroups(){return dataGroupRepository.findTop5ByOrderByIdDesc();}
     public void deleteAll(){dataGroupRepository.deleteAll();}
-    public void deleteFirstTen(){ dataGroupRepository.deleteTop5ByOrderByIdAsc();}
+    public void deleteFirst(){ dataGroupRepository.deleteTopByOrderByIdAsc();}
     public void deleteById(Long id){dataGroupRepository.deleteById(id);}
     public DataGroup addBoatData(BoatData boatData){
         Optional<DataGroup> optGroup = dataGroupRepository.findTopByOrderByIdDesc();
@@ -64,12 +58,10 @@ public class DataGroupService {
         this.exportList = list;
         exportCSV(response);
     }
-    public void exportLastFive(HttpServletResponse response)throws Exception{
-        Iterable<DataGroup> it = dataGroupRepository.findTop5ByOrderByIdDesc();
+    public void exportLast(HttpServletResponse response)throws Exception{
+        Optional<DataGroup> opt = dataGroupRepository.findTopByOrderByIdDesc();
         ArrayList<DataGroup> list = new ArrayList<>();
-        for (DataGroup b : it) {
-            list.add(b);
-        }
+            list.add(opt.get());
         this.exportList = list;
         exportCSV(response);
     }

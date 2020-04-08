@@ -5,6 +5,7 @@ import hu.schdesign.solarboat.service.SponsorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class SponsorController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public Sponsor addSponsor(@RequestBody Sponsor sponsor){
+    public Sponsor addSponsor(@Valid @RequestBody Sponsor sponsor){
         return sponsorService.addSponsor(sponsor);
     }
     @GetMapping
