@@ -20,7 +20,7 @@ nav.navbar.navbar-expand-lg{
 nav.navbar.navbar-expand-lg.nav-moving{
     padding-left: 10%;
     padding-right: 10%;
-    background-color: #000000;
+    background-color: #fff;
     height: 8%;
 }
 .navbar-brand.nav-moving img{

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScrollToService } from 'ng2-scroll-to-el';
 
 @Component({
   selector: 'app-cover',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoverComponent implements OnInit {
 
-  constructor() { }
+  constructor(private scrollService: ScrollToService) { }
 
   ngOnInit(): void {
   }
