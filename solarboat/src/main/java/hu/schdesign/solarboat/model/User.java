@@ -12,33 +12,6 @@ public class User {
     private String password;
     private boolean active;
     private String roles;
-    private String firstName;
-    private String lastName;
-    private String job_hu;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getJob_hu() {
-        return job_hu;
-    }
-
-    public void setJob_hu(String job_hu) {
-        this.job_hu = job_hu;
-    }
 
     public String getJob_en() {
         return job_en;

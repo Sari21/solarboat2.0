@@ -3,6 +3,8 @@ package hu.schdesign.solarboat.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -11,13 +13,21 @@ public class Team {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+    @NotNull
+    @Size(min=2, max=30)
     private String name_hu;
+    @NotNull
+    @Size(min=2, max=30)
     private String name_en;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Member> members;
     @OneToOne(cascade = CascadeType.ALL)
     private Member leader;
+    @NotNull
+    @Size(min=2, max=2000)
     private String description_hu;
+    @NotNull
+    @Size(min=2, max=2000)
     private String description_en;
 
     public Team(@JsonProperty("name_hu") String name_hu, @JsonProperty("name_en") String name_en,

@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -19,18 +20,25 @@ public class Achievement {
     @DateTimeFormat(pattern = "yyyy.MM.dd")
     private LocalDate date;
     @NotNull
+    @Size(min=2, max=50)
     private String title_hu;
     @NotNull
+    @Size(min=2, max=50)
     private String title_en;
     @NotNull
+    @Size(min=2, max=2000)
     private String description_hu;
     @NotNull
+    @Size(min=2, max=2000)
     private String description_en;
     @NotNull
+    @Size(min=2, max=50)
     private String location_hu;
     @NotNull
+    @Size(min=2, max=50)
     private String location_en;
     @NotNull
+    @Size(min=2, max=50)
     private String picture;
 
     public Achievement(@JsonProperty("title_hu") String title_hu,

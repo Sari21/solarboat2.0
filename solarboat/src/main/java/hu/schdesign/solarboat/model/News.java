@@ -32,7 +32,7 @@ public class News {
     @Size(min=15, max=10000)
     private String content_en;
     @NotNull
-    @Size(min=1, max=50)
+    @Size(min=2, max=50)
     private String picture;
 
     public News(){
