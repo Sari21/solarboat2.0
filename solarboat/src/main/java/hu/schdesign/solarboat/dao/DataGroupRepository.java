@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.dao;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;

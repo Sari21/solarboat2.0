@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -56,10 +55,14 @@ public class DataGroupController {
         return dataGroupService.getLastDataGroup();
     }
     @GetMapping(path = "{id}")
-    public Optional<DataGroup> getDataGroupById(Long id){
+    public Optional<DataGroup> getDataGroupById(@PathVariable("id") Long id){
         return dataGroupService.getDataGroupById(id);
     }
-        @DeleteMapping
+    @GetMapping(path = "/date")
+    public Optional<DataGroup> getDataGroupByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime date){
+        return dataGroupService.getDataGroupByDate(date);
+    }
+    @DeleteMapping
     public void deleteAllDataGroups(){
         dataGroupService.deleteAll();
     }
@@ -74,6 +77,11 @@ public class DataGroupController {
 
     @GetMapping(path ="export/{id}")
     public ResponseEntity<Resource>  exportById(@PathVariable("id") Long id, HttpServletResponse response, HttpServletRequest request) throws Exception {
+        dataGroupService.exportById(id, response);
+        return exportFile(request);
+    }
+    @GetMapping(path ="export/{date}")
+    public ResponseEntity<Resource>  exportByDate(@PathVariable("id") Long id, HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportById(id, response);
         return exportFile(request);
     }

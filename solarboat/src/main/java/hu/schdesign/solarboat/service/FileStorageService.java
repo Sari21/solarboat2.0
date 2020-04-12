@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.service;
 
 import hu.schdesign.solarboat.Exceptions.FileStorageException;
 import hu.schdesign.solarboat.Exceptions.MyFileNotFoundException;
+import hu.schdesign.solarboat.Exceptions.NotAnImageException;
 import hu.schdesign.solarboat.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -37,6 +38,10 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file, String path) {
+        if (!file.getContentType().contains("image")) {
+            return null;
+        }
+
         this.fileStorageLocation = Paths.get(this.path + "/" + path )
                 .toAbsolutePath().normalize();
         try {
