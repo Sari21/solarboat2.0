@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import * as CanvasJS from "../../../canvasjs.min";
 import { HttpClient } from "@angular/common/http";
 import { BoatDataService } from "../boat-data.service";
+import { DataGroup } from "../model/data-group";
 
 @Component({
   selector: "app-graph",
@@ -45,15 +46,7 @@ export class GraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: [
-            { x: 2, y: 850 },
-            { x: 3, y: 889 },
-            { x: 4, y: 890 },
-            { x: 5, y: 899 },
-            { x: 6, y: 903 },
-            { x: 7, y: 925 },
-            { x: 8, y: 899 },
-          ],
+          dataPoints: [this.datax],
         },
         {
           type: "line",
@@ -86,9 +79,15 @@ export class GraphComponent implements OnInit {
     }
   }
   public getLastData() {
-    console.log(this.dataService.getLastDataGroup());
+    var d: DataGroup = this.dataService.getLastDataGroup();
+    d.getTilts();
+    /*d.getTilts[0].forEach((x) => {
+      this.datax.push({ x: 1, y: x });
+    });*/
+    //this.datax = d.getTilts[1];
+    //this.datax = d.getTilts[2];
   }
   public getDataById() {
-    console.log(this.dataService.getDataGroupById(2));
+    this.dataService.getDataGroupById(2);
   }
 }
