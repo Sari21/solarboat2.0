@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 
 solarboat/src/main/resources/public/
+=======
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+>>>>>>> cf0e9b6... removed .idea & added gitignore to root folder
