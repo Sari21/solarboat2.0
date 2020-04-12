@@ -2,6 +2,7 @@ package hu.schdesign.solarboat.model;
 
 import hu.schdesign.solarboat.csv.CsvPrintable;
 import hu.schdesign.solarboat.model.Boat.Coordinates;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.text.DateFormat;
@@ -19,6 +20,7 @@ public class DataGroup implements CsvPrintable {
     private Long id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoatData> boatDataList;
+    @DateTimeFormat(pattern = "yyyy:MM:dd'T'HH:mm")
     private LocalDateTime date;
     private final char CSV_SEPARATOR = ';';
 
