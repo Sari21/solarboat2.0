@@ -26,6 +26,7 @@ public class DataGroup implements CsvPrintable {
     private LocalDateTime date;
     private final char CSV_SEPARATOR = ';';
 
+
     public DataGroup() {
         this.boatDataList = new ArrayList<>();
         this.date = LocalDateTime.now();

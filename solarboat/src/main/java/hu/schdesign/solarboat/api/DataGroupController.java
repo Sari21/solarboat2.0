@@ -2,6 +2,7 @@ package hu.schdesign.solarboat.api;
 
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
+import hu.schdesign.solarboat.model.ResponseBoatData;
 import hu.schdesign.solarboat.service.BoatDataService;
 import hu.schdesign.solarboat.service.DataGroupService;
 import hu.schdesign.solarboat.service.FileStorageService;
@@ -54,6 +55,11 @@ public class DataGroupController {
     public Optional<DataGroup> getLastDataGroup(){
         return dataGroupService.getLastDataGroup();
     }
+    @GetMapping(path = "response")
+    public ResponseBoatData getResponseBoatData(){ return dataGroupService.getDataGroupTilt();}
+
+
+
     @GetMapping(path = "{id}")
     public Optional<DataGroup> getDataGroupById(@PathVariable("id") Long id){
         return dataGroupService.getDataGroupById(id);

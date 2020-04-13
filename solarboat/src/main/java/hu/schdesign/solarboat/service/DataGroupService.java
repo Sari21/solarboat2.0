@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.service;
 import hu.schdesign.solarboat.dao.DataGroupRepository;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
+import hu.schdesign.solarboat.model.ResponseBoatData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class DataGroupService {
     public Optional<DataGroup> getLastDataGroup(){return dataGroupRepository.findTopByOrderByIdDesc();}
     public Optional<DataGroup> getDataGroupById(Long id){return dataGroupRepository.findById(id);}
     public Optional<DataGroup> getDataGroupByDate(LocalDateTime date){return dataGroupRepository.findByDate(date);
+    }
+    public ResponseBoatData getDataGroupTilt(){
+        return  new ResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().get());
     }
     public void deleteAll(){dataGroupRepository.deleteAll();}
     public void deleteFirst(){ dataGroupRepository.deleteTopByOrderByIdAsc();}
