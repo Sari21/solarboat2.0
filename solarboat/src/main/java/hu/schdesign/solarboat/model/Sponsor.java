@@ -7,6 +7,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table()
@@ -15,11 +16,11 @@ public class Sponsor {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @NotNull
+    @Size(min=1, max=50)
     private String name;
-    @NotNull
+    @Size(min=1, max=200)
     private String link;
     @NotNull
-    @Value("String value")
     private String picture;
     @NotNull
     private  int rowNumb;

@@ -3,6 +3,8 @@ package hu.schdesign.solarboat.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -10,10 +12,18 @@ public class Member {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min=1, max=20)
     private String firstName;
+    @NotNull
+    @Size(min=1, max=20)
     private String lastName;
+    @NotNull
+    @Size(min=1, max=50)
     private String job_hu;
+    @Size(min=1, max=50)
     private String job_en;
+    @NotNull
     private String picture;
     private String linkedin;
 

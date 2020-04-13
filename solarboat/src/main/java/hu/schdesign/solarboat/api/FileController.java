@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 @RestController
@@ -28,16 +31,25 @@ public class FileController {
     }
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("path") String path) {
+    public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("path") String path) throws URISyntaxException {
         String fileName = fileStorageService.storeFile(file, path);
+
+        if(fileName == null){
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.setLocation(new URI("api/uploadFile"));
+            responseHeaders.set("Error", "The file is not an image");
+            return new ResponseEntity<UploadFileResponse>(null, responseHeaders, HttpStatus.BAD_REQUEST);
+        }
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)
                 .toUriString();
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(new URI("api/uploadFile"));
 
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+        return new ResponseEntity<UploadFileResponse>(new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize()), responseHeaders, HttpStatus.CREATED);
     }
 
   /*  @PostMapping("/uploadMultipleFiles")

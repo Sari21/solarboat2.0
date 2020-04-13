@@ -12,7 +12,7 @@ export class CoverComponent implements OnInit {
   constructor(private scrollService: ScrollToService,  private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getWatts();
+    //this.getWatts();
   }
   getWatts(): void {
     console.log('getWatts');

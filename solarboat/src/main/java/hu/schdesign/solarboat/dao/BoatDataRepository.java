@@ -11,4 +11,5 @@ public interface BoatDataRepository extends CrudRepository<BoatData, Long> {
     Optional<BoatData> findTopByOrderByIdDesc();
 
 
+
 }
