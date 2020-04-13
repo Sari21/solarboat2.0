@@ -41,9 +41,9 @@ public class ResponseBoatData {
         ArrayList<dataPair> cy = new ArrayList();
         ArrayList<dataPair> cz = new ArrayList();
         for(BoatData bd : dataGroup.getBoatDataList()){
-            cx.add(new dataPair(bd.getId(), bd.getTilt().getX()));
-            cy.add(new dataPair(bd.getId(), bd.getTilt().getY()));
-            cz.add(new dataPair(bd.getId(), bd.getTilt().getZ()));
+            cx.add(new dataPair(bd.getId(), bd.getCompass().getX()));
+            cy.add(new dataPair(bd.getId(), bd.getCompass().getY()));
+            cz.add(new dataPair(bd.getId(), bd.getCompass().getZ()));
         }
         compassTemp.add(cx);
         compassTemp.add(cy);

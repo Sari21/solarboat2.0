@@ -52,7 +52,7 @@ public class DataGroupController {
         return dataGroupService.getAllDataGroups();
     }
     */
-    
+
     @GetMapping(path = "last")
     public Optional<DataGroup> getLastDataGroup(){
         return dataGroupService.getLastDataGroup();

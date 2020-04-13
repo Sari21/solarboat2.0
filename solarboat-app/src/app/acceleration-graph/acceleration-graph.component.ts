@@ -1,7 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injectable } from "@angular/core";
 import * as CanvasJS from "../../../canvasjs.min";
 import { BoatDataService } from "../boat-data.service";
 
+@Injectable({
+  providedIn: "root",
+})
 @Component({
   selector: "app-acceleration-graph",
   templateUrl: "./acceleration-graph.component.html",
@@ -9,31 +12,10 @@ import { BoatDataService } from "../boat-data.service";
 })
 export class AccelerationGraphComponent implements OnInit {
   constructor(private dataService: BoatDataService) {}
-  datax;
-  datay;
-  dataz;
 
-  ngOnInit() {
-    // this.getLastData();
-    //this.getDataById();
-    this.getTilt();
-  }
+  ngOnInit() {}
 
-  public getTilt() {
-    var datas = this.dataService.getLastDataGroupTilt();
-    var res;
-
-    datas.toPromise().then((data) => {
-      res = data;
-      this.datax = res.acceleration[0];
-      this.datay = res.acceleration[1];
-      this.dataz = res.acceleration[2];
-      console.log("1" + res);
-      this.printGraph();
-    });
-    console.log("2" + res);
-  }
-  public printGraph() {
+  public printGraph(res) {
     var chart = new CanvasJS.Chart("chartContainerAcc", {
       title: {
         text: "gyorsulás",
@@ -58,29 +40,29 @@ export class AccelerationGraphComponent implements OnInit {
         {
           type: "line",
           axisYType: "secondary",
-          name: "San Fransisco",
+          name: "x",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datax,
+          dataPoints: res[0],
         },
         {
           type: "line",
           axisYType: "secondary",
-          name: "Manhattan",
+          name: "y",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datay,
+          dataPoints: res[1],
         },
         {
           type: "line",
           axisYType: "secondary",
-          name: "Manhattan",
+          name: "z",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.dataz,
+          dataPoints: res[2],
         },
       ],
     });

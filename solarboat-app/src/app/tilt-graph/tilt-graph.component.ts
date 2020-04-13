@@ -1,7 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injectable } from "@angular/core";
 import * as CanvasJS from "../../../canvasjs.min";
 import { BoatDataService } from "../boat-data.service";
 
+@Injectable({
+  providedIn: "root",
+})
 @Component({
   selector: "app-tilt-graph",
   templateUrl: "./tilt-graph.component.html",
@@ -9,31 +12,10 @@ import { BoatDataService } from "../boat-data.service";
 })
 export class TiltGraphComponent implements OnInit {
   constructor(private dataService: BoatDataService) {}
-  datax;
-  datay;
-  dataz;
 
-  ngOnInit() {
-    // this.getLastData();
-    //this.getDataById();
-    this.getTilt();
-  }
+  ngOnInit() {}
 
-  public getTilt() {
-    var datas = this.dataService.getLastDataGroupTilt();
-    var res;
-
-    datas.toPromise().then((data) => {
-      res = data;
-      this.datax = res.tilt[0];
-      this.datay = res.tilt[1];
-      this.dataz = res.tilt[2];
-      console.log("1" + res);
-      this.printGraph();
-    });
-    console.log("2" + res);
-  }
-  public printGraph() {
+  public printGraph(tilt) {
     var chart = new CanvasJS.Chart("chartContainerTilt", {
       title: {
         text: "dőlésszög",
@@ -62,7 +44,7 @@ export class TiltGraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datax,
+          dataPoints: tilt[0],
         },
         {
           type: "line",
@@ -71,7 +53,7 @@ export class TiltGraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datay,
+          dataPoints: tilt[1],
         },
         {
           type: "line",
@@ -80,7 +62,7 @@ export class TiltGraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.dataz,
+          dataPoints: tilt[2],
         },
       ],
     });

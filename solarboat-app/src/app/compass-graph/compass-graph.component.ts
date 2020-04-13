@@ -1,7 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injectable } from "@angular/core";
 import * as CanvasJS from "../../../canvasjs.min";
 import { BoatDataService } from "../boat-data.service";
 
+@Injectable({
+  providedIn: "root",
+})
 @Component({
   selector: "app-compass-graph",
   templateUrl: "./compass-graph.component.html",
@@ -9,31 +12,10 @@ import { BoatDataService } from "../boat-data.service";
 })
 export class CompassGraphComponent implements OnInit {
   constructor(private dataService: BoatDataService) {}
-  datax;
-  datay;
-  dataz;
 
-  ngOnInit() {
-    // this.getLastData();
-    //this.getDataById();
-    this.getTilt();
-  }
+  ngOnInit() {}
 
-  public getTilt() {
-    var datas = this.dataService.getLastDataGroupTilt();
-    var res;
-
-    datas.toPromise().then((data) => {
-      res = data;
-      this.datax = res.compass[0];
-      this.datay = res.compass[1];
-      this.dataz = res.compass[2];
-      console.log("1" + res);
-      this.printGraph();
-    });
-    console.log("2" + res);
-  }
-  public printGraph() {
+  public printGraph(res) {
     var chart = new CanvasJS.Chart("chartContainerComp", {
       title: {
         text: "iránytű",
@@ -62,7 +44,7 @@ export class CompassGraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datax,
+          dataPoints: res[0],
         },
         {
           type: "line",
@@ -71,7 +53,7 @@ export class CompassGraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datay,
+          dataPoints: res[1],
         },
         {
           type: "line",
@@ -80,7 +62,7 @@ export class CompassGraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.dataz,
+          dataPoints: res[2],
         },
       ],
     });
