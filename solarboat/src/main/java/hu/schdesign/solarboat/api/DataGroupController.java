@@ -47,15 +47,17 @@ public class DataGroupController {
         DataGroup dg = new DataGroup();
         return dataGroupService.startDataGroup(dg);
     }
-    @GetMapping
+   /* @GetMapping
     public Iterable<DataGroup> getAllDataGroups(){
         return dataGroupService.getAllDataGroups();
     }
+    */
+
     @GetMapping(path = "last")
     public Optional<DataGroup> getLastDataGroup(){
         return dataGroupService.getLastDataGroup();
     }
-    @GetMapping(path = "response")
+    @GetMapping
     public ResponseBoatData getResponseBoatData(){ return dataGroupService.getDataGroupTilt();}
 
 
