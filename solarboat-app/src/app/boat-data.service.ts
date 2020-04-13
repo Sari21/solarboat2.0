@@ -37,7 +37,7 @@ export class BoatDataService {
     /* var res;
     var result = [];
     */
-    return this.http.get("http://localhost:8080/api/dataGroup/response");
+    return this.http.get("http://localhost:8080/api/dataGroup");
     /*.toPromise()
       .then((data) => {
         res = data;

@@ -21,6 +21,9 @@ import { NewsComponent } from "./news/news.component";
 import { ScrollToModule } from "ng2-scroll-to-el";
 import { BoatDataComponent } from "./boat-data/boat-data.component";
 import { GraphComponent } from './graph/graph.component';
+import { TiltGraphComponent } from './tilt-graph/tilt-graph.component';
+import { AccelerationGraphComponent } from './acceleration-graph/acceleration-graph.component';
+import { CompassGraphComponent } from './compass-graph/compass-graph.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { GraphComponent } from './graph/graph.component';
     NewsComponent,
     BoatDataComponent,
     GraphComponent,
+    TiltGraphComponent,
+    AccelerationGraphComponent,
+    CompassGraphComponent,
   ],
   // tslint:disable-next-line:max-line-length
   imports: [

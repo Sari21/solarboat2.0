@@ -1,48 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injectable } from "@angular/core";
 import * as CanvasJS from "../../../canvasjs.min";
-import { HttpClient } from "@angular/common/http";
 import { BoatDataService } from "../boat-data.service";
-import { DataGroup } from "../model/data-group";
 
-@Component({
-  selector: "app-graph",
-  templateUrl: "./graph.component.html",
-  styleUrls: ["./graph.component.css"],
+@Injectable({
+  providedIn: "root",
 })
-export class GraphComponent implements OnInit {
-  constructor(private http: HttpClient, private dataService: BoatDataService) {}
-  datax;
-  datay;
-  dataz;
+@Component({
+  selector: "app-tilt-graph",
+  templateUrl: "./tilt-graph.component.html",
+  styleUrls: ["./tilt-graph.component.css"],
+})
+export class TiltGraphComponent implements OnInit {
+  constructor(private dataService: BoatDataService) {}
 
-  ngOnInit() {
-    // this.getLastData();
-    //this.getDataById();
-    this.getTilt();
-  }
-  public getLastData() {
-    var d: DataGroup = this.dataService.getLastDataGroup();
-    d.getTilts();
-  }
-  public getDataById() {
-    console.log(this.dataService.getDataGroupById(2));
-  }
-  public getTilt() {
-    var datas = this.dataService.getLastDataGroupTilt();
-    var res;
+  ngOnInit() {}
 
-    datas.toPromise().then((data) => {
-      res = data;
-      this.datax = res.tilt[0];
-      this.datay = res.tilt[1];
-      this.dataz = res.tilt[2];
-      console.log("1" + res);
-      this.printGraph();
-    });
-    console.log("2" + res);
-  }
-  public printGraph() {
-    var chart = new CanvasJS.Chart("chartContainer2", {
+  public printGraph(tilt) {
+    var chart = new CanvasJS.Chart("chartContainerTilt", {
       title: {
         text: "dőlésszög",
       },
@@ -66,29 +40,29 @@ export class GraphComponent implements OnInit {
         {
           type: "line",
           axisYType: "secondary",
-          name: "San Fransisco",
+          name: "x",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datax,
+          dataPoints: tilt[0],
         },
         {
           type: "line",
           axisYType: "secondary",
-          name: "Manhattan",
+          name: "y",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.datay,
+          dataPoints: tilt[1],
         },
         {
           type: "line",
           axisYType: "secondary",
-          name: "Manhattan",
+          name: "z",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: this.dataz,
+          dataPoints: tilt[2],
         },
       ],
     });
