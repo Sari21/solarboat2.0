@@ -11,13 +11,37 @@ import { DataGroup } from "../model/data-group";
 })
 export class GraphComponent implements OnInit {
   constructor(private http: HttpClient, private dataService: BoatDataService) {}
-  datax = [];
-  datay = [];
-  dataz = [];
+  datax;
+  datay;
+  dataz;
 
   ngOnInit() {
-    this.getLastData();
-    this.getDataById();
+    // this.getLastData();
+    //this.getDataById();
+    this.getTilt();
+  }
+  public getLastData() {
+    var d: DataGroup = this.dataService.getLastDataGroup();
+    d.getTilts();
+  }
+  public getDataById() {
+    console.log(this.dataService.getDataGroupById(2));
+  }
+  public getTilt() {
+    var datas = this.dataService.getLastDataGroupTilt();
+    var res;
+
+    datas.toPromise().then((data) => {
+      res = data;
+      this.datax = res.tilt[0];
+      this.datay = res.tilt[1];
+      this.dataz = res.tilt[2];
+      console.log("1" + res);
+      this.printGraph();
+    });
+    console.log("2" + res);
+  }
+  public printGraph() {
     var chart = new CanvasJS.Chart("chartContainer", {
       title: {
         text: "dőlésszög",
@@ -46,7 +70,7 @@ export class GraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: [this.datax],
+          dataPoints: this.datax,
         },
         {
           type: "line",
@@ -55,15 +79,16 @@ export class GraphComponent implements OnInit {
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
-          dataPoints: [
-            { x: 2, y: 1200 },
-            { x: 3, y: 1200 },
-            { x: 4, y: 1190 },
-            { x: 5, y: 1180 },
-            { x: 6, y: 1250 },
-            { x: 7, y: 1270 },
-            { x: 8, y: 1300 },
-          ],
+          dataPoints: this.datay,
+        },
+        {
+          type: "line",
+          axisYType: "secondary",
+          name: "Manhattan",
+          showInLegend: true,
+          markerSize: 0,
+          yValueFormatString: "$#,###k",
+          dataPoints: this.dataz,
         },
       ],
     });
@@ -77,17 +102,5 @@ export class GraphComponent implements OnInit {
       }
       chart.render();
     }
-  }
-  public getLastData() {
-    var d: DataGroup = this.dataService.getLastDataGroup();
-    d.getTilts();
-    /*d.getTilts[0].forEach((x) => {
-      this.datax.push({ x: 1, y: x });
-    });*/
-    //this.datax = d.getTilts[1];
-    //this.datax = d.getTilts[2];
-  }
-  public getDataById() {
-    this.dataService.getDataGroupById(2);
   }
 }

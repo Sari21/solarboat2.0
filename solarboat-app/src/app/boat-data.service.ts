@@ -33,6 +33,21 @@ export class BoatDataService {
     return dataGroup;
   }
 
+  public getLastDataGroupTilt() {
+    /* var res;
+    var result = [];
+    */
+    return this.http.get("http://localhost:8080/api/dataGroup/response");
+    /*.toPromise()
+      .then((data) => {
+        res = data;
+        result = res.tilt;
+        console.log(result);
+        return result;
+      })
+      */
+  }
+
   public setData(data, dataGroup) {
     var rawData = data;
     var boatData = new BoatData();
