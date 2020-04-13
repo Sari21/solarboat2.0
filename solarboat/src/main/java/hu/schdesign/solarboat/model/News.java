@@ -2,7 +2,9 @@ package hu.schdesign.solarboat.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,14 +20,19 @@ public class News {
     //private Date date;
     private LocalDate date;
     @NotNull
+    @Size(min=2, max=50)
     private String title_hu;
     @NotNull
+    @Size(min=15, max=10000)
     private String content_hu;
     @NotNull
+    @Size(min=2, max=50)
     private String title_en;
     @NotNull
+    @Size(min=15, max=10000)
     private String content_en;
     @NotNull
+    @Size(min=2, max=50)
     private String picture;
 
     public News(){

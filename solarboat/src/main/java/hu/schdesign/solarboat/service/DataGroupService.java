@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -27,6 +29,8 @@ public class DataGroupService {
     public Iterable<DataGroup> getAllDataGroups(){return dataGroupRepository.findAll();}
     public Optional<DataGroup> getLastDataGroup(){return dataGroupRepository.findTopByOrderByIdDesc();}
     public Optional<DataGroup> getDataGroupById(Long id){return dataGroupRepository.findById(id);}
+    public Optional<DataGroup> getDataGroupByDate(LocalDateTime date){return dataGroupRepository.findByDate(date);
+    }
     public void deleteAll(){dataGroupRepository.deleteAll();}
     public void deleteFirst(){ dataGroupRepository.deleteTopByOrderByIdAsc();}
     public void deleteById(Long id){dataGroupRepository.deleteById(id);}
@@ -42,6 +46,7 @@ public class DataGroupService {
             return dataGroupRepository.save(newGroup);
         }
     }
+
     public void exportAll(HttpServletResponse response)throws Exception{
         Iterable<DataGroup> it = dataGroupRepository.findAll();
         ArrayList<DataGroup> list = new ArrayList<>();
@@ -58,6 +63,7 @@ public class DataGroupService {
         this.exportList = list;
         exportCSV(response);
     }
+
     public void exportLast(HttpServletResponse response)throws Exception{
         Optional<DataGroup> opt = dataGroupRepository.findTopByOrderByIdDesc();
         ArrayList<DataGroup> list = new ArrayList<>();
