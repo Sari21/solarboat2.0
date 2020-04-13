@@ -1,16 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import * as CanvasJS from "../../../canvasjs.min";
-import { HttpClient } from "@angular/common/http";
 import { BoatDataService } from "../boat-data.service";
-import { DataGroup } from "../model/data-group";
 
 @Component({
-  selector: "app-graph",
-  templateUrl: "./graph.component.html",
-  styleUrls: ["./graph.component.css"],
+  selector: "app-tilt-graph",
+  templateUrl: "./tilt-graph.component.html",
+  styleUrls: ["./tilt-graph.component.css"],
 })
-export class GraphComponent implements OnInit {
-  constructor(private http: HttpClient, private dataService: BoatDataService) {}
+export class TiltGraphComponent implements OnInit {
+  constructor(private dataService: BoatDataService) {}
   datax;
   datay;
   dataz;
@@ -20,13 +18,7 @@ export class GraphComponent implements OnInit {
     //this.getDataById();
     this.getTilt();
   }
-  public getLastData() {
-    var d: DataGroup = this.dataService.getLastDataGroup();
-    d.getTilts();
-  }
-  public getDataById() {
-    console.log(this.dataService.getDataGroupById(2));
-  }
+
   public getTilt() {
     var datas = this.dataService.getLastDataGroupTilt();
     var res;
@@ -42,7 +34,7 @@ export class GraphComponent implements OnInit {
     console.log("2" + res);
   }
   public printGraph() {
-    var chart = new CanvasJS.Chart("chartContainer2", {
+    var chart = new CanvasJS.Chart("chartContainer1", {
       title: {
         text: "dőlésszög",
       },
