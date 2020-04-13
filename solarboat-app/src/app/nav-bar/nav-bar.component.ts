@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 
 @Component({
@@ -7,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  public page: string;
 
-  constructor() { }
+  constructor(private router: Router) {
+    console.log(this.router.url);
+    this.page = this.router.url;
+  }
 
   ngOnInit(): void {
   }
