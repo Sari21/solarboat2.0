@@ -34,7 +34,7 @@ export class TiltGraphComponent implements OnInit {
     console.log("2" + res);
   }
   public printGraph() {
-    var chart = new CanvasJS.Chart("chartContainer1", {
+    var chart = new CanvasJS.Chart("chartContainerTilt", {
       title: {
         text: "dőlésszög",
       },
@@ -58,7 +58,7 @@ export class TiltGraphComponent implements OnInit {
         {
           type: "line",
           axisYType: "secondary",
-          name: "San Fransisco",
+          name: "x",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
@@ -67,7 +67,7 @@ export class TiltGraphComponent implements OnInit {
         {
           type: "line",
           axisYType: "secondary",
-          name: "Manhattan",
+          name: "y",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
@@ -76,7 +76,7 @@ export class TiltGraphComponent implements OnInit {
         {
           type: "line",
           axisYType: "secondary",
-          name: "Manhattan",
+          name: "z",
           showInLegend: true,
           markerSize: 0,
           yValueFormatString: "$#,###k",
