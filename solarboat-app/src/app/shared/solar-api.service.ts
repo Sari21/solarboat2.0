@@ -12,9 +12,9 @@ export class SolarApiService {
     this.http
         .get('https://api.forecast.solar/estimate/watts/47.475498098/19.05333312/0/0/0.312')
         .subscribe((data) => {
-          this.watts = 0; // number
+          this.watts = 404; // number
           this.watts = this.setWatts(data);
-          console.log('service 1' + this.watts);
+          console.log('service ' + this.watts);
           return this.watts;
           //console.log(this.setWatts(data));
           //return this.setWatts(data);
@@ -26,6 +26,7 @@ export class SolarApiService {
   }*/
 
   private setWatts(data) {
+    let watts = 0;
     const rawData = data;
     const date = new Date();
     const month = 1 + date.getMonth();
@@ -40,7 +41,7 @@ export class SolarApiService {
       if ( element.substring(0, 13) == currentDateHours.toString()) {
         console.log(element);
         console.log('if 1 ' + rawData.result[element]);
-        return rawData.result[element];
+        watts = rawData.result[element];
       }
     });
     function addZero(i: number) {
@@ -49,6 +50,7 @@ export class SolarApiService {
       }
       return i;
     }
+    return watts;
   }
 }
 

@@ -14,7 +14,7 @@ export class CoverComponent implements OnInit {
   constructor(private scrollService: ScrollToService,  private http: HttpClient, private solarapiservice: SolarApiService) { }
 
   ngOnInit(): void {
-    //this.getWatts();
+    this.getWatts();
   }
   /*getWatts(): void {
     console.log('getWatts');
@@ -26,7 +26,7 @@ export class CoverComponent implements OnInit {
   }*/
   public getWatts() {
     this.watts = this.solarapiservice.getCurrentSolarpower();
-    console.log('cover '+this.watts);
+    console.log('cover ' + this.watts);
   }
 
 }
