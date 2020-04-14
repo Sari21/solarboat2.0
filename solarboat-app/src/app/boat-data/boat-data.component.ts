@@ -1,9 +1,6 @@
 import { Component, OnInit, Output, NgModule } from "@angular/core";
 import { BoatDataService } from "../boat-data.service";
-import * as CanvasJS from "../../../canvasjs.min";
-import { TiltGraphComponent } from "../tilt-graph/tilt-graph.component";
-import { AccelerationGraphComponent } from "../acceleration-graph/acceleration-graph.component";
-import { CompassGraphComponent } from "../compass-graph/compass-graph.component";
+import { interval, Subscription } from "rxjs";
 
 @Component({
   selector: "app-boat-data",
@@ -16,9 +13,15 @@ export class BoatDataComponent implements OnInit {
   @Output() public acceleration;
   @Output() public battery;
   @Output() public motor;
+  @Output() public soc;
+  @Output() public temp;
+  subscription: Subscription;
+  source = interval(10000);
+
   constructor(private dataService: BoatDataService) {}
 
   ngOnInit() {
+    // this.subscription = this.source.subscribe((val) => this.makeGraphs());
     this.makeGraphs();
   }
   public async makeGraphs(): Promise<Object> {
@@ -60,10 +63,7 @@ export class BoatDataComponent implements OnInit {
           autoScale: true,
           legendTitle: "Tilt",
         };
-      });
 
-      getData.toPromise().then((data) => {
-        res = data;
         this.compass = {
           multi: [
             {
@@ -96,9 +96,7 @@ export class BoatDataComponent implements OnInit {
           autoScale: true,
           legendTitle: "Compass",
         };
-      });
-      getData.toPromise().then((data) => {
-        res = data;
+
         this.acceleration = {
           multi: [
             {
@@ -131,9 +129,7 @@ export class BoatDataComponent implements OnInit {
           autoScale: true,
           legendTitle: "Acceleration",
         };
-      });
-      getData.toPromise().then((data) => {
-        res = data;
+
         this.battery = {
           multi: [
             {
@@ -162,9 +158,6 @@ export class BoatDataComponent implements OnInit {
           autoScale: true,
           legendTitle: "Battery",
         };
-      });
-      getData.toPromise().then((data) => {
-        res = data;
         this.motor = {
           multi: [
             {
@@ -193,7 +186,60 @@ export class BoatDataComponent implements OnInit {
           autoScale: true,
           legendTitle: "Motor",
         };
+        this.soc = {
+          multi: [
+            {
+              name: "SoC",
+              value: res.battery[2][res.battery[2].length - 1].value,
+            },
+          ],
+          view: [200, 400],
+          showXAxis: true,
+          showYAxis: true,
+          gradient: false,
+          showLegend: true,
+          showXAxisLabel: false,
+          xAxisLabel: "Number",
+          showYAxisLabel: true,
+          yAxisLabel: "data",
+          timeline: false,
+          yScaleMax: 100,
+          colorScheme: {
+            domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+          },
+
+          legend: false,
+        };
+        this.temp = {
+          multi: [
+            {
+              name: "Temperature",
+              value: res.battery[3][res.battery[3].length - 1].value,
+            },
+          ],
+          view: [200, 400],
+          showXAxis: true,
+          showYAxis: true,
+          gradient: false,
+          showLegend: true,
+          showXAxisLabel: false,
+          xAxisLabel: "Number",
+          showYAxisLabel: true,
+          yAxisLabel: "°C",
+          timeline: false,
+          yScaleMax: 80,
+          colorScheme: {
+            domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+          },
+
+          legend: false,
+        };
       });
     });
+  }
+  public color(num: number) {
+    if (num < 50) {
+      return ["E91E63"];
+    } else ["CDDC39"];
   }
 }

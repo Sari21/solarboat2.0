@@ -52,7 +52,7 @@ public class ResponseBoatData {
             out.add(new dataPair(id, bd.getBattery().getOut()));
             SoC.add(new dataPair(id, bd.getBattery().getSoC())); //ezt majd nem így kell!
             temp.add(new dataPair(id, bd.getBattery().getTemp())); //ezt sem!!
-            
+
             RmP.add(new dataPair(id, bd.getMotor().getRpM()));
             mTemp.add(new dataPair(id, bd.getMotor().getTemp()));
 

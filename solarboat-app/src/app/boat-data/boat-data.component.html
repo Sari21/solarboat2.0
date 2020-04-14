@@ -90,4 +90,40 @@
   >
   </ngx-charts-line-chart>
 </div>
+<div style="display: inline-block;">
+  <ngx-charts-bar-vertical
+    [view]="soc.view"
+    [scheme]="soc.colorScheme"
+    [results]="soc.multi"
+    [gradient]="soc.gradient"
+    [xAxis]="soc.showXAxis"
+    [yAxis]="soc.showYAxis"
+    [legend]="soc.showLegend"
+    [showXAxisLabel]="soc.showXAxisLabel"
+    [showYAxisLabel]="soc.showYAxisLabel"
+    [xAxisLabel]="soc.xAxisLabel"
+    [yAxisLabel]="soc.yAxisLabel"
+    [legend]="soc.legend"
+    [yScaleMax]="soc.yScaleMax"
+  >
+  </ngx-charts-bar-vertical>
+</div>
+<div style="display: inline-block;">
+  <ngx-charts-bar-vertical
+    [view]="temp.view"
+    [scheme]="temp.colorScheme"
+    [results]="temp.multi"
+    [gradient]="temp.gradient"
+    [xAxis]="temp.showXAxis"
+    [yAxis]="temp.showYAxis"
+    [legend]="temp.showLegend"
+    [showXAxisLabel]="temp.showXAxisLabel"
+    [showYAxisLabel]="temp.showYAxisLabel"
+    [xAxisLabel]="temp.xAxisLabel"
+    [yAxisLabel]="temp.yAxisLabel"
+    [legend]="temp.legend"
+    [yScaleMax]="temp.yScaleMax"
+  >
+  </ngx-charts-bar-vertical>
+</div>
 <app-footer></app-footer>
