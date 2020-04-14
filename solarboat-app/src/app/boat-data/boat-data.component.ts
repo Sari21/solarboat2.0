@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BoatDataService } from "../boat-data.service";
-import * as CanvasJS from "../../../canvasjs.min";
+//import * as CanvasJS from "../../../canvasjs.min";
 import { TiltGraphComponent } from "../tilt-graph/tilt-graph.component";
 import { AccelerationGraphComponent } from "../acceleration-graph/acceleration-graph.component";
 import { CompassGraphComponent } from "../compass-graph/compass-graph.component";
