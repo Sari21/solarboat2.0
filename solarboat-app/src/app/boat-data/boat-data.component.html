@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div style="display: inline-block;">
   <ngx-charts-line-chart
     [view]="tilt.view"
@@ -12,7 +13,7 @@
     [xAxisLabel]="tilt.xAxisLabel"
     [yAxisLabel]="tilt.yAxisLabel"
     [autoScale]="tilt.autoScale"
-    [title]="tilt.title"
+    [legendTitle]="tilt.legendTitle"
   >
   </ngx-charts-line-chart>
 </div>
@@ -30,7 +31,7 @@
     [xAxisLabel]="compass.xAxisLabel"
     [yAxisLabel]="compass.yAxisLabel"
     [autoScale]="compass.autoScale"
-    [title]="compass.title"
+    [legendTitle]="compass.legendTitle"
   >
   </ngx-charts-line-chart>
 </div>
@@ -49,7 +50,44 @@
     [xAxisLabel]="acceleration.xAxisLabel"
     [yAxisLabel]="acceleration.yAxisLabel"
     [autoScale]="acceleration.autoScale"
-    [title]="acceleration.title"
+    [legendTitle]="acceleration.legendTitle"
   >
   </ngx-charts-line-chart>
 </div>
+<div style="display: inline-block;">
+  <ngx-charts-line-chart
+    [view]="battery.view"
+    [scheme]="battery.colorScheme"
+    [results]="battery.multi"
+    [gradient]="battery.gradient"
+    [xAxis]="battery.showXAxis"
+    [yAxis]="battery.showYAxis"
+    [legend]="battery.showLegend"
+    [showXAxisLabel]="battery.showXAxisLabel"
+    [showYAxisLabel]="battery.showYAxisLabel"
+    [xAxisLabel]="battery.xAxisLabel"
+    [yAxisLabel]="battery.yAxisLabel"
+    [autoScale]="battery.autoScale"
+    [legendTitle]="battery.legendTitle"
+  >
+  </ngx-charts-line-chart>
+</div>
+<div style="display: inline-block;">
+  <ngx-charts-line-chart
+    [view]="motor.view"
+    [scheme]="motor.colorScheme"
+    [results]="motor.multi"
+    [gradient]="motor.gradient"
+    [xAxis]="motor.showXAxis"
+    [yAxis]="motor.showYAxis"
+    [legend]="motor.showLegend"
+    [showXAxisLabel]="motor.showXAxisLabel"
+    [showYAxisLabel]="motor.showYAxisLabel"
+    [xAxisLabel]="motor.xAxisLabel"
+    [yAxisLabel]="motor.yAxisLabel"
+    [autoScale]="motor.autoScale"
+    [legendTitle]="motor.legendTitle"
+  >
+  </ngx-charts-line-chart>
+</div>
+<app-footer></app-footer>

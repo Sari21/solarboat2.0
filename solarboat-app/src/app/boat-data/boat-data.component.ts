@@ -14,6 +14,8 @@ export class BoatDataComponent implements OnInit {
   @Output() public tilt;
   @Output() public compass;
   @Output() public acceleration;
+  @Output() public battery;
+  @Output() public motor;
   constructor(private dataService: BoatDataService) {}
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class BoatDataComponent implements OnInit {
             domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
           },
           autoScale: true,
-          title: "Tilt",
+          legendTitle: "Tilt",
         };
       });
 
@@ -92,7 +94,7 @@ export class BoatDataComponent implements OnInit {
             domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
           },
           autoScale: true,
-          title: "Compass",
+          legendTitle: "Compass",
         };
       });
       getData.toPromise().then((data) => {
@@ -127,13 +129,71 @@ export class BoatDataComponent implements OnInit {
             domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
           },
           autoScale: true,
-          title: "Compass",
+          legendTitle: "Acceleration",
         };
       });
+      getData.toPromise().then((data) => {
+        res = data;
+        this.battery = {
+          multi: [
+            {
+              name: "in",
+              series: res.battery[0],
+            },
 
-      //this.tiltComp.printGraph(res.tilt);
-      //this.accCopm.printGraph(res.acceleration);
-      // this.compComp.printGraph(res.compass);
+            {
+              name: "out",
+              series: res.battery[1],
+            },
+          ],
+          view: [700, 400],
+          showXAxis: true,
+          showYAxis: true,
+          gradient: false,
+          showLegend: true,
+          showXAxisLabel: true,
+          xAxisLabel: "Number",
+          showYAxisLabel: true,
+          yAxisLabel: "data",
+          timeline: true,
+          colorScheme: {
+            domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+          },
+          autoScale: true,
+          legendTitle: "Battery",
+        };
+      });
+      getData.toPromise().then((data) => {
+        res = data;
+        this.motor = {
+          multi: [
+            {
+              name: "RpM",
+              series: res.motor[0],
+            },
+
+            {
+              name: "Temperature",
+              series: res.motor[1],
+            },
+          ],
+          view: [700, 400],
+          showXAxis: true,
+          showYAxis: true,
+          gradient: false,
+          showLegend: true,
+          showXAxisLabel: true,
+          xAxisLabel: "Number",
+          showYAxisLabel: true,
+          yAxisLabel: "data",
+          timeline: true,
+          colorScheme: {
+            domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+          },
+          autoScale: true,
+          legendTitle: "Motor",
+        };
+      });
     });
   }
 }
