@@ -1,4 +1,55 @@
-<app-tilt-graph></app-tilt-graph>
-<app-acceleration-graph></app-acceleration-graph>
-<app-compass-graph></app-compass-graph>
-<app-new-graph></app-new-graph>
+<div style="display: inline-block;">
+  <ngx-charts-line-chart
+    [view]="tilt.view"
+    [scheme]="tilt.colorScheme"
+    [results]="tilt.multi"
+    [gradient]="tilt.gradient"
+    [xAxis]="tilt.showXAxis"
+    [yAxis]="tilt.showYAxis"
+    [legend]="tilt.showLegend"
+    [showXAxisLabel]="tilt.showXAxisLabel"
+    [showYAxisLabel]="tilt.showYAxisLabel"
+    [xAxisLabel]="tilt.xAxisLabel"
+    [yAxisLabel]="tilt.yAxisLabel"
+    [autoScale]="tilt.autoScale"
+    [title]="tilt.title"
+  >
+  </ngx-charts-line-chart>
+</div>
+<div style="display: inline-block;">
+  <ngx-charts-line-chart
+    [view]="compass.view"
+    [scheme]="compass.colorScheme"
+    [results]="compass.multi"
+    [gradient]="compass.gradient"
+    [xAxis]="compass.showXAxis"
+    [yAxis]="compass.showYAxis"
+    [legend]="compass.showLegend"
+    [showXAxisLabel]="compass.showXAxisLabel"
+    [showYAxisLabel]="compass.showYAxisLabel"
+    [xAxisLabel]="compass.xAxisLabel"
+    [yAxisLabel]="compass.yAxisLabel"
+    [autoScale]="compass.autoScale"
+    [title]="compass.title"
+  >
+  </ngx-charts-line-chart>
+</div>
+
+<div style="display: inline-block;">
+  <ngx-charts-line-chart
+    [view]="acceleration.view"
+    [scheme]="acceleration.colorScheme"
+    [results]="acceleration.multi"
+    [gradient]="acceleration.gradient"
+    [xAxis]="acceleration.showXAxis"
+    [yAxis]="acceleration.showYAxis"
+    [legend]="acceleration.showLegend"
+    [showXAxisLabel]="acceleration.showXAxisLabel"
+    [showYAxisLabel]="acceleration.showYAxisLabel"
+    [xAxisLabel]="acceleration.xAxisLabel"
+    [yAxisLabel]="acceleration.yAxisLabel"
+    [autoScale]="acceleration.autoScale"
+    [title]="acceleration.title"
+  >
+  </ngx-charts-line-chart>
+</div>
