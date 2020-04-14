@@ -2,8 +2,10 @@ package hu.schdesign.solarboat.model.Boat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.schdesign.solarboat.csv.CsvPrintable;
+import hu.schdesign.solarboat.model.dataPair;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table

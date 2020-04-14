@@ -20,10 +20,12 @@ import { CoverComponent } from "./cover/cover.component";
 import { NewsComponent } from "./news/news.component";
 import { ScrollToModule } from "ng2-scroll-to-el";
 import { BoatDataComponent } from "./boat-data/boat-data.component";
-import { GraphComponent } from './graph/graph.component';
-import { TiltGraphComponent } from './tilt-graph/tilt-graph.component';
-import { AccelerationGraphComponent } from './acceleration-graph/acceleration-graph.component';
-import { CompassGraphComponent } from './compass-graph/compass-graph.component';
+import { GraphComponent } from "./graph/graph.component";
+import { TiltGraphComponent } from "./tilt-graph/tilt-graph.component";
+import { AccelerationGraphComponent } from "./acceleration-graph/acceleration-graph.component";
+import { CompassGraphComponent } from "./compass-graph/compass-graph.component";
+import { NewGraphComponent } from "./new-graph/new-graph.component";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { CompassGraphComponent } from './compass-graph/compass-graph.component';
     TiltGraphComponent,
     AccelerationGraphComponent,
     CompassGraphComponent,
+    NewGraphComponent,
   ],
   // tslint:disable-next-line:max-line-length
   imports: [
@@ -55,6 +58,7 @@ import { CompassGraphComponent } from './compass-graph/compass-graph.component';
     BrowserAnimationsModule,
     MDBBootstrapModule,
     ScrollToModule.forRoot(),
+    NgxChartsModule,
   ],
   bootstrap: [AppComponent],
   providers: [],

@@ -1,18 +1,18 @@
 package hu.schdesign.solarboat.model;
 
 public class dataPair {
-    private final long x;
-    private final int y;
+    private final long name;
+    private final int value;
     dataPair(long id, int data){
-        this.y = data;
-        this.x = id;
+        this.name = id;
+        this.value = data;
     }
 
-    public long getX() {
-        return x;
+    public long getName() {
+        return name;
     }
 
-    public int getY() {
-        return y;
+    public int getValue() {
+        return value;
     }
 }
