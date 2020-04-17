@@ -1,5 +1,5 @@
 <div style="display: inline-block;">
-  <ngx-charts-line-chart
+  <ngx-charts-bar-vertical
     [view]="data.view"
     [scheme]="data.colorScheme"
     [results]="data.multi"
@@ -11,8 +11,8 @@
     [showYAxisLabel]="data.showYAxisLabel"
     [xAxisLabel]="data.xAxisLabel"
     [yAxisLabel]="data.yAxisLabel"
-    [autoScale]="data.autoScale"
-    [legendTitle]="data.legendTitle"
+    [legend]="data.legend"
+    [yScaleMax]="data.yScaleMax"
   >
-  </ngx-charts-line-chart>
+  </ngx-charts-bar-vertical>
 </div>
