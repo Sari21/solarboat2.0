@@ -1,5 +1,21 @@
 <app-nav-bar></app-nav-bar>
 
+<select [(ngModel)]="selectedDate">
+  <option *ngFor="let item of dates" [ngValue]="item">
+    {{ item.value }}
+  </option>
+</select>
+<button (click)="getDataById(selectedDate.name)">Kiválasztás</button>
+<button (click)="exportById(selectedDate.name)">Letöltés</button>
+<button>
+  <a
+    href="
+       http://localhost:8080/api/dataGroup/export 
+  "
+    >Hali</a
+  >
+</button>
+
 <app-graph [data]="tilt"></app-graph>
 <app-graph [data]="compass"></app-graph>
 <app-graph [data]="acceleration"></app-graph>

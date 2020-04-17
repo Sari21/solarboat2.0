@@ -4,57 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseBoatData {
-    private ArrayList<ArrayList<dataPair>> tilt;
-    private ArrayList<ArrayList<dataPair>> acceleration;
-    private ArrayList<ArrayList<dataPair>> compass;
-    private ArrayList<ArrayList<dataPair>> battery;
-    private ArrayList<ArrayList<dataPair>> motor;
+    private ArrayList<ArrayList<dataPair<Long, Integer>>> tilt;
+    private ArrayList<ArrayList<dataPair<Long, Integer>>> acceleration;
+    private ArrayList<ArrayList<dataPair<Long, Integer>>> compass;
+    private ArrayList<ArrayList<dataPair<Long, Integer>>> battery;
+    private ArrayList<ArrayList<dataPair<Long, Integer>>> motor;
     private Long id;
     //extra temps???
     public ResponseBoatData(DataGroup dataGroup){
-        ArrayList<ArrayList<dataPair>> tiltTemp = new ArrayList();
-        ArrayList<ArrayList<dataPair>> accelerationTemp = new ArrayList();
-        ArrayList<ArrayList<dataPair>> compassTemp = new ArrayList();
-        ArrayList<ArrayList<dataPair>> batteryTemp = new ArrayList();
-        ArrayList<ArrayList<dataPair>> motorTemp = new ArrayList();
+        ArrayList<ArrayList<dataPair<Long, Integer>>> tiltTemp = new ArrayList<>();
+        ArrayList<ArrayList<dataPair<Long, Integer>>> accelerationTemp = new ArrayList<>();
+        ArrayList<ArrayList<dataPair<Long, Integer>>> compassTemp = new ArrayList<>();
+        ArrayList<ArrayList<dataPair<Long, Integer>>> batteryTemp = new ArrayList<>();
+        ArrayList<ArrayList<dataPair<Long, Integer>>> motorTemp = new ArrayList<>();
 
-        ArrayList<dataPair> x = new ArrayList();
-        ArrayList<dataPair> y = new ArrayList();
-        ArrayList<dataPair> z = new ArrayList();
-        ArrayList<dataPair> ax = new ArrayList();
-        ArrayList<dataPair> ay = new ArrayList();
-        ArrayList<dataPair> az = new ArrayList();
-        ArrayList<dataPair> cx = new ArrayList();
-        ArrayList<dataPair> cy = new ArrayList();
-        ArrayList<dataPair> cz = new ArrayList();
-        ArrayList<dataPair> in = new ArrayList();
-        ArrayList<dataPair> out = new ArrayList();
-        ArrayList<dataPair> SoC = new ArrayList();
-        ArrayList<dataPair> temp = new ArrayList();
-        ArrayList<dataPair> RmP = new ArrayList();
-        ArrayList<dataPair> mTemp = new ArrayList();
+        ArrayList<dataPair<Long, Integer>> x = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> y = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> z = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> ax = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> ay = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> az = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> cx = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> cy = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> cz = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> in = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> out = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> SoC = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> temp = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> RmP = new ArrayList<>();
+        ArrayList<dataPair<Long, Integer>> mTemp = new ArrayList<>();
 
         for(BoatData bd : dataGroup.getBoatDataList()){
             id = bd.getId();
-            x.add(new dataPair(id, bd.getTilt().getX()));
-            y.add(new dataPair(id, bd.getTilt().getY()));
-            z.add(new dataPair(id, bd.getTilt().getZ()));
+            x.add(new dataPair<Long, Integer>(id, bd.getTilt().getX()));
+            y.add(new dataPair<Long, Integer>(id, bd.getTilt().getY()));
+            z.add(new dataPair<Long, Integer>(id, bd.getTilt().getZ()));
 
-            ax.add(new dataPair(id, bd.getAcceleration().getX()));
-            ay.add(new dataPair(id, bd.getAcceleration().getY()));
-            az.add(new dataPair(id, bd.getAcceleration().getZ()));
+            ax.add(new dataPair<Long, Integer>(id, bd.getAcceleration().getX()));
+            ay.add(new dataPair<Long, Integer>(id, bd.getAcceleration().getY()));
+            az.add(new dataPair<Long, Integer>(id, bd.getAcceleration().getZ()));
 
-            cx.add(new dataPair(id, bd.getCompass().getX()));
-            cy.add(new dataPair(id, bd.getCompass().getY()));
-            cz.add(new dataPair(id, bd.getCompass().getZ()));
+            cx.add(new dataPair<Long, Integer>(id, bd.getCompass().getX()));
+            cy.add(new dataPair<Long, Integer>(id, bd.getCompass().getY()));
+            cz.add(new dataPair<Long, Integer>(id, bd.getCompass().getZ()));
 
-            in.add(new dataPair(id, bd.getBattery().getIn()));
-            out.add(new dataPair(id, bd.getBattery().getOut()));
-            SoC.add(new dataPair(id, bd.getBattery().getSoC())); //ezt majd nem így kell!
-            temp.add(new dataPair(id, bd.getBattery().getTemp())); //ezt sem!!
+            in.add(new dataPair<Long, Integer>(id, bd.getBattery().getIn()));
+            out.add(new dataPair<Long, Integer>(id, bd.getBattery().getOut()));
+            SoC.add(new dataPair<Long, Integer>(id, bd.getBattery().getSoC())); //ezt majd nem így kell!
+            temp.add(new dataPair<Long, Integer>(id, bd.getBattery().getTemp())); //ezt sem!!
 
-            RmP.add(new dataPair(id, bd.getMotor().getRpM()));
-            mTemp.add(new dataPair(id, bd.getMotor().getTemp()));
+            RmP.add(new dataPair<Long, Integer>(id, bd.getMotor().getRpM()));
+            mTemp.add(new dataPair<Long, Integer>(id, bd.getMotor().getTemp()));
 
 
         }
@@ -85,23 +85,27 @@ public class ResponseBoatData {
 
     }
 
-    public ArrayList<ArrayList<dataPair>> getTilt() {
+    public ArrayList<ArrayList<dataPair<Long, Integer>>> getTilt() {
         return tilt;
     }
 
-    public ArrayList<ArrayList<dataPair>> getAcceleration() {
+    public ArrayList<ArrayList<dataPair<Long, Integer>>> getAcceleration() {
         return acceleration;
     }
 
-    public ArrayList<ArrayList<dataPair>> getCompass() {
+    public ArrayList<ArrayList<dataPair<Long, Integer>>> getCompass() {
         return compass;
     }
 
-    public ArrayList<ArrayList<dataPair>> getBattery() {
+    public ArrayList<ArrayList<dataPair<Long, Integer>>> getBattery() {
         return battery;
     }
 
-    public ArrayList<ArrayList<dataPair>> getMotor() {
+    public ArrayList<ArrayList<dataPair<Long, Integer>>> getMotor() {
         return motor;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
