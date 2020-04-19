@@ -22,6 +22,7 @@ export class BoatDataComponent implements OnInit {
   @Input() selectedDate: Dates;
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
+  show = false;
 
   constructor(private dataService: BoatDataService) {}
 
@@ -30,6 +31,13 @@ export class BoatDataComponent implements OnInit {
     this.lastDataGroup();
     //this.getDataById(1);
     this.getDates();
+  }
+  public setShow() {
+    if (this.show == false) {
+      this.show = true;
+    } else {
+      this.show = false;
+    }
   }
   public dateChanged() {
     this.EXPORT_URL = this.BASE_URL.concat("/").concat(
@@ -242,7 +250,7 @@ export class BoatDataComponent implements OnInit {
             value: res.battery[2][res.battery[2].length - 1].value,
           },
         ],
-        view: [200, 400],
+        view: [200, 300],
         showXAxis: true,
         showYAxis: true,
         gradient: false,
@@ -266,7 +274,7 @@ export class BoatDataComponent implements OnInit {
             value: res.battery[3][res.battery[3].length - 1].value,
           },
         ],
-        view: [200, 400],
+        view: [200, 300],
         showXAxis: true,
         showYAxis: true,
         gradient: false,
