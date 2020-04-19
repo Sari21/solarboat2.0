@@ -1,0 +1,76 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="d-flex justify-content-center sponsors p-3">
+  <div class="title content col-md-9">
+    <h1 class="m-4 title">Fő szponzoraink</h1>
+    <div class="text-center">
+      <a *ngFor="let sponsor of main" href="{{ sponsor.link }}" target="blank">
+        <img
+          class="col-3"
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors">
+  <div class="title content col-md-9">
+    <h2 class="m-4 title">Kiemelt sponsoraink</h2>
+    <div class="text-center">
+      <a *ngFor="let sponsor of top" href="{{ sponsor.link }}" target="blank">
+        <img
+          class="p-2 m-2 col-3"
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors">
+  <div class="title content col-md-9">
+    <h2 class="m-4 title">Szponzoraink</h2>
+    <div class="text-center">
+      <a *ngFor="let sponsor of other" href="{{ sponsor.link }}" target="blank">
+        <img
+          class="p-2 m-2 col-3"
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors">
+  <div class="title content col-md-9">
+    <h2 class="m-4 title">Tudományos partnereink</h2>
+    <div class="text-center">
+      <a
+        *ngFor="let sponsor of partner"
+        href="{{ sponsor.link }}"
+        target="blank"
+      >
+        <img
+          class="p-2 m-2 col-3"
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors">
+  <div class="title content col-md-9">
+    <h2 class="m-4 title">
+      Budapesti Műszaki és Gazdaságtudományi Egyetem
+    </h2>
+    <div class="text-center">
+      <a *ngFor="let sponsor of uni" href="{{ sponsor.link }}" target="blank">
+        <img class="p-2 m-2 col-3" src="{{ sponsor.picture }}" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
