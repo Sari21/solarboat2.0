@@ -109,6 +109,7 @@ public class DataGroupService {
             writer.append("groupid").append(CSV_SEPARATOR)
                     .append("date").append(CSV_SEPARATOR)
                     .append("dataid").append(CSV_SEPARATOR)
+                    .append("datadate").append(CSV_SEPARATOR)
                     .append("tilt_x").append(CSV_SEPARATOR)
                     .append("tilt_y").append(CSV_SEPARATOR)
                     .append("tilt_z").append(CSV_SEPARATOR)

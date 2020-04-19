@@ -1,27 +1,39 @@
 <app-nav-bar></app-nav-bar>
 
-<select [(ngModel)]="selectedDate">
-  <option *ngFor="let item of dates" [ngValue]="item">
-    {{ item.value }}
-  </option>
-</select>
-<button (click)="getDataById(selectedDate.name)">Kiválasztás</button>
-<button (click)="exportById(selectedDate.name)">Letöltés</button>
-<button>
-  <a
-    href="
-       http://localhost:8080/api/dataGroup/export 
-  "
-    >Hali</a
-  >
-</button>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
+  </div>
+  <select [(ngModel)]="selectedDate" (change)="dateChanged()">
+    <option *ngFor="let item of dates" [ngValue]="item">
+      {{ item.value }}
+    </option>
+  </select>
+</div>
 
+<button class="btn-outline-dark">
+  <a href="{{ BASE_URL }}">Összes letöltése</a>
+</button>
+<button class="btn btn-outline-dark btn-sm">
+  <a href="{{ EXPORT_URL }}">Kiválasztott letöltése</a>
+</button>
+<button
+  (click)="deleteById(selectedDate.name)"
+  class="btn btn-outline-dark btn-sm"
+>
+  Kiválasztott törlése
+</button>
+<button (click)="deleteAll()" class="btn btn-outline-dark btn-sm">
+  Összes törlése
+</button>
+<div>
+  <app-bar-chart [data]="soc"></app-bar-chart>
+  <app-bar-chart [data]="temp"></app-bar-chart>
+</div>
 <app-graph [data]="tilt"></app-graph>
 <app-graph [data]="compass"></app-graph>
 <app-graph [data]="acceleration"></app-graph>
 <app-graph [data]="battery"></app-graph>
 <app-graph [data]="motor"></app-graph>
-<app-bar-chart [data]="soc"></app-bar-chart>
-<app-bar-chart [data]="temp"></app-bar-chart>
 
 <app-footer></app-footer>

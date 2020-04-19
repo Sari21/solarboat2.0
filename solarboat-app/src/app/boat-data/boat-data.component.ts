@@ -20,6 +20,8 @@ export class BoatDataComponent implements OnInit {
   source = interval(10000);
   @Output() dates: Dates[] = [];
   @Input() selectedDate: Dates;
+  BASE_URL = "http://localhost:8080/api/dataGroup/export";
+  EXPORT_URL = this.BASE_URL;
 
   constructor(private dataService: BoatDataService) {}
 
@@ -28,13 +30,14 @@ export class BoatDataComponent implements OnInit {
     this.lastDataGroup();
     //this.getDataById(1);
     this.getDates();
-    this.dataService.exportDataById(1);
+  }
+  public dateChanged() {
+    this.EXPORT_URL = this.BASE_URL.concat("/").concat(
+      this.selectedDate.name.toString()
+    );
+    this.getDataById(this.selectedDate.name);
   }
 
-  public exportById(id: number) {
-    console.log("letöltés");
-    this.dataService.exportDataById(id);
-  }
   public async getDataById(id: number): Promise<Object> {
     return new Promise(() => {
       var getData = this.dataService.getDataGroupById(id);
@@ -52,18 +55,31 @@ export class BoatDataComponent implements OnInit {
     this.dataService.getDate().subscribe(
       (res) => {
         this.dates = res;
-        console.log(this.dates);
+        this.selectedDate = res[res.length - 1];
       },
       (err) => {
         alert("get error");
       }
     );
   }
+  public deleteAll() {
+    this.dataService.deleteAll();
+    this.getDates();
+  }
+  public deleteById(id: number) {
+    console.log(id);
+    this.dataService.deleteById(id);
+    this.getDates();
+  }
 
   public setGraphData(getData) {
     var res;
     getData.toPromise().then((data) => {
       res = data;
+      this.setColor(
+        res.battery[3][res.battery[3].length - 1].value,
+        res.battery[2][res.battery[2].length - 1].value
+      );
       this.tilt = {
         multi: [
           {
@@ -238,7 +254,7 @@ export class BoatDataComponent implements OnInit {
         timeline: false,
         yScaleMax: 100,
         colorScheme: {
-          domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+          domain: this.socColor,
         },
 
         legend: false,
@@ -262,16 +278,24 @@ export class BoatDataComponent implements OnInit {
         timeline: false,
         yScaleMax: 80,
         colorScheme: {
-          domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+          domain: this.tempColor,
         },
-
         legend: false,
       };
     });
   }
-  public color(num: number) {
-    if (num < 50) {
-      return ["E91E63"];
-    } else ["CDDC39"];
+  public setColor(temp: number, soc: number) {
+    if (temp < 60) {
+      this.tempColor = ["#CDDC39"];
+    } else {
+      this.tempColor = ["#E91E63"];
+    }
+    if (soc < 80) {
+      this.socColor = ["#CDDC39"];
+    } else {
+      this.socColor = ["#E91E63"];
+    }
   }
+  tempColor;
+  socColor;
 }

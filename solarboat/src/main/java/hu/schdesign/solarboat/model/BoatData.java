@@ -8,9 +8,14 @@ import hu.schdesign.solarboat.model.Boat.Error;
 import hu.schdesign.solarboat.model.Boat.Motor;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table
@@ -30,6 +35,8 @@ public class BoatData implements CsvPrintable {
     private final Battery battery;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private final Error error;
+
+    private final String date;
     @ElementCollection
     private final List<Integer> extraTemps;
     public static final char CSV_SEPARATOR = ';';
@@ -44,6 +51,9 @@ public class BoatData implements CsvPrintable {
         this.battery = battery;
         this.error = error;
         this.extraTemps  = extraTemps;
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        date =  sdf.format(now);
     }
 
     public BoatData() {
@@ -54,12 +64,14 @@ public class BoatData implements CsvPrintable {
         this.battery = null;
         this.error = null;
         this.extraTemps = null;
+        this.date = null;
     }
 
     @Override
     public String printCsv() {
         return new StringBuilder()
                 .append(id).append(CSV_SEPARATOR)
+                .append(date).append(CSV_SEPARATOR)
                 .append(tilt.printCsv()).append(CSV_SEPARATOR)
                 .append(acceleration.printCsv()).append(CSV_SEPARATOR)
                 .append(compass.printCsv()).append(CSV_SEPARATOR)
@@ -113,5 +125,16 @@ public class BoatData implements CsvPrintable {
 
     public List<Integer> getExtraTemps() {
         return extraTemps;
+    }
+
+    /*public String getDate() {
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        return sdf.format(date);
+    }
+
+     */
+
+    public String getDate() {
+        return date;
     }
 }
