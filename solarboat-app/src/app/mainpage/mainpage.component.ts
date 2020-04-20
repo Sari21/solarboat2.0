@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ScrollToService } from 'ng2-scroll-to-el';
 
 
 @Component({
@@ -9,7 +8,7 @@ import { ScrollToService } from 'ng2-scroll-to-el';
 })
 
 export class MainpageComponent implements OnInit {
-  constructor(private scrollService: ScrollToService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

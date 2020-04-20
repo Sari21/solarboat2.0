@@ -1,0 +1,17 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="achievements ">
+    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+
+        <h1 class="title pb-5 mb-4">Eredményeink</h1>
+<div class="row justify-content-center pb-5">
+        <ul class="timeline col-10 col-sm-12 col-lg-8 col-md-11 ">
+            <li *ngFor="let achievement of achievements">
+             <app-achievement [achievement]="achievement" ></app-achievement>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

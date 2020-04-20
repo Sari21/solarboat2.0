@@ -4,6 +4,7 @@ import { MainpageComponent } from "./mainpage/mainpage.component";
 import { TeamComponent } from "./team/team.component";
 import { NewsComponent } from "./news/news.component";
 import { BoatDataComponent } from "./boat-data/boat-data.component";
+import {AchievementsComponent} from './achievements/achievements.component';
 import { SponsorsComponent } from "./sponsors/sponsors.component";
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: "news", component: NewsComponent },
   { path: "sponsors", component: SponsorsComponent },
   { path: "boatdata", component: BoatDataComponent },
+  { path: "achievements", component: AchievementsComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
 ];
 

@@ -31,4 +31,19 @@ a:hover {
     padding-top: 2%;
 }
 
+.tooltip-inner {
+    font-size: 1.1rem;
+    background-color: white;
+    color: black;
+    font-family: 'Helvetica';
+    margin-bottom: 10%;
+}
+.my-tooltip .arrow::before {
+    border-top-color: transparent;
+}
+.schdesign{
+    font-family: "Kelson Sans Light";
+    padding: 0;
+    margin:0;
+}
 

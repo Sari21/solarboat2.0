@@ -28,6 +28,12 @@ import { NewGraphComponent } from "./new-graph/new-graph.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
+import { GraphComponent } from './graph/graph.component';
+import { TiltGraphComponent } from './tilt-graph/tilt-graph.component';
+import { AccelerationGraphComponent } from './acceleration-graph/acceleration-graph.component';
+import { CompassGraphComponent } from './compass-graph/compass-graph.component';
+import { AchievementsComponent } from './achievements/achievements.component';
+import { AchievementComponent } from './achievement/achievement.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +52,8 @@ import { SponsorsComponent } from './sponsors/sponsors.component';
     TiltGraphComponent,
     AccelerationGraphComponent,
     CompassGraphComponent,
+    AchievementsComponent,
+    AchievementComponent,
     NewGraphComponent,
     BarChartComponent,
     SponsorsComponent,
