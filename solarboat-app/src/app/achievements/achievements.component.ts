@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../shared/api.service';
 import {Achievement} from '../model/achievement';
 
+
 @Component({
   selector: 'app-achievements',
   templateUrl: './achievements.component.html',
