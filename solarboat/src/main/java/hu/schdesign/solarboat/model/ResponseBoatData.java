@@ -1,5 +1,7 @@
 package hu.schdesign.solarboat.model;
 
+import hu.schdesign.solarboat.model.Boat.Error;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ public class ResponseBoatData {
     private ArrayList<ArrayList<dataPair<String, Integer>>> compass;
     private ArrayList<ArrayList<dataPair<String, Integer>>> battery;
     private ArrayList<ArrayList<dataPair<String, Integer>>> motor;
+    private ArrayList<Error> errors = new ArrayList<>();
+
     private String id;
     //extra temps???
     public ResponseBoatData(DataGroup dataGroup){
@@ -17,6 +21,7 @@ public class ResponseBoatData {
         ArrayList<ArrayList<dataPair<String, Integer>>> compassTemp = new ArrayList<>();
         ArrayList<ArrayList<dataPair<String, Integer>>> batteryTemp = new ArrayList<>();
         ArrayList<ArrayList<dataPair<String, Integer>>> motorTemp = new ArrayList<>();
+
 
         ArrayList<dataPair<String, Integer>> x = new ArrayList<>();
         ArrayList<dataPair<String, Integer>> y = new ArrayList<>();
@@ -55,6 +60,9 @@ public class ResponseBoatData {
 
             RmP.add(new dataPair<String, Integer>(id, bd.getMotor().getRpM()));
             mTemp.add(new dataPair<String, Integer>(id, bd.getMotor().getTemp()));
+           if(bd.getError() != null){
+               errors.add(bd.getError());
+           }
 
 
         }
@@ -103,6 +111,10 @@ public class ResponseBoatData {
 
     public ArrayList<ArrayList<dataPair<String, Integer>>> getMotor() {
         return motor;
+    }
+
+    public ArrayList<Error> getErrors() {
+        return errors;
     }
 
     public String getId() {

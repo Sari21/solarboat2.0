@@ -25,10 +25,8 @@ public class Achievement {
     @NotNull
     @Size(min=2, max=50)
     private String title_en;
-    @NotNull
     @Size(min=2, max=2000)
     private String description_hu;
-    @NotNull
     @Size(min=2, max=2000)
     private String description_en;
     @NotNull
@@ -40,6 +38,10 @@ public class Achievement {
     @NotNull
     @Size(min=2, max=50)
     private String picture;
+    @NotNull
+    @Size(max=5)
+    private int place;
+
 
     public Achievement(@JsonProperty("title_hu") String title_hu,
                        @JsonProperty("title_en") String title_en,
@@ -48,7 +50,8 @@ public class Achievement {
                        @JsonProperty("description_en") String description_en,
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
-                       @JsonProperty("date") LocalDate date) {
+                       @JsonProperty("date") LocalDate date,
+                       @JsonProperty("date") int place) {
         this.title_hu=title_hu;
         this.title_en=title_en;
         this.description_hu = description_hu;
@@ -57,6 +60,7 @@ public class Achievement {
         this.location_en = location_en;
         this.picture = picture;
         this.date = date;
+        this.place = place;
 
     }
     public Achievement() {
@@ -129,5 +133,13 @@ public class Achievement {
 
     public void setTitle_en(String title_en) {
         this.title_en = title_en;
+    }
+
+    public int getPlace() {
+        return place;
+    }
+
+    public void setPlace(int place) {
+        this.place = place;
     }
 }
