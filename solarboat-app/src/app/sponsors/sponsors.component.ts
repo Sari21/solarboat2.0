@@ -17,8 +17,9 @@ export class SponsorsComponent implements OnInit {
   main: Sponsor[] = [];
   top: Sponsor[] = [];
   other: Sponsor[] = [];
-  @Output() uni: Sponsor[] = [];
+  uni = [];
   partner: Sponsor[] = [];
+  bme: Sponsor;
   getSponsores() {
     this.sponsorService.getSponsors().subscribe(
       (res) => {
@@ -38,6 +39,16 @@ export class SponsorsComponent implements OnInit {
     this.top = this.allSponsors.filter((s) => s.group == "TOP");
     this.other = this.allSponsors.filter((s) => s.group == "OTHER");
     this.partner = this.allSponsors.filter((s) => s.group == "PARTNER");
-    this.uni = this.allSponsors.filter((s) => s.group == "UNI");
+    this.bme = this.allSponsors.filter(
+      (s) => s.group == "UNI" && s.row == 1
+    )[0];
+    for (let i = 2; i < 10; i++) {
+      let t: Sponsor[] = this.allSponsors.filter(
+        (s) => s.group == "UNI" && s.row == i
+      );
+      if (t != undefined) {
+        this.uni.push(t);
+      }
+    }
   }
 }
