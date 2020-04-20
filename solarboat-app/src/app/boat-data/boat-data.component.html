@@ -1,129 +1,38 @@
 <app-nav-bar></app-nav-bar>
-<div style="display: inline-block;">
-  <ngx-charts-line-chart
-    [view]="tilt.view"
-    [scheme]="tilt.colorScheme"
-    [results]="tilt.multi"
-    [gradient]="tilt.gradient"
-    [xAxis]="tilt.showXAxis"
-    [yAxis]="tilt.showYAxis"
-    [legend]="tilt.showLegend"
-    [showXAxisLabel]="tilt.showXAxisLabel"
-    [showYAxisLabel]="tilt.showYAxisLabel"
-    [xAxisLabel]="tilt.xAxisLabel"
-    [yAxisLabel]="tilt.yAxisLabel"
-    [autoScale]="tilt.autoScale"
-    [legendTitle]="tilt.legendTitle"
-  >
-  </ngx-charts-line-chart>
-</div>
-<div style="display: inline-block;">
-  <ngx-charts-line-chart
-    [view]="compass.view"
-    [scheme]="compass.colorScheme"
-    [results]="compass.multi"
-    [gradient]="compass.gradient"
-    [xAxis]="compass.showXAxis"
-    [yAxis]="compass.showYAxis"
-    [legend]="compass.showLegend"
-    [showXAxisLabel]="compass.showXAxisLabel"
-    [showYAxisLabel]="compass.showYAxisLabel"
-    [xAxisLabel]="compass.xAxisLabel"
-    [yAxisLabel]="compass.yAxisLabel"
-    [autoScale]="compass.autoScale"
-    [legendTitle]="compass.legendTitle"
-  >
-  </ngx-charts-line-chart>
-</div>
 
-<div style="display: inline-block;">
-  <ngx-charts-line-chart
-    [view]="acceleration.view"
-    [scheme]="acceleration.colorScheme"
-    [results]="acceleration.multi"
-    [gradient]="acceleration.gradient"
-    [xAxis]="acceleration.showXAxis"
-    [yAxis]="acceleration.showYAxis"
-    [legend]="acceleration.showLegend"
-    [showXAxisLabel]="acceleration.showXAxisLabel"
-    [showYAxisLabel]="acceleration.showYAxisLabel"
-    [xAxisLabel]="acceleration.xAxisLabel"
-    [yAxisLabel]="acceleration.yAxisLabel"
-    [autoScale]="acceleration.autoScale"
-    [legendTitle]="acceleration.legendTitle"
-  >
-  </ngx-charts-line-chart>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
+  </div>
+  <select [(ngModel)]="selectedDate" (change)="dateChanged()">
+    <option *ngFor="let item of dates" [ngValue]="item">
+      {{ item.value }}
+    </option>
+  </select>
 </div>
-<div style="display: inline-block;">
-  <ngx-charts-line-chart
-    [view]="battery.view"
-    [scheme]="battery.colorScheme"
-    [results]="battery.multi"
-    [gradient]="battery.gradient"
-    [xAxis]="battery.showXAxis"
-    [yAxis]="battery.showYAxis"
-    [legend]="battery.showLegend"
-    [showXAxisLabel]="battery.showXAxisLabel"
-    [showYAxisLabel]="battery.showYAxisLabel"
-    [xAxisLabel]="battery.xAxisLabel"
-    [yAxisLabel]="battery.yAxisLabel"
-    [autoScale]="battery.autoScale"
-    [legendTitle]="battery.legendTitle"
-  >
-  </ngx-charts-line-chart>
+<button class="d-flex" (click)="setShow()">Show</button>
+<div *ngIf="show">
+  <button>
+    <a href="{{ BASE_URL }}">Összes letöltése</a>
+  </button>
+  <button>
+    <a href="{{ EXPORT_URL }}">Kiválasztott letöltése</a>
+  </button>
+  <button (click)="deleteById(selectedDate.name)">
+    Kiválasztott törlése
+  </button>
+  <button (click)="deleteAll()">
+    Összes törlése
+  </button>
 </div>
-<div style="display: inline-block;">
-  <ngx-charts-line-chart
-    [view]="motor.view"
-    [scheme]="motor.colorScheme"
-    [results]="motor.multi"
-    [gradient]="motor.gradient"
-    [xAxis]="motor.showXAxis"
-    [yAxis]="motor.showYAxis"
-    [legend]="motor.showLegend"
-    [showXAxisLabel]="motor.showXAxisLabel"
-    [showYAxisLabel]="motor.showYAxisLabel"
-    [xAxisLabel]="motor.xAxisLabel"
-    [yAxisLabel]="motor.yAxisLabel"
-    [autoScale]="motor.autoScale"
-    [legendTitle]="motor.legendTitle"
-  >
-  </ngx-charts-line-chart>
-</div>
-<div style="display: inline-block;">
-  <ngx-charts-bar-vertical
-    [view]="soc.view"
-    [scheme]="soc.colorScheme"
-    [results]="soc.multi"
-    [gradient]="soc.gradient"
-    [xAxis]="soc.showXAxis"
-    [yAxis]="soc.showYAxis"
-    [legend]="soc.showLegend"
-    [showXAxisLabel]="soc.showXAxisLabel"
-    [showYAxisLabel]="soc.showYAxisLabel"
-    [xAxisLabel]="soc.xAxisLabel"
-    [yAxisLabel]="soc.yAxisLabel"
-    [legend]="soc.legend"
-    [yScaleMax]="soc.yScaleMax"
-  >
-  </ngx-charts-bar-vertical>
-</div>
-<div style="display: inline-block;">
-  <ngx-charts-bar-vertical
-    [view]="temp.view"
-    [scheme]="temp.colorScheme"
-    [results]="temp.multi"
-    [gradient]="temp.gradient"
-    [xAxis]="temp.showXAxis"
-    [yAxis]="temp.showYAxis"
-    [legend]="temp.showLegend"
-    [showXAxisLabel]="temp.showXAxisLabel"
-    [showYAxisLabel]="temp.showYAxisLabel"
-    [xAxisLabel]="temp.xAxisLabel"
-    [yAxisLabel]="temp.yAxisLabel"
-    [legend]="temp.legend"
-    [yScaleMax]="temp.yScaleMax"
-  >
-  </ngx-charts-bar-vertical>
-</div>
+<app-bar-chart [data]="soc"></app-bar-chart>
+<app-bar-chart [data]="temp"></app-bar-chart>
+
+<app-graph [data]="battery"></app-graph>
+
+<app-graph [data]="motor"></app-graph>
+<app-graph [data]="tilt"></app-graph>
+<app-graph [data]="compass"></app-graph>
+<app-graph [data]="acceleration"></app-graph>
+
 <app-footer></app-footer>

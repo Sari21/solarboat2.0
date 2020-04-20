@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.api;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
+import hu.schdesign.solarboat.model.dataPair;
 import hu.schdesign.solarboat.service.BoatDataService;
 import hu.schdesign.solarboat.service.DataGroupService;
 import hu.schdesign.solarboat.service.FileStorageService;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -57,8 +59,15 @@ public class DataGroupController {
     public Optional<DataGroup> getLastDataGroup(){
         return dataGroupService.getLastDataGroup();
     }
+
     @GetMapping
-    public ResponseBoatData getResponseBoatData(){ return dataGroupService.getDataGroupTilt();}
+    public ResponseBoatData getResponseBoatData(){ return dataGroupService.getDataGroupLast();}
+    @GetMapping(path = "response/{id}")
+    public ResponseBoatData getResponseBoatData(@PathVariable("id") Long id){ return dataGroupService.getDataGroupId(id);}
+    @GetMapping(path = "ids")
+    public ArrayList<dataPair<Long, String>> getIds(){
+        return  dataGroupService.getDatesAndIds();
+    }
 
 
 
@@ -84,15 +93,11 @@ public class DataGroupController {
     }
 
     @GetMapping(path ="export/{id}")
-    public ResponseEntity<Resource>  exportById(@PathVariable("id") Long id, HttpServletResponse response, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Resource>  exportById( HttpServletResponse response, HttpServletRequest request, @PathVariable("id") Long id) throws Exception {
         dataGroupService.exportById(id, response);
         return exportFile(request);
     }
-    @GetMapping(path ="export/{date}")
-    public ResponseEntity<Resource>  exportByDate(@PathVariable("id") Long id, HttpServletResponse response, HttpServletRequest request) throws Exception {
-        dataGroupService.exportById(id, response);
-        return exportFile(request);
-    }
+
     @GetMapping(path = "export/lastfive")
     public ResponseEntity<Resource> exportLast(HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportLast(response);

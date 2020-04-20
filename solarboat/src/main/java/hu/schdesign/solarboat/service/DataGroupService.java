@@ -4,10 +4,12 @@ import hu.schdesign.solarboat.dao.DataGroupRepository;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
+import hu.schdesign.solarboat.model.dataPair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,8 +34,19 @@ public class DataGroupService {
     public Optional<DataGroup> getDataGroupById(Long id){return dataGroupRepository.findById(id);}
     public Optional<DataGroup> getDataGroupByDate(LocalDateTime date){return dataGroupRepository.findByDate(date);
     }
-    public ResponseBoatData getDataGroupTilt(){
+    public ResponseBoatData getDataGroupLast(){
         return  new ResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().get());
+    }
+    public ResponseBoatData getDataGroupId(long id){
+        return  new ResponseBoatData(dataGroupRepository.findById(id).get());
+    }
+    public ArrayList<dataPair<Long, String>> getDatesAndIds(){
+        ArrayList<dataPair<Long, String>> list = new ArrayList<>();
+        Iterable<DataGroup> it = dataGroupRepository.findAll();
+        for(DataGroup i : it){
+            list.add(new dataPair<Long, String>(i.getId(), i.getDate()));
+        }
+        return list;
     }
     public void deleteAll(){dataGroupRepository.deleteAll();}
     public void deleteFirst(){ dataGroupRepository.deleteTopByOrderByIdAsc();}
@@ -63,9 +76,13 @@ public class DataGroupService {
     public void exportById(Long id, HttpServletResponse response)throws Exception{
         Optional<DataGroup> it = dataGroupRepository.findById(id);
         ArrayList<DataGroup> list = new ArrayList<>();
+        if(it.isPresent()){
+
         list.add(it.get());
         this.exportList = list;
         exportCSV(response);
+        }
+
     }
 
     public void exportLast(HttpServletResponse response)throws Exception{
@@ -92,6 +109,7 @@ public class DataGroupService {
             writer.append("groupid").append(CSV_SEPARATOR)
                     .append("date").append(CSV_SEPARATOR)
                     .append("dataid").append(CSV_SEPARATOR)
+                    .append("datadate").append(CSV_SEPARATOR)
                     .append("tilt_x").append(CSV_SEPARATOR)
                     .append("tilt_y").append(CSV_SEPARATOR)
                     .append("tilt_z").append(CSV_SEPARATOR)

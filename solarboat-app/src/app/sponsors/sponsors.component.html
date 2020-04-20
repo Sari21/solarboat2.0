@@ -1,0 +1,107 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="d-flex justify-content-center sponsors pb-5">
+  <div class="title col-md-9">
+    <h1 class="title pb-5">Fő szponzoraink</h1>
+    <div class="d-flex align-content-start flex-wrap col-md-12">
+      <a
+        *ngFor="let sponsor of main"
+        href="{{ sponsor.link }}"
+        target="blank"
+        class="col-6 col-md-4"
+      >
+        <img
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+          class="col-12"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors pb-4">
+  <div class="col-md-9">
+    <h2 class="pb-5 pt-5 title">Kiemelt szponzoraink</h2>
+    <div class="d-flex align-content-start flex-wrap col-md-12">
+      <a
+        *ngFor="let sponsor of top"
+        href="{{ sponsor.link }}"
+        target="blank"
+        class="col-6 col-md-3"
+      >
+        <img
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+          class="col-12"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center sponsors pb-4">
+  <div class="col-md-9">
+    <h2 class="pb-5 pt-5 title">Szponzoraink</h2>
+    <div class="d-flex align-content-start flex-wrap col-md-12">
+      <a
+        *ngFor="let sponsor of other"
+        href="{{ sponsor.link }}"
+        target="blank"
+        class="col-4 col-md-2"
+      >
+        <img
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+          class="col-12"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors pb-4">
+  <div class="col-md-9">
+    <h2 class="pb-5 pt-5 title">Tudományos partnereink</h2>
+    <div class="d-flex align-content-center flex-column flex-wrap col-md-12">
+      <a
+        *ngFor="let sponsor of partner"
+        href="{{ sponsor.link }}"
+        target="blank"
+        class="col-6 col-md-5"
+      >
+        <img
+          src="{{ sponsor.picture }}"
+          alt="{{ sponsor.name }}"
+          class="col-12"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center sponsors pb-4">
+  <div class="col-md-9">
+    <h2 class="pb-5 pt-5 title">
+      Budapesti Műszaki és Gazdaságtudományi Egyetem
+    </h2>
+
+    <div class="d-flex justify-content-center flex-wrap col-md-12">
+      <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
+        <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}" />
+      </a>
+    </div>
+    <div
+      *ngFor="let sponsors of uni"
+      class="d-flex justify-content-center flex-wrap col-md-12"
+    >
+      <a
+        *ngFor="let sponsor of sponsors"
+        href="{{ sponsor.link }}"
+        target="blank"
+        class="col-3 col-md-2"
+      >
+        <img class="col-12" src="{{ sponsor.picture }}" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

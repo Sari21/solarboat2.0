@@ -16,7 +16,7 @@ public class Sponsor {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min=1, max=50)
+    @Size(min=1, max=200)
     private String name;
     @Size(min=1, max=200)
     private String link;

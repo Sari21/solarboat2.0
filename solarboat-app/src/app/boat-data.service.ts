@@ -1,70 +1,47 @@
 import { Injectable } from "@angular/core";
-
-import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BoatData } from "./model/boat-data";
 import { DataGroup } from "./model/data-group";
 import { MyCoordinates } from "./model/my-coordinates";
+import { ConditionalExpr } from "@angular/compiler";
+import { Dates } from "./model/dates";
+import { Http, ResponseContentType } from "@angular/http";
 
 @Injectable({
   providedIn: "root",
 })
 export class BoatDataService {
   private BASE_URL = "http://localhost:8080/api/dataGroup";
-
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "fda66d02-9f2f-492e-9327-64bc68a7e509",
+    }),
+  };
   // tilt: MyCoordinates[] = [];
   constructor(private http: HttpClient) {}
-  public getLastDataGroup(): DataGroup {
-    var dataGroup = new DataGroup();
-    this.http
-      .get("http://localhost:8080/api/dataGroup/last")
-      .subscribe((data) => {
-        this.setData(data, dataGroup);
-      });
 
-    return dataGroup;
+  public getDataGroupById(id: number) {
+    return this.http.get(
+      this.BASE_URL.concat("/response/").concat(id.toString())
+    );
   }
 
-  public getDataGroupById(id: number): DataGroup {
-    var dataGroup = new DataGroup();
-    this.http.get(this.BASE_URL + "/" + id).subscribe((data) => {
-      this.setData(data, dataGroup);
-    });
-
-    return dataGroup;
+  public getLastDataGroup() {
+    return this.http.get(this.BASE_URL);
   }
-
-  public getLastDataGroupTilt() {
-    /* var res;
-    var result = [];
-    */
-    return this.http.get("http://localhost:8080/api/dataGroup");
-    /*.toPromise()
-      .then((data) => {
-        res = data;
-        result = res.tilt;
-        console.log(result);
-        return result;
-      })
-      */
+  public getDate() {
+    return this.http.get<Dates[]>(this.BASE_URL.concat("/ids"));
   }
-
-  public setData(data, dataGroup) {
-    var rawData = data;
-    var boatData = new BoatData();
-    dataGroup.id = rawData.id;
-    dataGroup.date = rawData.date;
-
-    rawData.boatDataList.forEach((element) => {
-      // this.tilt.push(element.tilt);
-      boatData.tilt = element.tilt;
-      boatData.acceleration = element.acceleration;
-      boatData.battery = element.battery;
-      boatData.compass = element.compass;
-      boatData.error = element.error;
-      boatData.extraTemps = element.extraTemps;
-      boatData.id = element.id;
-      boatData.motor = element.motor;
-      dataGroup.boatDataList.push(boatData);
-    });
+  public deleteAll() {
+    this.http.delete(this.BASE_URL);
+  }
+  public deleteById(id: number) {
+    console.log(this.BASE_URL.concat("/").concat(id.toString()));
+    this.http.delete(
+      "http://localhost:8080/api/dataGroup/".concat(id.toString()),
+      this.httpOptions
+    );
   }
 }

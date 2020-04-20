@@ -26,6 +26,8 @@ import { AccelerationGraphComponent } from "./acceleration-graph/acceleration-gr
 import { CompassGraphComponent } from "./compass-graph/compass-graph.component";
 import { NewGraphComponent } from "./new-graph/new-graph.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { SponsorsComponent } from './sponsors/sponsors.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
     AccelerationGraphComponent,
     CompassGraphComponent,
     NewGraphComponent,
+    BarChartComponent,
+    SponsorsComponent,
   ],
   // tslint:disable-next-line:max-line-length
   imports: [

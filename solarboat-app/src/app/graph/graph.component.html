@@ -1,1 +1,17 @@
-<div id="chartContainer2" style="height: 370px; width: 50%;"></div>
+<div style="display: inline-block;">
+  <ngx-charts-line-chart
+    [scheme]="data.colorScheme"
+    [results]="data.multi"
+    [gradient]="data.gradient"
+    [xAxis]="data.showXAxis"
+    [yAxis]="data.showYAxis"
+    [legend]="data.showLegend"
+    [showXAxisLabel]="data.showXAxisLabel"
+    [showYAxisLabel]="data.showYAxisLabel"
+    [xAxisLabel]="data.xAxisLabel"
+    [yAxisLabel]="data.yAxisLabel"
+    [autoScale]="data.autoScale"
+    [legendTitle]="data.legendTitle"
+  >
+  </ngx-charts-line-chart>
+</div>
