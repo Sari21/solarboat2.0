@@ -96,3 +96,6 @@ mat-icon{
 .timeline-body p{
     font-family: Helvetica;
 }
+img {
+    max-width: 100%;
+}
