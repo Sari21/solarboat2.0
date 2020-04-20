@@ -16,13 +16,16 @@ export class BoatDataComponent implements OnInit {
   @Output() public motor;
   @Output() public soc;
   @Output() public temp;
-  subscription: Subscription;
-  source = interval(10000);
+  @Output() public temp_soc;
+  @Output() public errors;
   @Output() dates: Dates[] = [];
   @Input() selectedDate: Dates;
+  subscription: Subscription;
+  source = interval(10000);
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
   show = false;
+  showDetails = false;
 
   constructor(private dataService: BoatDataService) {}
 
@@ -39,11 +42,21 @@ export class BoatDataComponent implements OnInit {
       this.show = false;
     }
   }
+  public setShowDetails() {
+    if (this.showDetails == false) {
+      this.showDetails = true;
+    } else {
+      this.showDetails = false;
+    }
+  }
   public dateChanged() {
     this.EXPORT_URL = this.BASE_URL.concat("/").concat(
       this.selectedDate.name.toString()
     );
     this.getDataById(this.selectedDate.name);
+    var table = document.getElementById("errorTable");
+    table.remove();
+    document.getElementById("firstrow").appendChild(table);
   }
 
   public async getDataById(id: number): Promise<Object> {
@@ -104,8 +117,8 @@ export class BoatDataComponent implements OnInit {
             series: res.tilt[2],
           },
         ],
-        view: [700, 400],
-        showXAxis: true,
+        view: [1000, 250],
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -137,8 +150,8 @@ export class BoatDataComponent implements OnInit {
             series: res.compass[2],
           },
         ],
-        view: [700, 400],
-        showXAxis: true,
+        view: [1000, 250],
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -170,8 +183,8 @@ export class BoatDataComponent implements OnInit {
             series: res.acceleration[2],
           },
         ],
-        view: [700, 400],
-        showXAxis: true,
+        view: [1000, 250],
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -199,8 +212,8 @@ export class BoatDataComponent implements OnInit {
             series: res.battery[1],
           },
         ],
-        view: [700, 400],
-        showXAxis: true,
+        view: [1000, 250],
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -215,6 +228,7 @@ export class BoatDataComponent implements OnInit {
         autoScale: true,
         legendTitle: "Battery",
       };
+
       this.motor = {
         multi: [
           {
@@ -227,8 +241,8 @@ export class BoatDataComponent implements OnInit {
             series: res.motor[1],
           },
         ],
-        view: [700, 400],
-        showXAxis: true,
+        view: [1000, 250],
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -243,6 +257,34 @@ export class BoatDataComponent implements OnInit {
         autoScale: true,
         legendTitle: "Motor",
       };
+      this.temp_soc = {
+        multi: [
+          {
+            name: "SoC",
+            series: res.battery[2],
+          },
+
+          {
+            name: "temp",
+            series: res.battery[3],
+          },
+        ],
+        view: [1000, 250],
+        showXAxis: false,
+        showYAxis: true,
+        gradient: false,
+        showLegend: true,
+        showXAxisLabel: true,
+        xAxisLabel: "Number",
+        showYAxisLabel: true,
+        yAxisLabel: "data",
+        timeline: true,
+        colorScheme: {
+          domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+        },
+        autoScale: true,
+        legendTitle: "Battery",
+      };
       this.soc = {
         multi: [
           {
@@ -251,7 +293,7 @@ export class BoatDataComponent implements OnInit {
           },
         ],
         view: [200, 300],
-        showXAxis: true,
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -275,7 +317,7 @@ export class BoatDataComponent implements OnInit {
           },
         ],
         view: [200, 300],
-        showXAxis: true,
+        showXAxis: false,
         showYAxis: true,
         gradient: false,
         showLegend: true,
@@ -290,6 +332,7 @@ export class BoatDataComponent implements OnInit {
         },
         legend: false,
       };
+      this.errors = res.errors;
     });
   }
   public setColor(temp: number, soc: number) {
