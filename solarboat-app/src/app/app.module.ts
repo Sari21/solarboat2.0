@@ -24,6 +24,7 @@ import { GraphComponent } from './graph/graph.component';
 import { TiltGraphComponent } from './tilt-graph/tilt-graph.component';
 import { AccelerationGraphComponent } from './acceleration-graph/acceleration-graph.component';
 import { CompassGraphComponent } from './compass-graph/compass-graph.component';
+import { AchievementsComponent } from './achievements/achievements.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CompassGraphComponent } from './compass-graph/compass-graph.component';
     TiltGraphComponent,
     AccelerationGraphComponent,
     CompassGraphComponent,
+    AchievementsComponent,
   ],
   // tslint:disable-next-line:max-line-length
   imports: [
