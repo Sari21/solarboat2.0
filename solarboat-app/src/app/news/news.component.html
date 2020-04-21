@@ -1,26 +1,33 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="news">
-    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+  <div
+    class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center"
+  >
+    <div class="jumbotron col-12">
+      <h1 class="title pb-4">hírek</h1>
 
-        <div class="jumbotron col-12">
-
-            <h1 class="title pb-4">hírek</h1>
-
-            <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
-                <div class="row justify-content-between">
-                    <app-news-preview *ngFor="let news of allnews" [news]="news" class="col-lg-6 col-md-6 col-10 col-sm-12"></app-news-preview>
-                </div>
-            </div>
-
-            <button (click)="getNews()">Get</button>
-            <button (click)="postNews()">Post</button>
-            <button (click)="putNews()">Put</button>
-            <button (click)="deleteNews()">Delete</button>
-            <button (click)="handleClick($event)" type="button">Button</button>
+      <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
+        <div class="row justify-content-between">
+          <app-news-preview
+            *ngFor="let news of allnews"
+            [news]="news"
+            class="col-lg-6 col-md-6 col-10 col-sm-12"
+          ></app-news-preview>
         </div>
-    </div>
-</div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <a *ngIf="!isLastPage" (click)="getNews()">Korábbi hírek</a>
+      </div>
 
+      <button (click)="getNews()">Get</button>
+
+      <button (click)="postNews()">Post</button>
+      <button (click)="putNews()">Put</button>
+      <button (click)="deleteNews()">Delete</button>
+      <button (click)="handleClick($event)" type="button">Button</button>
+    </div>
+  </div>
+</div>
 
 <app-footer></app-footer>
