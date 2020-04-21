@@ -7,6 +7,7 @@ div.achievements{
     list-style: none;
     padding: 20px 0 20px;
     position: relative;
+    margin:0;
 }
 
 .timeline:before {
@@ -43,4 +44,9 @@ div.achievements{
 
 .timeline > li:after {
     clear: both;
+}
+
+.load-more{
+    padding-bottom: 10%;
+    padding-top:3%;
 }
