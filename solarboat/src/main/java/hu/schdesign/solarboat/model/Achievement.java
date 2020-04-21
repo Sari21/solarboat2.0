@@ -6,9 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 
 @Entity
 @Table
@@ -17,8 +15,7 @@ public class Achievement {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy.MM.dd")
-    private LocalDate date;
+    private String date;
     @NotNull
     @Size(min=2, max=50)
     private String title_hu;
@@ -38,10 +35,8 @@ public class Achievement {
     @NotNull
     @Size(min=2, max=50)
     private String picture;
-    @NotNull
-    @Size(max=5)
-    private int place;
     private boolean isLast = false;
+    private Integer place;
 
 
     public Achievement(@JsonProperty("title_hu") String title_hu,
@@ -52,8 +47,7 @@ public class Achievement {
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
                        @JsonProperty("date") LocalDate date,
-                       @JsonProperty("place") int place,
-                       @JsonProperty("isLast") boolean isLast) {
+                       @JsonProperty("date") int place) {
         this.title_hu=title_hu;
         this.title_en=title_en;
         this.description_hu = description_hu;
@@ -71,11 +65,12 @@ public class Achievement {
     }
 
     public String getDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-        return dtf.format(date);
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        //return dtf.format(date);
+        return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
