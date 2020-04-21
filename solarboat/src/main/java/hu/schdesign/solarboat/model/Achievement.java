@@ -41,6 +41,7 @@ public class Achievement {
     @NotNull
     @Size(max=5)
     private int place;
+    private boolean isLast = false;
 
 
     public Achievement(@JsonProperty("title_hu") String title_hu,
@@ -51,7 +52,8 @@ public class Achievement {
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
                        @JsonProperty("date") LocalDate date,
-                       @JsonProperty("date") int place) {
+                       @JsonProperty("place") int place,
+                       @JsonProperty("isLast") boolean isLast) {
         this.title_hu=title_hu;
         this.title_en=title_en;
         this.description_hu = description_hu;
@@ -61,6 +63,7 @@ public class Achievement {
         this.picture = picture;
         this.date = date;
         this.place = place;
+        this.isLast = isLast;
 
     }
     public Achievement() {
@@ -141,5 +144,13 @@ public class Achievement {
 
     public void setPlace(int place) {
         this.place = place;
+    }
+
+    public boolean getIsLast() {
+        return isLast;
+    }
+
+    public void setIsLast(boolean isLast) {
+        this.isLast = isLast;
     }
 }

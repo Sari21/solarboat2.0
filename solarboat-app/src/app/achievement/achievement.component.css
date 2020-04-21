@@ -1,3 +1,58 @@
+
+mat-icon{
+    transform: scale(1);
+}
+.date p{
+    font-family: Helvetica;
+    margin:0;
+}
+.timeline-body p{
+    font-family: Helvetica;
+}
+
+
+.container {
+    position: relative;
+    width: 100%;
+    padding:0;
+    align-content: center;
+
+}
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #17252f;
+}
+
+.container:hover .overlay {
+    opacity: 0.7;
+}
+
+.place{
+    font-family: KelsonSans-Normal;
+    font-size: 2rem;
+    color:white;
+    text-transform:uppercase;
+}
+
+
+
 /* TIMELINE*/
 .timeline-panel {
     border: 1px solid #d4d4d4;
@@ -40,6 +95,10 @@
     border-right-width: 14px;
     left: -14px;
     right: auto;
+
+}
+.timeline-panel.date{
+
 }
 
 .timeline-badge {
@@ -47,24 +106,19 @@
     width: 50px;
     height: 50px;
     line-height: 50px;
-    font-size: 1.4em;
     text-align: center;
     position: absolute;
-    background-color: #999999;
     z-index: 100;
-    border-top-right-radius: 50%;
-    border-top-left-radius: 50%;
+    border-top-right-radius: 110%;
+    border-top-left-radius: 110%;
     border-bottom-right-radius: 50%;
     border-bottom-left-radius: 50%;
 
     left: 15px;
     margin-left: 0;
-    top: 16px;
+    top: 2px;
 }
 
-.timeline-badge.warning {
-    background-color: #f0ad4e !important;
-}
 
 .timeline-title p{
     color: black;
@@ -86,16 +140,3 @@
     margin-top: 5px;
 }
 
-mat-icon{
-    transform: scale(1);
-}
-.date p{
-    font-family: Helvetica;
-    margin:0;
-}
-.timeline-body p{
-    font-family: Helvetica;
-}
-img {
-    max-width: 100%;
-}
