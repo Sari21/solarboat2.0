@@ -8,6 +8,7 @@ import hu.schdesign.solarboat.service.NewsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -49,6 +50,14 @@ public class NewsController {
     @GetMapping(path = "{id}")
     public Optional<News> getNewsById(@PathVariable("id") Long id) {
         return newsService.getNewsById(id);
+    }
+    @GetMapping(path= "page/{pageNum}")
+    public Page<News> getPage(@PathVariable int pageNum){
+        return newsService.getPage(pageNum, 10);
+    }
+    @GetMapping(path= "mainpage")
+    public Page<News> getMainPage(){
+        return newsService.getPage(0, 2);
     }
 
     @DeleteMapping(path = "{id}")
