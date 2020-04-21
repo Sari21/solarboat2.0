@@ -14,8 +14,8 @@ div.achievements{
     bottom: 0;
     position: absolute;
     content: " ";
-    width: 3px;
-    background-color: #ffffff;
+    width: 2px;
+    background-color: #173a45;
     margin-left: -1.5px;
     left: 40px;
 }

@@ -49,7 +49,7 @@ a.btn, button.btn{
     letter-spacing:0.2em;
     text-transform:uppercase;
     padding:19px 35px;
-    border:1px solid #000;
+    border:1px solid #1B262F;
     text-align:center;
     position:relative;
     -webkit-transition:color 0.3s ease-out;
@@ -76,7 +76,7 @@ a.btn:before,button.btn:before{
     transition:transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     -webkit-transform-origin:0 0;
     transform-origin:0 0;
-    background:#000
+    background:#1B262F
 }
 a.btn:hover,button.btn:hover{
     text-decoration:none;
@@ -94,11 +94,14 @@ a.btn.white,button.btn.white{
     border-color:#fff;
     color:#fff
 }
+a.btn, button.btn{
+    color:#1B262F;
+}
 a.btn.white:before,button.btn.white:before{
     background:#fff
 }
 a.btn.white:hover,button.btn.white:hover{
-    color:#000
+    color:#1B262F
 }
 @-webkit-keyframes btn-anim{
     from{
@@ -145,3 +148,6 @@ a.btn.white:hover,button.btn.white:hover{
     }
 }
 
+a:hover{
+    opacity: 1 !important;
+}
