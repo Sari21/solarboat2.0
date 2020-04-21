@@ -4,6 +4,7 @@ import hu.schdesign.solarboat.model.Achievement;
 import hu.schdesign.solarboat.model.News;
 import hu.schdesign.solarboat.service.AchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,8 +41,12 @@ public class AchievementController {
         achievementService.updateAchievement(achievement);
     }
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public Achievement addAchievement(@Valid @RequestBody Achievement achievement){
-        return achievementService.addAchievment(achievement);
+    public Achievement addAchievement( @RequestBody Achievement achievement){
+        return achievementService.addAchievement(achievement);
+    }
+    @GetMapping(path= "page/{pageNum}")
+    public Page<Achievement> getPage(@PathVariable int pageNum){
+        return achievementService.getPage(pageNum, 4);
     }
 
 

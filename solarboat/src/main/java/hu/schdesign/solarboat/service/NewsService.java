@@ -6,6 +6,7 @@ import hu.schdesign.solarboat.model.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +39,8 @@ public class NewsService {
         newsRepository.save(news);
     }
     public Page<News> getPage(int pageNo, int pageSize){
-        PageRequest paging = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
         Page<News> pagedResult = newsPagingRepository.findAll(paging);
-        pagedResult.isLast();
         if(pagedResult.hasContent()) {
             return pagedResult;
         } else {
