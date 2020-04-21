@@ -58,9 +58,6 @@ export class BoatDataComponent implements OnInit {
       this.selectedDate.name.toString()
     );
     this.getDataById(this.selectedDate.name);
-    var table = document.getElementById("errorTable");
-    table.remove();
-    document.getElementById("firstrow").appendChild(table);
   }
 
   public async getDataById(id: number): Promise<Object> {
@@ -92,9 +89,9 @@ export class BoatDataComponent implements OnInit {
     this.getDates();
   }
   public deleteById(id: number) {
-    console.log(id);
     this.dataService.deleteById(id);
     this.getDates();
+    this.lastDataGroup();
   }
 
   public setGraphData(getData) {
