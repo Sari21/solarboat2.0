@@ -11,6 +11,8 @@ import {Achievement} from '../model/achievement';
 })
 export class AchievementsComponent implements OnInit {
   achievements: Achievement[] = [];
+  pageNumber: number = 0;
+  isLastPage: boolean = false;
   constructor(
       private http: HttpClient,
       private apiService: ApiService) {}
@@ -19,9 +21,14 @@ export class AchievementsComponent implements OnInit {
   }
 
   public getAchievements() {
-    this.apiService.getAchievements().subscribe(
-        res => {
-          this.achievements = res;
+    this.apiService.getAchievements(this.pageNumber).subscribe(
+        // tslint:disable-next-line:prefer-const
+        res => { let data: any = res;
+          <Achievement[]>data.content.forEach((element) => {
+          this.achievements.push(element);
+        });
+          this.pageNumber++;
+          this.isLastPage = data.last;
         },
         err => {
           alert('get error');
@@ -29,4 +36,7 @@ export class AchievementsComponent implements OnInit {
     );
   }
 
+  public sortby(date: string) {
+    return this.achievements.sort((a, b) => a[date] < b[date] ? 1 : a[date] === b[date] ? 0 : -1);
+  }
 }
