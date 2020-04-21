@@ -1,5 +1,8 @@
 
-    <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+    <div class="timeline-badge">
+        <img *ngIf="achievement.isLast" src="../../assets/footer-logo/solarboat-white.png" alt="Solar Boat" title="Solar Boat" width="100" />
+        <img *ngIf="!achievement.isLast" src="../../assets/achievements/logo.png" width="100" />
+    </div>
     <div class="timeline-panel pl-5 pr-5 pb-5">
         <div class="timeline-heading ">
             <div class="row timeline-title p-3 ">
@@ -14,8 +17,8 @@
         <div class="timeline-body pt-3">
             <p>{{achievement.description_hu}}</p>
         </div>
-        <div class="row justify-content-center pt-4">
-            <img src={{achievement.picture}} alt="logo" title="logo"  />
+        <div class="row justify-content-center pt-4" *ngIf="achievement.picture != null">
+            <img  src={{achievement.picture}} alt="picture" title="picture"  />
         </div>
     </div>
 

@@ -8,5 +8,7 @@ export interface Achievement {
     picture: string;
     title_en: string;
     title_hu: string;
+    place: number;
+    isLast: boolean;
 }
 
