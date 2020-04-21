@@ -4,15 +4,15 @@
     <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
 
         <h1 class="title pb-5 mb-4">Eredményeink</h1>
-        <div class="row justify-content-center pb-5">
+        <div class="row justify-content-center">
             <ul class="timeline col-10 col-sm-12 col-lg-8 col-md-11 ">
-                <li *ngFor="let achievement of achievements">
+                <li *ngFor="let achievement of sortby('date') ">
                  <app-achievement [achievement]="achievement" ></app-achievement>
                 </li>
             </ul>
         </div>
-        <div class="row justify-content-center pb-5">
-            <a class="btn" href="" target="" [scrollTo]="'#aboutus'"><span>Továbbiak betöltése</span></a>
+        <div class="col-sm-6 col-md-6 col-lg-3 offset-lg-2 offset-md-3 offset-sm-3 load-more">
+            <a class="btn"  *ngIf="!isLastPage" href="" target="" [scrollTo]="'#aboutus'"><span>Továbbiak betöltése</span></a>
         </div>
 
     </div>

@@ -17,9 +17,11 @@ export class ApiService {
   getNews(): Observable<News[]> {
     return this.http.get<News[]>(this.BASE_URL + '/news');
   }
-
-  getAchievements(): Observable<Achievement[]> {
-    return this.http.get<Achievement[]>(this.BASE_URL + '/achievement');
+  
+  getAchievements(pageNum: number) {
+    return this.http.get(
+        this.BASE_URL + '/achievement/page/'.concat(pageNum.toString())
+    );
   }
 
   /*  postItem(item: News): Observable<any> {
