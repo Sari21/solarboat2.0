@@ -35,13 +35,11 @@ export class BoatDataService {
     return this.http.get<Dates[]>(this.BASE_URL.concat("/ids"));
   }
   public deleteAll() {
-    this.http.delete(this.BASE_URL);
+    this.http.delete(this.BASE_URL).subscribe((res) => {});
   }
   public deleteById(id: number) {
-    console.log(this.BASE_URL.concat("/").concat(id.toString()));
-    this.http.delete(
-      "http://localhost:8080/api/dataGroup/".concat(id.toString()),
-      this.httpOptions
-    );
+    this.http
+      .delete("http://localhost:8080/api/dataGroup/".concat(id.toString()))
+      .subscribe((res) => {});
   }
 }
