@@ -1,0 +1,34 @@
+<div class="d-flex flex-row members mb-3 justify-content-center flex-wrap">
+    <div class="d-flex flex-column flex-wrap col-lg-3 col-sm-4 col-md-3 p-2 ml-2 leader  pl-5 pr-4">
+        <img *ngIf="!leader.linkedin" class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="leader.picture"/>
+        <a *ngIf="leader.linkedin" class="img" [href]="leader.linkedin" target="blank" >
+            <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
+            <img  [src]="leader.picture"/>
+        </a>
+        <div class="text-center name">
+            {{leader.lastName}}
+            <br />
+            {{leader.firstName}}
+
+        </div>
+        <div *ngIf="isLeader" class="text-center post" >{{leader.job_hu}} </div>
+    </div>
+
+    <div *ngFor="let member of members" class="d-flex flex-column col-lg-2 col-sm-2 col-md-2 p-2 member justify-content-center">
+        <img *ngIf="!member.linkedin" class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="leader.picture"/>
+        <a *ngIf="member.linkedin"class="img" [href]="member.linkedin" target="blank" >
+            <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
+            <img  [src]="member.picture"/>
+        </a>
+
+        <div class="text-center name">
+            {{member.lastName}}
+            <br />
+            {{member.firstName}}
+        </div>
+
+        <div *ngIf="isLeader" class="text-center post ">{{member.job_hu}}</div>
+    </div>
+
+
+</div>

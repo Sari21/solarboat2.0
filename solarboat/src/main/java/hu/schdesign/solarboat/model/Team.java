@@ -24,21 +24,27 @@ public class Team {
     @OneToOne(cascade = CascadeType.ALL)
     private Member leader;
     @NotNull
-    @Size(min=2, max=2000)
+    @Size(min=2, max=2000000)
     private String description_hu;
     @NotNull
-    @Size(min=2, max=2000)
+    @Size(min=2, max=2000000)
     private String description_en;
+    @NotNull
+    private long teamType;
+
 
     public Team(@JsonProperty("name_hu") String name_hu, @JsonProperty("name_en") String name_en,
                 @JsonProperty("members") List<Member> members, @JsonProperty("leader") Member leader,
-                @JsonProperty("description_hu") String description_hu, @JsonProperty("description_en") String description_en) {
+                @JsonProperty("description_hu") String description_hu, @JsonProperty("description_en") String description_en,
+                @JsonProperty("teamType") long teamType) {
+
         this.name_hu = name_hu;
         this.name_en = name_en;
         this.members = members;
         this.leader = leader;
         this.description_hu = description_hu;
         this.description_en = description_en;
+        this.teamType = teamType;
     }
 
     public Team() {
@@ -104,5 +110,13 @@ public class Team {
 
     public void setDescription_en(String description_en) {
         this.description_en = description_en;
+    }
+
+    public long getTeamType() {
+        return teamType;
+    }
+
+    public void setTeamType(long teamType) {
+        this.teamType = teamType;
     }
 }

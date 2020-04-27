@@ -1,1 +1,103 @@
-<p>team works!</p>
+<app-nav-bar></app-nav-bar>
+
+<div class="team-boss">
+    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron col-12">
+            <h1 class="title pb-4">{{leaders.name_hu}}</h1>
+            <app-team-members *ngIf="leaders.members"
+                              [members]="leaders.members"
+                              [leader]="leaders.leader"
+                              [isLeader] = "true"
+                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+            ></app-team-members>
+
+        </div>
+    </div>
+</div>
+<div class="team-electr">
+    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron col-12">
+            <h1 class="title pb-4">{{electronics.name_hu}}</h1>
+            <div class="row">
+                <div class="col- load-more pb-5 pl-3">
+                    <a class="btn"  data-toggle="collapse" data-target="#collapseElectr" href="javascript:void(0)"><span>Leírás</span></a>
+                </div>
+                <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseElectr">
+                    <div class="description col- pl-lg-5">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                </div>
+            </div>
+
+            <app-team-members *ngIf="electronics.members"
+                              [members]="electronics.members"
+                              [leader]="electronics.leader"
+                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+            ></app-team-members>
+
+
+        </div>
+    </div>
+</div>
+<div class="team-econ">
+    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron col-12">
+            <h1 class="title pb-4">{{economics.name_hu}}</h1>
+            <div class="row">
+                <div class="col- load-more pb-5 pl-3">
+                    <a class="btn"  data-toggle="collapse" data-target="#collapseEcon" href="javascript:void(0)"><span>Leírás</span></a>
+                </div>
+                <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseEcon">
+                    <div class="description col- pl-lg-5">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                </div>
+            </div>
+            <app-team-members *ngIf="economics.members"
+                              [members]="economics.members"
+                              [leader]="economics.leader"
+                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+            ></app-team-members>
+
+
+        </div>
+    </div>
+</div>
+<div class="team-mech">
+    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron col-12">
+            <h1 class="title pb-4">{{mechatronics.name_hu}}</h1>
+            <div class="row">
+                <div class="col- load-more pb-5 pl-3">
+                    <a class="btn"  data-toggle="collapse" data-target="#collapseMech" href="javascript:void(0)"><span>Leírás</span></a>
+                </div>
+                <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseMech">
+                    <div class="description col- pl-lg-5">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="title subtitle pb-4">{{mechatronics_material.name_hu}}</h2>
+            <app-team-members *ngIf="mechatronics_material.members"
+                              [members]="mechatronics_material.members"
+                              [leader]="mechatronics_material.leader"
+                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+            ></app-team-members>
+
+
+            <h2 class="title subtitle pb-4">{{mechatronics_simulation.name_hu}}</h2>
+            <app-team-members *ngIf="mechatronics_simulation.members"
+                              [members]="mechatronics_simulation.members"
+                              [leader]="mechatronics_simulation.leader"
+                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+            ></app-team-members>
+
+
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+

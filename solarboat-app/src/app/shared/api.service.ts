@@ -9,7 +9,7 @@ import { Achievement } from "../model/achievement";
 })
 export class ApiService {
   private BASE_URL = "http://localhost:8080/api";
-
+  //private BASE_URL = "http://solarboatteam:8080/api";
   constructor(private http: HttpClient) {}
 
   getNews(pageNum: number) {
@@ -18,13 +18,15 @@ export class ApiService {
     );
   }
   getMainpageNews() {
-    return this.http.get(this.BASE_URL + "/news/mainpage");
+    return this.http.get(this.BASE_URL + '/news/mainpage');
   }
-  
   getAchievements(pageNum: number) {
     return this.http.get(
         this.BASE_URL + '/achievement/page/'.concat(pageNum.toString())
     );
+  }
+  getTeams() {
+    return this.http.get(this.BASE_URL + '/teams');
   }
 
   /*  postItem(item: News): Observable<any> {

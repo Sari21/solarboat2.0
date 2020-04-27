@@ -36,6 +36,7 @@ import { UserComponent } from "./user/user.component";
 import { RegisterComponent } from "./register/register.component";
 import { HomeComponent } from "./home/home.component";
 import { AdminComponent } from "./admin/admin.component";
+import { TeamMembersComponent } from './team-members/team-members.component';
 
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
 

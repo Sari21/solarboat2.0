@@ -16,6 +16,10 @@
           ></app-news-preview>
         </div>
       </div>
+      <div class="row align-items-center justify-content-center">
+        <div class="col- load-more pt-5">
+          <a class="btn"  *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)" ><span>Korábbi hírek</span></a>
+        </div>
 
       <div
         class="col-sm-6 col-md-6 col-lg-3 offset-lg-2 offset-md-3 offset-sm-3 load-more"
@@ -24,13 +28,12 @@
           ><span>Továbbiak betöltése</span></a
         >
       </div>
+        <button (click)="getNews()">Get</button>
+        <button (click)="postNews()">Post</button>
+        <button (click)="putNews()">Put</button>
+        <button (click)="deleteNews()">Delete</button>
+        <button (click)="handleClick($event)" type="button">Button</button>
 
-      <button (click)="getNews()">Get</button>
-
-      <button (click)="postNews()">Post</button>
-      <button (click)="putNews()">Put</button>
-      <button (click)="deleteNews()">Delete</button>
-      <button (click)="handleClick($event)" type="button">Button</button>
     </div>
   </div>
 </div>

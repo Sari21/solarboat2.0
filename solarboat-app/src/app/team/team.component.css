@@ -1,0 +1,32 @@
+div.team-boss, div.team-econ{
+    background-color: #f3f4f4;
+}
+div.team-electr, div.team-mech{
+    background-color: white;
+}
+.jumbotron {
+    background: none;
+    margin-bottom: 0;
+}
+
+.post.leader {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    font-style: italic;
+}
+.description{
+    font-family: Helvetica;
+    font-size: 1.5rem;
+    line-height: 100%;
+    padding-bottom: 10%;
+}
+.description.card.cardbody{
+    padding-bottom: 5%;
+}
+.title.subtitle{
+    font-family: 'KelsonSans-Normal';
+    letter-spacing: 6px;
+    text-transform: uppercase;
+}
+
+

@@ -27,7 +27,7 @@ public class Member {
     private String picture;
     private String linkedin;
 
-    public Member(@JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName, @JsonProperty("job_hu") String job_hu,
+    public Member(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("job_hu") String job_hu,
                   @JsonProperty("job_en") String job_en, @JsonProperty("picture") String picture, @JsonProperty("linkedin") String linkedin) {
         this.firstName = firstName;
         this.lastName = lastName;
