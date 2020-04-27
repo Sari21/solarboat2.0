@@ -34,7 +34,7 @@ export class CoverComponent implements OnInit {
     const storageData = sessionStorage.getItem('solarpower');
     if (storageData === null) {
       this.http
-          .get('https://api.forecast.solar/estimate/watts/47.475498098/19.05333312/0/0/0.312')
+          .get('https://api.forecast.solar/estimate/watts/47.475498098/19.05333312/0/0/2.1')
           .subscribe((data) => {
             //console.log("using GET");
             this.watts = this.setWatts(data);

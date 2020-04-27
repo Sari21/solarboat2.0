@@ -9,7 +9,7 @@ import { Achievement } from "../model/achievement";
 })
 export class ApiService {
   private BASE_URL = "http://localhost:8080/api";
-
+  //private BASE_URL = "http://solarboatteam:8080/api";
   constructor(private http: HttpClient) {}
 
   getNews(pageNum: number) {

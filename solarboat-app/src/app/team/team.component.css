@@ -1,0 +1,16 @@
+div.team-boss, div.team-econ{
+    background-color: #f3f4f4;
+}
+div.team-electr, div.team-mech{
+    background-color: white;
+}
+.jumbotron {
+    background: none;
+    margin-bottom: 0;
+}
+
+.post.leader {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    font-style: italic;
+}

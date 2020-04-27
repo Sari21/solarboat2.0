@@ -30,6 +30,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { AchievementsComponent } from './achievements/achievements.component';
 import {AchievementComponent} from './achievement/achievement.component';
+import { TeamMembersComponent } from './team-members/team-members.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {AchievementComponent} from './achievement/achievement.component';
     NewGraphComponent,
     BarChartComponent,
     SponsorsComponent,
+    TeamMembersComponent,
   ],
   // tslint:disable-next-line:max-line-length
   imports: [

@@ -16,16 +16,17 @@
           ></app-news-preview>
         </div>
       </div>
-      <div class="d-flex justify-content-end">
-        <a *ngIf="!isLastPage" (click)="getNews()">Korábbi hírek</a>
+      <div class="row align-items-center justify-content-center">
+        <div class="col- load-more pt-5">
+          <a class="btn"  *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)" ><span>Korábbi hírek</span></a>
+        </div>
       </div>
+        <button (click)="getNews()">Get</button>
+        <button (click)="postNews()">Post</button>
+        <button (click)="putNews()">Put</button>
+        <button (click)="deleteNews()">Delete</button>
+        <button (click)="handleClick($event)" type="button">Button</button>
 
-      <button (click)="getNews()">Get</button>
-
-      <button (click)="postNews()">Post</button>
-      <button (click)="putNews()">Put</button>
-      <button (click)="deleteNews()">Delete</button>
-      <button (click)="handleClick($event)" type="button">Button</button>
     </div>
   </div>
 </div>
