@@ -1,4 +1,4 @@
-package hu.sari.AspTodo.message.Response;
+package hu.schdesign.solarboat.message.Response;
 
 import org.springframework.security.core.GrantedAuthority;
 

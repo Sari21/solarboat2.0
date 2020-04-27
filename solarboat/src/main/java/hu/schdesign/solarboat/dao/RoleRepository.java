@@ -1,7 +1,7 @@
-package hu.sari.AspTodo.Repository;
+package hu.schdesign.solarboat.dao;
 
-import hu.sari.AspTodo.Model.Role;
-import hu.sari.AspTodo.Model.RoleName;
+import hu.schdesign.solarboat.model.Role;
+import hu.schdesign.solarboat.model.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

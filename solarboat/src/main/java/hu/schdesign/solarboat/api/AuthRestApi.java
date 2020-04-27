@@ -1,20 +1,16 @@
-package hu.sari.AspTodo.Controller;
+package hu.schdesign.solarboat.api;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.validation.Valid;
-
-import hu.sari.AspTodo.Model.Role;
-import hu.sari.AspTodo.Model.RoleName;
-import hu.sari.AspTodo.Model.User;
-import hu.sari.AspTodo.Repository.RoleRepository;
-import hu.sari.AspTodo.Repository.UserRepository;
-import hu.sari.AspTodo.message.Request.LoginForm;
-import hu.sari.AspTodo.message.Request.SignUpForm;
-import hu.sari.AspTodo.message.Response.JwtResponse;
-import hu.sari.AspTodo.message.Response.ResponseMessage;
-import hu.sari.AspTodo.security.jwt.JwtProvider;
+import hu.schdesign.solarboat.Security.jwt.JwtProvider;
+import hu.schdesign.solarboat.dao.RoleRepository;
+import hu.schdesign.solarboat.dao.UserRepository;
+import hu.schdesign.solarboat.message.Request.LoginForm;
+import hu.schdesign.solarboat.message.Request.SignUpForm;
+import hu.schdesign.solarboat.message.Response.JwtResponse;
+import hu.schdesign.solarboat.message.Response.ResponseMessage;
+import hu.schdesign.solarboat.model.Role;
+import hu.schdesign.solarboat.model.RoleName;
+import hu.schdesign.solarboat.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +20,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

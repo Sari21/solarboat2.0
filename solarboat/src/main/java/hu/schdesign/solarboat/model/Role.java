@@ -1,4 +1,4 @@
-package hu.sari.AspTodo.Model;
+package hu.schdesign.solarboat.model;
 
 import org.hibernate.annotations.NaturalId;
 

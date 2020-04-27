@@ -1,6 +1,6 @@
-package hu.sari.AspTodo.Model;
+package hu.schdesign.solarboat.model;
 
-public enum  RoleName {
+public enum RoleName {
     ROLE_USER,
     ROLE_PM,
     ROLE_ADMIN

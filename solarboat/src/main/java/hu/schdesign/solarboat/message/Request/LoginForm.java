@@ -1,4 +1,4 @@
-package hu.sari.AspTodo.message.Request;
+package hu.schdesign.solarboat.message.Request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

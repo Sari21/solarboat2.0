@@ -1,7 +1,8 @@
-package hu.sari.AspTodo.Controller;
+package hu.schdesign.solarboat.api;
 
-import hu.sari.AspTodo.Model.User;
-import hu.sari.AspTodo.security.Service.UserService;
+
+import hu.schdesign.solarboat.model.User;
+import hu.schdesign.solarboat.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
