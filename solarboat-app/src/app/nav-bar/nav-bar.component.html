@@ -62,13 +62,20 @@
           >szponzorok</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authority">
         <a
           class="nav-link"
           routerLink="/boatdata"
           routerLinkActive="active-link"
           >adatok</a
         >
+      </li>
+      <li *ngIf="!authority" class="nav-item">
+        <a class="nav-link" routerLink="/auth/login">Login</a>
+      </li>
+
+      <li *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="/mainpage" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>

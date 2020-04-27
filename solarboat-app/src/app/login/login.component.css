@@ -1,0 +1,12 @@
+label {
+  font-family: "KelsonSans-Light";
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: black;
+  margin-right: 1rem;
+  text-decoration: none;
+  position: relative;
+}
+.jumbotron {
+  background-color: #f3f4f4;
+}
