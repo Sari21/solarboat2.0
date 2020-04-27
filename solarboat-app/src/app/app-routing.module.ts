@@ -11,33 +11,20 @@ import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
 import { UserComponent } from "./user/user.component";
 import { AdminComponent } from "./admin/admin.component";
+import { CanActivate } from "@angular/router";
+import { AuthGuardService as AuthGuard } from "./shared/auth-guard.service";
 const routes: Routes = [
-  {
-    path: "home",
-    component: HomeComponent,
-  },
-  {
-    path: "user",
-    component: UserComponent,
-  },
+  { path: "home", component: HomeComponent },
+  { path: "user", component: UserComponent },
 
-  {
-    path: "admin",
-    component: AdminComponent,
-  },
-  {
-    path: "auth/login",
-    component: LoginComponent,
-  },
-  {
-    path: "signup",
-    component: RegisterComponent,
-  },
+  { path: "admin", component: AdminComponent },
+  { path: "auth/login", component: LoginComponent },
+  { path: "signup", component: RegisterComponent },
   { path: "team", component: TeamComponent },
   { path: "mainpage", component: MainpageComponent },
   { path: "news", component: NewsComponent },
   { path: "sponsors", component: SponsorsComponent },
-  { path: "boatdata", component: BoatDataComponent },
+  { path: "boatdata", component: BoatDataComponent, canActivate: [AuthGuard] },
   { path: "achievements", component: AchievementsComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
 ];
