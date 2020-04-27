@@ -47,7 +47,11 @@ public class Achievement {
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
                        @JsonProperty("date") String date,
+<<<<<<< HEAD
                        @JsonProperty("place") int place) {
+=======
+                       @JsonProperty("date") int place) {
+>>>>>>> Sári
         this.title_hu=title_hu;
         this.title_en=title_en;
         this.description_hu = description_hu;
