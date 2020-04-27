@@ -47,11 +47,10 @@ public class Achievement {
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
                        @JsonProperty("date") String date,
-<<<<<<< HEAD
-                       @JsonProperty("place") int place) {
-=======
-                       @JsonProperty("date") int place) {
->>>>>>> Sári
+                       @JsonProperty("place") int place,
+                        @JsonProperty("isLast") boolean isLast)
+                      {
+
         this.title_hu=title_hu;
         this.title_en=title_en;
         this.description_hu = description_hu;
@@ -62,6 +61,7 @@ public class Achievement {
         this.date = date;
         this.place = place;
         this.isLast = isLast;
+
 
     }
     public Achievement() {
@@ -152,4 +152,8 @@ public class Achievement {
     public void setIsLast(boolean isLast) {
         this.isLast = isLast;
     }
-}
+
+
+
+
+    }
