@@ -23,13 +23,13 @@ public class News {
     @Size(min=2, max=50)
     private String title_hu;
     @NotNull
-    @Size(min=15, max=10000)
+    @Size(min=15, max=100000000)
     private String content_hu;
     @NotNull
     @Size(min=2, max=50)
     private String title_en;
     @NotNull
-    @Size(min=15, max=10000)
+    @Size(min=15, max=100000000)
     private String content_en;
     @NotNull
     @Size(min=2, max=50)

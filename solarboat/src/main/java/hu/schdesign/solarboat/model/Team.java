@@ -24,10 +24,10 @@ public class Team {
     @OneToOne(cascade = CascadeType.ALL)
     private Member leader;
     @NotNull
-    @Size(min=2, max=20000)
+    @Size(min=2, max=2000000)
     private String description_hu;
     @NotNull
-    @Size(min=2, max=20000)
+    @Size(min=2, max=2000000)
     private String description_en;
     @NotNull
     private long teamType;

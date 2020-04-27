@@ -45,6 +45,8 @@ img {
 }
 mat-icon{
     transform: scale(1);
+    display: inline-flex;
+    vertical-align: middle;
 }
 
 /* animated arrow */
