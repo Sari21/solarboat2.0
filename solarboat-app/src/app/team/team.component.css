@@ -14,3 +14,19 @@ div.team-electr, div.team-mech{
     line-height: 1.2rem;
     font-style: italic;
 }
+.description{
+    font-family: Helvetica;
+    font-size: 1.5rem;
+    line-height: 100%;
+    padding-bottom: 10%;
+}
+.description.card.cardbody{
+    padding-bottom: 5%;
+}
+.title.subtitle{
+    font-family: 'KelsonSans-Normal';
+    letter-spacing: 6px;
+    text-transform: uppercase;
+}
+
+
