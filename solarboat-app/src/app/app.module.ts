@@ -67,6 +67,7 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
     RegisterComponent,
     HomeComponent,
     AdminComponent,
+    TeamMembersComponent
   ],
   // tslint:disable-next-line:max-line-length
   imports: [

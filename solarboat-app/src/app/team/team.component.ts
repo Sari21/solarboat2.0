@@ -14,6 +14,7 @@ export class TeamComponent implements OnInit {
   //teams: Team[] = [];
 
   leaders: Team = new class implements Team {
+    // tslint:disable-next-line:variable-name
     description_en: string;
     description_hu: string;
     id: number;
