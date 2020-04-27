@@ -46,7 +46,7 @@ public class Achievement {
                        @JsonProperty("description_en") String description_en,
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
-                       @JsonProperty("date") LocalDate date,
+                       @JsonProperty("date") String date,
                        @JsonProperty("date") int place) {
         this.title_hu=title_hu;
         this.title_en=title_en;
