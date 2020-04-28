@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import "../../lightbox.min.css";
 import "../../../lightbox-plus-jquery.min.js";
+import { ApiService } from "../shared/api.service";
+import { GalleryPicture } from "../model/gallery-picture";
 
 @Component({
   selector: "app-gallery",
@@ -8,7 +10,20 @@ import "../../../lightbox-plus-jquery.min.js";
   styleUrls: ["./gallery.component.css"],
 })
 export class GalleryComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+  constructor(apiService: ApiService) {
+    this.apiService = apiService;
+  }
+  gallery: GalleryPicture[];
+  @Output() apiService: ApiService;
+  ngOnInit(): void {
+    this.apiService.getGallery().subscribe((res) => {
+      this.gallery = res;
+      this.gallery.forEach(
+        (s) => (s.picture = "../../assets/gallery/".concat(s.picture))
+      );
+      this.gallery.forEach(
+        (s) => (s.smallPicture = "../../assets/gallery/".concat(s.smallPicture))
+      );
+    });
+  }
 }

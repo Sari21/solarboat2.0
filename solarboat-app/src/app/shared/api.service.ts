@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { News } from "../model/news";
 import { Achievement } from "../model/achievement";
+import { GalleryPicture } from "../model/gallery-picture";
 
 @Injectable({
   providedIn: "root",
@@ -20,10 +21,15 @@ export class ApiService {
   getMainpageNews() {
     return this.http.get(this.BASE_URL + "/news/mainpage");
   }
-  
+
   getAchievements(pageNum: number) {
     return this.http.get(
-        this.BASE_URL + '/achievement/page/'.concat(pageNum.toString())
+      this.BASE_URL + "/achievement/page/".concat(pageNum.toString())
+    );
+  }
+  getGallery(): Observable<GalleryPicture[]> {
+    return <Observable<GalleryPicture[]>>(
+      this.http.get(this.BASE_URL + "/gallery")
     );
   }
 

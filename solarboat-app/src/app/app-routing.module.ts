@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "mainpage", component: MainpageComponent },
   { path: "news", component: NewsComponent },
   { path: "sponsors", component: SponsorsComponent },
-  { path: "boatdata", component: BoatDataComponent, canActivate: [AuthGuard] },
+  { path: "boatdata", component: BoatDataComponent },
   { path: "achievements", component: AchievementsComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
 ];

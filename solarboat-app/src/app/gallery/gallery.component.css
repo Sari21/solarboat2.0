@@ -1,6 +1,9 @@
 /*.gallery {
   margin: 10px 50px;
 }*/
+* {
+  background-color: #f3f4f4;
+}
 .gallery img {
   transition: 1s;
   padding: 5px;
