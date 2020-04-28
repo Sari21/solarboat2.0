@@ -28,7 +28,9 @@ public class NewsService {
     public News addNews(News news){
         return newsRepository.save(news);
     }
-    public Iterable<News> getAllNews() {return newsRepository.findAll();}
+    public Iterable<News> getAllNews() {
+        return newsRepository.findAll(Sort.by("date").descending());
+    }
     public Optional<News> getNewsById(Long id){
         return newsRepository.findById(id);
     }
@@ -39,7 +41,7 @@ public class NewsService {
         newsRepository.save(news);
     }
     public Page<News> getPage(int pageNo, int pageSize){
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("date").descending());
         Page<News> pagedResult = newsPagingRepository.findAll(paging);
         if(pagedResult.hasContent()) {
             return pagedResult;
