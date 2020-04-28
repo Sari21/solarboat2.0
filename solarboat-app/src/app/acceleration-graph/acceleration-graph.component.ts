@@ -1,21 +1,20 @@
-import { Component, OnInit, Injectable } from "@angular/core";
-import * as CanvasJS from "../../../canvasjs.min";
-import { BoatDataService } from "../boat-data.service";
+import { Component, OnInit, Injectable } from '@angular/core';
+import { BoatDataService } from '../boat-data.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 @Component({
-  selector: "app-acceleration-graph",
-  templateUrl: "./acceleration-graph.component.html",
-  styleUrls: ["./acceleration-graph.component.css"],
+  selector: 'app-acceleration-graph',
+  templateUrl: './acceleration-graph.component.html',
+  styleUrls: ['./acceleration-graph.component.css'],
 })
 export class AccelerationGraphComponent implements OnInit {
   constructor(private dataService: BoatDataService) {}
 
   ngOnInit() {}
 
-  public printGraph(res) {
+  /*public printGraph(res) {
     var chart = new CanvasJS.Chart("chartContainerAcc", {
       title: {
         text: "gyorsulás",
@@ -69,12 +68,12 @@ export class AccelerationGraphComponent implements OnInit {
     chart.render();
 
     function toogleDataSeries(e) {
-      if (typeof e.dataSeries.visible === "undefined" || e.dataSeries.visible) {
+      if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
         e.dataSeries.visible = false;
       } else {
         e.dataSeries.visible = true;
       }
       chart.render();
     }
-  }
+  };*/
 }
