@@ -1,0 +1,31 @@
+<app-nav-bar></app-nav-bar>
+<div>
+  <div class="container col-10 col-sm-12 col-lg-10 col-md-11">
+    <h1 class="title pb-3">Galéria</h1>
+    <div class="align-items-center justify-content-center d-flex flex-column">
+      <div class="d-flex justify-content-center col-12 col-md-8 p-3 mb-3">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/ezgTLqlOhzs"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="justify-content-center d-flex mb-5">
+        <div class="gallery justify-content-center" id="photos">
+          <a
+            *ngFor="let img of gallery"
+            href="{{ img.picture }}"
+            data-lightbox="gallery"
+          >
+            <img src="{{ img.smallPicture }}" alt="{{ img.title_hu }}" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

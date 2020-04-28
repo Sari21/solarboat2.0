@@ -14,16 +14,20 @@ public class GalleryPicture {
     @NotNull
     private String picture;
     @NotNull
+    private String smallPicture;
+    @NotNull
     private String title_hu;
     @NotNull
     private String title_en;
 
     public GalleryPicture(@JsonProperty("title_hu")String title_hu,
                           @JsonProperty("title_en")String title_en,
-                          @JsonProperty("picture") String picture) {
+                          @JsonProperty("picture") String picture,
+                          @JsonProperty("smallPicture") String smallPicture) {
         this.picture = picture;
         this.title_hu = title_hu;
         this.title_en = title_en;
+        this.smallPicture = smallPicture;
     }
     public GalleryPicture() {
     }
@@ -54,5 +58,13 @@ public class GalleryPicture {
 
     public void setTitle_en(String title_en) {
         this.title_en = title_en;
+    }
+
+    public String getSmallPicture() {
+        return smallPicture;
+    }
+
+    public void setSmallPicture(String smallPicture) {
+        this.smallPicture = smallPicture;
     }
 }

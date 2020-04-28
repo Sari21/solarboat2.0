@@ -17,7 +17,7 @@ public class GalleryController {
     GalleryController(GalleryService galleryService){
         this.galleryService = galleryService;
     }
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public GalleryPicture addPicture(@Validated @RequestBody GalleryPicture galleryPicture){
         return galleryService.addPicture(galleryPicture);
     }

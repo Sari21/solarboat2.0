@@ -39,6 +39,7 @@ import { AdminComponent } from "./admin/admin.component";
 import { TeamMembersComponent } from './team-members/team-members.component';
 
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
+import { GalleryComponent } from "./gallery/gallery.component";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,6 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
     RegisterComponent,
     HomeComponent,
     AdminComponent,
-    TeamMembersComponent
   ],
   // tslint:disable-next-line:max-line-length
   imports: [
