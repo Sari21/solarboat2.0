@@ -26,7 +26,8 @@ public class AchievementService {
         this.achievementPagingRepository = achievementPagingRepository;
     }
     public Iterable<Achievement> getAllAchievements(){
-        return achievementRepository.findAll();
+
+        return achievementRepository.findAll(Sort.by("date").descending());
     }
     public Achievement addAchievement(Achievement achievement) {
         return this.achievementRepository.save(achievement);
@@ -42,7 +43,7 @@ public class AchievementService {
         achievementRepository.deleteById(id);
     }
     public Page<Achievement> getPage(int pageNo, int pageSize){
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("date").descending());
         Page<Achievement> pagedResult = achievementPagingRepository.findAll(paging);
 
         if(pagedResult.hasContent()) {

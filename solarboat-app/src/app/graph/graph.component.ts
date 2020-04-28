@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from "@angular/core";
-import * as CanvasJS from "../../../canvasjs.min";
 import { HttpClient } from "@angular/common/http";
 import { BoatDataService } from "../boat-data.service";
 import { DataGroup } from "../model/data-group";
