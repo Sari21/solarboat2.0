@@ -28,7 +28,7 @@ import { SponsorsComponent } from "./sponsors/sponsors.component";
 import { AchievementsComponent } from "./achievements/achievements.component";
 import { AchievementComponent } from "./achievement/achievement.component";
 import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
+import { RegisterComponent } from "./admin/register/register.component";
 import { TeamMembersComponent } from "./team-members/team-members.component";
 import {
   AuthGuardService as AuthGuard,
@@ -37,7 +37,7 @@ import {
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { JwtModule } from "@auth0/angular-jwt";
-import { UsersComponent } from './admin/users/users.component';
+import { UsersComponent } from "./admin/users/users.component";
 
 @NgModule({
   declarations: [

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Router } from "@angular/router";
-import { AuthService } from "../auth/auth.service";
-import { SignUpInfo } from "../auth/signup-info";
+import { AuthService } from "../../auth/auth.service";
+import { SignUpInfo } from "../../auth/signup-info";
 
 @Component({
   selector: "app-register",
@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit {
       this.form.name,
       this.form.username,
       this.form.email,
-      this.form.password
+      this.form.password,
+      this.form.admin
     );
 
     this.authService.signUp(this.signupInfo).subscribe(

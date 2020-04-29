@@ -1,0 +1,129 @@
+<app-nav-bar></app-nav-bar>
+<div class="d-flex justify-content-center">
+  <div class="col-10">
+    <h1 class="title mb-5">Új felhasználó regisztrációja</h1>
+    <div class="row col-sm-10 col-10 col-md-6">
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+        class="pb-5"
+      >
+        <div class="form-group">
+          <label for="name"
+            ><p class="p-0 m-0">
+              Név
+            </p></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="form.name"
+            #name="ngModel"
+            required
+          />
+          <div *ngIf="f.submitted && name.invalid">
+            <div *ngIf="name.errors.required">Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name"
+            ><p class="p-0 m-0">
+              Felhasználónév
+            </p></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            [(ngModel)]="form.username"
+            #username="ngModel"
+            required
+          />
+          <div *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name"
+            ><p class="p-0 m-0">
+              E-mail cím
+            </p></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            #email="ngModel"
+            required
+            email
+          />
+          <div *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name"
+            ><p class="p-0 m-0">
+              Jelszó
+            </p></label
+          >
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            #password="ngModel"
+            required
+            minlength="6"
+          />
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="admin"
+            ><p class="p-0 m-0">
+              Adminisztrátor
+            </p></label
+          >
+          <input
+            type="checkbox"
+            class="form-control"
+            name="admin"
+            [(ngModel)]="form.admin"
+            #admin="ngModel"
+          />
+        </div>
+        <div class="form-group p-2">
+          <button class="btn m-2" href="javascript:void(0)" target="">
+            <span>OK</span>
+          </button>
+          <a
+            routerLink="/users"
+            class="btn m-2"
+            href="javascript:void(0)"
+            target=""
+            ><span>Mégse</span></a
+          >
+          <div
+            *ngIf="f.submitted && isSignUpFailed"
+            class="alert alert-warning"
+          >
+            Signup failed!<br />{{ errorMessage }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
