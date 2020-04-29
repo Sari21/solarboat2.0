@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule, CanActivate } from "@angular/router";
 import { MainpageComponent } from "./mainpage/mainpage.component";
 import { TeamComponent } from "./team/team.component";
 import { NewsComponent } from "./news/news.component";
@@ -8,9 +8,9 @@ import { AchievementsComponent } from "./achievements/achievements.component";
 import { SponsorsComponent } from "./sponsors/sponsors.component";
 import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
-import { CanActivate } from "@angular/router";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { AuthGuardService as AuthGuard } from "./shared/auth-guard.service";
+import { RoleGuardService as RoleGuard } from "./shared/role-guard.service";
 const routes: Routes = [
   { path: "gallery", component: GalleryComponent },
   { path: "auth/login", component: LoginComponent },
@@ -19,9 +19,13 @@ const routes: Routes = [
   { path: "mainpage", component: MainpageComponent },
   { path: "news", component: NewsComponent },
   { path: "sponsors", component: SponsorsComponent },
-  { path: "boatdata", component: BoatDataComponent },
+  {
+    path: "boatdata",
+    component: BoatDataComponent,
+  },
   { path: "achievements", component: AchievementsComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
+  { path: "**", redirectTo: "/mainpage" },
 ];
 
 @NgModule({

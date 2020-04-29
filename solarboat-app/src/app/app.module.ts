@@ -30,9 +30,13 @@ import { AchievementComponent } from "./achievement/achievement.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { TeamMembersComponent } from "./team-members/team-members.component";
-
+import {
+  AuthGuardService as AuthGuard,
+  AuthGuardService,
+} from "./shared/auth-guard.service";
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
+import { JwtModule } from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -72,8 +76,9 @@ import { GalleryComponent } from "./gallery/gallery.component";
     ScrollToModule.forRoot(),
     NgxChartsModule,
     CommonModule,
+    JwtModule,
   ],
   bootstrap: [AppComponent],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule],
 })
 export class AppModule {}
