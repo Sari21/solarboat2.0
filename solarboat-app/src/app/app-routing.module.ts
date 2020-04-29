@@ -11,6 +11,7 @@ import { LoginComponent } from "./login/login.component";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { AuthGuardService as AuthGuard } from "./shared/auth-guard.service";
 import { RoleGuardService as RoleGuard } from "./shared/role-guard.service";
+import { UsersComponent } from "./admin/users/users.component";
 const routes: Routes = [
   { path: "gallery", component: GalleryComponent },
   { path: "auth/login", component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
     component: BoatDataComponent,
   },
   { path: "achievements", component: AchievementsComponent },
+  { path: "users", component: UsersComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
   { path: "**", redirectTo: "/mainpage" },
 ];

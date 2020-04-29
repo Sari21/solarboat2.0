@@ -1,0 +1,17 @@
+<table class="col-5">
+  <tr>
+    <th class="col-1">Név</th>
+    <th class="col-1">Felhasználónév</th>
+    <th class="col-1">Admin</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td class="col-1">{{ user.name }}</td>
+    <td class="col-1">{{ user.username }}</td>
+    <td class="col-1">
+      <p *ngFor="let role of user.roles">{{ role.name }}</p>
+    </td>
+  </tr>
+  <a routerLink="/signup">
+    új felhasználó felvétele
+  </a>
+</table>
