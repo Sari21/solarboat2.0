@@ -9,7 +9,7 @@
           height="315"
           src="https://www.youtube.com/embed/ezgTLqlOhzs"
           frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allow=" encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
       </div>
@@ -20,6 +20,7 @@
             *ngFor="let img of gallery"
             href="{{ img.picture }}"
             data-lightbox="gallery"
+            data-title="{{ img.title_hu }}"
           >
             <img src="{{ img.smallPicture }}" alt="{{ img.title_hu }}" />
           </a>

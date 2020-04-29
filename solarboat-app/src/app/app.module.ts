@@ -22,20 +22,13 @@ import { NewsComponent } from "./news/news.component";
 import { ScrollToModule } from "ng2-scroll-to-el";
 import { BoatDataComponent } from "./boat-data/boat-data.component";
 import { GraphComponent } from "./graph/graph.component";
-import { TiltGraphComponent } from "./tilt-graph/tilt-graph.component";
-import { AccelerationGraphComponent } from "./acceleration-graph/acceleration-graph.component";
-import { CompassGraphComponent } from "./compass-graph/compass-graph.component";
-import { NewGraphComponent } from "./new-graph/new-graph.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { BarChartComponent } from "./bar-chart/bar-chart.component";
 import { SponsorsComponent } from "./sponsors/sponsors.component";
 import { AchievementsComponent } from "./achievements/achievements.component";
 import { AchievementComponent } from "./achievement/achievement.component";
 import { LoginComponent } from "./login/login.component";
-import { UserComponent } from "./user/user.component";
 import { RegisterComponent } from "./register/register.component";
-import { HomeComponent } from "./home/home.component";
-import { AdminComponent } from "./admin/admin.component";
 import { TeamMembersComponent } from "./team-members/team-members.component";
 
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
@@ -55,19 +48,12 @@ import { GalleryComponent } from "./gallery/gallery.component";
     NewsComponent,
     BoatDataComponent,
     GraphComponent,
-    TiltGraphComponent,
-    AccelerationGraphComponent,
-    CompassGraphComponent,
     AchievementsComponent,
     AchievementComponent,
-    NewGraphComponent,
     BarChartComponent,
     SponsorsComponent,
     LoginComponent,
-    UserComponent,
     RegisterComponent,
-    HomeComponent,
-    AdminComponent,
     TeamMembersComponent,
     GalleryComponent,
     NavBarComponent,
