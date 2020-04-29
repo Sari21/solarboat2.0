@@ -1,5 +1,4 @@
 import { Component, OnInit, Injectable } from "@angular/core";
-import * as CanvasJS from "../../../canvasjs.min";
 import { BoatDataService } from "../boat-data.service";
 
 @Injectable({
@@ -15,7 +14,7 @@ export class TiltGraphComponent implements OnInit {
 
   ngOnInit() {}
 
-  public printGraph(tilt) {
+  /*public printGraph(tilt) {
     var chart = new CanvasJS.Chart("chartContainerTilt", {
       title: {
         text: "dőlésszög",
@@ -76,5 +75,5 @@ export class TiltGraphComponent implements OnInit {
       }
       chart.render();
     }
-  }
+  }*/
 }

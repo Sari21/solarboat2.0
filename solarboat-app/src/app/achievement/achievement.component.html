@@ -9,7 +9,7 @@
                 <p id="timeline-location" class="pr-3 pt-3">{{achievement.location_hu}} </p>
                 <p class="pt-3">{{achievement.title_hu}} </p>
             </div>
-            <div class="row date col-12 date mt-2 mb-2 align-items-center">
+            <div class=" .d-block .d-md-none row date col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
                 <p class="pl-1">{{achievement.date}}</p>
             </div>
@@ -17,13 +17,9 @@
         <div class="timeline-body pt-3">
             <p>{{achievement.description_hu}}</p>
         </div>
-        <div class="container ">
-            <img src={{achievement.picture}}  class="image">
-            <div class="overlay">
-                <div class="row justify-content-center ">
-                    <div class="place col align-items-center ">{{achievement.place}}. helyezés</div>
-                </div>
-            </div>
-        </div>
+        <a *ngIf="achievement.picture" class="img">
+            <div class="img__overlay place">{{achievement.place}}. helyezés</div>
+            <img  [src]="achievement.picture"/>
+        </a>
     </div>
 

@@ -1,5 +1,4 @@
 import { Component, OnInit, Injectable } from "@angular/core";
-import * as CanvasJS from "../../../canvasjs.min";
 import { BoatDataService } from "../boat-data.service";
 
 @Injectable({
@@ -15,7 +14,7 @@ export class CompassGraphComponent implements OnInit {
 
   ngOnInit() {}
 
-  public printGraph(res) {
+  /*public printGraph(res) {
     var chart = new CanvasJS.Chart("chartContainerComp", {
       title: {
         text: "iránytű",
@@ -76,5 +75,5 @@ export class CompassGraphComponent implements OnInit {
       }
       chart.render();
     }
-  }
+  }*/
 }

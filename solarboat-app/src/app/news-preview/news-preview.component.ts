@@ -20,7 +20,7 @@ export class NewsPreviewComponent implements OnInit {
   }
 
   openScrollableContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true, centered: true });
+    this.modalService.open(longContent, { scrollable: true, centered: true, size: 'lg' });
   }
 
 }
