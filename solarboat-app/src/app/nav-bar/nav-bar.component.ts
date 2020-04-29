@@ -24,6 +24,14 @@ export class NavBarComponent implements OnInit {
   public authority: string;
 
   ngOnInit() {
+    this.checkAuth();
+  }
+  logout() {
+    this.tokenStorage.signOut();
+    this.checkAuth();
+  }
+  checkAuth() {
+    this.authority = undefined;
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every((role) => {
@@ -35,9 +43,5 @@ export class NavBarComponent implements OnInit {
         return true;
       });
     }
-  }
-  logout() {
-    this.tokenStorage.signOut();
-    this.router.navigateByUrl("/mainpage");
   }
 }

@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.schdesign.solarboat.model.Role;
 import org.hibernate.annotations.NaturalId;
@@ -43,6 +44,7 @@ public class User{
 
     @NotBlank
     @Size(min=6, max = 100)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
