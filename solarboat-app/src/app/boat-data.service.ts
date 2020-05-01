@@ -12,6 +12,7 @@ import { Http, ResponseContentType } from "@angular/http";
   providedIn: "root",
 })
 export class BoatDataService {
+  //private BASE_URL = "http://solarboatteam:8080/api/dataGroup";
   private BASE_URL = "http://localhost:8080/api/dataGroup";
   httpOptions = {
     headers: new HttpHeaders({
@@ -40,6 +41,7 @@ export class BoatDataService {
   public deleteById(id: number) {
     this.http
       .delete("http://localhost:8080/api/dataGroup/".concat(id.toString()))
+        //.delete("http://solarboatteam:8080/api/dataGroup/".concat(id.toString()))
       .subscribe((res) => {});
   }
 }
