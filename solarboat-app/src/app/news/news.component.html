@@ -8,6 +8,50 @@
       <h1 class="title pb-4">hírek</h1>
 
       <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
+        <div class="card mb-5 mr-3 ml-3" id="news-form">
+          <h2 class="title pb-3">Új hír hozzáadása</h2>
+          <div>
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="title">Cím</label>
+                    <input type="text" class="form-control" id="title"
+                           required
+                           [(ngModel)]="form.title" name="title"
+                           [ngClass]="{'failed': failed }">
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">Kép</label>
+                    <input type="password" class="form-control" id="password"
+                           required
+                           [(ngModel)]="form.password" name="password"
+                           [ngClass]="{'failed': failed }">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="content">Tartalom</label>
+                    <textarea type="content" class="form-control" id="content" rows="5"
+                           required
+                           [(ngModel)]="form.content" name="content"
+                              [ngClass]="{'failed': failed }"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <a class="btn" (click)="onSubmit()" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+
+              <div [hidden]="!failed"
+                   class="alert alert-danger mt-3">
+                {{errorMessage}}
+              </div>
+
+            </form>
+          </div>
+        </div>
         <div class="row justify-content-between">
           <app-news-preview
             *ngFor="let news of allnews"

@@ -40,7 +40,7 @@ export class BoatDataService {
   }
   public deleteById(id: number) {
     this.http
-        .delete(this.BASE_URL.concat(id.toString()))
+        .delete(this.BASE_URL + '/' + id.toString() )
       .subscribe((res) => {});
   }
 }
