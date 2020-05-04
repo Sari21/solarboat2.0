@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class FileController {
 
