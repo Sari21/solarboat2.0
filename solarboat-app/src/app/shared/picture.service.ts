@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import {GalleryPicture} from "../model/gallery-picture";
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,17 @@ import { Observable } from "rxjs";
 export class PictureService {
 
   constructor(private http: HttpClient) {}
+  BASE_URL = 'http://localhost:8080';
   postFile(fileToUpload: File)  {
-    const BASE_URL = 'http://localhost:8080/uploadFile';
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     formData.append('path', 'gallery' );
-    return this.http.post(BASE_URL, formData);
+    return this.http.post(this.BASE_URL.concat("/uploadFile"), formData);
      
+}
+getGallery(): Observable<GalleryPicture[]> {
+  return <Observable<GalleryPicture[]>>(
+    this.http.get(this.BASE_URL + "/api/gallery")
+  );
 }
 }
