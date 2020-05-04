@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { News } from "../model/news";
 import { ApiService } from "../shared/api.service";
+import {TokenStorageService} from '../auth/token-storage.service';
 
 @Component({
   selector: "app-news",
@@ -12,11 +13,47 @@ export class NewsComponent implements OnInit {
   allnews: News[] = [];
   pageNumber: number = 0;
   isLastPage: boolean = false;
-  // allnews = news;
+  public roles: string[];
+  public authority: string;
+  form: any = {};
+  failed = false;
+  errorMessage = '';
 
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private tokenStorage: TokenStorageService) {}
+
   ngOnInit(): void {
     this.getNews();
+    this.checkAuth();
+  }
+  onSubmit() {
+    console.log(this.form);
+    const o: Object = {
+      title_hu: this.form.title,
+      content_hu: this.form.content,
+      title_en: "angolcim",
+      content_en: "angoltartalommmmmmmmmmmmmmmmm",
+      picture: "kepkepkep",
+    };
+    const b = this.http
+        .post("http://localhost:8080/api/news", o)
+        .subscribe((data) => {
+          console.log(data);
+        });
+  }
+
+  checkAuth() {
+    this.authority = undefined;
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every((role) => {
+        if (role === "ROLE_ADMIN") {
+          this.authority = "admin";
+          return false;
+        }
+        this.authority = "user";
+        return true;
+      });
+    }
   }
 
   /*  getNews(): void {
@@ -48,9 +85,9 @@ export class NewsComponent implements OnInit {
     // tslint:disable-next-line:ban-types
     const o: Object = {
       title_hu: "magyarcim",
-      content_hu: "magyartartalom",
+      content_hu: "magyartartalommmmmmmmmmmmmmmmmmmmm",
       title_en: "angolcim",
-      content_en: "angoltartalom",
+      content_en: "angoltartalommmmmmmmmmmmmmmmmmmmmmmmmm",
       picture: "kepkepkep",
     };
     const b = this.http
