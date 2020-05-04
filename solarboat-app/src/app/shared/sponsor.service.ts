@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class SponsorService {
   private BASE_URL = "http://localhost:8080/api/sponsor";
-  //private BASE_URL = "http://solarboatteam:8080/api/sponsor";
+  //private BASE_URL = "http://solarboatteam.hu:81/api/sponsor";
   constructor(private http: HttpClient) {}
   getSponsors(): Observable<Sponsor[]> {
     return this.http.get<Sponsor[]>(this.BASE_URL);
