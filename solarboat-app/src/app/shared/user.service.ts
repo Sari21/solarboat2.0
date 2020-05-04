@@ -15,4 +15,10 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return <Observable<User[]>>this.http.get(this.BASE_URL);
   }
+  updateUser(user: User){
+   if(user.password == undefined){
+     user.password = "defaultValue";
+   }
+    return this.http.patch(this.userUrl, user);
+  }
 }
