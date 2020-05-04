@@ -12,7 +12,7 @@ import { Http, ResponseContentType } from "@angular/http";
   providedIn: "root",
 })
 export class BoatDataService {
-  //private BASE_URL = "http://solarboatteam:8080/api/dataGroup";
+  //private BASE_URL = "http://solarboatteam.hu:81/api/dataGroup";
   private BASE_URL = "http://localhost:8080/api/dataGroup";
   httpOptions = {
     headers: new HttpHeaders({
