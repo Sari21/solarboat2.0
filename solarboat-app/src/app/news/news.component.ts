@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { News } from "../model/news";
 import { ApiService } from "../shared/api.service";
 import {TokenStorageService} from '../auth/token-storage.service';
+import {PictureService} from '../shared/picture.service';
 
 @Component({
   selector: "app-news",
@@ -18,8 +19,12 @@ export class NewsComponent implements OnInit {
   form: any = {};
   failed = false;
   errorMessage = '';
+  pictureService: PictureService;
+  fileToUpload: File = null;
 
-  constructor(private http: HttpClient, private apiService: ApiService, private tokenStorage: TokenStorageService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private tokenStorage: TokenStorageService, pictureService: PictureService) {
+    this.pictureService = pictureService;
+  }
 
   ngOnInit(): void {
     this.getNews();
@@ -40,7 +45,17 @@ export class NewsComponent implements OnInit {
           console.log(data);
         });
   }
-
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.uploadFileToActivity();
+  }
+  uploadFileToActivity() {
+    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+      // do something, if upload success
+    }, error => {
+      console.log(error);
+    });
+  }
   checkAuth() {
     this.authority = undefined;
     if (this.tokenStorage.getToken()) {

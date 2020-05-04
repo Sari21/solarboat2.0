@@ -24,11 +24,11 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="password">Kép</label>
-                    <input type="password" class="form-control" id="password"
-                           required
-                           [(ngModel)]="form.password" name="password"
-                           [ngClass]="{'failed': failed }">
+                    <label for="file">Kép</label>
+                    <input type="file"
+                           id="file"
+                           [(ngModel)]="form.file" name="file"
+                           (change)="handleFileInput($event.target.files)">
                   </div>
                 </div>
                 <div class="col-6">
