@@ -19,6 +19,6 @@ export class UserService {
    if(user.password == undefined){
      user.password = "defaultValue";
    }
-    return this.http.patch(this.userUrl, user);
+    return this.http.patch(this.BASE_URL, user);
   }
 }

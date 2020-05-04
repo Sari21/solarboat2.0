@@ -12,7 +12,9 @@ import { GalleryComponent } from "./gallery/gallery.component";
 import { AuthGuardService as AuthGuard } from "./shared/auth-guard.service";
 import { RoleGuardService as RoleGuard } from "./shared/role-guard.service";
 import { UsersComponent } from "./admin/users/users.component";
+import{GalleryAdminComponent} from './admin/gallery-admin/gallery-admin.component';
 const routes: Routes = [
+  { path: "gallery/admin", component: GalleryAdminComponent },
   { path: "gallery", component: GalleryComponent },
   { path: "auth/login", component: LoginComponent },
   { path: "signup", component: RegisterComponent },
