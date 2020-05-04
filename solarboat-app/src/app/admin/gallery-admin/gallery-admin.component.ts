@@ -4,6 +4,7 @@ import { Component, OnInit, Output } from "@angular/core";
 
 import { GalleryPicture } from "../../model/gallery-picture";
 
+
 @Component({
   selector: 'app-gallery-admin',
   templateUrl: './gallery-admin.component.html',
@@ -14,47 +15,64 @@ export class GalleryAdminComponent implements OnInit {
   constructor(pictureService : PictureService) { 
     this.pictureService = pictureService;
   }
+  @Output() gallery: GalleryPicture[];
+  newPicture: GalleryPicture;
   pictureService: PictureService;
+  failed = false;
+  errorMessage = '';
   ngOnInit(): void {
-   this.loadGallery()
+   this.loadGallery();
+   this.newPicture = new GalleryPicture();
   }
   fileToUpload: File = null;
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
+    this.newPicture.picture = files.item(0).name;
     
 }
 smallFileToUpload: File = null;
 handleSmallFileInput(files: FileList) {
   this.smallFileToUpload = files.item(0);
-  
+  this.newPicture.smallPicture = files.item(0).name;
 }
 
 uploadFileToActivity() {
-  this.pictureService.postFile(this.fileToUpload).subscribe(data => {
-    // do something, if upload success
-    }, error => {
-      console.log(error);
-    });
-  this.pictureService.postFile(this.smallFileToUpload).subscribe(data => {
-    // do something, if upload success
-    }, error => {
-      console.log(error);
-    });
+ 
+
+    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+      // do something, if upload success
+      }, error => {
+        console.log(error);
+      });
+    this.pictureService.postFile(this.smallFileToUpload).subscribe(data => {
+      // do something, if upload success
+      }, error => {
+        console.log(error);
+      });
+    this.pictureService.postGalleryPicture(this.newPicture).subscribe(data => {
+      // do something, if upload success
+      }, error => {
+        console.log(error);
+      });
+      this.newPicture = new GalleryPicture();
+      this.fileToUpload = undefined;
+      this.smallFileToUpload = undefined;
+
 }
 
-@Output() gallery: GalleryPicture[];
 
 loadGallery(){
   this.pictureService.getGallery().subscribe((res) => {
     this.gallery = res;
-    console.log(res);
+    //console.log(res);
     this.gallery.forEach(
-      (s) => {(s.picture = "../../../src/assets/gallery/".concat(s.picture))}
+      (s) => {(s.picture = "./assets/gallery/".concat(s.picture))}
     );
     this.gallery.forEach(
-      (s) => (s.smallPicture = "../../../src/assets/gallery/".concat(s.smallPicture))
+      (s) => (s.smallPicture = "./assets/gallery/".concat(s.smallPicture))
     );
-  console.log(this.gallery);
+
   });
 }
+
 }
