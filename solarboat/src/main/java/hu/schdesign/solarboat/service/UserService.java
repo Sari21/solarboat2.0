@@ -21,6 +21,14 @@ public class UserService {
         return this.userRepository.findById(id);
     }
     public User updateUser(User user){
+        if(user.getPassword() == "defaultValue") {
+            User u = getUserById(user.getId()).get();
+            u.setRoles(user.getRoles());
+            u.setEmail(user.getEmail());
+            u.setName(user.getName());
+            u.setUsername(user.getUsername());
+            return this.userRepository.save(u);
+        }
         return this.userRepository.save(user);
     }
     public User addUser(User user){

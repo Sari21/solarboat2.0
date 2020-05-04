@@ -5,6 +5,7 @@ import hu.schdesign.solarboat.model.User;
 import hu.schdesign.solarboat.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Column;
 import java.util.Optional;
 
 @RestController
@@ -27,8 +28,8 @@ public class UserController {
     public Optional<User> getUserById(@PathVariable("id") long id){
         return this.userService.getUserById(id);
     }
-    @PutMapping
-    public User updateUser(@RequestBody User user){
+    @PatchMapping
+    public User updateUser(@RequestParam User user){
         return this.userService.updateUser(user);
     }
     @DeleteMapping ("{id}")
