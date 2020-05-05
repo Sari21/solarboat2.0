@@ -1,9 +1,20 @@
 /*.gallery {
   margin: 10px 50px;
 }*/
-* {
-  background-color: #f3f4f4;
+.gallery {
+  background-color: #f3f4f4;;
 }
+.jumbotron {
+  background: none;
+  margin-bottom: 0;
+}
+#galleryform {
+  background: white;
+  background-color: white;
+  padding: 3%;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
+}
+
 .gallery img {
   transition: 1s;
   padding: 5px;
@@ -60,22 +71,8 @@
     -webkit-column-count: 1;
     column-count: 1;
   }
-  div.news {
-    background-color: #f3f4f4;
-  }
-  .jumbotron {
-    background: none;
-    margin-bottom: 0;
-  }
-  #news-form{
-    background: white;
-    background-color: white;
-    padding: 3%;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
-  }
-  textarea{
-    height: 100%;
-  }
+
+
   
   
 }

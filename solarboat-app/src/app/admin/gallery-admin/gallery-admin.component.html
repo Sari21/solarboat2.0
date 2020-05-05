@@ -1,62 +1,68 @@
 <app-nav-bar></app-nav-bar>
-<div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
-  <div class="card mb-5 mr-3 ml-3" id="news-form">
-    <h2 class="title pb-3">Új kép hozzáadása</h2>
-    <div>
-      <form (ngSubmit)="uploadFileToActivity()" #loginForm="ngForm">
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group">
-              <label for="title_hu">Magyar cím</label>
-              <input type="text" class="form-control" id="title_hu"
-                     required
-                     [(ngModel)]="newPicture.title_hu" name="title_hu"
-                     [ngClass]="{'failed': failed }">
-                    
+<div class="gallery">
 
-            </div>
-            <div class="form-group">
-              <label for="title_en">Angol cím</label>
-              <input type="text" class="form-control" id="title_en"
-                     required
-                     [(ngModel)]="newPicture.title_en" name="title_en"
-                     [ngClass]="{'failed': failed }">
-                    
-            </div>
-            <div class="form-group">
-              <label for="file">Nagy fotó</label>
-              <input type="file"
-                     required
-                     id="file"
-                     class="form-control"
-                     (change)="handleFileInput($event.target.files)"
-                     [ngClass]="{'failed': failed }"/>
-            </div>
-            <div class="form-group">
-              <label for="smallfile">Kis fotó</label>
-              <input type="file"
-                    required
-                    id="smallfile"
-                    class="form-control"
-                    (change)="handleSmallFileInput($event.target.files)"
-                    [ngClass]="{'failed': failed }"/>
-             </div>
 
+    <div  class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+      <div class="jumbotron col-12">
+      <h1 class="title pb-3">Galéria</h1>
+      <div class=" container col-lg-7 col-md-10 col-12 col-sm-12 mt-5">
+        <div class="valami card mb-5 mr-3 ml-3" id="galleryform">
+          <h2 class="title pb-3">Új kép hozzáadása</h2>
+          <div>
+            <form  #loginForm="ngForm">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="title_hu">Magyar cím</label>
+                    <input type="text" class="form-control" id="title_hu"
+                           required
+                           [(ngModel)]="newPicture.title_hu" name="title_hu"
+                           [ngClass]="{'failed': failed }">
+                          
+      
+                  </div>
+                  <div class="form-group">
+                    <label for="title_en">Angol cím</label>
+                    <input type="text" class="form-control" id="title_en"
+                           required
+                           [(ngModel)]="newPicture.title_en" name="title_en"
+                           [ngClass]="{'failed': failed }">
+                          
+                  </div>
+                  <div class="form-group">
+                    <label for="file">Nagy fotó</label>
+                    <input type="file"
+                           required
+                           id="file"
+                           class="form-control"
+                           (change)="handleFileInput($event.target.files)"
+                           [ngClass]="{'failed': failed }"
+                           />
+                  </div>
+                  <div class="form-group">
+                    <label for="smallfile">Kis fotó</label>
+                    <input type="file"
+                          required
+                          id="smallfile"
+                          class="form-control"
+                          (change)="handleSmallFileInput($event.target.files)"
+                          [ngClass]="{'failed': failed }"
+                          />
+                   </div>
+      
+                </div>
+              </div>
+              
+              <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': (!loginForm.form.valid && !picturesSelected) }" ><span>Feltöltés</span></a>
+
+              <div [hidden]="!failed"
+                   class="alert alert-danger mt-3">
+                {{errorMessage}}
+              </div>
+            </form>
           </div>
         </div>
-        <button type="submit">Feltölt</button>
-      </form>
-    </div>
-  </div>
-</div>
-  
-   
-    
-            
-
-  
-    <div class="container col-10 col-sm-12 col-lg-10 col-md-11">
-      <h1 class="title pb-3">Galéria</h1>
+      </div>
       <div class="align-items-center justify-content-center d-flex flex-column">
         <div class="d-flex justify-content-center col-12 col-md-8 p-3 mb-3">
           <iframe
@@ -83,6 +89,6 @@
         </div>
       </div>
     </div>
- 
-
+  </div>
+</div>
 <app-footer></app-footer>
