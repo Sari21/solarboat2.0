@@ -31,13 +31,14 @@ export class NewsComponent implements OnInit {
     this.checkAuth();
   }
   onSubmit() {
-    console.log(this.form);
+    console.log(this.fileToUpload.name);
+    this.uploadFileToActivity();
     const o: Object = {
       title_hu: this.form.title,
       content_hu: this.form.content,
       title_en: "angolcim",
       content_en: "angoltartalommmmmmmmmmmmmmmmm",
-      picture: "kepkepkep",
+      picture: '../../assets/gallery/' + this.fileToUpload.name,
     };
     const b = this.http
         .post("http://localhost:8080/api/news", o)
@@ -47,7 +48,6 @@ export class NewsComponent implements OnInit {
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
-    this.uploadFileToActivity();
   }
   uploadFileToActivity() {
     this.pictureService.postFile(this.fileToUpload).subscribe(data => {

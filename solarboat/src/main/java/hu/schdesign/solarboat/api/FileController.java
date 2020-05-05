@@ -18,7 +18,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
+@RequestMapping("api/file")
 @RestController
 public class FileController {
 
@@ -36,7 +37,7 @@ public class FileController {
 
         if(fileName == null){
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.setLocation(new URI("api/uploadFile"));
+            responseHeaders.setLocation(new URI("/uploadFile"));
             responseHeaders.set("Error", "The file is not an image");
             return new ResponseEntity<UploadFileResponse>(null, responseHeaders, HttpStatus.BAD_REQUEST);
         }
@@ -46,7 +47,7 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.setLocation(new URI("api/uploadFile"));
+        responseHeaders.setLocation(new URI("uploadFile"));
 
         return new ResponseEntity<UploadFileResponse>(new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize()), responseHeaders, HttpStatus.CREATED);

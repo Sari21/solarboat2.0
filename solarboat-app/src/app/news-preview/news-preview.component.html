@@ -1,6 +1,10 @@
 
-<a class="card lift  mb-5 mr-3 ml-3" (click)="openScrollableContent(longContent)">
+<a class="card lift  mb-5 mr-3 ml-3" (click)="openContent(longContent)">
     <div class="card-body m-3">
+        <div class="row justify-content-end">
+            <a class="col-2" (click)="openContent(EditForm)" ><mat-icon>edit</mat-icon></a>
+            <a class="col-2" (click)="delete(news.id)" ><mat-icon>delete</mat-icon></a>
+        </div>
         <h2 class="title mb-2 mt-4">{{news.title_hu}}</h2>
         <div class="row date col-12 date mt-2 mb-2 align-items-center">
             <mat-icon>calendar_today</mat-icon>
@@ -41,6 +45,56 @@
                 <img [src]="news.picture" alt="logo" title="logo"  />
             </div>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #EditForm let-modal>
+    <div class="modal-header">
+        <h2 class="title mb-2 mt-4">Hír módosítása</h2>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body pb-5">
+        <form (ngSubmit)="onSubmit(news.id)" #loginForm="ngForm">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="title">Cím</label>
+                        <input type="text" class="form-control" id="title"
+                               required
+                               [formControl]="title" name="title"
+                               [ngClass]="{'failed': failed }">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file">Kép</label>
+                        <input type="file"
+                               id="file"
+                               [(ngModel)]="form.file" name="file"
+                               (change)="handleFileInput($event.target.files)">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="content">Tartalom</label>
+                        <textarea type="content" class="form-control" id="content" rows="5"
+                                  required
+                                  [formControl]="content" name="content"
+                                  [ngClass]="{'failed': failed }"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn" (click)="onSubmit(news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+
+            <div [hidden]="!failed"
+                 class="alert alert-danger mt-3">
+                {{errorMessage}}
+            </div>
+
+        </form>
     </div>
 </ng-template>
 
