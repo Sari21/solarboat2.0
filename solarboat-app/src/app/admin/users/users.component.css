@@ -1,3 +1,6 @@
+.users {
+  background-color: #f3f4f4;;
+}
 th {
   font-family: "KelsonSans-Bold";
   letter-spacing: 4px;
@@ -26,7 +29,7 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: white;
 }
 .fas:hover {
   color: grey;

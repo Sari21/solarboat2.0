@@ -20,6 +20,9 @@ export class GalleryAdminComponent implements OnInit {
   pictureService: PictureService;
   failed = false;
   errorMessage = '';
+  picturesSelected = false;
+  pic = false;
+  smallPic = false;
   ngOnInit(): void {
    this.loadGallery();
    this.newPicture = new GalleryPicture();
@@ -28,12 +31,22 @@ export class GalleryAdminComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.newPicture.picture = files.item(0).name;
+    this.pic = true;
+    if(this.pic && this.smallPic){
+      console.log("true");
+      this.picturesSelected = true;
+    }
     
 }
 smallFileToUpload: File = null;
 handleSmallFileInput(files: FileList) {
   this.smallFileToUpload = files.item(0);
   this.newPicture.smallPicture = files.item(0).name;
+  this.smallPic = true;
+  if(this.pic && this.smallPic){
+    console.log("true");
+    this.picturesSelected = true;
+  }
 }
 
 uploadFileToActivity() {
