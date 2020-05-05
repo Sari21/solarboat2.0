@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.api;
 import hu.schdesign.solarboat.model.GalleryPicture;
 import hu.schdesign.solarboat.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,8 @@ public class GalleryController {
     GalleryController(GalleryService galleryService){
         this.galleryService = galleryService;
     }
+
+    @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public GalleryPicture addPicture(@Validated @RequestBody GalleryPicture galleryPicture){
         return galleryService.addPicture(galleryPicture);

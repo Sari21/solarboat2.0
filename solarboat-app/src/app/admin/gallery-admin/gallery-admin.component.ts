@@ -79,7 +79,7 @@ loadGallery(){
     this.gallery = res;
     //console.log(res);
     this.gallery.forEach(
-      (s) => {(s.picture = "./assets/gallery/".concat(s.picture))}
+      (s) => {(s.picture = "./assets/gallery/".concat(s.picture), console.log(s))}
     );
     this.gallery.forEach(
       (s) => (s.smallPicture = "./assets/gallery/".concat(s.smallPicture))
