@@ -9,17 +9,19 @@ import {GalleryPicture} from "../model/gallery-picture";
 export class PictureService {
 
   constructor(private http: HttpClient) {}
+
   BASE_URL = 'http://localhost:8080';
+
   postFile(fileToUpload: File)  {
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     formData.append('path', 'gallery' );
-    return this.http.post(this.BASE_URL.concat("/uploadFile"), formData);
-     
-}
-getGallery(): Observable<GalleryPicture[]> {
-  return <Observable<GalleryPicture[]>>(
-    this.http.get(this.BASE_URL + "/api/gallery")
-  );
-}
+    return this.http.post(this.BASE_URL.concat("/api/file/uploadFile"), formData);
+  }
+  getGallery(): Observable<GalleryPicture[]> {
+    return <Observable<GalleryPicture[]>>(
+      this.http.get(this.BASE_URL + "/api/gallery")
+    );
+  }
+
 }
