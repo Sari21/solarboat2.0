@@ -24,13 +24,7 @@ export class PictureService {
     );
   }
 
-}
-getGallery(): Observable<GalleryPicture[]> {
-  return <Observable<GalleryPicture[]>>(
-    this.http.get(this.BASE_URL + "/api/gallery")
-  );
-}
-postGalleryPicture(picture : GalleryPicture): Observable<GalleryPicture>{
-  return <Observable<GalleryPicture>>this.http.post(this.BASE_URL.concat("/api/gallery"), picture)
-}
+  postGalleryPicture(picture : GalleryPicture): Observable<GalleryPicture>{
+    return <Observable<GalleryPicture>>this.http.post(this.BASE_URL.concat("/api/gallery"), picture)
+  }
 }

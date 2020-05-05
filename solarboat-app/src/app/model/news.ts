@@ -1,4 +1,4 @@
-export interface News {
+export class News {
     title_hu: string;
     content_hu: string;
     title_en: string;
@@ -6,4 +6,6 @@ export interface News {
     picture: string;
     id: number;
     date: string;
+
+
 }

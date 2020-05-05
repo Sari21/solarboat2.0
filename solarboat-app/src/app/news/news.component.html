@@ -11,7 +11,7 @@
         <div class="card mb-5 mr-3 ml-3" id="news-form">
           <h2 class="title pb-3">Új hír hozzáadása</h2>
           <div>
-            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <form (ngSubmit)="onSubmit(loginForm, $event)" #loginForm="ngForm">
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
@@ -42,7 +42,7 @@
                 </div>
               </div>
 
-              <a class="btn" (click)="onSubmit()" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+              <a class="btn" (click)="onSubmit(loginForm, $event)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
 
               <div [hidden]="!failed"
                    class="alert alert-danger mt-3">
@@ -56,6 +56,7 @@
           <app-news-preview
             *ngFor="let news of allnews"
             [news]="news"
+            (onRemove)="onDeleteNews($event)"
             class="col-lg-6 col-md-6 col-10 col-sm-12"
           ></app-news-preview>
         </div>
@@ -65,12 +66,6 @@
           <a class="btn"  *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)" ><span>Korábbi hírek</span></a>
         </div>
       </div>
-        <button (click)="getNews()">Get</button>
-        <button (click)="postNews()">Post</button>
-        <button (click)="putNews()">Put</button>
-        <button (click)="deleteNews()">Delete</button>
-        <button (click)="handleClick($event)" type="button">Button</button>
-
     </div>
   </div>
 </div>

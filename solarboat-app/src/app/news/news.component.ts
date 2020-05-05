@@ -30,22 +30,36 @@ export class NewsComponent implements OnInit {
     this.getNews();
     this.checkAuth();
   }
-  onSubmit() {
-    console.log(this.fileToUpload.name);
-    this.uploadFileToActivity();
-    const o: Object = {
-      title_hu: this.form.title,
-      content_hu: this.form.content,
-      title_en: "angolcim",
-      content_en: "angoltartalommmmmmmmmmmmmmmmm",
-      picture: '../../assets/gallery/' + this.fileToUpload.name,
-    };
+  //post
+  onSubmit(empForm: any, event: Event) {
+    event.preventDefault();
+    let o: Object;
+    if (this.fileToUpload != null) {
+      this.uploadFileToActivity();
+      o = {
+        title_hu: this.form.title,
+        content_hu: this.form.content,
+        title_en: "angolcim",
+        content_en: "angoltartalommmmmmmmmmmmmmmmm",
+        picture: '../../assets/gallery/' + this.fileToUpload.name
+      };
+    } else {
+      o = {
+        title_hu: this.form.title,
+        content_hu: this.form.content,
+        title_en: "angolcim",
+        content_en: "angoltartalommmmmmmmmmmmmmmmm"
+      };
+    }
+
     const b = this.http
         .post("http://localhost:8080/api/news", o)
         .subscribe((data) => {
           console.log(data);
         });
+    this.pushNews();
   }
+
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
   }
@@ -69,6 +83,9 @@ export class NewsComponent implements OnInit {
         return true;
       });
     }
+  }
+  onDeleteNews(news: News) {
+    this.allnews = this.allnews.filter(rowObj => rowObj.id !== news.id);
   }
 
   /*  getNews(): void {
@@ -96,43 +113,16 @@ export class NewsComponent implements OnInit {
     );
   }
 
-  postNews(): void {
-    // tslint:disable-next-line:ban-types
-    const o: Object = {
-      title_hu: "magyarcim",
-      content_hu: "magyartartalommmmmmmmmmmmmmmmmmmmm",
+  private pushNews() {
+    const n: News = {
+      id: 0,
+      date: 'most',
+      title_hu: this.form.title,
+      content_hu: this.form.content,
       title_en: "angolcim",
-      content_en: "angoltartalommmmmmmmmmmmmmmmmmmmmmmmmm",
-      picture: "kepkepkep",
+      content_en: "angoltartalommmmmmmmmmmmmmmmm",
+      picture: '../../assets/gallery/' + this.fileToUpload.name,
     };
-    const b = this.http
-      .post("http://localhost:8080/api/news", o)
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
-  putNews(): void {
-    const o: Object = {
-      id: 2,
-      title: "ez a címe:(",
-      content: "ez a tartalma:(",
-      picture: "itt van hozzá a kép:(",
-    };
-    const b = this.http
-      .put("http://localhost:8080/api/news", o)
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
-  deleteNews(): void {
-    const b = this.http
-      .delete("http://localhost:8080/api/news/3")
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
-
-  handleClick(event: Event) {
-    console.log("Click!’", event);
+    this.allnews.unshift(n);
   }
 }

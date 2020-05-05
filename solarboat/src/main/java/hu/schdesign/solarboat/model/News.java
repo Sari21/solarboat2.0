@@ -18,6 +18,7 @@ public class News {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     //private Date date;
+    private String picture;
     private LocalDate date;
     @NotNull
     @Size(min=2, max=50)
@@ -31,9 +32,7 @@ public class News {
     @NotNull
     @Size(min=15, max=100000000)
     private String content_en;
-    @NotNull
-    @Size(min=2, max=50)
-    private String picture;
+
 
     public News(){
         this.title_hu = null;
@@ -53,7 +52,6 @@ public class News {
         this.picture = picture;
        // this.date = new Date();
         this.date = LocalDate.now();
-
     }
 
 

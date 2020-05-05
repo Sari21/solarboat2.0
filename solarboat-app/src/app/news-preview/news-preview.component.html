@@ -1,24 +1,26 @@
 
-<a class="card lift  mb-5 mr-3 ml-3" (click)="openContent(longContent)">
+<a class="card lift  mb-5 mr-3 ml-3" >
     <div class="card-body m-3">
         <div class="row justify-content-end">
-            <a class="col-2" (click)="openContent(EditForm)" ><mat-icon>edit</mat-icon></a>
-            <a class="col-2" (click)="delete(news.id)" ><mat-icon>delete</mat-icon></a>
+            <a class="col-2" (click)="openContent(EditForm)" ><mat-icon class="update-icon">edit</mat-icon></a>
+            <a class="col-2" (click)="delete(news.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
         </div>
-        <h2 class="title mb-2 mt-4">{{news.title_hu}}</h2>
-        <div class="row date col-12 date mt-2 mb-2 align-items-center">
-            <mat-icon>calendar_today</mat-icon>
-            <div class="pl-1">2020.03.04</div>
-        </div>
-        <div class="text-wrap col-12 p-0">
-            <p class="card-text mt-3 text-break">{{shortArticle_hu}}</p>
-        </div>
-        <div class="arrow-read col-md-6 offset-md-6 col-lg-6 offset-lg-6 col-10 offset-2 p-0 mt-4">
-            <div class="read-more m-0"><mat-icon aria-hidden="false" >arrow_right_alt</mat-icon>TELJES HÍR OLVASÁSA</div>
-        </div>
-        <div *ngIf="news.picture" class="row mt-4 align-items-center">
-            <div class="col-12">
-                <img [src]="news.picture" alt="logo" title="logo"  />
+        <div (click)="openContent(longContent)">
+            <h2 class="title mb-2 mt-4">{{news.title_hu}}</h2>
+            <div class="row date col-12 date mt-2 mb-2 align-items-center">
+                <mat-icon>calendar_today</mat-icon>
+                <div class="pl-1">{{news.date}}</div>
+            </div>
+            <div class="text-wrap col-12 p-0">
+                <p class="card-text mt-3 text-break">{{shortArticle_hu}}</p>
+            </div>
+            <div class="arrow-read col-md-6 offset-md-6 col-lg-6 offset-lg-6 col-10 offset-2 p-0 mt-4">
+                <div class="read-more m-0"><mat-icon aria-hidden="false" >arrow_right_alt</mat-icon>TELJES HÍR OLVASÁSA</div>
+            </div>
+            <div *ngIf="news.picture" class="row mt-4 align-items-center">
+                <div class="col-12">
+                    <img [src]="news.picture" alt="logo" title="logo"  />
+                </div>
             </div>
         </div>
     </div>
@@ -63,7 +65,8 @@
                         <label for="title">Cím</label>
                         <input type="text" class="form-control" id="title"
                                required
-                               [formControl]="title" name="title"
+                               [(ngModel)]="form.title" name="title"
+                               [placeholder]="news.title_hu"
                                [ngClass]="{'failed': failed }">
 
                     </div>
@@ -81,7 +84,8 @@
                         <label for="content">Tartalom</label>
                         <textarea type="content" class="form-control" id="content" rows="5"
                                   required
-                                  [formControl]="content" name="content"
+                                  [(ngModel)]="form.content" name="content"
+                                  [placeholder]="news.content_hu"
                                   [ngClass]="{'failed': failed }"></textarea>
                     </div>
                 </div>
