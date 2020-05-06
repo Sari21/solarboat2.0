@@ -9,7 +9,12 @@ div.achievements{
     position: relative;
     margin:0;
 }
-
+#achievement-form{
+    background: white;
+    background-color: white;
+    padding: 3%;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
+}
 .timeline:before {
     top: 0;
     bottom: 0;

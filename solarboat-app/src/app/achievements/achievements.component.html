@@ -4,10 +4,73 @@
     <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
 
         <h1 class="title pb-5 mb-4">Eredményeink</h1>
+        <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
+        <div class="card  mb-5 mr-3 ml-3" id="achievement-form">
+            <h2 class="title pb-3">Új eredmény hozzáadása</h2>
+            <div>
+                <form (ngSubmit)="onSubmit(loginForm, $event)" #loginForm="ngForm">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="location">Helyszín</label>
+                                <input type="text" class="form-control" id="location"
+                                       required
+                                       [(ngModel)]="form.location" name="location"
+                                       [ngClass]="{'failed': failed }">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Verseny/eredmény neve</label>
+                                <input type="text" class="form-control" id="title"
+                                       required
+                                       [(ngModel)]="form.title" name="title"
+                                       [ngClass]="{'failed': failed }">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">Dátum</label>
+                                <input type="text" class="form-control" id="date"
+                                       required
+                                       [(ngModel)]="form.date" name="date"
+                                       [ngClass]="{'failed': failed }">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="file">Kép</label>
+                                <input type="file"
+                                       id="file"
+                                       [(ngModel)]="form.file" name="file"
+                                       (change)="handleFileInput($event.target.files)">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="description">Leírás</label>
+                                <textarea type="description" class="form-control" id="description" rows="5"
+                                          required
+                                          [(ngModel)]="form.description" name="description"
+                                          [ngClass]="{'failed': failed }"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a class="btn" (click)="onSubmit(loginForm, $event)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+
+                    <div [hidden]="!failed"
+                         class="alert alert-danger mt-3">
+                        {{errorMessage}}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        </div>
         <div class="row justify-content-center">
             <ul class="timeline col-10 col-sm-12 col-lg-8 col-md-11 ">
                 <li *ngFor="let achievement of sortby('date') ">
-                 <app-achievement [achievement]="achievement" ></app-achievement>
+                 <app-achievement [achievement]="achievement" (onRemove)="onDeleteAchievement($event)"></app-achievement>
                 </li>
             </ul>
         </div>

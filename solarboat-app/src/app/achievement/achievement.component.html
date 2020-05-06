@@ -5,6 +5,10 @@
     </div>
     <div class="timeline-panel pl-5 pr-5 pb-5">
         <div class="timeline-heading ">
+            <div class="row justify-content-end">
+                <a class="col-1"  (click)="openContent(EditForm)"><mat-icon class="update-icon">edit</mat-icon></a>
+                <a class="col-1" (click)="delete(achievement.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
+            </div>
             <div class="row timeline-title p-3 ">
                 <p id="timeline-location" class="pr-3 pt-3">{{achievement.location_hu}} </p>
                 <p class="pt-3">{{achievement.title_hu}} </p>
@@ -22,4 +26,71 @@
             <img  [src]="achievement.picture"/>
         </a>
     </div>
+
+    <ng-template #EditForm let-modal>
+        <div class="modal-header">
+            <h2 class="title mb-2 mt-4">Hír módosítása</h2>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body pb-5">
+            <form (ngSubmit)="onSubmit(achievement.id)" #loginForm="ngForm">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="location">Helyszín</label>
+                            <input type="text" class="form-control" id="location"
+                                   required
+                                   [(ngModel)]="form.location" name="location"
+                                   [ngClass]="{'failed': failed }">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Verseny/eredmény neve</label>
+                            <input type="text" class="form-control" id="title"
+                                   required
+                                   [(ngModel)]="form.title" name="title"
+                                   [ngClass]="{'failed': failed }">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Dátum</label>
+                            <input type="text" class="form-control" id="date"
+                                   required
+                                   [(ngModel)]="form.date" name="date"
+                                   [ngClass]="{'failed': failed }">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file">Kép</label>
+                            <input type="file"
+                                   id="file"
+                                   [(ngModel)]="form.file" name="file"
+                                   (change)="handleFileInput($event.target.files)">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="description">Leírás</label>
+                            <textarea type="description" class="form-control" id="description" rows="5"
+                                      required
+                                      [(ngModel)]="form.description" name="description"
+                                      [ngClass]="{'failed': failed }"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="btn" (click)="onSubmit(achievement.id)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+
+                <div [hidden]="!failed"
+                     class="alert alert-danger mt-3">
+                    {{errorMessage}}
+                </div>
+
+            </form>
+        </div>
+    </ng-template>
 
