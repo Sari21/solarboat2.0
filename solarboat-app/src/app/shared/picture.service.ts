@@ -24,13 +24,14 @@ export class PictureService {
     );
   }
 
-}
-getGallery(): Observable<GalleryPicture[]> {
-  return <Observable<GalleryPicture[]>>(
-    this.http.get(this.BASE_URL + "/api/gallery")
-  );
-}
-postGalleryPicture(picture : GalleryPicture): Observable<GalleryPicture>{
-  return <Observable<GalleryPicture>>this.http.post(this.BASE_URL.concat("/api/gallery"), picture)
-}
+  postGalleryPicture(picture : GalleryPicture): Observable<GalleryPicture>{
+    return <Observable<GalleryPicture>>this.http.post(this.BASE_URL.concat("/api/gallery"), picture)
+  }
+
+  deleteGalleryPicture(id: number){
+    return this.http.delete(this.BASE_URL.concat("/api/gallery/").concat(id.toString()));
+  }
+  deletePicture(filename: string){
+    return this.http.delete(this.BASE_URL.concat("/deleteFile/").concat(filename));
+  }
 }
