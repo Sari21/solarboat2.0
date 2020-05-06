@@ -60,3 +60,11 @@ mat-icon{
     -webkit-transform:translateX(-12px);transform:translateX(-12px);-webkit-transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0s cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s;transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0s cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s;transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), transform 0s cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s;transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), transform 0s cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s, -webkit-transform 0s cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s
 }
 a:hover .read-more{opacity:1;-webkit-transform:none;transform:none;-webkit-transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)}
+
+
+a .update-icon.mat-icon{
+    transition: transform .2s ease;
+}
+a .update-icon.mat-icon:hover{
+    transform: scale(1.4);
+}

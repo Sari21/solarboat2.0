@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {News} from '../model/news';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
@@ -21,16 +21,15 @@ export class NewsPreviewComponent implements OnInit {
   fileToUpload: File = null;
 
   @Input() news: News;
-  title = new FormControl('');
-  content = new FormControl('');
+  @Output() onRemove = new EventEmitter<News>();
 
   constructor(private http: HttpClient, private apiService: ApiService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
-    this.title.setValue(this.news.title_hu);
-    this.content.setValue(this.news.content_hu);
   }
   ngOnInit(): void {
     this.shortArticle_hu = this.news.content_hu.substring(0, 100) + '...';
+    this.form.title = this.news.title_hu;
+    this.form.content = this.news.content_hu;
   }
 
   openContent(longContent) {
@@ -38,6 +37,7 @@ export class NewsPreviewComponent implements OnInit {
   }
 
   delete(id: number) {
+    this.onRemove.emit(this.news);
     //TODO: kép törlése
     const b = this.http
         .delete('http://localhost:8080/api/news/'.concat(id.toString()))
@@ -48,22 +48,28 @@ export class NewsPreviewComponent implements OnInit {
 
 
   onSubmit(id: number) {
-    console.log(this.fileToUpload.name);
-    this.uploadFileToActivity();
+    this.news.title_hu = this.form.title;
+    this.news.content_hu = this.form.content;
     const newsId = id;
     let o: Object;
     if (this.fileToUpload != null) {
+      this.uploadFileToActivity();
       o = {
         id: newsId,
-        title_hu: this.title,
-        content_hu: this.content,
-        picture: '../../assets/gallery/' + this.fileToUpload.name,
+        title_hu: this.form.title,
+        content_hu: this.form.content,
+        title_en: this.news.title_en,
+        content_en: this.news.content_en,
+        picture: '../../assets/gallery/' + this.fileToUpload.name
       };
     } else {
       o = {
         id: newsId,
-        title_hu: this.title,
-        content_hu: this.content,
+        title_hu: this.form.title,
+        content_hu: this.form.content,
+        picture: this.news.picture,
+        title_en: this.news.title_en,
+        content_en: this.news.content_en
       };
     }
     const b = this.http
@@ -71,6 +77,7 @@ export class NewsPreviewComponent implements OnInit {
         .subscribe((data) => {
           console.log(data);
         });
+    this.modalService.dismissAll('put');
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
