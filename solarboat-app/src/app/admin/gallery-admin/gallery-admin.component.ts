@@ -12,7 +12,7 @@ import { GalleryPicture } from "../../model/gallery-picture";
 })
 export class GalleryAdminComponent implements OnInit {
 
-  constructor(pictureService : PictureService) { 
+  constructor(pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   @Output() gallery: GalleryPicture[];

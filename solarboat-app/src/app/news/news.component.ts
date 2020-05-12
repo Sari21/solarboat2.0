@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { News } from "../model/news";
-import { ApiService } from "../shared/api.service";
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { News } from '../model/news';
+import { ApiService } from '../shared/api.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
 
 @Component({
-  selector: "app-news",
-  templateUrl: "./news.component.html",
-  styleUrls: ["./news.component.css"],
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.css'],
 })
 export class NewsComponent implements OnInit {
   allnews: News[] = [];
@@ -21,8 +21,8 @@ export class NewsComponent implements OnInit {
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
-
-  constructor(private http: HttpClient, private apiService: ApiService, private tokenStorage: TokenStorageService, pictureService: PictureService) {
+  constructor(private http: HttpClient, private apiService: ApiService,
+              private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
 
@@ -58,6 +58,7 @@ export class NewsComponent implements OnInit {
           console.log(data);
         });
     this.pushNews();
+    this.form.reset();
   }
 
   handleFileInput(files: FileList) {

@@ -1,3 +1,9 @@
+a .update-icon.mat-icon{
+    transition: transform .2s ease;
+}
+a .update-icon.mat-icon:hover{
+    transform: scale(1.4);
+}
 
 mat-icon{
     transform: scale(1);

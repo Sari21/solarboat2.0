@@ -17,7 +17,7 @@ import java.util.Date;
 public class News {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    //private Date date;
+
     private String picture;
     private LocalDate date;
     @NotNull
@@ -50,9 +50,17 @@ public class News {
         this.title_en = title_en;
         this.content_en = content_en;
         this.picture = picture;
-       // this.date = new Date();
         this.date = LocalDate.now();
     }
+    public News(@JsonProperty("title_hu")String title_hu, @JsonProperty("content_hu") String content_hu, @JsonProperty("title_en")String title_en, @JsonProperty("content_en") String content_en){
+        this.title_hu = title_hu;
+        this.content_hu = content_hu;
+        this.title_en = title_en;
+        this.content_en = content_en;
+        this.picture = null;
+        this.date = LocalDate.now();
+    }
+
 
 
     public Long getId() {
