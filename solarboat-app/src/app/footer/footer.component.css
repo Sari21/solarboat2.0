@@ -22,8 +22,8 @@ a, a:hover {
     color: white;
 }
 
-a:hover {
-    opacity: 0.7;
+#footer i.fab:hover , #footer .mat-icon:hover, #footer img:hover{
+    opacity: 0.7 ;
     cursor: pointer;
 }
 

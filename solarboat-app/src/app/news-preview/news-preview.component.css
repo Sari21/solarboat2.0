@@ -4,6 +4,7 @@
     transition: box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
     transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+    cursor: pointer;
 }
 .lift:hover {
     -webkit-transform: translateY(-0.3333333333rem);
@@ -61,6 +62,9 @@ mat-icon{
 }
 a:hover .read-more{opacity:1;-webkit-transform:none;transform:none;-webkit-transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);transition:opacity 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1), -webkit-transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)}
 
+a .mat-icon{
+    cursor: pointer;
+}
 
 a .update-icon.mat-icon{
     transition: transform .2s ease;
