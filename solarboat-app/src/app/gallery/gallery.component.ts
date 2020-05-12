@@ -106,12 +106,12 @@ export class GalleryComponent implements OnInit {
     });
   }
   delete(id: number) {
-    var pic = this.gallery.find((g) => g.id == id);
-    this.pictureService.deletePicture(pic.picture).subscribe(
+    //var pic = this.gallery.find((g) => g.id == id);
+    /*this.pictureService.deletePicture(pic.picture).subscribe(
       (data) => {
         // do something, if upload success
         console.log("pic");
-        this.loadGallery();
+        //this.loadGallery();
       },
       (error) => {
         console.log(error);
@@ -121,18 +121,22 @@ export class GalleryComponent implements OnInit {
       (data) => {
         // do something, if upload success
         console.log("smallpic");
-        this.loadGallery();
+        //this.loadGallery();
       },
       (error) => {
         console.log(error);
       }
     );
+    */
 
     this.pictureService.deleteGalleryPicture(id).subscribe(
       (data) => {
         // do something, if upload success
-        console.log("gallery");
-        this.loadGallery();
+        var du = this.gallery.find((a) => a.id == id);
+        const index = this.gallery.indexOf(du, 0);
+        if (index > -1) {
+          this.gallery.splice(index, 1);
+        }
       },
       (error) => {
         console.log(error);

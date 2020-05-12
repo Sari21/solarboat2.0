@@ -13,4 +13,10 @@ export class SponsorService {
   getSponsors(): Observable<Sponsor[]> {
     return this.http.get<Sponsor[]>(this.BASE_URL);
   }
+  postSponsor(sponsor: Sponsor) :Observable<Sponsor>{
+    return <Observable<Sponsor>> this.http.post(this.BASE_URL, sponsor);
+  }
+  deleteSponsor(id: number){
+    return this.http.delete(this.BASE_URL.concat("/").concat(id.toString()));
+  }
 }

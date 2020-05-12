@@ -1,13 +1,12 @@
-<div class="justify-content-center d-flex">
+<app-nav-bar></app-nav-bar>
+<div class="justify-content-center d-flex users">
   <div class="col-10">
-    <div class="justify-content-center d-flex">
-      <h1 class="mt-5 mb-5">Felhasználók</h1>
-    </div>
-    <div class="justify-content-end d-flex">
-      <button class="brk-btn" routerLink="/signup">
-        Új felhasználó
-      </button>
-    </div>
+
+      <h1 class="title mt-5 mb-5">Felhasználók</h1>
+      <a class="btn " href="javascript:void(0)"  routerLink="/signup">
+        <span>  Új felhasználó</span>
+      </a>
+
     <div class="justify-content-center d-flex">
       <table class="col-12 m-5">
         <tr>
@@ -24,9 +23,9 @@
           <td class="col-3">
             <p *ngFor="let role of user.roles">{{ role.name }}</p>
           </td>
-          <td class="col-3" (click)="open(content, user.id)">szerkeszt</td>
+          <td class="col-3" (click)="open(content, user.id)"><i class="fas fa-edit p-2"></i></td>
           <td class="col-3" (click)="confirmDelete(user.id, user.name)">
-            kuka
+            <i class="fas fa-trash p-2"></i>
           </td>
         </tr>
       </table>
@@ -81,3 +80,4 @@
     <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
   </div>
 </ng-template>
+<app-footer></app-footer>

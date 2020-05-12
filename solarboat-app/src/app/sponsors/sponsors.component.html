@@ -1,107 +1,223 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="d-flex justify-content-center sponsors pb-5">
-  <div class="title col-md-9">
-    <h1 class="title pb-5">Fő szponzoraink</h1>
-    <div class="d-flex align-content-start flex-wrap col-md-12">
-      <a
-        *ngFor="let sponsor of main"
-        href="{{ sponsor.link }}"
-        target="blank"
-        class="col-6 col-md-4"
-      >
-        <img
-          src="{{ sponsor.picture }}"
-          alt="{{ sponsor.name }}"
-          class="col-12"
-        />
-      </a>
-    </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center sponsors pb-4">
-  <div class="col-md-9">
-    <h2 class="pb-5 pt-5 title">Kiemelt szponzoraink</h2>
-    <div class="d-flex align-content-start flex-wrap col-md-12">
-      <a
-        *ngFor="let sponsor of top"
-        href="{{ sponsor.link }}"
-        target="blank"
-        class="col-6 col-md-3"
-      >
-        <img
-          src="{{ sponsor.picture }}"
-          alt="{{ sponsor.name }}"
-          class="col-12"
-        />
-      </a>
-    </div>
-  </div>
-</div>
+<div>
+  <div class="card mb-5 mr-3 ml-3" id="news-form">
+    <h2 class="title pb-3">Új szponzor hozzáadása</h2>
+    <div>
+      <form (ngSubmit)="onSubmit($event)" #loginForm="ngForm">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="name">Név</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+                [(ngModel)]="newSponsor.name"
+                name="name"
+                [ngClass]="{ failed: failed }"
+              />
+            </div>
+            <div class="form-group">
+              <label for="link">Weblap cím</label>
+              <input
+                type="url"
+                class="form-control"
+                id="link"
+                required
+                [(ngModel)]="newSponsor.link"
+                name="link"
+                [ngClass]="{ failed: failed }"
+              />
+            </div>
+            <label for="group">Típus</label>
+            <select [(ngModel)]="newSponsor.group" name="group" id="group">
+              <option *ngFor="let item of types" [ngValue]="item">
+                {{ item }}
+              </option>
+            </select>
 
-<div class="d-flex justify-content-center sponsors pb-4">
-  <div class="col-md-9">
-    <h2 class="pb-5 pt-5 title">Szponzoraink</h2>
-    <div class="d-flex align-content-start flex-wrap col-md-12">
-      <a
-        *ngFor="let sponsor of other"
-        href="{{ sponsor.link }}"
-        target="blank"
-        class="col-4 col-md-2"
-      >
-        <img
-          src="{{ sponsor.picture }}"
-          alt="{{ sponsor.name }}"
-          class="col-12"
-        />
-      </a>
-    </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center sponsors pb-4">
-  <div class="col-md-9">
-    <h2 class="pb-5 pt-5 title">Tudományos partnereink</h2>
-    <div class="d-flex align-content-center flex-column flex-wrap col-md-12">
-      <a
-        *ngFor="let sponsor of partner"
-        href="{{ sponsor.link }}"
-        target="blank"
-        class="col-6 col-md-5"
-      >
-        <img
-          src="{{ sponsor.picture }}"
-          alt="{{ sponsor.name }}"
-          class="col-12"
-        />
-      </a>
-    </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center sponsors pb-4">
-  <div class="col-md-9">
-    <h2 class="pb-5 pt-5 title">
-      Budapesti Műszaki és Gazdaságtudományi Egyetem
-    </h2>
+            <div class="form-group">
+              <label for="link">Sor</label>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                class="form-control"
+                id="row"
+                [(ngModel)]="newSponsor.row"
+                name="row"
+                [ngClass]="{ failed: failed }"
+              />
+            </div>
+            <div class="form-group">
+              <label for="file">Kép</label>
+              <input
+                type="file"
+                id="file"
+                [(ngModel)]="fileToUpload"
+                name="file"
+                (change)="handleFileInput($event.target.files)"
+              />
+            </div>
+          </div>
+        </div>
 
-    <div class="d-flex justify-content-center flex-wrap col-md-12">
-      <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
-        <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}" />
-      </a>
+        <a
+          class="btn"
+          (click)="onSubmit($event)"
+          href="javascript:void(0)"
+          [ngClass]="{ disabled: !loginForm.form.valid }"
+          ><span>Feltöltés</span></a
+        >
+
+        <div [hidden]="!failed" class="alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
+      </form>
     </div>
-    <div
-      *ngFor="let sponsors of uni"
-      class="d-flex justify-content-center flex-wrap col-md-12"
-    >
-      <a
-        *ngFor="let sponsor of sponsors"
-        href="{{ sponsor.link }}"
-        target="blank"
-        class="col-3 col-md-2"
-      >
-        <img class="col-12" src="{{ sponsor.picture }}" />
-      </a>
+  </div>
+
+  <div>
+    <div class="d-flex justify-content-center sponsors pb-5">
+      <div class="title col-md-9">
+        <h1 class="title pb-5">Fő szponzoraink</h1>
+        <div class="d-flex align-content-start flex-wrap col-md-12">
+          <div *ngFor="let sponsor of main" class="col-6 col-md-4">
+            <a
+              (click)="clickMethod(sponsor.id)"
+              href="javascript:void(0)"
+              class="close"
+              >&times;</a
+            >
+            <div class="img-wrap">
+              <a href="{{ sponsor.link }}" target="blank">
+                <img
+                  src="{{ sponsor.picture }}"
+                  alt="{{ sponsor.name }}"
+                  class="col-12"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center sponsors pb-4">
+      <div class="col-md-9">
+        <h2 class="pb-5 pt-5 title">Kiemelt szponzoraink</h2>
+        <div class="d-flex align-content-start flex-wrap col-md-12">
+          <div *ngFor="let sponsor of top"  class="col-6 col-md-3">
+            <a
+              (click)="clickMethod(sponsor.id)"
+              href="javascript:void(0)"
+              class="close"
+              >&times;</a
+            >
+            <div class="img-wrap">
+              <a href="{{ sponsor.link }}" target="blank">
+                <img
+                  src="{{ sponsor.picture }}"
+                  alt="{{ sponsor.name }}"
+                  class="col-12"
+                />
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center sponsors pb-4">
+      <div class="col-md-9">
+        <h2 class="pb-5 pt-5 title">Szponzoraink</h2>
+
+        <div class="d-flex align-content-start flex-wrap col-md-12">
+          <div *ngFor="let sponsor of other" class="col-4 col-md-2">
+            <a
+              (click)="clickMethod(sponsor.id)"
+              href="javascript:void(0)"
+              class="close"
+              >&times;</a
+            >
+            <div class="img-wrap">
+              <a href="{{ sponsor.link }}" target="blank">
+                <img
+                  src="{{ sponsor.picture }}"
+                  alt="{{ sponsor.name }}"
+                  class="col-12"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center sponsors pb-4">
+      <div class="col-md-9">
+        <h2 class="pb-5 pt-5 title">Tudományos partnereink</h2>
+        <div
+          class="d-flex align-content-center flex-column flex-wrap col-md-12"
+        >
+        <div *ngFor="let sponsor of partner"  class="col-6 col-md-5">
+          <a
+            (click)="clickMethod(sponsor.id)"
+            href="javascript:void(0)"
+            class="close"
+            >&times;</a
+          >
+          <div class="img-wrap">
+            <a href="{{ sponsor.link }}" target="blank">
+              <img
+                src="{{ sponsor.picture }}"
+                alt="{{ sponsor.name }}"
+                class="col-12"
+              />
+            </a>
+          </div>
+        </div>
+         
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center sponsors pb-4">
+      <div class="col-md-9">
+        <h2 class="pb-5 pt-5 title">
+          Budapesti Műszaki és Gazdaságtudományi Egyetem
+        </h2>
+
+        <div class="d-flex justify-content-center flex-wrap col-md-12">
+          <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
+            <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}" />
+          </a>
+        </div>
+        <div
+          *ngFor="let sponsors of uni"
+          class="d-flex justify-content-center flex-wrap col-md-12"
+        >
+        <div *ngFor="let sponsor of sponsors"   class="col-3 col-md-2">
+          <a
+            (click)="clickMethod(sponsor.id)"
+            href="javascript:void(0)"
+            class="close"
+            >&times;</a
+          >
+          <div class="img-wrap">
+            <a href="{{ sponsor.link }}" target="blank">
+              <img
+                src="{{ sponsor.picture }}"
+                alt="{{ sponsor.name }}"
+                class="col-12"
+              />
+            </a>
+          </div>
+        </div>
+         
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
 <app-footer></app-footer>
