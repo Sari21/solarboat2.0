@@ -1,7 +1,8 @@
 <app-nav-bar></app-nav-bar>
 
-<div>
-  <div class="card mb-5 mr-3 ml-3" id="news-form">
+<div class="d-flex justify-content-center row">
+  <div class="form col-12 d-flex justify-content-center row">
+  <div class="card mb-5 mt-5 col-6" id="sponsor-form">
     <h2 class="title pb-3">Új szponzor hozzáadása</h2>
     <div>
       <form (ngSubmit)="onSubmit($event)" #loginForm="ngForm">
@@ -32,7 +33,7 @@
               />
             </div>
             <label for="group">Típus</label>
-            <select [(ngModel)]="newSponsor.group" name="group" id="group">
+            <select [(ngModel)]="newSponsor.group" name="group" id="group" class="ml-3">
               <option *ngFor="let item of types" [ngValue]="item">
                 {{ item }}
               </option>
@@ -78,7 +79,7 @@
       </form>
     </div>
   </div>
-
+</div>
   <div>
     <div class="d-flex justify-content-center sponsors pb-5">
       <div class="title col-md-9">
@@ -106,7 +107,7 @@
     </div>
     <div class="d-flex justify-content-center sponsors pb-4">
       <div class="col-md-9">
-        <h2 class="pb-5 pt-5 title">Kiemelt szponzoraink</h2>
+        <h3 class="pb-5 pt-5 title">Kiemelt szponzoraink</h3>
         <div class="d-flex align-content-start flex-wrap col-md-12">
           <div *ngFor="let sponsor of top"  class="col-6 col-md-3">
             <a
@@ -132,7 +133,7 @@
 
     <div class="d-flex justify-content-center sponsors pb-4">
       <div class="col-md-9">
-        <h2 class="pb-5 pt-5 title">Szponzoraink</h2>
+        <h3 class="pb-5 pt-5 title">Szponzoraink</h3>
 
         <div class="d-flex align-content-start flex-wrap col-md-12">
           <div *ngFor="let sponsor of other" class="col-4 col-md-2">
@@ -157,7 +158,7 @@
     </div>
     <div class="d-flex justify-content-center sponsors pb-4">
       <div class="col-md-9">
-        <h2 class="pb-5 pt-5 title">Tudományos partnereink</h2>
+        <h3 class="pb-5 pt-5 title">Tudományos partnereink</h3>
         <div
           class="d-flex align-content-center flex-column flex-wrap col-md-12"
         >
@@ -184,9 +185,9 @@
     </div>
     <div class="d-flex justify-content-center sponsors pb-4">
       <div class="col-md-9">
-        <h2 class="pb-5 pt-5 title">
+        <h3 class="pb-5 pt-5 title">
           Budapesti Műszaki és Gazdaságtudományi Egyetem
-        </h2>
+        </h3>
 
         <div class="d-flex justify-content-center flex-wrap col-md-12">
           <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
