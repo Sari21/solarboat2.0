@@ -38,7 +38,6 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { UsersComponent } from "./admin/users/users.component";
-import { GalleryAdminComponent} from "./admin/gallery-admin/gallery-admin.component"
 
 @NgModule({
   declarations: [
@@ -63,8 +62,7 @@ import { GalleryAdminComponent} from "./admin/gallery-admin/gallery-admin.compon
     TeamMembersComponent,
     GalleryComponent,
     NavBarComponent,
-    UsersComponent,
-    GalleryAdminComponent
+    UsersComponent
   ],
   // tslint:disable-next-line:max-line-length
     imports: [

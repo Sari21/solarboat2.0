@@ -22,7 +22,7 @@ public class Sponsor {
     private String link;
     @NotNull
     private String picture;
-    @NotNull
+
     private  int rowNumb;
     @NotNull
     private SponsorGroup groupId;

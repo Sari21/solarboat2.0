@@ -16,9 +16,13 @@ export class UserService {
     return <Observable<User[]>>this.http.get(this.BASE_URL);
   }
   updateUser(user: User){
-   if(user.password == undefined){
-     user.password = "defaultValue";
-   }
+    var v = {
+      
+    }
     return this.http.patch(this.BASE_URL, user);
+  }
+
+  deleteUser(id: number){
+    return this.http.delete(this.BASE_URL.concat("/").concat(id.toString()));
   }
 }

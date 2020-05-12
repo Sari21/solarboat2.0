@@ -7,15 +7,8 @@ div.sponsors:nth-child(even) {
   border-radius: 10px;
   margin: 10px;
 }
-h1.title {
-  font-family: "KelsonSans-Light";
-  letter-spacing: 7px;
-  text-transform: uppercase;
-  font-size: 3rem;
-  margin: 0;
-  padding-top: 5%;
-}
-h2.title {
+
+h3.title {
   font-family: "KelsonSans-Light";
   letter-spacing: 7px;
   text-transform: uppercase;
@@ -23,3 +16,44 @@ h2.title {
   margin: 0;
   padding-top: 5%;
 }
+
+.img-wrap .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  background-color: #FFF;
+  padding: 5px 2px 2px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: .8;
+  text-align: center;
+  font-size: 22px;
+  line-height: 10px;
+  border-radius: 50%;
+}
+.img-wrap:hover .close {
+  opacity: 1;
+  transform: scale(1.05);
+}
+a.delete{
+  color: black;
+}
+
+div.news {
+  background-color: #f3f4f4;
+}
+.jumbotron {
+  background: none;
+  margin-bottom: 0;
+}
+#sponsor-form{
+  background: white;
+  background-color: white;
+  padding: 3%;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
+}
+
+
+

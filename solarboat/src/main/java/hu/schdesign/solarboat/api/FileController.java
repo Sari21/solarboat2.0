@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,7 +31,7 @@ public class FileController {
     FileController(FileStorageService fileStorageService){
         this.fileStorageService = fileStorageService;
     }
-
+    @Secured("ROLE_ADMIN")
     @PostMapping("/uploadFile")
     public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("path") String path) throws URISyntaxException {
         String fileName = fileStorageService.storeFile(file, path);
@@ -61,7 +62,7 @@ public class FileController {
                 .collect(Collectors.toList());
     }
     */
-
+    @Secured("ROLE_USER")
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
@@ -85,6 +86,7 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "/deleteFile")
     public void deleteFile(@RequestBody String fileName){
         this.fileStorageService.deleteFile(fileName);

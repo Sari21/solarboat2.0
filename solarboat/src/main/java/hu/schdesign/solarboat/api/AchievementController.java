@@ -5,6 +5,7 @@ import hu.schdesign.solarboat.model.News;
 import hu.schdesign.solarboat.service.AchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,15 +32,17 @@ public class AchievementController {
         }
         return list;
     }
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
     public void deleteAchievementById(@PathVariable("id") Long id){
         achievementService.deleteAchievementById(id);
     }
-
+    @Secured("ROLE_ADMIN")
     @PutMapping()
     public void updateAchievementById(@Valid @RequestBody Achievement achievement){
         achievementService.updateAchievement(achievement);
     }
+    @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public Achievement addAchievement( @RequestBody Achievement achievement){
         return achievementService.addAchievement(achievement);
