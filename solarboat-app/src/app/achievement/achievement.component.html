@@ -5,7 +5,7 @@
     </div>
     <div class="timeline-panel pl-5 pr-5 pb-5">
         <div class="timeline-heading ">
-            <div class="row justify-content-end">
+            <div  *ngIf=" authority =='admin'" class="row justify-content-end edit">
                 <a class="col-1"  (click)="openContent(EditForm)"><mat-icon class="update-icon">edit</mat-icon></a>
                 <a class="col-1" (click)="delete(achievement.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
             </div>
@@ -35,7 +35,7 @@
             </button>
         </div>
         <div class="modal-body pb-5">
-            <form (ngSubmit)="onSubmit(achievement.id)" #loginForm="ngForm">
+            <form  #loginForm="ngForm">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">

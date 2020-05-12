@@ -1,7 +1,7 @@
 
 <a class="card lift  mb-5 mr-3 ml-3" >
     <div class="card-body m-3">
-        <div class="row justify-content-end">
+        <div *ngIf="authority=='admin'" class="row justify-content-end">
             <a class="col-2" (click)="openContent(Edit)" ><mat-icon class="update-icon">edit</mat-icon></a>
             <a class="col-2" (click)="delete(news.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
         </div>
@@ -27,7 +27,7 @@
 
 </a>
 
-<ng-template #longContent let-modal>
+<ng-template  #longContent let-modal>
     <div class="modal-header">
         <h2 class="title mb-2 mt-4">{{news.title_hu}}</h2>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -50,7 +50,7 @@
     </div>
 </ng-template>
 
-<ng-template #Edit let-modal>
+<ng-template   #Edit let-modal>
     <div class="modal-header">
         <h2 class="title mb-2 mt-4">Hír módosítása</h2>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

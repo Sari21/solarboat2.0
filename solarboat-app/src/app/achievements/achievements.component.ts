@@ -14,18 +14,22 @@ import {TokenStorageService} from '../auth/token-storage.service';
 })
 export class AchievementsComponent implements OnInit {
   achievements: Achievement[] = [];
-  pageNumber: number = 0;
-  isLastPage: boolean = false;
+  pageNumber = 0;
+  isLastPage =false;
   form: any = {};
   failed = false;
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
-  constructor(private http: HttpClient, private apiService: ApiService, pictureService: PictureService) {
+  authority: string;
+  constructor(private http: HttpClient, private apiService: ApiService,
+              private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
+
   ngOnInit(): void {
     this.getAchievements();
+    this.checkAuth();
   }
 
   public getAchievements() {
@@ -64,44 +68,78 @@ export class AchievementsComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: 'leiras',
-        description_en: 'leiras',
+        description_hu: '',
+        description_en: '',
         place: this.form.place,
       isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
       };
     const b = this.http
-        .post("http://localhost:8080/api/achievements", o)
+        .post("http://localhost:8080/api/achievement", o)
         .subscribe((data) => {
           console.log(data);
         });
     this.pushAchievement();
+    this.form = empForm;
+    this.form.reset();
+    this.fileToUpload = null;
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
   }
   uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+    this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
       // do something, if upload success
     }, error => {
       console.log(error);
     });
   }
   private pushAchievement() {
-    const n: Achievement = {
-      id: 0,
-      title_hu: this.form.title,
-      location_hu: this.form.location,
-      title_en: this.form.title,
-      location_en: this.form.location,
-      description_hu: 'leiras',
-      description_en: 'leiras',
-      place: this.form.place,
-      isLast: false,
-      date: this.form.date,
-      picture: '../../assets/achievement/' + this.fileToUpload.name
-    };
+    let n: Achievement;
+    if(this.fileToUpload != null) {
+      n = {
+        id: 0,
+        title_hu: this.form.title,
+        location_hu: this.form.location,
+        title_en: this.form.title,
+        location_en: this.form.location,
+        description_hu: '',
+        description_en: '',
+        place: this.form.place,
+        isLast: false,
+        date: this.form.date,
+        picture: '../../assets/achievement/' + this.fileToUpload.name
+      };
+    } else {
+      n = {
+        id: 0,
+        title_hu: this.form.title,
+        location_hu: this.form.location,
+        title_en: this.form.title,
+        location_en: this.form.location,
+        description_hu: '',
+        description_en: '',
+        place: this.form.place,
+        isLast: false,
+        date: this.form.date,
+        picture: ''
+      };
+    }
     this.achievements.unshift(n);
+  }
+  checkAuth() {
+    this.authority = undefined;
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every((role) => {
+        if (role === "ROLE_ADMIN") {
+          this.authority = "admin";
+          return false;
+        }
+        this.authority = "user";
+        return true;
+      });
+    }
   }
 }

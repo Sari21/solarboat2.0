@@ -18,6 +18,7 @@ export class AchievementComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
 
+  @Input() authority: string;
   @Input() achievement: Achievement;
   @Output() onRemove = new EventEmitter<Achievement>();
   constructor(private http: HttpClient, private apiService: ApiService, private modalService: NgbModal, pictureService: PictureService) {
@@ -52,6 +53,7 @@ export class AchievementComponent implements OnInit {
     const achievementId = id;
     let o: Object;
     if (this.fileToUpload != null) {
+      this.achievement.picture =  '../../assets/achievement/' + this.fileToUpload.name;
       this.uploadFileToActivity();
       o = {
         id: achievementId,
@@ -60,8 +62,8 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: 'leiras',
-        description_en: 'leiras',
+        description_hu: '',
+        description_en: '',
         place: this.form.place,
         isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
@@ -74,11 +76,11 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: 'leiras',
-        description_en: 'leiras',
+        description_hu: '',
+        description_en: '',
         place: this.form.place,
         isLast: false,
-        picture: "nincs"
+        picture: ''
       };
     }
     const b = this.http
@@ -92,7 +94,7 @@ export class AchievementComponent implements OnInit {
     this.fileToUpload = files.item(0);
   }
   uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+    this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
       // do something, if upload success
     }, error => {
       console.log(error);
