@@ -21,7 +21,6 @@ export class ApiService {
   getMainpageNews() {
     return this.http.get(this.BASE_URL + '/news/mainpage');
   }
-  
   getAchievements(pageNum: number) {
     return this.http.get(
       this.BASE_URL + "/achievement/page/".concat(pageNum.toString())

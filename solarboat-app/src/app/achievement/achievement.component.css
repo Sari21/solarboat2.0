@@ -4,9 +4,13 @@ a .update-icon.mat-icon{
 a .update-icon.mat-icon:hover{
     transform: scale(1.4);
 }
-
 mat-icon{
     transform: scale(1);
+}
+
+.edit mat-icon{
+    transform: scale(1);
+    cursor: pointer;
 }
 .date p{
     font-family: Helvetica;

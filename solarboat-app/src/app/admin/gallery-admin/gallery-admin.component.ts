@@ -52,7 +52,7 @@ handleSmallFileInput(files: FileList) {
 uploadFileToActivity() {
  
   
-    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+    this.pictureService.postFile(this.fileToUpload, 'gallery').subscribe(data => {
       // do something, if upload success
       this.fileToUpload = null;
       console.log("pic");

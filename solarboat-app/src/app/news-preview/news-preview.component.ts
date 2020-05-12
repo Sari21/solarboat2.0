@@ -20,6 +20,7 @@ export class NewsPreviewComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
 
+  @Input() authority: string;
   @Input() news: News;
   @Output() onRemove = new EventEmitter<News>();
 
@@ -53,7 +54,7 @@ export class NewsPreviewComponent implements OnInit {
     const newsId = id;
     let o: Object;
     if (this.fileToUpload != null) {
-      this.news.picture = '../../assets/gallery/' + this.fileToUpload.name;
+      this.news.picture = '../../assets/news/' + this.fileToUpload.name;
       console.log('kep modositas');
       this.uploadFileToActivity();
       o = {
@@ -62,7 +63,7 @@ export class NewsPreviewComponent implements OnInit {
         content_hu: this.form.content,
         title_en: this.news.title_en,
         content_en: this.news.content_en,
-        picture: '../../assets/gallery/' + this.fileToUpload.name
+        picture: '../../assets/news/' + this.fileToUpload.name
 
       };
     } else {
@@ -86,7 +87,7 @@ export class NewsPreviewComponent implements OnInit {
     this.fileToUpload = files.item(0);
   }
   uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+    this.pictureService.postFile(this.fileToUpload, 'news').subscribe(data => {
       // do something, if upload success
     }, error => {
       console.log(error);

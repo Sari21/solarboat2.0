@@ -32,7 +32,6 @@ public class Achievement {
     @NotNull
     @Size(min=2, max=50)
     private String location_en;
-    @Size(min=2, max=50)
     private String picture;
     private boolean isLast = false;
     private Integer place;
