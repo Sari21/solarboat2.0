@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-center row">
   <div class="form col-12 d-flex justify-content-center row">
-  <div class="card mb-5 mt-5 col-6" id="sponsor-form">
+  <div class="card mb-5 mt-5 col-6" id="sponsor-form" *ngIf="authority == 'admin' ">
     <h2 class="title pb-3">Új szponzor hozzáadása</h2>
     <div>
       <form (ngSubmit)="onSubmit($event)" #loginForm="ngForm">

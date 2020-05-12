@@ -8,6 +8,7 @@ import hu.schdesign.solarboat.model.News;
 import hu.schdesign.solarboat.service.BoatDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,7 @@ public class BoatDataController {
     }
 
     */
-
+   @Secured("ROLE_USER")
     @GetMapping
     public List<BoatData> getAllData(){
 

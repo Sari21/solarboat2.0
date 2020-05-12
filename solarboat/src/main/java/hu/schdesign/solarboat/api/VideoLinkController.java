@@ -4,6 +4,7 @@ import hu.schdesign.solarboat.model.VideoLink;
 import hu.schdesign.solarboat.service.VideoLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class VideoLinkController {
         return ResponseEntity.ok(videoLinkService.getAllLinks());
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping
-    public ResponseEntity  addVideoLink(@RequestBody VideoLink link){
+    public ResponseEntity<VideoLink>  addVideoLink(@RequestBody VideoLink link){
         return ResponseEntity.ok(videoLinkService.addVideoLink(link));
 
     }
@@ -41,7 +43,7 @@ public class VideoLinkController {
 
         return ResponseEntity.ok(link.get());
     }
-
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         if (!videoLinkService.findLinkById(id).isPresent()) {

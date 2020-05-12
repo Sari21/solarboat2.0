@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.api;
 
 import hu.schdesign.solarboat.model.User;
 import hu.schdesign.solarboat.service.UserService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Column;
@@ -17,22 +18,27 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+    @Secured("ROLE_ADMIN")
     @PostMapping
     public User addUser(@RequestBody User user){
         return this.userService.addUser(user);
     }
+    @Secured("ROLE_ADMIN")
     @GetMapping
     public Iterable<User> getAllUsers(){
         return this.userService.getUsers();
     }
+    @Secured("ROLE_ADMIN")
     @GetMapping(path = "{id}")
     public Optional<User> getUserById(@PathVariable("id") long id){
         return this.userService.getUserById(id);
     }
+    @Secured("ROLE_ADMIN")
     @PatchMapping
     public User updateUser(@RequestBody User user){
         return this.userService.updateUser(user);
     }
+    @Secured("ROLE_ADMIN")
     @Transactional
     @DeleteMapping ("{id}")
     public void deleteUserById(@PathVariable("id") long id){

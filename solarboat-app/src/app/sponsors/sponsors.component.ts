@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from "@angular/core";
 import { SponsorService } from "../shared/sponsor.service";
 import { Sponsor } from "../model/sponsor";
 import { PictureService } from "../shared/picture.service";
-
+import { TokenStorageService } from "../auth/token-storage.service";
 @Component({
   selector: "app-sponsors",
   templateUrl: "./sponsors.component.html",
@@ -11,7 +11,8 @@ import { PictureService } from "../shared/picture.service";
 export class SponsorsComponent implements OnInit {
   constructor(
     private sponsorService: SponsorService,
-    pictureService: PictureService
+    pictureService: PictureService,
+    private tokenStorage: TokenStorageService
   ) {
     this.pictureService = pictureService;
   }
@@ -37,6 +38,8 @@ export class SponsorsComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
   types = [ "MAIN","TOP","OTHER", "PARTNER", "UNI"];
+  public authority: string;
+  public roles: string[];
   getSponsores() {
     this.sponsorService.getSponsors().subscribe(
       (res) => {
@@ -125,5 +128,18 @@ clickMethod(id: number) {
   }
 }
 
-
+checkAuth() {
+  this.authority = undefined;
+  if (this.tokenStorage.getToken()) {
+    this.roles = this.tokenStorage.getAuthorities();
+    this.roles.every((role) => {
+      if (role === "ROLE_ADMIN") {
+        this.authority = "admin";
+        return false;
+      }
+      this.authority = "user";
+      return true;
+    });
+  }
+}
 }
