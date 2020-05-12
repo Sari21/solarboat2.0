@@ -12,10 +12,10 @@ export class PictureService {
 
   BASE_URL = 'http://localhost:8080';
 
-  postFile(fileToUpload: File)  {
+  postFile(fileToUpload: File, directory: string)  {
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    formData.append('path', 'gallery' );
+    formData.append('path', directory );
     return this.http.post(this.BASE_URL.concat("/api/file/uploadFile"), formData);
   }
   postSponsorLogo(fileToUpload: File)  {

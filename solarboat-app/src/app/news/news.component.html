@@ -8,10 +8,10 @@
     <div class="jumbotron col-12">
       <h1 class="title pb-4">hírek</h1>
 
-      <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
-        <div class="card mb-5 mr-3 ml-3" id="news-form">
+      <div  class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
+        <div  *ngIf="authority == 'admin'" class="card mb-5 mr-3 ml-3" id="news-form">
           <h2 class="title pb-3">Új hír hozzáadása</h2>
-          <div>
+          <div >
             <form #AddForm="ngForm">
               <div class="row">
                 <div class="col-6">
@@ -56,7 +56,7 @@
         <div class="row justify-content-between">
           <app-news-preview
             *ngFor="let news of allnews"
-            [news]="news"
+            [news]="news" [authority] ="authority"
             (onRemove)="onDeleteNews($event)"
             class="col-lg-6 col-md-6 col-10 col-sm-12"
           > </app-news-preview>

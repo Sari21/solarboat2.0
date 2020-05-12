@@ -41,7 +41,7 @@ export class NewsComponent implements OnInit {
         content_hu: this.form.content,
         title_en: 'angolcim',
         content_en: 'angoltartalommmmmmmmmmmmmmmmm',
-        picture: '../../assets/gallery/' + this.fileToUpload.name
+        picture: '../../assets/news/' + this.fileToUpload.name
       };
     } else {
       o = {
@@ -68,7 +68,7 @@ export class NewsComponent implements OnInit {
     this.fileToUpload = files.item(0);
   }
   uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload).subscribe(data => {
+    this.pictureService.postFile(this.fileToUpload, 'news').subscribe(data => {
       // do something, if upload success
     }, error => {
       console.log(error);
@@ -79,11 +79,12 @@ export class NewsComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every((role) => {
-        if (role === 'ROLE_ADMIN') {
-          this.authority = 'admin';
-        } else {
-          this.authority = 'user';
+        if (role === "ROLE_ADMIN") {
+          this.authority = "admin";
+          return false;
         }
+        this.authority = "user";
+        return true;
       });
     }
   }
@@ -127,7 +128,7 @@ export class NewsComponent implements OnInit {
         content_hu: this.form.content,
         title_en: 'angolcim',
         content_en: 'angoltartalommmmmmmmmmmmmmmmm',
-        picture: '../../assets/gallery/' + this.fileToUpload.name,
+        picture: '../../assets/news/' + this.fileToUpload.name,
       };
     }
     this.allnews.unshift(n);
