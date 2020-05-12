@@ -53,6 +53,7 @@ export class NewsPreviewComponent implements OnInit {
     const newsId = id;
     let o: Object;
     if (this.fileToUpload != null) {
+      this.news.picture = '../../assets/gallery/' + this.fileToUpload.name;
       console.log('kep modositas');
       this.uploadFileToActivity();
       o = {
@@ -69,9 +70,9 @@ export class NewsPreviewComponent implements OnInit {
         id: newsId,
         title_hu: this.form.title,
         content_hu: this.form.content,
-        picture: this.news.picture,
         title_en: this.news.title_en,
-        content_en: this.news.content_en
+        content_en: this.news.content_en,
+        picture: ''
       };
     }
     const b = this.http

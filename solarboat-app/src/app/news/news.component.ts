@@ -12,8 +12,8 @@ import {PictureService} from '../shared/picture.service';
 })
 export class NewsComponent implements OnInit {
   allnews: News[] = [];
-  pageNumber: number = 0;
-  isLastPage: boolean = false;
+  pageNumber = 0;
+  isLastPage = false;
   public roles: string[];
   public authority: string;
   form: any = {};
@@ -30,35 +30,38 @@ export class NewsComponent implements OnInit {
     this.getNews();
     this.checkAuth();
   }
-  //post
   onSubmit(empForm: any, event: Event) {
     event.preventDefault();
+    // tslint:disable-next-line:ban-types
     let o: Object;
     if (this.fileToUpload != null) {
       this.uploadFileToActivity();
       o = {
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: "angolcim",
-        content_en: "angoltartalommmmmmmmmmmmmmmmm",
+        title_en: 'angolcim',
+        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
         picture: '../../assets/gallery/' + this.fileToUpload.name
       };
     } else {
       o = {
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: "angolcim",
-        content_en: "angoltartalommmmmmmmmmmmmmmmm"
+        title_en: 'angolcim',
+        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        picture: ''
       };
     }
 
-    const b = this.http
-        .post("http://localhost:8080/api/news", o)
+    this.http
+        .post('http://localhost:8080/api/news', o)
         .subscribe((data) => {
           console.log(data);
         });
     this.pushNews();
+    this.form = empForm;
     this.form.reset();
+    this.fileToUpload = null;
   }
 
   handleFileInput(files: FileList) {
@@ -76,54 +79,57 @@ export class NewsComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every((role) => {
-        if (role === "ROLE_ADMIN") {
-          this.authority = "admin";
-          return false;
+        if (role === 'ROLE_ADMIN') {
+          this.authority = 'admin';
+        } else {
+          this.authority = 'user';
         }
-        this.authority = "user";
-        return true;
       });
     }
   }
   onDeleteNews(news: News) {
     this.allnews = this.allnews.filter(rowObj => rowObj.id !== news.id);
   }
-
-  /*  getNews(): void {
-      console.log('getnews');
-      const json = this.http
-          .get('http://localhost:8080/api/news')
-          .subscribe(data => {
-            console.log(data);
-            this.allnews = data;
-          });
-    }*/
   public getNews() {
     this.apiService.getNews(this.pageNumber).subscribe(
       (res) => {
-        var data: any = res;
-        <News[]>data.content.forEach((element) => {
+        // tslint:disable-next-line:prefer-const
+        let data: any = res;
+        <News[]> data.content.forEach((element) => {
           this.allnews.push(element);
         });
         this.pageNumber++;
         this.isLastPage = data.last;
       },
       (err) => {
-        alert("get error");
+        alert('get error');
       }
     );
   }
 
   private pushNews() {
-    const n: News = {
-      id: 0,
-      date: 'most',
-      title_hu: this.form.title,
-      content_hu: this.form.content,
-      title_en: "angolcim",
-      content_en: "angoltartalommmmmmmmmmmmmmmmm",
-      picture: '../../assets/gallery/' + this.fileToUpload.name,
-    };
+    let n: News;
+    if (this.fileToUpload == null) {
+      n = {
+        id: 0,
+        date: 'most',
+        title_hu: this.form.title,
+        content_hu: this.form.content,
+        title_en: 'angolcim',
+        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        picture: '',
+      };
+    } else {
+      n = {
+        id: 0,
+        date: 'most',
+        title_hu: this.form.title,
+        content_hu: this.form.content,
+        title_en: 'angolcim',
+        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        picture: '../../assets/gallery/' + this.fileToUpload.name,
+      };
+    }
     this.allnews.unshift(n);
   }
 }

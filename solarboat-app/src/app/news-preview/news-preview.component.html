@@ -2,7 +2,7 @@
 <a class="card lift  mb-5 mr-3 ml-3" >
     <div class="card-body m-3">
         <div class="row justify-content-end">
-            <a class="col-2" (click)="openContent(EditForm)" ><mat-icon class="update-icon">edit</mat-icon></a>
+            <a class="col-2" (click)="openContent(Edit)" ><mat-icon class="update-icon">edit</mat-icon></a>
             <a class="col-2" (click)="delete(news.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
         </div>
         <div (click)="openContent(longContent)">
@@ -50,7 +50,7 @@
     </div>
 </ng-template>
 
-<ng-template #EditForm let-modal>
+<ng-template #Edit let-modal>
     <div class="modal-header">
         <h2 class="title mb-2 mt-4">Hír módosítása</h2>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -58,7 +58,7 @@
         </button>
     </div>
     <div class="modal-body pb-5">
-        <form (ngSubmit)="onSubmit(news.id)" #loginForm="ngForm">
+        <form  #EditForm="ngForm">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <a class="btn" (click)="onSubmit(news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+            <a class="btn" (click)="onSubmit(news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
 
             <div [hidden]="!failed"
                  class="alert alert-danger mt-3">

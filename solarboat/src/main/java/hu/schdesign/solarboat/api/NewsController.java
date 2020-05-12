@@ -31,7 +31,10 @@ public class NewsController {
 
     @PostMapping(consumes = "application/json")
     public News addNews( @Valid @RequestBody News news ){
-
+        System.out.println("post hali");
+        if(news.getPicture() == null){
+            System.out.println("nincs kep");
+        }
         return newsService.addNews(news);
 
     }

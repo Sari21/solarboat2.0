@@ -11,7 +11,7 @@
         <div class="card mb-5 mr-3 ml-3" id="news-form">
           <h2 class="title pb-3">Új hír hozzáadása</h2>
           <div>
-            <form (ngSubmit)="onSubmit(loginForm, $event)" #loginForm="ngForm">
+            <form #AddForm="ngForm">
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
@@ -42,7 +42,7 @@
                 </div>
               </div>
 
-              <a class="btn" (click)="onSubmit(loginForm, $event)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+              <a class="btn" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)" [ngClass]="{'disabled': !AddForm.form.valid }" ><span>Feltöltés</span></a>
 
               <div [hidden]="!failed"
                    class="alert alert-danger mt-3">
@@ -58,7 +58,7 @@
             [news]="news"
             (onRemove)="onDeleteNews($event)"
             class="col-lg-6 col-md-6 col-10 col-sm-12"
-          ></app-news-preview>
+          > </app-news-preview>
         </div>
       </div>
       <div class="row align-items-center justify-content-center">
