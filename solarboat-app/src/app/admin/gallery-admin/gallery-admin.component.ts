@@ -51,41 +51,79 @@ handleSmallFileInput(files: FileList) {
 
 uploadFileToActivity() {
  
-
+  
     this.pictureService.postFile(this.fileToUpload).subscribe(data => {
       // do something, if upload success
+      this.fileToUpload = null;
+      console.log("pic");
+
       }, error => {
         console.log(error);
       });
     this.pictureService.postFile(this.smallFileToUpload).subscribe(data => {
       // do something, if upload success
-      }, error => {
-        console.log(error);
-      });
-    this.pictureService.postGalleryPicture(this.newPicture).subscribe(data => {
-      // do something, if upload success
-      }, error => {
-        console.log(error);
-      });
-      this.newPicture = new GalleryPicture();
-      this.fileToUpload = undefined;
-      this.smallFileToUpload = undefined;
+      this.smallFileToUpload = null;
+      console.log("sm")
 
+      }, error => {
+        console.log(error);
+      });
+   
+}
+uploadGalleryPicture(){
+  this.pictureService.postGalleryPicture(this.newPicture).subscribe(data => {
+    // do something, if upload success
+    this.newPicture = new GalleryPicture();
+    this.loadGallery();
+    }, error => {
+      console.log(error);
+    });
 }
 
 
 loadGallery(){
+  console.log("loaded");
   this.pictureService.getGallery().subscribe((res) => {
     this.gallery = res;
     //console.log(res);
     this.gallery.forEach(
-      (s) => {(s.picture = "./assets/gallery/".concat(s.picture), console.log(s))}
+      (s) => {(s.picture = "./assets/gallery/".concat(s.picture) )}
     );
     this.gallery.forEach(
       (s) => (s.smallPicture = "./assets/gallery/".concat(s.smallPicture))
     );
 
   });
+}
+delete(id: number){
+  var pic = this.gallery.find(g => g.id == id);
+  this.pictureService.deletePicture(pic.picture).subscribe(data => {
+    // do something, if upload success
+    console.log("pic");
+  this.loadGallery();
+    }, error => {
+      console.log(error);
+    });
+  this.pictureService.deletePicture(pic.smallPicture).subscribe(data => {
+    // do something, if upload success
+    console.log("smallpic");
+  this.loadGallery();
+    }, error => {
+      console.log(error);
+    });
+ 
+  this.pictureService.deleteGalleryPicture(id).subscribe(data => {
+    // do something, if upload success
+    console.log("gallery");
+  this.loadGallery();
+    }, error => {
+      console.log(error);
+    });
+}
+clickMethod(id: number) {
+  if(confirm("Are you sure to delete "+id.toString())) {
+    this.delete(id);
+  }
 }
 
 }

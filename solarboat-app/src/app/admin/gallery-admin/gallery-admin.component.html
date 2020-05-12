@@ -54,6 +54,7 @@
               </div>
               
               <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': (!loginForm.form.valid && !picturesSelected) }" ><span>Feltöltés</span></a>
+              <a class="btn" (click)="uploadGalleryPicture()" href="javascript:void(0)" [ngClass]="{'disabled': (!loginForm.form.valid && !picturesSelected) }" ><span>Feltöltés gp</span></a>
 
               <div [hidden]="!failed"
                    class="alert alert-danger mt-3">
@@ -77,18 +78,26 @@
   
         <div class="justify-content-center d-flex mb-5">
           <div class="gallery justify-content-center" id="photos">
-            <a
-              *ngFor="let img of gallery"
+            <div  *ngFor="let img of gallery" class="picture">
+
+              <a (click)="clickMethod(img.id)"  class="close">&times;</a>
+            
+              <a
+             
               href="{{img.picture}}"
               data-lightbox="gallery"
               data-title="{{ img.title_hu }}"
-            > 
-              <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}" />
+              > <div class="img-wrap">
+                
+                <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}" />
+              </div>
             </a>
+          </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>
