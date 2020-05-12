@@ -6,6 +6,7 @@ import hu.schdesign.solarboat.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Column;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RestController
@@ -29,9 +30,10 @@ public class UserController {
         return this.userService.getUserById(id);
     }
     @PatchMapping
-    public User updateUser(@RequestParam User user){
+    public User updateUser(@RequestBody User user){
         return this.userService.updateUser(user);
     }
+    @Transactional
     @DeleteMapping ("{id}")
     public void deleteUserById(@PathVariable("id") long id){
         this.userService.deleteUserById(id);
