@@ -5,7 +5,7 @@
 
         <h1 class="title pb-5 mb-4">Eredményeink</h1>
         <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
-        <div class="card  mb-5 mr-3 ml-3" id="achievement-form">
+        <div *ngIf=" authority =='admin'" class="card  mb-5 mr-3 ml-3" id="achievement-form">
             <h2 class="title pb-3">Új eredmény hozzáadása</h2>
             <div>
                 <form (ngSubmit)="onSubmit(loginForm, $event)" #loginForm="ngForm">
@@ -54,12 +54,9 @@
                                        required
                                        [(ngModel)]="form.place" name="date"
                                        [ngClass]="{'failed': failed }">
-
                             </div>
-
                         </div>
                     </div>
-
                     <a class="btn" (click)="onSubmit(loginForm, $event)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid || fileToUpload==null}" ><span>Feltöltés</span></a>
 
                     <div [hidden]="!failed"

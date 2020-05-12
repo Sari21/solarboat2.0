@@ -15,7 +15,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 export class AchievementsComponent implements OnInit {
   achievements: Achievement[] = [];
   pageNumber = 0;
-  isLastPage =false;
+  isLastPage = false;
   form: any = {};
   failed = false;
   errorMessage = '';
@@ -131,8 +131,8 @@ export class AchievementsComponent implements OnInit {
   checkAuth() {
     this.authority = undefined;
     if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
-      this.roles.every((role) => {
+      let roles = this.tokenStorage.getAuthorities();
+      roles.every((role) => {
         if (role === "ROLE_ADMIN") {
           this.authority = "admin";
           return false;
