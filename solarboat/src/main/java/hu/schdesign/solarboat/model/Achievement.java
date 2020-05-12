@@ -34,7 +34,7 @@ public class Achievement {
     private String location_en;
     private String picture;
     private boolean isLast = false;
-    private Integer place;
+    private String place;
 
 
     public Achievement(@JsonProperty("title_hu") String title_hu,
@@ -45,7 +45,7 @@ public class Achievement {
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
                        @JsonProperty("date") String date,
-                       @JsonProperty("place") int place,
+                       @JsonProperty("place") String place,
                         @JsonProperty("isLast") boolean isLast)
                       {
 
@@ -135,11 +135,11 @@ public class Achievement {
         this.title_en = title_en;
     }
 
-    public int getPlace() {
+    public String getPlace() {
         return place;
     }
 
-    public void setPlace(int place) {
+    public void setPlace(String place) {
         this.place = place;
     }
 

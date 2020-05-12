@@ -22,6 +22,7 @@ export class AchievementsComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
   authority: string;
+  roles: string[];
   constructor(private http: HttpClient, private apiService: ApiService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
@@ -68,8 +69,8 @@ export class AchievementsComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'tempdata',
+        description_en: 'tempdata',
         place: this.form.place,
       isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
