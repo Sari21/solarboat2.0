@@ -64,6 +64,10 @@ export class AchievementsComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
+        description_hu: 'leiras',
+        description_en: 'leiras',
+        place: this.form.place,
+      isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
       };
     const b = this.http
@@ -91,6 +95,10 @@ export class AchievementsComponent implements OnInit {
       location_hu: this.form.location,
       title_en: this.form.title,
       location_en: this.form.location,
+      description_hu: 'leiras',
+      description_en: 'leiras',
+      place: this.form.place,
+      isLast: false,
       date: this.form.date,
       picture: '../../assets/achievement/' + this.fileToUpload.name
     };

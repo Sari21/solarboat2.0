@@ -60,6 +60,10 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
+        description_hu: 'leiras',
+        description_en: 'leiras',
+        place: this.form.place,
+        isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
       };
     } else {
@@ -70,6 +74,10 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
+        description_hu: 'leiras',
+        description_en: 'leiras',
+        place: this.form.place,
+        isLast: false,
         picture: "nincs"
       };
     }
