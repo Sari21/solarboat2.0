@@ -24,6 +24,7 @@ public class GalleryController {
     public GalleryPicture addPicture(@Validated @RequestBody GalleryPicture galleryPicture){
         return galleryService.addPicture(galleryPicture);
     }
+    @Secured("ROLE_ADMIN")
     @PutMapping
     public GalleryPicture updatePicture(@Validated @RequestBody GalleryPicture galleryPicture){
         return galleryService.updatePicture(galleryPicture);
@@ -36,6 +37,7 @@ public class GalleryController {
     public Optional<GalleryPicture> getPictureById(@PathVariable("id") Long id){
         return galleryService.getPictureById(id);
     }
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
     public void deletePicture(@PathVariable("id") Long id){
         galleryService.deletePictureById(id);

@@ -133,4 +133,5 @@ export class NewsComponent implements OnInit {
     }
     this.allnews.unshift(n);
   }
+
 }

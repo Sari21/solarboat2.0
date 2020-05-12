@@ -40,9 +40,11 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file, String path) {
-        if (!file.getContentType().contains("image")) {
-            return null;
-        }
+
+            if (!file.getContentType().contains("image")) {
+                return null;
+            }
+
 
         this.fileStorageLocation = Paths.get(this.path + "/" + path )
                 .toAbsolutePath().normalize();

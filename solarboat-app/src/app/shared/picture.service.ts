@@ -18,6 +18,12 @@ export class PictureService {
     formData.append('path', directory );
     return this.http.post(this.BASE_URL.concat("/api/file/uploadFile"), formData);
   }
+  postSponsorLogo(fileToUpload: File)  {
+    const formData: FormData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('path', 'sponsors' );
+    return this.http.post(this.BASE_URL.concat("/api/file/uploadFile"), formData);
+  }
   getGallery(): Observable<GalleryPicture[]> {
     return <Observable<GalleryPicture[]>>(
       this.http.get(this.BASE_URL + "/api/gallery")

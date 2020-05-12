@@ -1,36 +1,37 @@
 <app-nav-bar></app-nav-bar>
+<div class="justify-content-center d-flex">
+  <div class="col-10">
+    
+    <div class="input-group mt-5 mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
+      </div>
+      <select [(ngModel)]="selectedDate" (change)="dateChanged()">
+        <option *ngFor="let item of dates" [ngValue]="item">
+          {{ item.value }}
+        </option>
+      </select>
+</div>
 
-<div class="input-group mt-5 ml-5 mb-3">
-  <div class="input-group-prepend">
-    <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
-  </div>
-  <select [(ngModel)]="selectedDate" (change)="dateChanged()">
-    <option *ngFor="let item of dates" [ngValue]="item">
-      {{ item.value }}
-    </option>
-  </select>
+
+<a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"  ><span>Opciók</span></a>
+
+<div *ngIf="show" class="d-flex mb-3">
+  
+  <a class="btn" href="{{ BASE_URL }}"  ><span>Összes letöltése</span></a>
+  <a class="btn" href="{{ EXPORT_URL }}"  ><span>Kiválasztott letöltése</span></a>
+  <a class="btn" (click)="deleteById(selectedDate.name)" href="javascript:void(0)"  ><span>Kiválasztott törlése</span></a>
+  <a class="btn"  (click)="deleteAll()" href="javascript:void(0)" ><span>Összes törlése</span></a>
+  
+  
 </div>
-<button class="d-flex ml-5 mb-3" (click)="setShow()">Show</button>
-<div *ngIf="show" class="d-flex ml-5 mb-3">
-  <button>
-    <a href="{{ BASE_URL }}">Összes letöltése</a>
-  </button>
-  <button>
-    <a href="{{ EXPORT_URL }}">Kiválasztott letöltése</a>
-  </button>
-  <button (click)="deleteById(selectedDate.name)">
-    Kiválasztott törlése
-  </button>
-  <button (click)="deleteAll()">
-    Összes törlése
-  </button>
-</div>
+
 <div class="d-flex flex-row justify-content-center" id=" firstrow">
   <div class="d-inline-flex, flex-row">
     <app-bar-chart (click)="setShowDetails()" [data]="soc"></app-bar-chart>
     <app-bar-chart (click)="setShowDetails()" [data]="temp"></app-bar-chart>
   </div>
-
+  
   <table class="col-5" id="errorTable">
     <thead>
       <tr>
@@ -48,15 +49,17 @@
 
 <div class="d-flex align-items-center flex-column">
   <app-graph
-    *ngIf="showDetails"
+  *ngIf="showDetails"
     class="d-inline-flex p-5"
     [data]="temp_soc"
-  ></app-graph>
-  <app-graph class="d-inline-flex p-5" [data]="battery"></app-graph>
+    ></app-graph>
+    <app-graph class="d-inline-flex p-5" [data]="battery"></app-graph>
   <app-graph class="d-inline-flex p-5" [data]="motor"></app-graph>
   <app-graph class="d-inline-flex p-5" [data]="tilt"></app-graph>
   <app-graph class="d-inline-flex p-5" [data]="compass"></app-graph>
   <app-graph class="d-inline-flex p-5" [data]="acceleration"></app-graph>
+</div>
+</div>
 </div>
 
 <app-footer></app-footer>

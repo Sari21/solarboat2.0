@@ -32,7 +32,6 @@ export class BoatDataComponent implements OnInit {
   ngOnInit() {
     // this.subscription = this.source.subscribe((val) => this.makeGraphs());
     this.lastDataGroup();
-    //this.getDataById(1);
     this.getDates();
   }
   public setShow() {

@@ -3,6 +3,7 @@ package hu.schdesign.solarboat.api;
 import hu.schdesign.solarboat.model.Sponsor;
 import hu.schdesign.solarboat.service.SponsorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,7 +20,7 @@ public class SponsorController {
     SponsorController(SponsorService sponsorService){
         this.sponsorService = sponsorService;
     }
-
+    @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public Sponsor addSponsor(@Valid @RequestBody Sponsor sponsor){
         return sponsorService.addSponsor(sponsor);
@@ -33,6 +34,7 @@ public class SponsorController {
         }
         return list;
     }
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
     public void deleteSponsorById(@PathVariable("id") Long id){
         sponsorService.deleteSponsorById(id);

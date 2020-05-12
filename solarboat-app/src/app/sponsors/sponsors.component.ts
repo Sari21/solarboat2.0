@@ -1,18 +1,30 @@
 import { Component, OnInit, Output } from "@angular/core";
 import { SponsorService } from "../shared/sponsor.service";
 import { Sponsor } from "../model/sponsor";
-
+import { PictureService } from "../shared/picture.service";
+import { TokenStorageService } from "../auth/token-storage.service";
 @Component({
   selector: "app-sponsors",
   templateUrl: "./sponsors.component.html",
   styleUrls: ["./sponsors.component.css"],
 })
 export class SponsorsComponent implements OnInit {
-  constructor(private sponsorService: SponsorService) {}
+  constructor(
+    private sponsorService: SponsorService,
+    pictureService: PictureService,
+    private tokenStorage: TokenStorageService
+  ) {
+    this.pictureService = pictureService;
+  }
 
   ngOnInit(): void {
     this.getSponsores();
+    this.newSponsor = new Sponsor()
+    console.log(this.types);
   }
+  title = 'Tour of Heroes';
+  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+  myHero = this.heroes[0];
   allSponsors: Sponsor[] = [];
   main: Sponsor[] = [];
   top: Sponsor[] = [];
@@ -20,6 +32,14 @@ export class SponsorsComponent implements OnInit {
   uni = [];
   partner: Sponsor[] = [];
   bme: Sponsor;
+  newSponsor: Sponsor;
+  failed = false;
+  errorMessage = "";
+  pictureService: PictureService;
+  fileToUpload: File = null;
+  types = [ "MAIN","TOP","OTHER", "PARTNER", "UNI"];
+  public authority: string;
+  public roles: string[];
   getSponsores() {
     this.sponsorService.getSponsors().subscribe(
       (res) => {
@@ -51,4 +71,75 @@ export class SponsorsComponent implements OnInit {
       }
     }
   }
+  onSubmit( event: Event) {
+    console.log(this.newSponsor);
+    event.preventDefault();
+    this.sponsorService.postSponsor(this.newSponsor).subscribe(
+
+      data => {
+        this.uploadFileToActivity();
+        this.allSponsors.push(data);
+        this.splitSponsores();       
+      },
+      error  => {
+        console.log(error);
+      }
+      );
+
+  }
+   
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.newSponsor.picture = files.item(0).name;
+  }
+  uploadFileToActivity() {
+    console.log("fileupload");
+    this.pictureService.postSponsorLogo(this.fileToUpload).subscribe(
+      (data) => {
+        // do something, if upload success
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  delete(id: number) {
+   
+  this.sponsorService.deleteSponsor(id).subscribe(
+    (data) => {
+      // do something, if upload success
+
+      var du = this.allSponsors.find((a) => a.id == id);
+      const index = this.allSponsors.indexOf(du, 0);
+      if (index > -1) {
+        this.allSponsors.splice(index, 1);
+      }
+      this.splitSponsores();
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
+clickMethod(id: number) {
+  if (confirm("Are you sure to delete " + id.toString())) {
+    this.delete(id);
+  }
+}
+
+checkAuth() {
+  this.authority = undefined;
+  if (this.tokenStorage.getToken()) {
+    this.roles = this.tokenStorage.getAuthorities();
+    this.roles.every((role) => {
+      if (role === "ROLE_ADMIN") {
+        this.authority = "admin";
+        return false;
+      }
+      this.authority = "user";
+      return true;
+    });
+  }
+}
 }
