@@ -62,8 +62,8 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'dgtrs',
+        description_en: 'rsngre',
         place: this.form.place,
         isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
@@ -76,8 +76,8 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'tbrnren',
+        description_en: 'htrenren',
         place: this.form.place,
         isLast: false,
         picture: ''
