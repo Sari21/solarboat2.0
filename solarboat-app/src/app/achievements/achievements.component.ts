@@ -59,8 +59,7 @@ export class AchievementsComponent implements OnInit {
     this.achievements = this.achievements.filter(rowObj => rowObj.id !== a.id);
   }
   //post
-  onSubmit(empForm: any, event: Event) {
-    event.preventDefault();
+  onSubmit(empForm: any) {
     this.uploadFileToActivity();
     const o: Object = {
         title_hu: this.form.title,
