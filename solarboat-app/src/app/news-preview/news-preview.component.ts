@@ -3,7 +3,7 @@ import {News} from '../model/news';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {HttpClient} from '@angular/common/http';
-import {ApiService} from '../shared/api.service';
+import {ApiService} from '../shared/news.service';
 import { FormControl } from '@angular/forms';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {News} from '../model/news';
-import { ApiService } from '../shared/api.service';
+import { ApiService } from '../shared/team.service';
 import {HttpClient} from '@angular/common/http';
 import {Team} from '../model/team';
 import {Member} from '../model/member';

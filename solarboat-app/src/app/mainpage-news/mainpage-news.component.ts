@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { News } from "../model/news";
-import { ApiService } from "../shared/api.service";
+import { ApiService } from "../shared/achievement.service";
 
 @Component({
   selector: "app-mainpage-news",

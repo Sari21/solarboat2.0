@@ -13,8 +13,10 @@ export class ApiService {
   //private BASE_URL = "http://solarboatteam.hu:81/api";
   constructor(private http: HttpClient) {}
 
-
-  getTeams() {
-    return this.http.get(this.BASE_URL + '/teams');
+  getAchievements(pageNum: number) {
+    return this.http.get(
+        this.BASE_URL + "/achievement/page/".concat(pageNum.toString())
+    );
   }
+
 }
