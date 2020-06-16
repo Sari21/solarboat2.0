@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { News } from "../model/news";
-import { ApiService } from "../shared/achievement.service";
+import { NewsService } from "../shared/news.service";
 
 @Component({
   selector: "app-mainpage-news",
@@ -10,7 +10,7 @@ import { ApiService } from "../shared/achievement.service";
 })
 export class MainpageNewsComponent implements OnInit {
   allnews: News[] = [];
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private http: HttpClient, private apiService: NewsService) {}
   ngOnInit(): void {
     this.getNews();
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiService } from "../shared/achievement.service";
+import { AchievementService } from "../shared/achievement.service";
 import { Achievement } from "../model/achievement";
 import {News} from '../model/news';
 import {PictureService} from '../shared/picture.service';
@@ -22,7 +22,7 @@ export class AchievementsComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
   authority: string;
-  constructor(private http: HttpClient, private apiService: ApiService,
+  constructor(private http: HttpClient, private apiService: AchievementService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
   }

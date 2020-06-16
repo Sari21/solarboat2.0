@@ -86,7 +86,7 @@
         <h1 class="title pb-5">Fő szponzoraink</h1>
         <div class="d-flex align-content-start flex-wrap col-md-12">
           <div *ngFor="let sponsor of main" class="col-6 col-md-4">
-            <a
+            <a *ngIf="authority == 'admin'"
               (click)="clickMethod(sponsor.id)"
               href="javascript:void(0)"
               class="close"
@@ -110,7 +110,7 @@
         <h3 class="pb-5 pt-5 title">Kiemelt szponzoraink</h3>
         <div class="d-flex align-content-start flex-wrap col-md-12">
           <div *ngFor="let sponsor of top"  class="col-6 col-md-3">
-            <a
+            <a *ngIf="authority == 'admin'"
               (click)="clickMethod(sponsor.id)"
               href="javascript:void(0)"
               class="close"
@@ -137,7 +137,7 @@
 
         <div class="d-flex align-content-start flex-wrap col-md-12">
           <div *ngFor="let sponsor of other" class="col-4 col-md-2">
-            <a
+            <a *ngIf="authority == 'admin'"
               (click)="clickMethod(sponsor.id)"
               href="javascript:void(0)"
               class="close"
@@ -163,7 +163,7 @@
           class="d-flex align-content-center flex-column flex-wrap col-md-12"
         >
         <div *ngFor="let sponsor of partner"  class="col-6 col-md-5">
-          <a
+          <a *ngIf="authority == 'admin'"
             (click)="clickMethod(sponsor.id)"
             href="javascript:void(0)"
             class="close"
@@ -199,7 +199,7 @@
           class="d-flex justify-content-center flex-wrap col-md-12"
         >
         <div *ngFor="let sponsor of sponsors"   class="col-3 col-md-2">
-          <a
+          <a *ngIf="authority == 'admin'"
             (click)="clickMethod(sponsor.id)"
             href="javascript:void(0)"
             class="close"
