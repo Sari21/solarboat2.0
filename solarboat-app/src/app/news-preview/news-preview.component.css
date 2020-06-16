@@ -33,7 +33,7 @@
 }
 
 .date{
-    text-size: 0.5rem;
+    font-size: 0.7rem;
     font-family: "helvetica";
 }
 img {
@@ -45,7 +45,7 @@ img {
     width:30rem;
 }
 mat-icon{
-    transform: scale(1);
+    transform: scale(0.7);
     display: inline-flex;
     vertical-align: middle;
 }
@@ -54,7 +54,7 @@ mat-icon{
 .read-more{
     display:block;
     letter-spacing:0.1em;
-    font-size:1rem;
+    font-size:0.75rem;
     font-family: "Kelson Sans Light";
     opacity:0;
     will-change:transform;
@@ -72,3 +72,6 @@ a .update-icon.mat-icon{
 a .update-icon.mat-icon:hover{
     transform: scale(1.4);
 }
+ p {
+     font-size: 0.8rem;
+ }

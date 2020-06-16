@@ -33,7 +33,7 @@ export class NewsPreviewComponent implements OnInit {
   }
 
   openContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true, centered: true, size: 'lg' });
+    this.modalService.open(longContent, { scrollable: true, centered: true, size: 'md' });
   }
 
   delete(id: number) {
