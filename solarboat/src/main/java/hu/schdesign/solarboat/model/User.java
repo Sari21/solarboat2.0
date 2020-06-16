@@ -107,6 +107,7 @@ public class User{
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
     public void clearRoles(){
         this.roles.clear();
     }

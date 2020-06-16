@@ -17,12 +17,11 @@ import java.util.Optional;
 @Service
 public class NewsService {
     private final NewsRepository newsRepository;
-    private final NewsPagingRepository newsPagingRepository;
 
     @Autowired
-    public NewsService(NewsRepository newsRepository, NewsPagingRepository newsPagingRepository){
+    public NewsService(NewsRepository newsRepository){
         this.newsRepository = newsRepository;
-        this.newsPagingRepository = newsPagingRepository;
+
     }
 
     public News addNews(News news){
@@ -42,7 +41,7 @@ public class NewsService {
     }
     public Page<News> getPage(int pageNo, int pageSize){
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("date").descending().by("id").descending());
-        Page<News> pagedResult = newsPagingRepository.findAll(paging);
+        Page<News> pagedResult = newsRepository.findAll(paging);
         if(pagedResult.hasContent()) {
             return pagedResult;
         } else {

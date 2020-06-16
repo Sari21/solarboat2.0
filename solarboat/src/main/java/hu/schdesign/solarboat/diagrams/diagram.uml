@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="943.0">hu.schdesign.solarboat.model.Achievement</node>
+    <node x="225.25000000000006" y="534.0">hu.schdesign.solarboat.model.DataGroup</node>
+    <node x="368.0" y="22.0">hu.schdesign.solarboat.model.Boat.Motor</node>
+    <node x="552.0" y="22.0">hu.schdesign.solarboat.model.Boat.Error</node>
+    <node x="1001.0" y="0.0">hu.schdesign.solarboat.model.RoleName</node>
+    <node x="204.0" y="943.0">hu.schdesign.solarboat.model.News</node>
+    <node x="266.0" y="233.0">hu.schdesign.solarboat.model.BoatData</node>
+    <node x="986.5" y="272.0">hu.schdesign.solarboat.model.User</node>
+    <node x="1167.0" y="191.0">hu.schdesign.solarboat.model.Sponsor</node>
+    <node x="783.0" y="0.0">hu.schdesign.solarboat.model.Member</node>
+    <node x="184.0" y="11.0">hu.schdesign.solarboat.model.Boat.Coordinates</node>
+    <node x="761.0" y="235.0">hu.schdesign.solarboat.model.Team</node>
+    <node x="0.0" y="0.0">hu.schdesign.solarboat.model.Boat.Battery</node>
+    <node x="985.0" y="147.0">hu.schdesign.solarboat.model.Role</node>
+    <node x="100.25000000000006" y="556.0">hu.schdesign.solarboat.model.dataPair</node>
+    <node x="389.0" y="943.0">hu.schdesign.solarboat.model.GalleryPicture</node>
+    <node x="140.75000000000006" y="713.0">hu.schdesign.solarboat.model.ResponseBoatData</node>
+    <node x="1185.0" y="0.0">hu.schdesign.solarboat.model.SponsorGroup</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="hu.schdesign.solarboat.model.BoatData" target="hu.schdesign.solarboat.model.Boat.Battery">
+      <point x="-80.5" y="-125.5" />
+      <point x="277.5" y="213.0" />
+      <point x="41.0" y="213.0" />
+      <point x="-41.0" y="81.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.Role" target="hu.schdesign.solarboat.model.RoleName">
+      <point x="34.25" y="-37.5" />
+      <point x="1087.75" y="122.0" />
+      <point x="1079.75" y="122.0" />
+      <point x="26.25" y="48.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.User" target="hu.schdesign.solarboat.model.Role">
+      <point x="33.5" y="-81.5" />
+      <point x="34.25" y="37.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.ResponseBoatData" target="hu.schdesign.solarboat.model.BoatData">
+      <point x="53.28571428571422" y="-92.5" />
+      <point x="380.5357142857143" y="673.0" />
+      <point x="439.75000000000006" y="673.0" />
+      <point x="439.75000000000006" y="509.0" />
+      <point x="419.33333333333337" y="509.0" />
+      <point x="61.33333333333337" y="125.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.BoatData" target="hu.schdesign.solarboat.model.Boat.Error">
+      <point x="57.5" y="-125.5" />
+      <point x="415.5" y="203.0" />
+      <point x="572.5" y="203.0" />
+      <point x="-61.5" y="59.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.Sponsor" target="hu.schdesign.solarboat.model.SponsorGroup">
+      <point x="-42.5" y="-81.5" />
+      <point x="1209.5" y="166.0" />
+      <point x="1218.5" y="166.0" />
+      <point x="-33.5" y="70.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.ResponseBoatData" target="hu.schdesign.solarboat.model.dataPair">
+      <point x="-159.85714285714295" y="-92.5" />
+      <point x="167.3928571428571" y="693.0" />
+      <point x="117.75000000000006" y="693.0" />
+      <point x="-35.0" y="37.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.ResponseBoatData" target="hu.schdesign.solarboat.model.DataGroup">
+      <point x="0.0" y="-92.5" />
+      <point x="0.0" y="59.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.Team" target="hu.schdesign.solarboat.model.Member">
+      <point x="0.0" y="-103.5" />
+      <point x="0.0" y="92.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.ResponseBoatData" target="hu.schdesign.solarboat.model.Boat.Error">
+      <point x="159.8571428571429" y="-92.5" />
+      <point x="487.10714285714295" y="693.0" />
+      <point x="680.5" y="693.0" />
+      <point x="680.5" y="213.0" />
+      <point x="695.5" y="213.0" />
+      <point x="61.5" y="59.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.BoatData" target="hu.schdesign.solarboat.model.Boat.Motor">
+      <point x="34.5" y="-125.5" />
+      <point x="392.5" y="193.0" />
+      <point x="491.0" y="193.0" />
+      <point x="41.0" y="59.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.DataGroup" target="hu.schdesign.solarboat.model.BoatData">
+      <point x="51.0" y="-59.5" />
+      <point x="378.25000000000006" y="509.0" />
+      <point x="358.0" y="509.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="hu.schdesign.solarboat.model.BoatData" target="hu.schdesign.solarboat.model.Boat.Coordinates">
+      <point x="-34.5" y="-125.5" />
+      <point x="323.5" y="193.0" />
+      <point x="225.0" y="193.0" />
+      <point x="-41.0" y="70.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="712.0" y="591.9999999999998" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
