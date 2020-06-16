@@ -56,7 +56,7 @@ export class GalleryComponent implements OnInit {
   }
 
   uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload).subscribe(
+    this.pictureService.postFile(this.fileToUpload, "gallery").subscribe(
       (data) => {
         // do something, if upload success
         this.fileToUpload = null;
@@ -66,7 +66,7 @@ export class GalleryComponent implements OnInit {
         console.log(error);
       }
     );
-    this.pictureService.postFile(this.smallFileToUpload).subscribe(
+    this.pictureService.postFile(this.smallFileToUpload, "gallery").subscribe(
       (data) => {
         // do something, if upload success
         this.smallFileToUpload = null;

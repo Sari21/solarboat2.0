@@ -39,7 +39,7 @@ public class BoatData implements CsvPrintable {
     private final String date;
     @ElementCollection
     private final List<Integer> extraTemps;
-    public static final char CSV_SEPARATOR = ';';
+    private static final char CSV_SEPARATOR = ';';
 
     public BoatData(@JsonProperty("tilt") Coordinates tilt, @JsonProperty("acceleration")Coordinates acceleration,
                     @JsonProperty("compass")Coordinates compass, @JsonProperty("motor")Motor motor,

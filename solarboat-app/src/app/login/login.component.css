@@ -10,3 +10,7 @@ label {
 .jumbotron {
   background-color: #f3f4f4;
 }
+img{
+width:100%;
+height: auto;
+}
