@@ -23,7 +23,7 @@ export class AchievementsComponent implements OnInit {
   fileToUpload: File = null;
   authority: string;
   roles: string[];
-  constructor(private http: HttpClient, private apiService: ApiService,
+  constructor(private http: HttpClient, private achievementService: AchievementService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
@@ -34,7 +34,7 @@ export class AchievementsComponent implements OnInit {
   }
 
   public getAchievements() {
-    this.apiService.getAchievements(this.pageNumber).subscribe(
+    this.achievementService.getAchievements(this.pageNumber).subscribe(
       // tslint:disable-next-line:prefer-const
       (res) => {
         let data: any = res;
