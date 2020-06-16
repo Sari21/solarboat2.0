@@ -25,6 +25,7 @@ const routes: Routes = [
     component: BoatDataComponent,
   },
   { path: "achievements", component: AchievementsComponent },
+  { path: "admin", redirectTo: "/auth/login" },
   { path: "users", component: UsersComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
   { path: "**", redirectTo: "/mainpage" },
