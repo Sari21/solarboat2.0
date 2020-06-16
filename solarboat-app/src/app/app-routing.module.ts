@@ -28,11 +28,11 @@ const routes: Routes = [
   { path: "admin", redirectTo: "/auth/login" },
   { path: "users", component: UsersComponent },
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
-  { path: "**", redirectTo: "/mainpage" },
+  { path: "**", redirectTo: "/mainpage", pathMatch: "full"},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

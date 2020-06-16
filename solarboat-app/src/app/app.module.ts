@@ -1,4 +1,4 @@
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule} from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule, NgForm } from "@angular/forms";
@@ -38,6 +38,7 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { UsersComponent } from "./admin/users/users.component";
+
 
 @NgModule({
   declarations: [
@@ -81,7 +82,10 @@ import { UsersComponent } from "./admin/users/users.component";
         JwtModule,
         ReactiveFormsModule,
     ],
+    
   bootstrap: [AppComponent],
-  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule],
+
+
+  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule]
 })
 export class AppModule {}
