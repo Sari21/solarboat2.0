@@ -8,11 +8,10 @@ import { GalleryPicture } from "../model/gallery-picture";
 @Injectable({
   providedIn: "root",
 })
-export class ApiService {
+export class TeamService {
   private BASE_URL = "http://localhost:8080/api";
   //private BASE_URL = "http://solarboatteam.hu:81/api";
   constructor(private http: HttpClient) {}
-
 
   getTeams() {
     return this.http.get(this.BASE_URL + '/teams');

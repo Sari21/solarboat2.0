@@ -3,8 +3,7 @@ import {News} from '../model/news';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {HttpClient} from '@angular/common/http';
-import {ApiService} from '../shared/api.service';
-import { FormControl } from '@angular/forms';
+import {NewsService} from '../shared/news.service';
 
 @Component({
   selector: 'app-news-preview',
@@ -24,7 +23,7 @@ export class NewsPreviewComponent implements OnInit {
   @Input() news: News;
   @Output() onRemove = new EventEmitter<News>();
 
-  constructor(private http: HttpClient, private apiService: ApiService, private modalService: NgbModal, pictureService: PictureService) {
+  constructor(private http: HttpClient, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {

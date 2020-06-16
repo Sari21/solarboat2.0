@@ -8,7 +8,7 @@
         <div *ngIf=" authority =='admin'" class="card  mb-5 mr-3 ml-3" id="achievement-form">
             <h2 class="title pb-3">Új eredmény hozzáadása</h2>
             <div>
-                <form (ngSubmit)="onSubmit(loginForm, $event)" #loginForm="ngForm">
+                <form  #AddForm="ngForm">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn" (click)="onSubmit(loginForm, $event)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid || fileToUpload==null}" ><span>Feltöltés</span></a>
+                    <a class="btn" (click)="onSubmit(AddForm)" href="javascript:void(0)" [ngClass]="{'disabled': !AddForm.form.valid || fileToUpload==null}" ><span>Feltöltés</span></a>
 
                     <div [hidden]="!failed"
                          class="alert alert-danger mt-3">

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {News} from '../model/news';
-import { ApiService } from '../shared/api.service';
+import { TeamService } from '../shared/team.service';
 import {HttpClient} from '@angular/common/http';
 import {Team} from '../model/team';
 import {Member} from '../model/member';
@@ -74,7 +73,7 @@ export class TeamComponent implements OnInit {
     name_hu: string;
     teamType: number;
   };
-  constructor(private http: HttpClient, private apiService: ApiService) { }
+  constructor(private http: HttpClient, private apiService: TeamService) { }
 
   ngOnInit(): void {
     this.getTeams();
