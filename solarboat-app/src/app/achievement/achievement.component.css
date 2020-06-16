@@ -2,24 +2,25 @@ a .update-icon.mat-icon{
     transition: transform .2s ease;
 }
 a .update-icon.mat-icon:hover{
-    transform: scale(1.4);
+    transform: scale(1.1);
 }
 mat-icon{
-    transform: scale(1);
+    transform: scale(0.75);
 }
 
 .edit mat-icon{
-    transform: scale(1);
+    transform: scale(0.75);
     cursor: pointer;
 }
 .date p{
     font-family: Helvetica;
     margin:0;
+    font-size: 0.75rem;
 }
 .left-date p{
     font-family: KelsonSans-Normal;
     margin:0;
-    font-size: 1.3rem;
+    font-size: 0.5rem;
 }
 .left-date{
     right: 13%;
@@ -65,7 +66,7 @@ mat-icon{
 
 .place{
     font-family: KelsonSans-Normal;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color:white;
     text-transform:uppercase;
 }
@@ -175,7 +176,7 @@ mat-icon{
     color: black;
     font-family: 'KelsonSans-Light';
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 0;
 }
 #timeline-location {

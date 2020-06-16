@@ -1,7 +1,7 @@
 
     <div class="timeline-badge">
-        <img *ngIf="achievement.isLast" class="last-one" src="../../assets/achievement/cake.png"  width="50"   />
-        <img *ngIf="!achievement.isLast"  src="../../assets/achievement/logo.png"  width="50"/>
+        <img *ngIf="achievement.isLast" class="last-one" src="../../assets/achievement/cake.png"  width="35"   />
+        <img *ngIf="!achievement.isLast"  src="../../assets/achievement/logo.png"  width="35"/>
     </div>
     <div class="timeline-panel pl-5 pr-5 pb-5">
         <div class="timeline-heading ">
@@ -13,7 +13,7 @@
                 <p id="timeline-location" class="pr-3 pt-3">{{achievement.location_hu}} </p>
                 <p class="pt-3">{{achievement.title_hu}} </p>
             </div>
-            <div class=" .d-block .d-md-none row date col-12 date mt-2 mb-2 align-items-center">
+            <div class=" .d-block .d-md-none row col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
                 <p class="pl-1">{{achievement.date}}</p>
             </div>
