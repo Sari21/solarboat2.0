@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Achievement} from '../model/achievement';
-import {News} from '../model/news';
 import {HttpClient} from '@angular/common/http';
-import {ApiService} from '../shared/api.service';
 import {PictureService} from '../shared/picture.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AchievementService} from '../shared/achievement.service';
 
 @Component({
   selector: 'app-achievement',
@@ -21,7 +20,7 @@ export class AchievementComponent implements OnInit {
   @Input() authority: string;
   @Input() achievement: Achievement;
   @Output() onRemove = new EventEmitter<Achievement>();
-  constructor(private http: HttpClient, private apiService: ApiService, private modalService: NgbModal, pictureService: PictureService) {
+  constructor(private http: HttpClient, private apiService: AchievementService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
@@ -62,8 +61,8 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'dgtrs',
+        description_en: 'rsngre',
         place: this.form.place,
         isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
@@ -76,8 +75,8 @@ export class AchievementComponent implements OnInit {
         title_en: this.form.title,
         location_en: this.form.location,
         date: this.form.date,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'tbrnren',
+        description_en: 'htrenren',
         place: this.form.place,
         isLast: false,
         picture: ''

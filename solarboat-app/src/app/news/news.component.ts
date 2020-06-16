@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { News } from '../model/news';
-import { ApiService } from '../shared/api.service';
+import { NewsService} from '../shared/news.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
 
@@ -21,7 +21,7 @@ export class NewsComponent implements OnInit {
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
-  constructor(private http: HttpClient, private apiService: ApiService,
+  constructor(private http: HttpClient, private apiService: NewsService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
   }

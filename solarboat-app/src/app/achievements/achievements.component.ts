@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ApiService } from "../shared/api.service";
+import { AchievementService } from "../shared/achievement.service";
 import { Achievement } from "../model/achievement";
 import {News} from '../model/news';
 import {PictureService} from '../shared/picture.service';
@@ -15,7 +15,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 export class AchievementsComponent implements OnInit {
   achievements: Achievement[] = [];
   pageNumber = 0;
-  isLastPage =false;
+  isLastPage = false;
   form: any = {};
   failed = false;
   errorMessage = '';
@@ -60,8 +60,7 @@ export class AchievementsComponent implements OnInit {
     this.achievements = this.achievements.filter(rowObj => rowObj.id !== a.id);
   }
   //post
-  onSubmit(empForm: any, event: Event) {
-    event.preventDefault();
+  onSubmit(empForm: any) {
     this.uploadFileToActivity();
     const o: Object = {
         title_hu: this.form.title,
@@ -105,8 +104,8 @@ export class AchievementsComponent implements OnInit {
         location_hu: this.form.location,
         title_en: this.form.title,
         location_en: this.form.location,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'thrnrnre',
+        description_en: 'trnrntr',
         place: this.form.place,
         isLast: false,
         date: this.form.date,
@@ -119,8 +118,8 @@ export class AchievementsComponent implements OnInit {
         location_hu: this.form.location,
         title_en: this.form.title,
         location_en: this.form.location,
-        description_hu: '',
-        description_en: '',
+        description_hu: 'trenren',
+        description_en: 'brngrn',
         place: this.form.place,
         isLast: false,
         date: this.form.date,
@@ -132,8 +131,8 @@ export class AchievementsComponent implements OnInit {
   checkAuth() {
     this.authority = undefined;
     if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
-      this.roles.every((role) => {
+      let roles = this.tokenStorage.getAuthorities();
+      roles.every((role) => {
         if (role === "ROLE_ADMIN") {
           this.authority = "admin";
           return false;
