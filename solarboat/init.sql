@@ -1,2 +1,0 @@
-CREATE DATABASE IF NOT EXISTS db_solarboat;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'rootpass' WITH GRANT OPTION;
