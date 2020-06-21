@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TokenStorageService } from "./auth/token-storage.service";
+import { TranslateService} from "@ngx-translate/core"
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -10,7 +11,11 @@ export class AppComponent implements OnInit {
   public roles: string[];
   public authority: string;
 
-  constructor(private tokenStorage: TokenStorageService) {}
+  constructor(private tokenStorage: TokenStorageService,  public translate: TranslateService) { 
+    translate.addLangs(['en', 'hu']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|hu/) ? browserLang : 'en'); }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {

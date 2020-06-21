@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
-
 import { TokenStorageService } from "../auth/token-storage.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: "app-nav-bar",
@@ -14,7 +14,8 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    public translate: TranslateService
   ) {
     console.log(this.router.url);
     this.page = this.router.url;
