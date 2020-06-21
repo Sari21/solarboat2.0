@@ -7,7 +7,7 @@
                         <i class="icon bigger" style="background: url(https://www.amcharts.com/wp-content/themes/amcharts4/css/img/icons/weather/animated/day.png) no-repeat; background: none, url(https://www.amcharts.com/wp-content/themes/amcharts4/css/img/icons/weather/animated/day.svg) no-repeat; background-size: contain;"></i>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6">
-                        <p class="">Jelenlegi napsütésben {{watts}} Wattot termel a hajó</p>
+                        <p translate [translateParams]="{ watts: watts }">COVER.solarPower</p>
                     </div>
                 </div>
             </div>
@@ -19,6 +19,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

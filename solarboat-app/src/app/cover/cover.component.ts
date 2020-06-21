@@ -3,6 +3,7 @@ import { ScrollToService } from 'ng2-scroll-to-el';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subscription} from 'rxjs';
 import 'rxjs/add/observable/interval';
+import {TranslateService} from '@ngx-translate/core'
 
 @Component({
   selector: 'app-cover',
@@ -13,7 +14,10 @@ export class CoverComponent implements OnInit {
 
   public  sub: Subscription;
   public watts;
-  constructor(private scrollService: ScrollToService,  private http: HttpClient) { }
+  welcome: string;
+  constructor(private scrollService: ScrollToService,  private http: HttpClient, 
+    public translate: TranslateService) { 
+    }
 
   ngOnInit(): void {
     this.getWatts();
@@ -25,6 +29,7 @@ export class CoverComponent implements OnInit {
             this.watts = this.setWatts(data);
           }
         });
+
   }
 
 
