@@ -1,5 +1,37 @@
 {
-    "COVER": {
-      "solarPower": "Jelenlegi napsütésben {{ watts }} Wattot termel a hajó"
-    }
+  "COVER": {
+    "solarPower": "Jelenlegi napsütésben {{ watts }} Wattot termel a hajó"
+  },
+  "ABOUT_US":{
+    "about_us":"rólunk",
+    "begining":"2014-ben a Gépészmérnöki Kar három gépészmérnök hallgatója alapította BME Solar Boat Team csapatot, mely azzal a céllal jött létre, hogy egy kizárólag napenergiával működő, ember által vezetett, teljesen elektromos hajtású versenyhajót tervezzen és építsen, és ezzel a járművel 2016-ban a Hollandiában és Monte-Carlóban megrendezésre kerülő Dutch Solar Challenge Világbajnokság és Solar 1 Races megmérettetésein sikerrel szálljon versenybe.",
+    "GPK": "A projekthez csatlakoztak továbbá a Gépészmérnöki Karról mechatronikai mérnök és gépészmérnök hallgatók, akik az elektronikai rendszerek szoftveres támogatásán, a hajótest gyártástechnológiáján, a CFD szimulációkon, valamint a kormányzási és hajtásrendszeren dolgoztak.",
+    "KJK":"A Közlekedésmérnöki és Járműmérnöki Karról további négy hallgató érkezett, akik a tervezésben és megvalósításban segédkeztek; a közlekedésmérnökök feladata a hajótest és a hydrofoil tervezése volt, valamint megfelelő szállítókocsi tervezése a jármű közúti mozgatásához.",
+    "VIK":"A Villamosmérnöki és Informatikai Karról is érkeztek hallgatók, akik a hajó elektronikai rendszerének összeállításán: az akkumulátor és napelem rendszer, a teljesítményelektronikai berendezések, valamint a villamos hajtás tervezésében játszottak kulcsszerepet.",
+    "GTK":"A későbbiekben, ahogy a csapat egyre jobban kinőtte magát, a Gazdaság- és Társadalomtudományi Karról is érkeztek hallgatók, akik a marketing és gazdasági ügyek lebonyolításával foglalkoztak.",
+    "end":"A jelen tervezési és építési feladatai mellett a jövőre is figyelmet fordítunk - versenycsapatunkat hosszú távú céllal hoztuk létre; reményeink szerint kezdeményezésünkkel egy olyan tudásbázis és infrastruktúra jön létre, melyre építve éveken keresztül működik majd a csapat, a mérnökhallgatók újabb és újabb generációját bevonva az elektromos járműépítés világába."
+  },
+  "NEWS":{
+    "news":"hírek",
+    "all_news":"összes hír"
+  },
+  "SPONSORS":{
+    "sponsors":"szponzorok",
+    "main":"Fő szponzoraink",
+    "top":"Kiemelt szponzoraink",
+    "other":"Szponzoraink",
+    "partners":"Tudományos partnereink",
+    "uni":"Budapesti Műszaki és Gazdaságtudományi Egyetem"
+  },
+  "GALLERY":{
+    "gallery":"galéria"
+  },
+  "ACHIEVEMENTS":{
+    "achievements":"eredmények",
+    "title":"{{title_hu}}",
+    "description":"{{description_hu}}",
+    "location":"{{location_hu}}",
+    "date":"{{date}}",
+    "place":"{{place}}. helyezés"
   }
+}

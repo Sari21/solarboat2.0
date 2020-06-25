@@ -83,7 +83,7 @@
     <div>
       <div class="d-flex justify-content-center sponsors pb-5 ">
         <div class="title col-md-9">
-          <h3 class="title pb-5">Fő szponzoraink</h3>
+          <h3 translate class="title pb-5">SPONSORS.main</h3>
           <div class="d-flex align-content-start flex-wrap col-md-12">
             <div *ngFor="let sponsor of main" class="col-6 col-md-4">
               <a *ngIf="authority == 'admin'"
@@ -107,7 +107,7 @@
       </div>
       <div class="d-flex justify-content-center sponsors pb-4">
         <div class="col-md-9">
-          <h3 class="pb-5 pt-5 title">Kiemelt szponzoraink</h3>
+          <h3 translate class="pb-5 pt-5 title">SPONSORS.top</h3>
           <div class="d-flex align-content-start flex-wrap col-md-12">
             <div *ngFor="let sponsor of top"  class="col-6 col-md-3">
               <a *ngIf="authority == 'admin'"
@@ -133,7 +133,7 @@
 
       <div class="d-flex justify-content-center sponsors pb-4">
         <div class="col-md-9">
-          <h3 class="pb-5 pt-5 title">Szponzoraink</h3>
+          <h3 translate class="pb-5 pt-5 title">SPONSORS.other</h3>
 
           <div class="d-flex align-content-start flex-wrap col-md-12">
             <div *ngFor="let sponsor of other" class="col-4 col-md-2">
@@ -158,7 +158,7 @@
       </div>
       <div class="d-flex justify-content-center sponsors pb-4">
         <div class="col-md-9">
-          <h3 class="pb-5 pt-5 title">Tudományos partnereink</h3>
+          <h3 translate class="pb-5 pt-5 title">SPONSORS.partners</h3>
           <div
             class="d-flex align-content-center flex-column flex-wrap col-md-12"
           >
@@ -185,9 +185,7 @@
       </div>
       <div class="d-flex justify-content-center sponsors pb-4">
         <div class="col-md-9">
-          <h3 class="pb-5 pt-5 title">
-            Budapesti Műszaki és Gazdaságtudományi Egyetem
-          </h3>
+          <h3 translate class="pb-5 pt-5 title"> SPONSORS.uni</h3>
 
           <div class="d-flex justify-content-center flex-wrap col-md-12">
             <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
