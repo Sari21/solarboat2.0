@@ -10,19 +10,20 @@
                 <a class="col-1" (click)="delete(achievement.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
             </div>
             <div class="row timeline-title p-3 ">
-                <p id="timeline-location" class="pr-3 pt-3">{{achievement.location_hu}} </p>
-                <p class="pt-3">{{achievement.title_hu}} </p>
+                <p id="timeline-location" class="pr-3 pt-3" translate [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
+                    ACHIEVEMENTS.location</p>
+                <p  class="pt-3" translate [translateParams]="{ title_hu: achievement.title_hu, title_en: achievement.title_en}">ACHIEVEMENTS.title </p>
             </div>
             <div class=" .d-block .d-md-none row col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
-                <p class="pl-1">{{achievement.date}}</p>
+                <p class="pl-1" translate [translateParams]="{date: achievement.date}">ACHIEVEMENTS.date</p>
             </div>
         </div>
-        <div class="timeline-body pt-3">
-            <p>{{achievement.description_hu}}</p>
+        <div class="timeline-body pt-3" >
+            <p translate [translateParams]="{description_hu: achievement.description_hu, description_en: achievement.description_en}">ACHIEVEMENTS.description</p>
         </div>
         <a *ngIf="achievement.picture" class="img">
-            <div class="img__overlay place">{{achievement.place}}. helyezés</div>
+            <div class="img__overlay place" translate [translateParams]="{place: achievement.place}">ACHIEVEMENTS.place</div>
             <img  [src]="achievement.picture"/>
         </a>
     </div>
