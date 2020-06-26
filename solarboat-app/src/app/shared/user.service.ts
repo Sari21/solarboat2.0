@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "../model/user";
+import {Globals} from '../globals';
 
 @Injectable({
   providedIn: "root",
 })
 export class UserService {
-  private BASE_URL = "http://localhost:8080/api/user";
-  //private BASE_URL = "http://solarboatteam.hu:81/api/user";
+  private BASE_URL = this.globals.BASE_URL + "/api/user";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public globals: Globals) {}
 
   getUsers(): Observable<User[]> {
     return <Observable<User[]>>this.http.get(this.BASE_URL);

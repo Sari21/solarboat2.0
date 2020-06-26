@@ -4,14 +4,14 @@ import { Observable } from "rxjs";
 import { News } from "../model/news";
 import { Achievement } from "../model/achievement";
 import { GalleryPicture } from "../model/gallery-picture";
+import {Globals} from '../globals';
 
 @Injectable({
   providedIn: "root",
 })
 export class TeamService {
-  private BASE_URL = "http://localhost:8080/api";
-  //private BASE_URL = "http://solarboatteam.hu:81/api";
-  constructor(private http: HttpClient) {}
+  private BASE_URL = this.globals.BASE_URL + "/api";
+  constructor(private http: HttpClient, public globals: Globals) {}
 
   getTeams() {
     return this.http.get(this.BASE_URL + '/teams');

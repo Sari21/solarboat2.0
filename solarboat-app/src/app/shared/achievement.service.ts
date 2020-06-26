@@ -4,18 +4,18 @@ import { Observable } from "rxjs";
 import { News } from "../model/news";
 import { Achievement } from "../model/achievement";
 import { GalleryPicture } from "../model/gallery-picture";
+import {Globals} from '../globals';
 
 @Injectable({
   providedIn: "root",
 })
 export class AchievementService {
-  private BASE_URL = "http://localhost:8080/api";
-  //private BASE_URL = "http://solarboatteam.hu:81/api";
-  constructor(private http: HttpClient) {}
+  private BASE_URL = this.globals.BASE_URL;
+  constructor(private http: HttpClient, public globals: Globals) {}
 
   getAchievements(pageNum: number) {
     return this.http.get(
-        this.BASE_URL + "/achievement/page/".concat(pageNum.toString())
+        this.BASE_URL + "/api/achievement/page/".concat(pageNum.toString())
     );
   }
 

@@ -7,13 +7,13 @@ import { MyCoordinates } from "./model/my-coordinates";
 import { ConditionalExpr } from "@angular/compiler";
 import { Dates } from "./model/dates";
 import { Http, ResponseContentType } from "@angular/http";
+import {Globals} from './globals';
 
 @Injectable({
   providedIn: "root",
 })
 export class BoatDataService {
-  //private BASE_URL = "http://solarboatteam.hu:81/api/dataGroup";
-  private BASE_URL = "http://localhost:8080/api/dataGroup";
+  private BASE_URL = this.globals.BASE_URL + "/api/dataGroup";
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export class BoatDataService {
     }),
   };
   // tilt: MyCoordinates[] = [];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public globals: Globals) {}
 
   public getDataGroupById(id: number) {
     return this.http.get(

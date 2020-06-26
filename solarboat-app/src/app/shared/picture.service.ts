@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {GalleryPicture} from "../model/gallery-picture";
+import {Globals} from '../globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PictureService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public globals: Globals) {}
 
-  BASE_URL = 'http://localhost:8080';
+  BASE_URL = this.globals.BASE_URL;
 
   postFile(fileToUpload: File, directory: string)  {
     const formData: FormData = new FormData();

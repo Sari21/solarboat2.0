@@ -2,14 +2,14 @@ import { Injectable } from "@angular/core";
 import { Sponsor } from "../model/sponsor";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import {Globals} from '../globals';
 
 @Injectable({
   providedIn: "root",
 })
 export class SponsorService {
-  private BASE_URL = "http://localhost:8080/api/sponsor";
-  //private BASE_URL = "http://solarboatteam.hu:81/api/sponsor";
-  constructor(private http: HttpClient) {}
+  private BASE_URL = this.globals.BASE_URL + "/api/sponsor";
+  constructor(private http: HttpClient, public globals: Globals) {}
   getSponsors(): Observable<Sponsor[]> {
     return this.http.get<Sponsor[]>(this.BASE_URL);
   }
