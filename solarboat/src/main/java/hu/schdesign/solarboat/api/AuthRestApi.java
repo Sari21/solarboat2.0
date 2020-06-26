@@ -47,6 +47,42 @@ public class AuthRestApi {
     @Autowired
     JwtProvider jwtProvider;
 
+    @PostMapping("/setup/roles")
+    public ResponseEntity<?> setupRoles() {
+
+        //hozzáadom a használt szerepeket
+        roleRepository.save(new Role(RoleName.ROLE_ADMIN));
+        roleRepository.save(new Role(RoleName.ROLE_USER));
+
+        return new ResponseEntity<>(new ResponseMessage("Admin and user roles successfully added!"),
+                HttpStatus.OK);
+    }
+    @PostMapping("/setup/admin")
+    public ResponseEntity<?> setupAdmin() {
+        //leellenőrzöm hogy létre lett-e már hozva ilyen felhasználó
+        if (userRepository.existsByUsername("sb-admin")) {
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        //hozzáadom az admint
+        //username: sb-admin
+        //password: uszikAhajo!
+        User user = new User("SBT Admin", "sb-admin", "info@solarboatteam.hu",
+                encoder.encode("uszikAhajo!"));
+
+        Set<Role> roles = new HashSet<>();
+        Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find. Run POST request /api/auth/setup/roles first!"));
+        roles.add(adminRole);
+
+        user.setRoles(roles);
+        userRepository.save(user);
+
+        return new ResponseEntity<>(new ResponseMessage("Admin user succesfully added!"),
+                HttpStatus.OK);
+    }
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -61,6 +97,7 @@ public class AuthRestApi {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
