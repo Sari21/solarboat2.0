@@ -4,6 +4,7 @@ import { News } from '../model/news';
 import { NewsService} from '../shared/news.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
+import {Globals} from '../globals';
 
 @Component({
   selector: 'app-news',
@@ -22,7 +23,7 @@ export class NewsComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
   constructor(private http: HttpClient, private apiService: NewsService,
-              private tokenStorage: TokenStorageService, pictureService: PictureService) {
+              private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
     this.pictureService = pictureService;
   }
 
@@ -39,22 +40,22 @@ export class NewsComponent implements OnInit {
       o = {
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '../../assets/news/' + this.fileToUpload.name
       };
     } else {
       o = {
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: ''
       };
     }
 
     this.http
-        .post('http://localhost:8080/api/news', o)
+        .post(this.globals.BASE_URL + '/api/news', o)
         .subscribe((data) => {
           console.log(data);
         });
@@ -116,8 +117,8 @@ export class NewsComponent implements OnInit {
         date: 'most',
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '',
       };
     } else {
@@ -126,8 +127,8 @@ export class NewsComponent implements OnInit {
         date: 'most',
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '../../assets/news/' + this.fileToUpload.name,
       };
     }

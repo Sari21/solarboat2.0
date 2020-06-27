@@ -6,7 +6,7 @@
     class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center"
   >
     <div class="jumbotron col-12">
-      <h1 class="title pb-4">hírek</h1>
+      <h1 translate class="title pb-4">NEWS.mainTitle</h1>
 
       <div  class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
         <div  *ngIf="authority == 'admin'" class="card mb-5 mr-3 ml-3" id="news-form">
@@ -16,12 +16,20 @@
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="title">Cím</label>
+                    <label for="title">Magyar cím</label>
                     <input type="text" class="form-control" id="title"
                            required
                            [(ngModel)]="form.title" name="title"
                            [ngClass]="{'failed': failed }">
 
+                  </div>
+
+                  <div class="form-group">
+                    <label for="content">Magyar tartalom</label>
+                    <textarea type="content" class="form-control" id="content" rows="5"
+                              required
+                              [(ngModel)]="form.content" name="content"
+                              [ngClass]="{'failed': failed }"></textarea>
                   </div>
 
                   <div class="form-group">
@@ -34,10 +42,18 @@
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="content">Tartalom</label>
-                    <textarea type="content" class="form-control" id="content" rows="5"
+                    <label for="title_en">Angol cím</label>
+                    <input type="text" class="form-control" id="title_en"
                            required
-                           [(ngModel)]="form.content" name="content"
+                           [(ngModel)]="form.title_en" name="title_en"
+                           [ngClass]="{'failed': failed }">
+
+                  </div>
+                  <div class="form-group">
+                    <label for="content_en">Angol tartalom</label>
+                    <textarea type="content_en" class="form-control" id="content_en" rows="5"
+                              required
+                              [(ngModel)]="form.content_en" name="content_en"
                               [ngClass]="{'failed': failed }"></textarea>
                   </div>
                 </div>
@@ -64,7 +80,7 @@
       </div>
       <div class="row align-items-center justify-content-center">
         <div class="col- load-more pt-5">
-          <a class="btn"  *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)" ><span>Korábbi hírek</span></a>
+          <a class="btn"  *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)" ><span translate>BUTTON.more</span></a>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {HttpClient} from '@angular/common/http';
 import {NewsService} from '../shared/news.service';
+import {Globals} from '../globals';
 
 @Component({
   selector: 'app-news-preview',
@@ -12,7 +13,8 @@ import {NewsService} from '../shared/news.service';
 })
 export class NewsPreviewComponent implements OnInit {
   // tslint:disable-next-line:variable-name
-  shortArticle_hu: string;
+  shortArticleEn: string;
+  shortArticleHu: string;
   form: any = {};
   failed = false;
   errorMessage = '';
@@ -23,13 +25,17 @@ export class NewsPreviewComponent implements OnInit {
   @Input() news: News;
   @Output() onRemove = new EventEmitter<News>();
 
-  constructor(private http: HttpClient, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
+
+  constructor(private http: HttpClient, private globals: Globals, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
-    this.shortArticle_hu = this.news.content_hu.substring(0, 100) + '...';
+    this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
+    this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
     this.form.title = this.news.title_hu;
     this.form.content = this.news.content_hu;
+    this.form.title_en = this.news.title_en;
+    this.form.content_en = this.news.content_en;
   }
 
   openContent(longContent) {
@@ -40,16 +46,18 @@ export class NewsPreviewComponent implements OnInit {
     this.onRemove.emit(this.news);
     //TODO: kép törlése
     const b = this.http
-        .delete('http://localhost:8080/api/news/'.concat(id.toString()))
+        .delete(this.globals.BASE_URL + '/api/news/'.concat(id.toString()))
         .subscribe((data) => {
           console.log(data);
         });
   }
 
 
-  onSubmit(id: number) {
+  onSubmit(empForm: any, id: number) {
     this.news.title_hu = this.form.title;
     this.news.content_hu = this.form.content;
+    this.news.title_en = this.form.title_en;
+    this.news.content_en = this.form.content_en;
     const newsId = id;
     let o: Object;
     if (this.fileToUpload != null) {
@@ -60,8 +68,8 @@ export class NewsPreviewComponent implements OnInit {
         id: newsId,
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: this.news.title_en,
-        content_en: this.news.content_en,
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '../../assets/news/' + this.fileToUpload.name
 
       };
@@ -70,17 +78,19 @@ export class NewsPreviewComponent implements OnInit {
         id: newsId,
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: this.news.title_en,
-        content_en: this.news.content_en,
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: ''
       };
     }
-    const b = this.http
-        .put("http://localhost:8080/api/news", o)
+    const b  = this.http
+        .put(this.globals.BASE_URL + "/api/news", o)
         .subscribe((data) => {
           console.log(data);
         });
     this.modalService.dismissAll('put');
+    this.form = empForm;
+    this.form.reset();
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);

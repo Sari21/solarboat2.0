@@ -6,16 +6,16 @@
             <a class="col-2" (click)="delete(news.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
         </div>
         <div (click)="openContent(longContent)">
-            <h2 class="title mb-2 mt-4">{{news.title_hu}}</h2>
+            <h2 translate class="title mb-2 mt-4" [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
             <div class="row date col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
                 <div class="pl-1">{{news.date}}</div>
             </div>
             <div class="text-wrap col-12 p-0">
-                <p class="card-text mt-3 text-break">{{shortArticle_hu}}</p>
+                <p translate class="card-text mt-3 text-break" [translateParams]="{ shortArticle_en: shortArticleEn, shortArticle_hu: shortArticleHu}">NEWS.shortArticle</p>
             </div>
             <div class="arrow-read col-md-6 offset-md-6 col-lg-6 offset-lg-6 col-10 offset-2 p-0 mt-4">
-                <div class="read-more m-0"><mat-icon aria-hidden="false" >arrow_right_alt</mat-icon>TELJES HÍR OLVASÁSA</div>
+                <div translate class="read-more m-0"><mat-icon aria-hidden="false" >arrow_right_alt</mat-icon>BUTTON.readAllNews</div>
             </div>
             <div *ngIf="news.picture" class="row mt-4 align-items-center">
                 <div class="col-12">
@@ -29,7 +29,7 @@
 
 <ng-template  #longContent let-modal>
     <div class="modal-header">
-        <h2 class="title mb-2 mt-4">{{news.title_hu}}</h2>
+        <h2 translate class="title mb-2 mt-4" [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -40,7 +40,7 @@
             <div class="pl-1">2020.03.04</div>
         </div>
         <div class="text-wrap col-12 p-0">
-            <p class="card-text mt-3 text-break">{{news.content_hu}}</p>
+            <p translate class="card-text mt-3 text-break" [translateParams]="{ content_en: news.content_en, content_hu: news.content_hu}">NEWS.content</p>
         </div>
         <div *ngIf="news.picture" class="row mt-4 align-items-center">
             <div class="col-12">
@@ -70,6 +70,13 @@
                                [ngClass]="{'failed': failed }">
 
                     </div>
+                    <div class="form-group">
+                        <label for="content">Tartalom</label>
+                        <textarea type="content" class="form-control" id="content" rows="5"
+                                  [(ngModel)]="form.content" name="content"
+                                  [placeholder]="news.content_hu"
+                                  [ngClass]="{'failed': failed }"></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label for="file">Kép</label>
@@ -81,16 +88,25 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="content">Tartalom</label>
-                        <textarea type="content" class="form-control" id="content" rows="5"
-                                  [(ngModel)]="form.content" name="content"
-                                  [placeholder]="news.content_hu"
+                        <label for="title_en">Angol cím</label>
+                        <input type="text" class="form-control" id="title_en"
+                               required
+                               [(ngModel)]="form.title_en" name="title_en"
+                               [placeholder]="news.title_en"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                    <div class="form-group">
+                        <label for="content_en">Angol tartalom</label>
+                        <textarea type="content_en" class="form-control" id="content_en" rows="5"
+                                  [(ngModel)]="form.content_en" name="content_en"
+                                  [placeholder]="news.content_en"
                                   [ngClass]="{'failed': failed }"></textarea>
                     </div>
+
                 </div>
             </div>
 
-            <a class="btn" (click)="onSubmit(news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
+            <a class="btn" (click)="onSubmit(EditForm, news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
 
             <div [hidden]="!failed"
                  class="alert alert-danger mt-3">

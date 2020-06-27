@@ -19,6 +19,7 @@ COPY solarboat/init.sql .
 RUN /etc/init.d/mysql start && mysql < init.sql 
 
 COPY solarboat/src src
+COPY --from=frontend-build /usr/src/app/dist src/main/resources/public/
 RUN /etc/init.d/mysql start && mvn -f pom.xml package
 
 EXPOSE 8080

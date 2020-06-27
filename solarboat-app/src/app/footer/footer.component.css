@@ -44,8 +44,9 @@ a, a:hover {
 .my-tooltip .arrow::before {
     border-top-color: transparent;
 }
-.schdesign-logo{
+.madeby p{
     font-family: "Kelson Sans Light";
+    font-size: 0.8rem;
     padding: 0;
     margin:0;
     opacity: 0.4;
