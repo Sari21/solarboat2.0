@@ -41,6 +41,7 @@ import { UsersComponent } from "./admin/users/users.component";
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {Globals} from './globals';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -99,6 +100,6 @@ export function HttpLoaderFactory(http: HttpClient){
   bootstrap: [AppComponent],
 
 
-  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule]
+  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule, Globals]
 })
 export class AppModule {}
