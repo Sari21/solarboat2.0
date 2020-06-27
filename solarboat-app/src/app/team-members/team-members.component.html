@@ -5,10 +5,10 @@
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
             <img  [src]="'../../assets/members/'+leader.picture+'.jpg'"/>
         </a>
-        <div class="text-center name">
-            {{leader.lastName}}
+        <div translate class="text-center name" [translateParams]="{ leader_lastName: leader.lastName, leader_firstName: leader.firstName}">
+            MEMBERS.leader_first
             <br />
-            {{leader.firstName}}
+            MEMBERS.leader_last
 
         </div>
         <div *ngIf="isLeader" class="text-center post" >{{leader.job_hu}} </div>
@@ -21,14 +21,13 @@
             <img  [src]="'../../assets/members/' + member.picture + '.jpg'"/>
         </a>
 
-        <div class="text-center name">
-            {{member.lastName}}
+        <div translate class="text-center name" [translateParams]="{ member_lastName: member.lastName, member_firstName: member.firstName}">
+            MEMBERS.member_last
             <br />
-            {{member.firstName}}
+            MEMBERS.member_first
         </div>
 
-        <div *ngIf="isLeader" class="text-center post ">{{member.job_hu}}</div>
+        <div translate *ngIf="isLeader" class="text-center post " [translateParams]="{ job_hu: member.job_hu, job_en: member.job_en}">MEMBERS.job</div>
     </div>
 
 </div>
-       
