@@ -3,6 +3,7 @@ import { TeamService } from '../shared/team.service';
 import {HttpClient} from '@angular/common/http';
 import {Team} from '../model/team';
 import {Member} from '../model/member';
+import * as data from '../../assets/team/team.json'
 
 @Component({
   selector: 'app-team',
@@ -82,7 +83,8 @@ export class TeamComponent implements OnInit {
   }
 
   public getTeams() {
-    this.apiService.getTeams().subscribe(
+    //var data = this.apiService.getTeams();
+   /* this.apiService.getTeams().subscribe(
         (res) => {
           var data: any = res;
          // console.log(data);
@@ -111,7 +113,16 @@ export class TeamComponent implements OnInit {
         (err) => {
           alert('get error');
         }
-    );
+    );*/
+    this.leaders = data.leaders;
+    this.electronics = data.electronics;
+    this.economics = data.economics;
+    this.mechatronics = data.mechatronics;
+    this.mechatronics_material = data.mechatronics_material;
+    this.mechatronics_simulation = data.mechatronics_simulation;
+    console.log(data);
+
+
   }
 
 }

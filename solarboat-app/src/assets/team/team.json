@@ -1,0 +1,235 @@
+{
+    "leaders": {
+    "description_en": "string",
+    "description_hu": "string",
+    "id": 0,
+    "leader": { 
+        "id": 0,
+        "firstName": "Szilárd",
+        "lastName": "Czibere",
+        "job_hu": "Csapatkapitány és Gazdasági vezető",
+        "job_en": "string",
+        "picture": "czibere-szilard",
+        "linkedin": ""
+    },
+    "members": [
+        { "id": 1,
+            "firstName": "Márk",
+            "lastName": "Kecskés",
+            "job_hu": "Elektronikai csoportvezető",
+            "job_en": "string",
+            "picture": "kecskes-mark",
+            "linkedin": "string"
+        },
+        { "id": 2,
+            "firstName": "Ábel",
+            "lastName": "Visnyei",
+            "job_hu": "Gépészet vezető",
+            "job_en": "string",
+            "picture": "visnyei-abel",
+            "linkedin": "string"
+        },
+        { "id": 2,
+            "firstName": "András",
+            "lastName": "Pintér",
+            "job_hu": "Anyagtechnológia csoportvezető",
+            "job_en": "string",
+            "picture": "pinter-andras",
+            "linkedin": "string"
+        }
+    ],
+    "name_en": "string",
+    "name_hu": "string",
+    "teamType": 1
+  },
+  "electronics":  {
+    "title_hu": "Elektronikai csoport",
+    "title_en": "Electronics workgroup",
+    "description_hu": "Az elektronikai csoport két részegységből áll: Elektrotechnika és Informatika. Az elektronikai csoport legfontosabb feladatai a hajó energia ellátásának a biztosítása és monitorozása. Számos villamos energetikai, valamint informatikai projekt köthető a csoporthoz, mint például akkumulátor design, töltésvezérlés tervezése, vagy szenzorok közötti kommunikáció. A 2020-as versenyszezontól a csapat nagy figyelmet fordít a felhő alapú IoT technológiákban rejlő lehetőségekre is.",
+    "description_en": "This team is responsible for the electrical design and for the installation of the electrical components. This year the team focuses on the possibilities of the IoT technologoies as well.",
+    
+    "id": 0,
+    "leader": { 
+        "id": 11,
+        "firstName": "Márk",
+        "lastName": "Kecskés",
+        "picture": "kecskes-mark",
+        "job_hu": "string",
+        "job_en": "string",
+        "linkedin": "string"
+    },
+    "members": [
+        { 
+            "id": 12,
+            "firstName": "Katica",
+            "lastName": "Bozsó",
+            "picture": "bozso-katica",
+            "job_hu": "string",
+            "job_en": "string",
+            "linkedin": "string"
+        },
+        { "id": 13,
+            "firstName": "Szilárd",
+            "lastName": "Czibere",
+            "picture": "czibere-szilard",
+            "job_hu": "string",
+            "job_en": "string",
+            "linkedin": "string"
+        },
+        { "id": 3,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        }
+    ],
+    "name_en": "string",
+    "name_hu": "string",
+    "teamType": 2
+  },
+  "economics":{
+    "description_en": "string",
+    "description_hu": "string",
+    "id": 0,
+    "leader": { 
+        "id": 0,
+        "firstName": "Szilárd",
+        "lastName": "Czibere",
+        "job_hu": "Csapatkapitány és Gazdasági vezető",
+        "job_en": "string",
+        "picture": "czibere-szilard",
+        "linkedin": ""
+    },
+    "members": [
+        { "id": 1,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        },
+        { "id": 2,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        }
+    ],
+    "name_en": "string",
+    "name_hu": "string",
+    "teamType": 3
+  },
+  "mechatronics": {
+    "description_en": "string",
+    "description_hu": "string",
+    "id": 0,
+    "leader": { 
+        "id": 0,
+        "firstName": "STRING",
+        "lastName": "string",
+        "job_hu": "string",
+        "job_en": "string",
+        "picture": "string",
+        "linkedin": "string"
+    },
+    "members": [
+        { "id": 1,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        },
+        { "id": 2,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        }
+      
+    ],
+    "name_en": "string",
+    "name_hu": "string",
+    "teamType": 4
+  },
+  "mechatronics_material": {
+    "description_en": "string",
+    "description_hu": "string",
+    "id": 0,
+    "leader": { 
+        "id": 0,
+        "firstName": "STRING",
+        "lastName": "string",
+        "job_hu": "string",
+        "job_en": "string",
+        "picture": "string",
+        "linkedin": "string"
+    },
+    "members": [
+        { "id": 1,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        },
+        { "id": 2,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        }
+      
+    ],
+    "name_en": "string",
+    "name_hu": "string",
+    "teamType": 5
+  },
+  "mechatronics_simulation": {
+    "description_en": "string",
+    "description_hu": "string",
+    "id": 0,
+    "leader": { 
+        "id": 0,
+        "firstName": "STRING",
+        "lastName": "string",
+        "job_hu": "string",
+        "job_en": "string",
+        "picture": "string",
+        "linkedin": "string"
+    },
+    "members": [
+        { "id": 1,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        },
+        { "id": 2,
+            "firstName": "STRING",
+            "lastName": "string",
+            "job_hu": "string",
+            "job_en": "string",
+            "picture": "string",
+            "linkedin": "string"
+        }
+        
+    ],
+    "name_en": "string",
+    "name_hu": "string",
+    "teamType": 6
+  }
+}

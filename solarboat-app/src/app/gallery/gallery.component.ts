@@ -93,7 +93,6 @@ export class GalleryComponent implements OnInit {
   }
 
   loadGallery() {
-    console.log("loaded");
     this.pictureService.getGallery().subscribe((res) => {
       this.gallery = res;
       //console.log(res);
