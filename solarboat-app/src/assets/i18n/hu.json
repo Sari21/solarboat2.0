@@ -1,7 +1,8 @@
 {
   "BUTTON": {
     "readAllNews": "TELJES HÍR OLVASÁSA",
-    "more": "korábbiak betöltése"
+    "more": "korábbiak betöltése",
+    "description": "leírás"
   },
   "COVER": {
     "solarPower": "Jelenlegi napsütésben {{ watts }} Wattot termel a hajó"
@@ -57,7 +58,10 @@
     "leader_last": "{{leader_firstName}}",
     "member_first": "{{member_lastName}}",
     "member_last": "{{member_firstName}}",
-    "job": "{{job_hu}}"
+    "job": "{{job_hu}}",
+    "electronicDesc": "{{electronic_desc_hu}}",
+    "economicDesc": "{{economic_desc_hu}}",
+    "mechanicalDesc": "{{mechanical_desc_hu}}"
 
   }
 }

@@ -1,7 +1,8 @@
 {
   "BUTTON": {
     "readAllNews": "READ THE NEWS",
-    "more": "load more"
+    "more": "load more",
+    "description": "description"
   },
   "COVER": {
     "solarPower": "Our boat produces currently {{ watts }} watts"
@@ -57,6 +58,9 @@
     "leader_last": "{{leader_lastName}}",
     "member_first": "{{member_firstName}}",
     "member_last": "{{member_lastName}}",
-    "job": "{{job_en}}"
+    "job": "{{job_en}}",
+    "electronicDesc": "{{electronic_desc_en}}",
+    "economicDesc": "{{economic_desc_en}}",
+    "mechanicalDesc": "{{mechanical_desc_en}}"
   }
 }
