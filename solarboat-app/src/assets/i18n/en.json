@@ -47,13 +47,16 @@
     "madeBy":"made by Sára Sinkó and Virág Dörner"
   },
   "MEMBERS":{
-    "management":"Management",
-    "economic": "Economic group",
-    "electronic": "Electronic group",
-    "mechanical": "Mechanical engineering group ",
-    "material": "Materials Technology group",
-    "simulation": "Design & Simulation",
-
-
+    "management":"{{management_en}}",
+    "economic": "{{economic_en}}",
+    "electronic": "{{electronic_en}}",
+    "mechanical": "{{mechanical_en}}",
+    "material": "{{material_en}}",
+    "simulation": "{{simulation_en}}",
+    "leader_first": "{{leader_firstName}}",
+    "leader_last": "{{leader_lastName}}",
+    "member_first": "{{member_firstName}}",
+    "member_last": "{{member_lastName}}",
+    "job": "{{job_en}}"
   }
 }

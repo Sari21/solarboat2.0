@@ -3,7 +3,7 @@
 <div class="team-boss">
     <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
-            <h1 class="title pb-4">{{leaders.name_hu}}</h1>
+            <h1 translate class="title pb-4" [translateParams]="{ management_hu: leaders.name_hu, management_en: leaders.name_en}">MEMBERS.management</h1>
             <app-team-members *ngIf="leaders.members"
                               [members]="leaders.members"
                               [leader]="leaders.leader"
@@ -17,7 +17,7 @@
 <div class="team-electr">
     <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
-            <h1 class="title pb-4">{{electronics.name_hu}}</h1>
+            <h1 translate class="title pb-4" [translateParams]="{ electronic_hu: electronics.name_hu, electronic_en: electronics.name_en}">MEMBERS.electronic</h1>
             <div class="row">
                 <div class="col- load-more pb-5 pl-3">
                     <a class="btn"  data-toggle="collapse" data-target="#collapseElectr" href="javascript:void(0)"><span>Leírás</span></a>
@@ -42,7 +42,7 @@
 <div class="team-econ">
     <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
-            <h1 class="title pb-4">{{economics.name_hu}}</h1>
+            <h1 translate class="title pb-4" [translateParams]="{ economic_hu: economics.name_hu, economic_en: economics.name_en}">MEMBERS.economic</h1>
             <div class="row">
                 <div class="col- load-more pb-5 pl-3">
                     <a class="btn"  data-toggle="collapse" data-target="#collapseEcon" href="javascript:void(0)"><span>Leírás</span></a>
@@ -66,7 +66,7 @@
 <div class="team-mech">
     <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
-            <h1 class="title pb-4">{{mechatronics.name_hu}}</h1>
+            <h1 translate class="title pb-4" [translateParams]="{ mechanical_hu: mechatronics.name_hu, mechanical_en: mechatronics.name_en}">MEMBERS.mechanical</h1>
             <div class="row">
                 <div class="col- load-more pb-5 pl-3">
                     <a class="btn"  data-toggle="collapse" data-target="#collapseMech" href="javascript:void(0)"><span>Leírás</span></a>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <h2 class="title subtitle pb-4">{{mechatronics_material.name_hu}}</h2>
+            <h2 translate class="title subtitle pb-4"[translateParams]="{ material_hu: mechatronics_material.name_hu, material_en: mechatronics_material.name_en}">MEMBERS.material</h2>
             <app-team-members *ngIf="mechatronics_material.members"
                               [members]="mechatronics_material.members"
                               [leader]="mechatronics_material.leader"
@@ -86,14 +86,12 @@
             ></app-team-members>
 
 
-            <h2 class="title subtitle pb-4">{{mechatronics_simulation.name_hu}}</h2>
+            <h2 translate class="title subtitle pb-4" [translateParams]="{ simulation_hu: mechatronics_simulation.name_hu, simulation_en: mechatronics_simulation.name_en}">MEMBERS.simulation</h2>
             <app-team-members *ngIf="mechatronics_simulation.members"
                               [members]="mechatronics_simulation.members"
                               [leader]="mechatronics_simulation.leader"
                               class="col-lg-6 col-md-6 col-10 col-sm-12"
             ></app-team-members>
-
-
 
         </div>
     </div>

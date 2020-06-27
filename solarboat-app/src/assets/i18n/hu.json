@@ -45,5 +45,19 @@
   "FOOTER":{
     "title":"elerhetőségek",
     "madeBy":"készítette: Sinkó Sára és Dörner Virág"
+  },
+  "MEMBERS":{
+    "management":"{{management_hu}}",
+    "economic": "{{economic_hu}}",
+    "electronic": "{{electronic_hu}}",
+    "mechanical": "{{mechanical_hu}}",
+    "material": "{{material_hu}}",
+    "simulation": "{{simulation_hu}}",
+    "leader_first": "{{leader_lastName}}",
+    "leader_last": "{{leader_firstName}}",
+    "member_first": "{{member_lastName}}",
+    "member_last": "{{member_firstName}}",
+    "job": "{{job_hu}}"
+
   }
 }
