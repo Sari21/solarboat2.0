@@ -56,9 +56,24 @@ ___________________________________
 sb062415:
 
 kitöröltem az api/auth/signup-ról a  @Secured("ROLE_ADMIN") annotációt, hogy tudjak admint regisztrálni
-
+de nem sikerül mert hiányzik a db-ból a roles tábla tartalma (ROLE_ADMIN, ROLE_USER)
 
 ___________________________________
+sb0626:
+
+létrehoztam egy setup.init nevû fájlt, megpróbálom a dockerfile-on belül futtatni
+feltöltöm a roles tábla tartalmát, és hozzáadok egy admint
+INSERT INTO `db_solarboat`.`users` (`email`, `name`, `password`, `username`) VALUES ('info@solarboatteam.hu', 'Solar Boat Team Admin', 'uszikAhajo!', 'sb-admin');
+
+de így nem lesz kódolva tárolva a jelszó, ráadásul nem is mûködik, mert ki akarja kódoln a  kódolatlan jelszót.. szóval ezt elengedem
+
+setup.init sem mûködik: nem tudom futtatni mert nem tudok bejelentkezni a db-be
+api/auth/setup/roles POST kéréssel adom hozzá a szerepeket,
+post kérés admin létrehozására
+
+regisztráció letiltását vissza kell csinálni!!!
+___________________________________
+sb0627:
 
 
 
@@ -66,12 +81,13 @@ TODO:
 admin usernév+jelszó páros beleégetése a back-endbe, letiltani a regisztrációt
 angol nyelv
 
-admin: körtag felhasználók menedzselése
 81-es port letiltása: DO - networking - firewalls - inbound - custum 81 törlése
 
 oldalak kicserélése: 
 nano /etc/apache2/sites-enabled/000-default-le-ssl.conf
 systemctl restart apache2
+
+admin: körtag felhasználók menedzselése
 
 
  
