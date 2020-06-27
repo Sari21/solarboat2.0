@@ -19,9 +19,11 @@
                 <p class="pl-1" translate [translateParams]="{date: achievement.date}">ACHIEVEMENTS.date</p>
             </div>
         </div>
+        <!--
         <div class="timeline-body pt-3" >
             <p translate [translateParams]="{description_hu: achievement.description_hu, description_en: achievement.description_en}">ACHIEVEMENTS.description</p>
         </div>
+        -->
         <a *ngIf="achievement.picture" class="img">
             <div class="img__overlay place" translate [translateParams]="{place: achievement.place}">ACHIEVEMENTS.place</div>
             <img  [src]="achievement.picture"/>
@@ -55,15 +57,22 @@
                                    [ngClass]="{'failed': failed }">
 
                         </div>
+                        <div class="form-group">
+                            <label for="location_en">Helyszín angolul</label>
+                            <input type="text" class="form-control" id="location_en"
+                                   required
+                                   [(ngModel)]="form.location_en" name="location_en"
+                                   [ngClass]="{'failed': failed }">
 
-                        <div class="form-group pt-4 pb-3">
-                            <label for="file">Kép</label>
-                            <input type="file"
-                                   id="file"
-                                   [(ngModel)]="form.file" name="file"
-                                   (change)="handleFileInput($event.target.files)">
                         </div>
+                        <div class="form-group">
+                            <label for="title_en">Verseny/eredmény neve angolul</label>
+                            <input type="text" class="form-control" id="title_en"
+                                   required
+                                   [(ngModel)]="form.title_en" name="title_en"
+                                   [ngClass]="{'failed': failed }">
 
+                        </div>
 
                     </div>
                     <div class="col-6">
@@ -71,7 +80,7 @@
                             <label for="place">Helyezés</label>
                             <input type="text" class="form-control" id="place"
                                    required
-                                   [(ngModel)]="form.place" name="date"
+                                   [(ngModel)]="form.place" name="place"
                                    [ngClass]="{'failed': failed }">
 
                         </div>
@@ -84,11 +93,18 @@
                                    [ngClass]="{'failed': failed }">
 
                         </div>
+                        <div class="form-group pt-4 pb-3">
+                            <label for="file">Kép</label>
+                            <input type="file"
+                                   id="file"
+                                   [(ngModel)]="form.file" name="file"
+                                   (change)="handleFileInput($event.target.files)">
+                        </div>
 
                     </div>
                 </div>
 
-                <a class="btn" (click)="onSubmit(achievement.id)" href="javascript:void(0)" [ngClass]="{'disabled': !loginForm.form.valid }" ><span>Feltöltés</span></a>
+                <a class="btn" (click)="onSubmit(EditForm, achievement.id)" href="javascript:void(0)" ><span>Feltöltés</span></a>
 
                 <div [hidden]="!failed"
                      class="alert alert-danger mt-3">

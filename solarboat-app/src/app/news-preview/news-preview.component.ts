@@ -14,12 +14,12 @@ import {Globals} from '../globals';
 export class NewsPreviewComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   shortArticleEn: string;
+  shortArticleHu: string;
   form: any = {};
   failed = false;
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
-  shortArticleHu: string;
 
   @Input() authority: string;
   @Input() news: News;
@@ -31,9 +31,11 @@ export class NewsPreviewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
-    this.shortArticleEn= this.news.content_en.substring(0, 100) + '...';
+    this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
     this.form.title = this.news.title_hu;
     this.form.content = this.news.content_hu;
+    this.form.title_en = this.news.title_en;
+    this.form.content_en = this.news.content_en;
   }
 
   openContent(longContent) {
@@ -51,9 +53,11 @@ export class NewsPreviewComponent implements OnInit {
   }
 
 
-  onSubmit(id: number) {
+  onSubmit(empForm: any, id: number) {
     this.news.title_hu = this.form.title;
     this.news.content_hu = this.form.content;
+    this.news.title_en = this.form.title_en;
+    this.news.content_en = this.form.content_en;
     const newsId = id;
     let o: Object;
     if (this.fileToUpload != null) {
@@ -64,8 +68,8 @@ export class NewsPreviewComponent implements OnInit {
         id: newsId,
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: this.news.title_en,
-        content_en: this.news.content_en,
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '../../assets/news/' + this.fileToUpload.name
 
       };
@@ -74,17 +78,19 @@ export class NewsPreviewComponent implements OnInit {
         id: newsId,
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: this.news.title_en,
-        content_en: this.news.content_en,
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: ''
       };
     }
-    const b = this.http
+    const b  = this.http
         .put(this.globals.BASE_URL + "/api/news", o)
         .subscribe((data) => {
           console.log(data);
         });
     this.modalService.dismissAll('put');
+    this.form = empForm;
+    this.form.reset();
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);

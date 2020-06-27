@@ -70,6 +70,13 @@
                                [ngClass]="{'failed': failed }">
 
                     </div>
+                    <div class="form-group">
+                        <label for="content">Tartalom</label>
+                        <textarea type="content" class="form-control" id="content" rows="5"
+                                  [(ngModel)]="form.content" name="content"
+                                  [placeholder]="news.content_hu"
+                                  [ngClass]="{'failed': failed }"></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label for="file">Kép</label>
@@ -81,16 +88,25 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="content">Tartalom</label>
-                        <textarea type="content" class="form-control" id="content" rows="5"
-                                  [(ngModel)]="form.content" name="content"
-                                  [placeholder]="news.content_hu"
+                        <label for="title_en">Angol cím</label>
+                        <input type="text" class="form-control" id="title_en"
+                               required
+                               [(ngModel)]="form.title_en" name="title_en"
+                               [placeholder]="news.title_en"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                    <div class="form-group">
+                        <label for="content_en">Angol tartalom</label>
+                        <textarea type="content_en" class="form-control" id="content_en" rows="5"
+                                  [(ngModel)]="form.content_en" name="content_en"
+                                  [placeholder]="news.content_en"
                                   [ngClass]="{'failed': failed }"></textarea>
                     </div>
+
                 </div>
             </div>
 
-            <a class="btn" (click)="onSubmit(news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
+            <a class="btn" (click)="onSubmit(EditForm, news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
 
             <div [hidden]="!failed"
                  class="alert alert-danger mt-3">

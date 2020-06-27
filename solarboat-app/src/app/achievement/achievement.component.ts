@@ -27,8 +27,10 @@ export class AchievementComponent implements OnInit {
   ngOnInit(): void {
     this.form.title = this.achievement.title_hu;
     this.form.location = this.achievement.location_hu;
-    this.form.description = this.achievement.description_hu;
+    this.form.title_en = this.achievement.title_en;
+    this.form.location_en = this.achievement.location_en;
     this.form.date = this.achievement.date;
+    this.form.place = this.achievement.place;
   }
 
   delete(id: number) {
@@ -45,11 +47,13 @@ export class AchievementComponent implements OnInit {
     this.modalService.open(longContent, { scrollable: true, centered: true, size: 'lg' });
   }
 
-  onSubmit(id: number) {
+  onSubmit(empForm: any, id: number) {
     this.achievement.title_hu = this.form.title;
     this.achievement.location_hu = this.form.location;
-    this.achievement.description_hu = this.form.description  ;
+    this.achievement.title_en = this.form.title_en;
+    this.achievement.location_en = this.form.location_en;
     this.achievement.date = this.form.date ;
+    this.achievement.place = this.form.place;
     const achievementId = id;
     let o: Object;
     if (this.fileToUpload != null) {
@@ -59,11 +63,11 @@ export class AchievementComponent implements OnInit {
         id: achievementId,
         title_hu: this.form.title,
         location_hu: this.form.location,
-        title_en: this.form.title,
-        location_en: this.form.location,
+        title_en: this.form.title_en,
+        location_en:this.form.location_en,
+        description_hu: "leírás",
+        description_en: "description",
         date: this.form.date,
-        description_hu: 'dgtrs',
-        description_en: 'rsngre',
         place: this.form.place,
         isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
@@ -73,14 +77,14 @@ export class AchievementComponent implements OnInit {
         id: achievementId,
         title_hu: this.form.title,
         location_hu: this.form.location,
-        title_en: this.form.title,
-        location_en: this.form.location,
+        title_en: this.form.title_en,
+        location_en:this.form.location_en,
+        description_hu: "leírás",
+        description_en: "description",
         date: this.form.date,
-        description_hu: 'tbrnren',
-        description_en: 'htrenren',
         place: this.form.place,
         isLast: false,
-        picture: ''
+        picture: this.achievement.picture
       };
     }
     const b = this.http
@@ -89,6 +93,8 @@ export class AchievementComponent implements OnInit {
           console.log(data);
         });
     this.modalService.dismissAll('put');
+    this.form = empForm;
+    this.form.reset();
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);

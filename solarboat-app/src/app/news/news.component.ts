@@ -40,16 +40,16 @@ export class NewsComponent implements OnInit {
       o = {
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '../../assets/news/' + this.fileToUpload.name
       };
     } else {
       o = {
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: ''
       };
     }
@@ -117,8 +117,8 @@ export class NewsComponent implements OnInit {
         date: 'most',
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '',
       };
     } else {
@@ -127,8 +127,8 @@ export class NewsComponent implements OnInit {
         date: 'most',
         title_hu: this.form.title,
         content_hu: this.form.content,
-        title_en: 'angolcim',
-        content_en: 'angoltartalommmmmmmmmmmmmmmmm',
+        title_en: this.form.title_en,
+        content_en: this.form.content_en,
         picture: '../../assets/news/' + this.fileToUpload.name,
       };
     }
