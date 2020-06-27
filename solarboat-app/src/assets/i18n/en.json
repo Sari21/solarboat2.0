@@ -1,4 +1,8 @@
 {
+  "BUTTON": {
+    "readAllNews": "READ THE NEWS",
+    "more": "load more"
+  },
   "COVER": {
     "solarPower": "angolul a szöveg {{ watts }}"
   },
@@ -13,7 +17,11 @@
   },
   "NEWS":{
     "news": "news",
-    "all_news": "all news"
+    "all_news": "all news",
+    "mainTitle": "news",
+    "title": "{{title_en}}",
+    "shortArticle": "{{shortArticle_en}}",
+    "content": "{{content_en}}"
   },
   "SPONSORS":{
     "sponsors":"sponsors",

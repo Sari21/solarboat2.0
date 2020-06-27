@@ -13,22 +13,25 @@ import {Globals} from '../globals';
 })
 export class NewsPreviewComponent implements OnInit {
   // tslint:disable-next-line:variable-name
-  shortArticle_hu: string;
+  shortArticleEn: string;
   form: any = {};
   failed = false;
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
+  shortArticleHu: string;
 
   @Input() authority: string;
   @Input() news: News;
   @Output() onRemove = new EventEmitter<News>();
 
+
   constructor(private http: HttpClient, private globals: Globals, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
-    this.shortArticle_hu = this.news.content_hu.substring(0, 100) + '...';
+    this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
+    this.shortArticleEn= this.news.content_en.substring(0, 100) + '...';
     this.form.title = this.news.title_hu;
     this.form.content = this.news.content_hu;
   }
