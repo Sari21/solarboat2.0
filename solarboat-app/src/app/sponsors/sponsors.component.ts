@@ -18,9 +18,9 @@ export class SponsorsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkAuth();
     this.getSponsores();
     this.newSponsor = new Sponsor()
-    console.log(this.types);
   }
   title = 'Tour of Heroes';
   heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
@@ -87,8 +87,6 @@ export class SponsorsComponent implements OnInit {
       );
 
   }
-   
-
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.newSponsor.picture = files.item(0).name;
@@ -105,11 +103,8 @@ export class SponsorsComponent implements OnInit {
     );
   }
   delete(id: number) {
-   
   this.sponsorService.deleteSponsor(id).subscribe(
     (data) => {
-      // do something, if upload success
-
       var du = this.allSponsors.find((a) => a.id == id);
       const index = this.allSponsors.indexOf(du, 0);
       if (index > -1) {
@@ -123,11 +118,12 @@ export class SponsorsComponent implements OnInit {
   );
 }
 clickMethod(id: number) {
-  if (confirm("Are you sure to delete " + id.toString())) {
+  var name;
+  this.allSponsors.forEach(t => {if( t.id == id) name = t.name})
+  if (confirm("Biztos, hogy törölni szeretnéd a következő szponzort: " + name + "?")) {
     this.delete(id);
   }
 }
-
 checkAuth() {
   this.authority = undefined;
   if (this.tokenStorage.getToken()) {

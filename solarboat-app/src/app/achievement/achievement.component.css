@@ -102,9 +102,6 @@ mat-icon{
     cursor: default;
 }
 
-
-
-
 /* TIMELINE*/
 .timeline-panel {
     border: 1px solid #d4d4d4;
@@ -149,9 +146,9 @@ mat-icon{
     right: auto;
 
 }
-.timeline-panel.date{
+/*.timeline-panel.date{
 
-}
+}*/
 
 .timeline-badge {
     color: #fff;
