@@ -4,6 +4,14 @@
     "more": "korábbiak betöltése",
     "description": "leírás"
   },
+  "NAV": {
+  "aboutUs": "rólunk",
+  "team": "csapatunk",
+  "news": "hírek",
+  "achievements": "eredmények",
+  "sponsors": "szponzorok",
+  "gallery": "galéria"
+},
   "COVER": {
     "solarPower": "Jelenlegi napsütésben {{ watts }} Wattot termel a hajó"
   },
@@ -59,6 +67,7 @@
     "member_first": "{{member_lastName}}",
     "member_last": "{{member_firstName}}",
     "job": "{{job_hu}}",
+    "job_leader": "{{job_hu}}",
     "electronicDesc": "{{electronic_desc_hu}}",
     "economicDesc": "{{economic_desc_hu}}",
     "mechanicalDesc": "{{mechanical_desc_hu}}"

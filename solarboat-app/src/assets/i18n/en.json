@@ -4,6 +4,14 @@
     "more": "load more",
     "description": "description"
   },
+  "NAV": {
+    "aboutUs": "about us",
+    "team": "our team",
+    "news": "news",
+    "achievements": "achievements",
+    "sponsors": "sponsors",
+    "gallery": "gallery"
+  },
   "COVER": {
     "solarPower": "Our boat produces currently {{ watts }} watts"
   },
@@ -59,6 +67,7 @@
     "member_first": "{{member_firstName}}",
     "member_last": "{{member_lastName}}",
     "job": "{{job_en}}",
+    "job_leader": "{{job_en}}",
     "electronicDesc": "{{electronic_desc_en}}",
     "economicDesc": "{{economic_desc_en}}",
     "mechanicalDesc": "{{mechanical_desc_en}}"
