@@ -6,7 +6,7 @@
     class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center"
   >
     <div class="jumbotron col-12">
-      <h1 translate class="title pb-4">NEWS.mainTitle</h1>
+      <h1 translate class="title pb-4">NEWS.news</h1>
 
       <div  class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
         <div  *ngIf="authority == 'admin'" class="card mb-5 mr-3 ml-3" id="news-form">
@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="title">Magyar cím</label>
+                    <label for="title">Cím (hu)</label>
                     <input type="text" class="form-control" id="title"
                            required
                            [(ngModel)]="form.title" name="title"
@@ -25,7 +25,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="content">Magyar tartalom</label>
+                    <label for="content">Tartalom (hu)</label>
                     <textarea type="content" class="form-control" id="content" rows="5"
                               required
                               [(ngModel)]="form.content" name="content"
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="title_en">Angol cím</label>
+                    <label for="title_en">Cím (en)</label>
                     <input type="text" class="form-control" id="title_en"
                            required
                            [(ngModel)]="form.title_en" name="title_en"
@@ -50,7 +50,7 @@
 
                   </div>
                   <div class="form-group">
-                    <label for="content_en">Angol tartalom</label>
+                    <label for="content_en">Tartalom (en)</label>
                     <textarea type="content_en" class="form-control" id="content_en" rows="5"
                               required
                               [(ngModel)]="form.content_en" name="content_en"

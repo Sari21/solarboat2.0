@@ -3,7 +3,7 @@
 <div class="achievements ">
     <div class="container col-8 col-sm-12 col-lg-8 col-md-11 align-items-center">
 
-        <h1 class="title pb-5 mb-4">Eredményeink</h1>
+        <h1 translate class="title pb-5 mb-4">ACHIEVEMENTS.achievements</h1>
         <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
         <div *ngIf=" authority =='admin'" class="card  mb-5 mr-3 ml-3" id="achievement-form">
             <h2 class="title pb-3">Új eredmény hozzáadása</h2>
@@ -25,15 +25,6 @@
                                        required
                                        [(ngModel)]="form.location_hu" name="location_hu"
                                        [ngClass]="{'failed': failed }">
-
-                            </div>
-                           
-                            <div class="form-group">
-                                <label for="description_hu">Leírás (hu)</label>
-                                <textarea type="text" class="form-control" id="description_hu"
-                                       required
-                                       [(ngModel)]="form.description_hu" name="description_hu"
-                                       [ngClass]="{'failed': failed }"> </textarea>
 
                             </div>
                             
@@ -72,14 +63,6 @@
                                        [ngClass]="{'failed': failed }">
 
                             </div>
-                            <div class="form-group">
-                                <label for="description_en">Leírás (en)</label>
-                                <textarea type="text" class="form-control" id="description_en"
-                                       required
-                                       [(ngModel)]="form.description_en" name="description_en"
-                                       [ngClass]="{'failed': failed }"> </textarea>
-
-                            </div>
                            
                             <div class="form-group pt-4 pb-3">
                                 <label for="file">Kép</label>
@@ -109,7 +92,7 @@
             </ul>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3 offset-lg-2 offset-md-3 offset-sm-3 load-more">
-            <a class="btn"  *ngIf="!isLastPage" (click)="getAchievements()" href="javascript:void(0)" ><span>Korábbi eredmények</span></a>
+            <a class="btn"  *ngIf="!isLastPage" (click)="getAchievements()" href="javascript:void(0)" ><span translate >BUTTON.more</span></a>
         </div>
 
     </div>

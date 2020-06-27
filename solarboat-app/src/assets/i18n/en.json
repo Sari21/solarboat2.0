@@ -4,7 +4,7 @@
     "more": "load more"
   },
   "COVER": {
-    "solarPower": "angolul a szöveg {{ watts }}"
+    "solarPower": "Our boat produces currently {{ watts }} watts"
   },
   "ABOUT_US":{
     "about_us":"about us",
@@ -18,7 +18,6 @@
   "NEWS":{
     "news": "news",
     "all_news": "all news",
-    "mainTitle": "news",
     "title": "{{title_en}}",
     "shortArticle": "{{shortArticle_en}}",
     "content": "{{content_en}}"
@@ -46,5 +45,15 @@
   "FOOTER":{
     "title":"contact us",
     "madeBy":"made by Sára Sinkó and Virág Dörner"
+  },
+  "MEMBERS":{
+    "management":"Management",
+    "economic": "Economic group",
+    "electronic": "Electronic group",
+    "mechanical": "Mechanical engineering group ",
+    "material": "Materials Technology group",
+    "simulation": "Design & Simulation",
+
+
   }
 }
