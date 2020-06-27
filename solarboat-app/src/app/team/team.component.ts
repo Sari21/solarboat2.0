@@ -13,67 +13,12 @@ import * as data from '../../assets/team/team.json'
 export class TeamComponent implements OnInit {
   //teams: Team[] = [];
 
-  leaders: Team = new class implements Team {
-    // tslint:disable-next-line:variable-name
-    description_en: string;
-    description_hu: string;
-    id: number;
-    leader: Member;
-    members: Member[];
-    name_en: string;
-    name_hu: string;
-    teamType: number;
-  };
-  electronics: Team = new class implements Team {
-    description_en: string;
-    description_hu: string;
-    id: number;
-    leader: Member;
-    members: Member[];
-    name_en: string;
-    name_hu: string;
-    teamType: number;
-  };
-  economics: Team = new class implements Team {
-    description_en: string;
-    description_hu: string;
-    id: number;
-    leader: Member;
-    members: Member[];
-    name_en: string;
-    name_hu: string;
-    teamType: number;
-  };
-  mechatronics: Team = new class implements Team {
-    description_en: string;
-    description_hu: string;
-    id: number;
-    leader: Member;
-    members: Member[];
-    name_en: string;
-    name_hu: string;
-    teamType: number;
-  };
-  mechatronics_material: Team = new class implements Team {
-    description_en: string;
-    description_hu: string;
-    id: number;
-    leader: Member;
-    members: Member[];
-    name_en: string;
-    name_hu: string;
-    teamType: number;
-  };
-  mechatronics_simulation: Team = new class implements Team {
-    description_en: string;
-    description_hu: string;
-    id: number;
-    leader: Member;
-    members: Member[];
-    name_en: string;
-    name_hu: string;
-    teamType: number;
-  };
+  leaders: Team;
+  electronics: Team;
+  economics: Team;
+  mechatronics: Team ;
+  mechatronicsMaterial: Team ;
+  mechatronicsSimulation: Team ;
   constructor(private http: HttpClient, private apiService: TeamService) { }
 
   ngOnInit(): void {
@@ -118,8 +63,8 @@ export class TeamComponent implements OnInit {
     this.electronics = data.electronics;
     this.economics = data.economics;
     this.mechatronics = data.mechatronics;
-    this.mechatronics_material = data.mechatronics_material;
-    this.mechatronics_simulation = data.mechatronics_simulation;
+    this.mechatronicsMaterial = data.mechatronics_material;
+    this.mechatronicsSimulation = data.mechatronics_simulation;
     console.log(data);
 
 

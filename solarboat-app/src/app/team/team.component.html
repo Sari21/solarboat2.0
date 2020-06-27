@@ -78,18 +78,18 @@
                 </div>
             </div>
 
-            <h2 translate class="title subtitle pb-4"[translateParams]="{ material_hu: mechatronics_material.name_hu, material_en: mechatronics_material.name_en}">MEMBERS.material</h2>
-            <app-team-members *ngIf="mechatronics_material.members"
-                              [members]="mechatronics_material.members"
-                              [leader]="mechatronics_material.leader"
+            <h2 translate class="title subtitle pb-4"[translateParams]="{ material_hu: mechatronicsMaterial.name_hu, material_en: mechatronicsMaterial.name_en}">MEMBERS.material</h2>
+            <app-team-members *ngIf="mechatronicsMaterial.members"
+                              [members]="mechatronicsMaterial.members"
+                              [leader]="mechatronicsMaterial.leader"
                               class="col-lg-6 col-md-6 col-10 col-sm-12"
             ></app-team-members>
 
 
-            <h2 translate class="title subtitle pb-4" [translateParams]="{ simulation_hu: mechatronics_simulation.name_hu, simulation_en: mechatronics_simulation.name_en}">MEMBERS.simulation</h2>
-            <app-team-members *ngIf="mechatronics_simulation.members"
-                              [members]="mechatronics_simulation.members"
-                              [leader]="mechatronics_simulation.leader"
+            <h2 translate class="title subtitle pb-4" [translateParams]="{ simulation_hu: mechatronicsSimulation.name_hu, simulation_en: mechatronicsSimulation.name_en}">MEMBERS.simulation</h2>
+            <app-team-members *ngIf="mechatronicsSimulation.members"
+                              [members]="mechatronicsSimulation.members"
+                              [leader]="mechatronicsSimulation.leader"
                               class="col-lg-6 col-md-6 col-10 col-sm-12"
             ></app-team-members>
 
