@@ -4,6 +4,7 @@ import { News } from '../model/news';
 import { NewsService} from '../shared/news.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
+import {Globals} from '../globals';
 
 @Component({
   selector: 'app-news',
@@ -22,7 +23,7 @@ export class NewsComponent implements OnInit {
   pictureService: PictureService;
   fileToUpload: File = null;
   constructor(private http: HttpClient, private apiService: NewsService,
-              private tokenStorage: TokenStorageService, pictureService: PictureService) {
+              private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
     this.pictureService = pictureService;
   }
 
@@ -54,7 +55,7 @@ export class NewsComponent implements OnInit {
     }
 
     this.http
-        .post('http://localhost:8080/api/news', o)
+        .post(this.globals.BASE_URL + '/api/news', o)
         .subscribe((data) => {
           console.log(data);
         });

@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {HttpClient} from '@angular/common/http';
 import {NewsService} from '../shared/news.service';
+import {Globals} from '../globals';
 
 @Component({
   selector: 'app-news-preview',
@@ -23,7 +24,7 @@ export class NewsPreviewComponent implements OnInit {
   @Input() news: News;
   @Output() onRemove = new EventEmitter<News>();
 
-  constructor(private http: HttpClient, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
+  constructor(private http: HttpClient, private globals: Globals, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class NewsPreviewComponent implements OnInit {
     this.onRemove.emit(this.news);
     //TODO: kép törlése
     const b = this.http
-        .delete('http://localhost:8080/api/news/'.concat(id.toString()))
+        .delete(this.globals.BASE_URL + '/api/news/'.concat(id.toString()))
         .subscribe((data) => {
           console.log(data);
         });
@@ -76,7 +77,7 @@ export class NewsPreviewComponent implements OnInit {
       };
     }
     const b = this.http
-        .put("http://localhost:8080/api/news", o)
+        .put(this.globals.BASE_URL + "/api/news", o)
         .subscribe((data) => {
           console.log(data);
         });

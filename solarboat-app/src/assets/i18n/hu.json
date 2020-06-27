@@ -33,5 +33,9 @@
     "location":"{{location_hu}}",
     "date":"{{date}}",
     "place":"{{place}}. helyezés"
+  },
+  "FOOTER":{
+    "title":"elerhetőségek",
+    "madeBy":"készítette: Sinkó Sára és Dörner Virág"
   }
 }

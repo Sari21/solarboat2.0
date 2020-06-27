@@ -30,5 +30,9 @@
     "achievements":"eredmények",
     "title":"{{title_en}}"
 
+  },
+  "FOOTER":{
+    "title":"contact us",
+    "madeBy":"made by Sára Sinkó and Virág Dörner"
   }
 }

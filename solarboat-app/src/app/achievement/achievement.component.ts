@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {PictureService} from '../shared/picture.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AchievementService} from '../shared/achievement.service';
+import {Globals} from '../globals';
 
 @Component({
   selector: 'app-achievement',
@@ -20,7 +21,7 @@ export class AchievementComponent implements OnInit {
   @Input() authority: string;
   @Input() achievement: Achievement;
   @Output() onRemove = new EventEmitter<Achievement>();
-  constructor(private http: HttpClient, private apiService: AchievementService, private modalService: NgbModal, pictureService: PictureService) {
+  constructor(private globals: Globals, private http: HttpClient, private apiService: AchievementService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class AchievementComponent implements OnInit {
     this.onRemove.emit(this.achievement);
     //TODO: kép törlése
     const b = this.http
-        .delete('http://localhost:8080/api/achievement/'.concat(id.toString()))
+        .delete(this.globals.BASE_URL + '/api/achievement/'.concat(id.toString()))
         .subscribe((data) => {
           console.log(data);
         });
@@ -83,7 +84,7 @@ export class AchievementComponent implements OnInit {
       };
     }
     const b = this.http
-        .put("http://localhost:8080/api/achievement", o)
+        .put(this.globals.BASE_URL + "/api/achievement", o)
         .subscribe((data) => {
           console.log(data);
         });

@@ -75,6 +75,18 @@ regisztráció letiltását vissza kell csinálni!!!
 ___________________________________
 sb0627:
 
+valami megint szar: régi oldal jön be
+
+_________________________
+sb062714:
+
+mûködõ solarboat2.0-mappában ujrabuildelem
+(url-t, db portot átírtam)
+frontend a dist mappába buildel
+
+hiba javítása: dockerfile-ból kitöröltem múltkor egy sort, visszatettem
+
+__________________________
 
 
 TODO:

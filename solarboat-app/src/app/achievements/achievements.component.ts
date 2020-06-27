@@ -5,6 +5,7 @@ import { Achievement } from "../model/achievement";
 import {News} from '../model/news';
 import {PictureService} from '../shared/picture.service';
 import {TokenStorageService} from '../auth/token-storage.service';
+import {Globals} from '../globals';
 
 @Component({
   selector: "app-achievements",
@@ -23,7 +24,7 @@ export class AchievementsComponent implements OnInit {
   fileToUpload: File = null;
   authority: string;
   roles: string[];
-  constructor(private http: HttpClient, private achievementService: AchievementService,
+  constructor(private globals: Globals, private http: HttpClient, private achievementService: AchievementService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
@@ -75,7 +76,7 @@ export class AchievementsComponent implements OnInit {
         picture: '../../assets/achievement/' + this.fileToUpload.name
       };
     const b = this.http
-        .post("http://localhost:8080/api/achievement", o)
+        .post(this.globals.BASE_URL + "/api/achievement", o)
         .subscribe((data) => {
           console.log(data);
         });
