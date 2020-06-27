@@ -12,33 +12,31 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="location">Helyszín</label>
-                                <input type="text" class="form-control" id="location"
+                                <label for="title_hu">Verseny/eredmény neve (hu)</label>
+                                <input type="text" class="form-control" id="title_hu"
                                        required
-                                       [(ngModel)]="form.location" name="location"
+                                       [(ngModel)]="form.title_hu" name="title_hu"
                                        [ngClass]="{'failed': failed }">
 
                             </div>
                             <div class="form-group">
-                                <label for="title">Verseny/eredmény neve</label>
-                                <input type="text" class="form-control" id="title"
+                                <label for="location_hu">Helyszín (hu)</label>
+                                <input type="text" class="form-control" id="location_hu"
                                        required
-                                       [(ngModel)]="form.title" name="title"
+                                       [(ngModel)]="form.location_hu" name="location_hu"
                                        [ngClass]="{'failed': failed }">
 
                             </div>
+                           
+                            <div class="form-group">
+                                <label for="description_hu">Leírás (hu)</label>
+                                <textarea type="text" class="form-control" id="description_hu"
+                                       required
+                                       [(ngModel)]="form.description_hu" name="description_hu"
+                                       [ngClass]="{'failed': failed }"> </textarea>
 
-
-                            <div class="form-group pt-4 pb-3">
-                                <label for="file">Kép</label>
-                                <input type="file"
-                                       id="file"
-                                       [(ngModel)]="form.file" name="file"
-                                       (change)="handleFileInput($event.target.files)">
                             </div>
-
-                        </div>
-                        <div class="col-6">
+                            
                             <div class="form-group">
                                 <label for="date">Dátum</label>
                                 <input type="text" class="form-control" id="date"
@@ -54,6 +52,41 @@
                                        required
                                        [(ngModel)]="form.place" name="date"
                                        [ngClass]="{'failed': failed }">
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="title_en">Verseny/eredmény neve (en)</label>
+                                <input type="text" class="form-control" id="title_en"
+                                       required
+                                       [(ngModel)]="form.title_en" name="title"
+                                       [ngClass]="{'failed': failed }">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="location_en">Helyszín (en)</label>
+                                <input type="text" class="form-control" id="location_en"
+                                       required
+                                       [(ngModel)]="form.location_en" name="location_en"
+                                       [ngClass]="{'failed': failed }">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="description_en">Leírás (en)</label>
+                                <textarea type="text" class="form-control" id="description_en"
+                                       required
+                                       [(ngModel)]="form.description_en" name="description_en"
+                                       [ngClass]="{'failed': failed }"> </textarea>
+
+                            </div>
+                           
+                            <div class="form-group pt-4 pb-3">
+                                <label for="file">Kép</label>
+                                <input type="file"
+                                       id="file"
+                                       [(ngModel)]="form.file" name="file"
+                                       (change)="handleFileInput($event.target.files)">
                             </div>
                         </div>
                     </div>

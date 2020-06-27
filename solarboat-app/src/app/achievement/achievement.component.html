@@ -23,7 +23,7 @@
             <p translate [translateParams]="{description_hu: achievement.description_hu, description_en: achievement.description_en}">ACHIEVEMENTS.description</p>
         </div>
         <a *ngIf="achievement.picture" class="img">
-            <div class="img__overlay place" translate [translateParams]="{place: achievement.place}">ACHIEVEMENTS.place</div>
+            <div *ngIf="achievement.place" class="img__overlay place" translate [translateParams]="{place: achievement.place}">ACHIEVEMENTS.place</div>
             <img  [src]="achievement.picture"/>
         </a>
     </div>

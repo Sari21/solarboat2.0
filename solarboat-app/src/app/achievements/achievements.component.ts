@@ -63,13 +63,13 @@ export class AchievementsComponent implements OnInit {
   onSubmit(empForm: any) {
     this.uploadFileToActivity();
     const o: Object = {
-        title_hu: this.form.title,
-        location_hu: this.form.location,
-        title_en: this.form.title,
-        location_en: this.form.location,
+        title_hu: this.form.title_hu,
+        location_hu: this.form.location_hu,
+        title_en: this.form.title_en,
+        location_en: this.form.location_en,
         date: this.form.date,
-        description_hu: 'tempdata',
-        description_en: 'tempdata',
+        description_hu: this.form.description_hu,
+        description_en: this.form.description_en,
         place: this.form.place,
       isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
@@ -99,13 +99,13 @@ export class AchievementsComponent implements OnInit {
     let n: Achievement;
     if(this.fileToUpload != null) {
       n = {
-        id: 0,
-        title_hu: this.form.title,
-        location_hu: this.form.location,
-        title_en: this.form.title,
-        location_en: this.form.location,
-        description_hu: 'thrnrnre',
-        description_en: 'trnrntr',
+        id: this.achievements.length,
+        title_hu: this.form.title_hu,
+        location_hu: this.form.location_hu,
+        title_en: this.form.title_en,
+        location_en: this.form.location_en,
+        description_hu: this.form.descripton_hu,
+        description_en: this.form.description_en,
         place: this.form.place,
         isLast: false,
         date: this.form.date,
@@ -113,13 +113,13 @@ export class AchievementsComponent implements OnInit {
       };
     } else {
       n = {
-        id: 0,
-        title_hu: this.form.title,
-        location_hu: this.form.location,
-        title_en: this.form.title,
-        location_en: this.form.location,
-        description_hu: 'trenren',
-        description_en: 'brngrn',
+        id: this.achievements.length,
+        title_hu: this.form.title_hu,
+        location_hu: this.form.location_hu,
+        title_en: this.form.title_en,
+        location_en: this.form.location_en,
+        description_hu: this.form.descripton_hu,
+        description_en: this.form.description_en,
         place: this.form.place,
         isLast: false,
         date: this.form.date,
