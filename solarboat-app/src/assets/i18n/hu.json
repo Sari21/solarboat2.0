@@ -19,7 +19,6 @@
   "NEWS": {
     "news":"hírek",
     "all_news":"összes hír",
-    "mainTitle": "hírek",
     "title": "{{title_hu}}",
     "shortArticle": "{{shortArticle_hu}}",
     "content": "{{content_hu}}"

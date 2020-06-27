@@ -91,6 +91,9 @@
         </li>
       -->
 
+      <li *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="/mainpage" (click)="logout()">Logout</a>
+      </li>
       <li *ngIf=" translate.currentLang == 'en' " >
         <a class="language" (click)="translate.use('hu')">
           <img src="../../assets/i18n/hu.png" alt="language" title="en" />
@@ -100,10 +103,6 @@
         <a class="language" (click)="translate.use('en')">
           <img src="../../assets/i18n/en.png" alt="language" title="en" />
         </a>
-      </li>
-
-      <li *ngIf="authority" class="nav-item">
-        <a class="nav-link" routerLink="/mainpage" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>
