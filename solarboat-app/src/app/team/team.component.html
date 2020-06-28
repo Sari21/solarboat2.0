@@ -1,21 +1,21 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="team-boss">
-    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4" [translateParams]="{ management_hu: leaders.name_hu, management_en: leaders.name_en}">MEMBERS.management</h1>
             <app-team-members *ngIf="leaders.members"
                               [members]="leaders.members"
                               [leader]="leaders.leader"
                               [isLeader] = "true"
-                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+                              class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-members>
 
         </div>
     </div>
 </div>
 <div class="team-electr">
-    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4" [translateParams]="{ electronic_hu: electronics.name_hu, electronic_en: electronics.name_en}">MEMBERS.electronic</h1>
             <div class="row">
@@ -32,7 +32,7 @@
             <app-team-members *ngIf="electronics.members"
                               [members]="electronics.members"
                               [leader]="electronics.leader"
-                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+                              class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-members>
 
 
@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="team-econ">
-    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4" [translateParams]="{ economic_hu: economics.name_hu, economic_en: economics.name_en}">MEMBERS.economic</h1>
             <div class="row">
@@ -56,7 +56,7 @@
             <app-team-members *ngIf="economics.members"
                               [members]="economics.members"
                               [leader]="economics.leader"
-                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+                              class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-members>
 
 
@@ -64,7 +64,7 @@
     </div>
 </div>
 <div class="team-mech">
-    <div class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4" [translateParams]="{ mechanical_hu: mechatronics.name_hu, mechanical_en: mechatronics.name_en}">MEMBERS.mechanical</h1>
             <div class="row">
@@ -88,7 +88,7 @@
             <app-team-members *ngIf="mechatronicsMaterial.members"
                               [members]="mechatronicsMaterial.members"
                               [leader]="mechatronicsMaterial.leader"
-                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+                              class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-members>
 
 
@@ -96,7 +96,7 @@
             <app-team-members *ngIf="mechatronicsSimulation.members"
                               [members]="mechatronicsSimulation.members"
                               [leader]="mechatronicsSimulation.leader"
-                              class="col-lg-6 col-md-6 col-10 col-sm-12"
+                              class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-members>
 
         </div>

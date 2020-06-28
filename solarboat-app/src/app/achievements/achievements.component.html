@@ -1,16 +1,16 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="achievements ">
-    <div class="container col-8 col-sm-12 col-lg-8 col-md-11 align-items-center">
+    <div class="container col-12 col-sm-12 col-lg-8 col-md-11 align-items-center">
 
         <h1 translate class="title pb-5 mb-4">ACHIEVEMENTS.achievements</h1>
         <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
-        <div *ngIf=" authority =='admin'" class="card  mb-5 mr-3 ml-3" id="achievement-form">
+        <div *ngIf=" authority =='admin'" class="card  mb-5 mr-md-3 ml-md-3 mr-lg-3 ml-lg-3" id="achievement-form">
             <h2 class="title pb-3">Új eredmény hozzáadása</h2>
             <div>
                 <form  #AddForm="ngForm">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6 col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="title_hu">Verseny/eredmény neve (hu)</label>
                                 <input type="text" class="form-control" id="title_hu"
@@ -55,7 +55,7 @@
                             </div>
 
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="title_en">Verseny/eredmény neve (en)</label>
                                 <input type="text" class="form-control" id="title_en"
@@ -94,13 +94,13 @@
         </div>
         </div>
         <div class="row justify-content-center">
-            <ul class="timeline col-10 col-sm-12 col-lg-8 col-md-11 ">
+            <ul class="timeline col-12 col-sm-12 col-lg-8 col-md-11 ">
                 <li *ngFor="let achievement of sortby('date') ">
                  <app-achievement [achievement]="achievement" [authority]="authority" (onRemove)="onDeleteAchievement($event)"></app-achievement>
                 </li>
             </ul>
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-3 offset-lg-2 offset-md-3 offset-sm-3 load-more">
+        <div class="col-sm-6 col-md-6 col-lg-3 col-6 offset-lg-2 offset-md-3 offset-sm-3 offset-2 load-more">
             <a class="btn"  *ngIf="!isLastPage" (click)="getAchievements()" href="javascript:void(0)" ><span translate >BUTTON.more</span></a>
         </div>
 

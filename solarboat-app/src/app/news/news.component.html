@@ -3,18 +3,18 @@
 
 <div class="news">
   <div
-    class="container col-10 col-sm-12 col-lg-10 col-md-11 align-items-center"
+    class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center"
   >
     <div class="jumbotron col-12">
       <h1 translate class="title pb-4">NEWS.news</h1>
 
       <div  class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5">
-        <div  *ngIf="authority == 'admin'" class="card mb-5 mr-3 ml-3" id="news-form">
+        <div  *ngIf="authority == 'admin'" class="card mb-5 mr-md-3 mr-lg-3 ml-md-3 ml-lg-3" id="news-form">
           <h2 class="title pb-3">Új hír hozzáadása</h2>
           <div >
             <form #AddForm="ngForm">
               <div class="row">
-                <div class="col-6">
+                <div class="col-md-6 col-lg-6 col-12">
                   <div class="form-group">
                     <label for="title">Cím (hu)</label>
                     <input type="text" class="form-control" id="title"
@@ -41,7 +41,7 @@
                   </div>
 
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-lg-6 col-12">
                   <div class="form-group">
                     <label for="title_en">Cím (en)</label>
                     <input type="text" class="form-control" id="title_en"
@@ -84,7 +84,7 @@
             *ngFor="let news of allnews"
             [news]="news" [authority] ="authority"
             (onRemove)="onDeleteNews($event)"
-            class="col-lg-6 col-md-6 col-10 col-sm-12"
+            class="col-lg-6 col-md-6 col-12 col-sm-12"
           > </app-news-preview>
         </div>
       </div>

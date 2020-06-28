@@ -22,9 +22,6 @@ export class SponsorsComponent implements OnInit {
     this.getSponsores();
     this.newSponsor = new Sponsor()
   }
-  title = 'Tour of Heroes';
-  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-  myHero = this.heroes[0];
   allSponsors: Sponsor[] = [];
   main: Sponsor[] = [];
   top: Sponsor[] = [];
@@ -37,7 +34,7 @@ export class SponsorsComponent implements OnInit {
   errorMessage = "";
   pictureService: PictureService;
   fileToUpload: File = null;
-  types = [ "MAIN", "TOP", "OTHER", "PARTNER", "UNI"];
+  types = [ 'MAIN', 'TOP', 'OTHER', 'PARTNER', 'UNI'];
   public authority: string;
   public roles: string[];
   getSponsores() {
