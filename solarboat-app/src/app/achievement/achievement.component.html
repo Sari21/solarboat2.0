@@ -25,7 +25,7 @@
         </div>
         -->
         <a *ngIf="achievement.picture" class="img">
-            <div *ngIf="achievement.place" class="img__overlay place" translate [translateParams]="{place: achievement.place}">ACHIEVEMENTS.place</div>
+            <div *ngIf="achievement.place_hu" class="img__overlay place" translate [translateParams]="{place_hu: achievement.place_hu, place_en: achievement.place_en}">ACHIEVEMENTS.place</div>
             <img  [src]="achievement.picture"/>
         </a>
     </div>
@@ -77,10 +77,18 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="place">Helyezés</label>
-                            <input type="text" class="form-control" id="place"
+                            <label for="place_hu">Helyezés (hu)</label>
+                            <input type="text" class="form-control" id="place_hu"
                                    required
-                                   [(ngModel)]="form.place" name="place"
+                                   [(ngModel)]="form.place_hu" name="place_hu"
+                                   [ngClass]="{'failed': failed }">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="place_en">Helyezés (en) </label>
+                            <input type="text" class="form-control" id="place_en"
+                                   required
+                                   [(ngModel)]="form.place_en" name="place_en"
                                    [ngClass]="{'failed': failed }">
 
                         </div>

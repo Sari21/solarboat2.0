@@ -27,6 +27,8 @@ export class AchievementsComponent implements OnInit {
   constructor(private globals: Globals, private http: HttpClient, private achievementService: AchievementService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
+    this.form.place_en = '1st';
+    this.form.place_hu = '1.';
   }
 
   ngOnInit(): void {
@@ -71,10 +73,11 @@ export class AchievementsComponent implements OnInit {
         date: this.form.date,
         description_hu: "leírás",
         description_en: "description",
-        place: this.form.place,
-      isLast: false,
-        picture: '../../assets/achievement/' + this.fileToUpload.name
-      };
+        place_hu: this.form.place_hu,
+        place_en: this.form.place_en,
+        isLast: false,
+          picture: '../../assets/achievement/' + this.fileToUpload.name
+    };
     const b = this.http
         .post(this.globals.BASE_URL + "/api/achievement", o)
         .subscribe((data) => {
@@ -107,7 +110,8 @@ export class AchievementsComponent implements OnInit {
         location_en: this.form.location_en,
         description_hu: "leírás",
         description_en: "description",
-        place: this.form.place,
+        place_hu: this.form.place_hu,
+        place_en: this.form.place_en,
         isLast: false,
         date: this.form.date,
         picture: '../../assets/achievement/' + this.fileToUpload.name
@@ -121,7 +125,8 @@ export class AchievementsComponent implements OnInit {
         location_en: this.form.location_en,
         description_hu: "leírás",
         description_en: "description",
-        place: this.form.place,
+        place_hu: this.form.place_hu,
+        place_en: this.form.place_en,
         isLast: false,
         date: this.form.date,
         picture: ''

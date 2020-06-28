@@ -49,7 +49,7 @@
     "description":"{{description_hu}}",
     "location":"{{location_hu}}",
     "date":"{{date}}",
-    "place":"{{place}}. helyezés"
+    "place":"{{place_hu}} helyezés"
   },
   "FOOTER":{
     "title":"elerhetőségek",
