@@ -25,13 +25,16 @@ export class NewsComponent implements OnInit {
   constructor(private http: HttpClient, private apiService: NewsService,
               private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
     this.pictureService = pictureService;
+    this.form.date = new Date();
   }
 
   ngOnInit(): void {
     this.getNews();
     this.checkAuth();
+    console.log(this.allnews[0].date);
   }
   onSubmit(empForm: any, event: Event) {
+    console.log(this.form.date);
     event.preventDefault();
     // tslint:disable-next-line:ban-types
     let o: Object;
@@ -42,6 +45,7 @@ export class NewsComponent implements OnInit {
         content_hu: this.form.content,
         title_en: this.form.title_en,
         content_en: this.form.content_en,
+        date: this.form.date,
         picture: '../../assets/news/' + this.fileToUpload.name
       };
     } else {
@@ -50,6 +54,7 @@ export class NewsComponent implements OnInit {
         content_hu: this.form.content,
         title_en: this.form.title_en,
         content_en: this.form.content_en,
+        date: this.form.date,
         picture: ''
       };
     }
@@ -114,7 +119,7 @@ export class NewsComponent implements OnInit {
     if (this.fileToUpload == null) {
       n = {
         id: 0,
-        date: 'most',
+        date: this.form.date,
         title_hu: this.form.title,
         content_hu: this.form.content,
         title_en: this.form.title_en,
@@ -124,7 +129,7 @@ export class NewsComponent implements OnInit {
     } else {
       n = {
         id: 0,
-        date: 'most',
+        date: this.form.date,
         title_hu: this.form.title,
         content_hu: this.form.content,
         title_en: this.form.title_en,

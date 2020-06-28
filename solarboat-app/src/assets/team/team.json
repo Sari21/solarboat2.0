@@ -12,7 +12,7 @@
             "job_hu": "Csapatkapitány és Gazdasági vezető",
             "job_en": "Team manager and Financial group leader",
             "picture": "czibere-szilard",
-            "linkedin": ""
+            "linkedin": "string"
         },
         "members": [
             {
@@ -22,7 +22,7 @@
                 "job_hu": "Elektronikai csoportvezető",
                 "job_en": "Electronic group leader",
                 "picture": "kecskes-mark",
-                "linkedin": "string"
+                "linkedin": "https://hu.linkedin.com/in/m%C3%A1rk-kecsk%C3%A9s-b238251b1?trk=people-guest_people_search-card&fbclid=IwAR2CuvM650hzcrkFpuG7aPP0uT6ASazw9XHMwzyL2PoobrerxktERWKwrE4"
             },
             {
                 "id": 2,
@@ -31,7 +31,7 @@
                 "job_hu": "Gépészet vezető",
                 "job_en": "Mechanical group leader",
                 "picture": "visnyei-abel",
-                "linkedin": "string"
+                "linkedin": "https://hu.linkedin.com/in/%C3%A1bel-visnyei-b290951a4?fbclid=IwAR1DcN1YBqSiqE81JAfn4nefhsih76f2I7mccJOjsY7a1MCf2v2WnrFhqxk"
             },
             {
                 "id": 3,
@@ -104,7 +104,7 @@
                 "picture": "gracza-david",
                 "job_hu": "string",
                 "job_en": "string",
-                "linkedin": "string"
+                "linkedin": "https://hu.linkedin.com/in/gracza"
             }
         ],
         "teamType": 2
@@ -119,10 +119,10 @@
             "id": 0,
             "firstName": "Szilárd",
             "lastName": "Czibere",
-            "job_hu": "",
-            "job_en": "",
+            "job_hu": "string",
+            "job_en": "string",
             "picture": "czibere-szilard",
-            "linkedin": ""
+            "linkedin": "string"
         },
         "members": [
             {
@@ -206,7 +206,7 @@
                 "picture": "sinko-andras",
                 "job_hu": "string",
                 "job_en": "string",
-                "linkedin": "string"
+                "linkedin": "https://hu.linkedin.com/in/andr%C3%A1s-sink%C3%B3-15b390150?trk=people-guest_people_search-card&fbclid=IwAR1a_MB78jf3YdB3RcltuElcGm9qboy95sr1xGWakT70jy68j-FTafeMRDk"
             },
             {
                 "id": 2,
