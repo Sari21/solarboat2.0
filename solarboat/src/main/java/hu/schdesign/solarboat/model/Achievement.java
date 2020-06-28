@@ -34,7 +34,8 @@ public class Achievement {
     private String location_en;
     private String picture;
     private boolean isLast = false;
-    private String place;
+    private String place_hu;
+    private String place_en;
 
 
     public Achievement(@JsonProperty("title_hu") String title_hu,
@@ -45,7 +46,8 @@ public class Achievement {
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
                        @JsonProperty("date") String date,
-                       @JsonProperty("place") String place,
+                       @JsonProperty("place_hu") String place_hu,
+                       @JsonProperty("place_en") String place_en,
                         @JsonProperty("isLast") boolean isLast)
                       {
 
@@ -57,7 +59,8 @@ public class Achievement {
         this.location_en = location_en;
         this.picture = picture;
         this.date = date;
-        this.place = place;
+        this.place_hu = place_hu;
+        this.place_en = place_en;
         this.isLast = isLast;
 
 
@@ -135,14 +138,6 @@ public class Achievement {
         this.title_en = title_en;
     }
 
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
     public boolean getIsLast() {
         return isLast;
     }
@@ -151,7 +146,19 @@ public class Achievement {
         this.isLast = isLast;
     }
 
-
-
-
+    public String getPlace_hu() {
+        return place_hu;
     }
+
+    public void setPlace_hu(String place_hu) {
+        this.place_hu = place_hu;
+    }
+
+    public String getPlace_en() {
+        return place_en;
+    }
+
+    public void setPlace_en(String place_en) {
+        this.place_en = place_en;
+    }
+}

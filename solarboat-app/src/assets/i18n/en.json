@@ -48,7 +48,7 @@
     "description":"{{description_en}}",
     "location":"{{location_en}}",
     "date":"{{date}}",
-    "place":"Ranking achieved: {{place}}"
+    "place":"{{place_en}} place"
 
   },
   "FOOTER":{

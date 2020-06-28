@@ -29,8 +29,8 @@ export class AchievementComponent implements OnInit {
     this.form.location = this.achievement.location_hu;
     this.form.title_en = this.achievement.title_en;
     this.form.location_en = this.achievement.location_en;
-    this.form.date = this.achievement.date;
-    this.form.place = this.achievement.place;
+    this.form.place_hu = this.achievement.place_hu;
+    this.form.place_en = this.achievement.place_en;
   }
 
   delete(id: number) {
@@ -53,7 +53,8 @@ export class AchievementComponent implements OnInit {
     this.achievement.title_en = this.form.title_en;
     this.achievement.location_en = this.form.location_en;
     this.achievement.date = this.form.date ;
-    this.achievement.place = this.form.place;
+    this.achievement.place_hu = this.form.place_hu;
+    this.achievement.place_en = this.form.place_en;
     const achievementId = id;
     let o: Object;
     if (this.fileToUpload != null) {
@@ -68,7 +69,8 @@ export class AchievementComponent implements OnInit {
         description_hu: "leírás",
         description_en: "description",
         date: this.form.date,
-        place: this.form.place,
+        place_hu: this.form.place_hu,
+        place_en: this.form.place_en,
         isLast: false,
         picture: '../../assets/achievement/' + this.fileToUpload.name
       };
@@ -82,7 +84,8 @@ export class AchievementComponent implements OnInit {
         description_hu: "leírás",
         description_en: "description",
         date: this.form.date,
-        place: this.form.place,
+        place_hu: this.form.place_hu,
+        place_en: this.form.place_en,
         isLast: false,
         picture: this.achievement.picture
       };
