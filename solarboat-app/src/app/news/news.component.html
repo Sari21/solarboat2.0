@@ -33,12 +33,13 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="file">Kép</label>
+                    <label class="col-12" for="file">Kép</label>
                     <input type="file"
                            id="file"
                            [(ngModel)]="form.file" name="file"
                            (change)="handleFileInput($event.target.files)">
                   </div>
+
                 </div>
                 <div class="col-6">
                   <div class="form-group">
@@ -56,6 +57,15 @@
                               [(ngModel)]="form.content_en" name="content_en"
                               [ngClass]="{'failed': failed }"></textarea>
                   </div>
+                  <!--
+                  <div class="form-group">
+                    <label class="col-12" for="date">Dátum</label>
+                    <input type="date" class="form-control" id="date"
+                           [ngModel] ="form.date | date:'yyyy-MM-dd'" name="date"
+                           (ngModelChange)="form.date = $event"
+                           [value]="form.date | date:'yyyy-MM-dd'">
+                  </div>
+                  -->
                 </div>
               </div>
 
