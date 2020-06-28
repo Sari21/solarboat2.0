@@ -72,8 +72,14 @@
                     <a class="btn"  data-toggle="collapse" data-target="#collapseMech" href="javascript:void(0)"><span>Leírás</span></a>
                 </div>
                 <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseMech">
-                    <div translate class="description col- pl-lg-5" [translateParams]="{ mechanical_desc_hu: mechatronics.description_hu, mechanical_desc_en: mechatronics.description_en}">
+                    <div translate class="description col- pl-lg-5 pb-1" [translateParams]="{ mechanical_desc_hu: mechatronics.description_hu, mechanical_desc_en: mechatronics.description_en}">
                         MEMBERS.mechanicalDesc
+                    </div>
+                    <div translate class="description col- pl-lg-5 pb-1" [translateParams]="{ material_desc_hu: mechatronicsMaterial.description_hu, material_desc_en: mechatronicsMaterial.description_en}">
+                        MEMBERS.materialDesc
+                    </div>
+                    <div translate class="description col- pl-lg-5 pt-0" [translateParams]="{ simulation_desc_hu: mechatronicsSimulation.description_hu, simulation_desc_en: mechatronicsSimulation.description_en}">
+                        MEMBERS.simulationDesc
                     </div>
                 </div>
             </div>

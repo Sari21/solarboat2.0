@@ -22,7 +22,7 @@ a, a:hover {
     color: white;
 }
 
-#footer i.fab:hover , #footer .mat-icon:hover, #footer img:hover{
+#footer i.fab:hover ,i.fa:hover , #footer .mat-icon:hover, #footer img:hover{
     opacity: 0.7 ;
     cursor: pointer;
 }

@@ -37,7 +37,7 @@ export class SponsorsComponent implements OnInit {
   errorMessage = "";
   pictureService: PictureService;
   fileToUpload: File = null;
-  types = [ "MAIN","TOP","OTHER", "PARTNER", "UNI"];
+  types = [ "MAIN", "TOP", "OTHER", "PARTNER", "UNI"];
   public authority: string;
   public roles: string[];
   getSponsores() {

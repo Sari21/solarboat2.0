@@ -20,7 +20,7 @@
     "begining":"BME Solar Boat Team was founded in 2014 by three mechanical engineering students from the Faculty of Mechanical Engineering. The team was created with the purpose of designing and building a solar-powered,  electric racing boat and to successfully compete in the Dutch Solar Challenge in 2016 and Solar 1 Races in Monte-Carlo with this vehicle. Our aim is to raise awareness of the renewable energy source possibilities and to create a knowledge base and infrastructure that helps the newer generations to take part in electric vehicle development projects.",
     "GPK": "Mechatronics and mechanical engineering students joined from the Faculty of Mechanical Engineering, who worked on software support for the electronic systems, hull manufacturing technology, CFD simulations, steering and propulsion system.",
     "KJK":"Students from the Faculty of Transport and Vehicle Engineering also joined us. They assisted the design and the implementation works. Their main tasks were the hull design and its manufacturing and the blueprints of the first hydrofoils.",
-    "VIK":"Also several students came from the Faculty of Electrical Engineering and Informatics to play a key role in the design of the electrical system of the boat: the battery management and solar cell system, the power electronics, and the electric drive.",
+    "VIK":"Several students came from the Faculty of Electrical Engineering and Informatics to play a key role in the design of the electrical system of the boat. The battery management, the solar system, the power electronics and the electric drive were the major topics for them.",
     "GTK":"Later, as the team developed more and more, students from the Faculty of Economic and Social Sciences also came to deal with marketing and economic affairs.",
     "end":"In addition to the design and construction plans of the present, we also pay attention to the future - we have created our racing team with a long-term goal; we hope that our initiative will create a knowledge base and infrastructure which makes the project work for many years, involving more and more generations of engineer students in the field of electric vehicle design and construction."
   },
@@ -53,7 +53,7 @@
   },
   "FOOTER":{
     "title":"contact us",
-    "madeBy":"made by Sára Sinkó and Virág Dörner"
+    "madeBy":"designed by Sára Sinkó and Virág Dörner"
   },
   "MEMBERS":{
     "management":"{{management_en}}",
@@ -70,6 +70,8 @@
     "job_leader": "{{job_en}}",
     "electronicDesc": "{{electronic_desc_en}}",
     "economicDesc": "{{economic_desc_en}}",
-    "mechanicalDesc": "{{mechanical_desc_en}}"
+    "mechanicalDesc": "{{mechanical_desc_en}}",
+    "materialDesc": "{{material_desc_en}}",
+    "simulationDesc": "{{simulation_desc_en}}"
   }
 }
