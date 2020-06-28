@@ -11,7 +11,9 @@
             MEMBERS.leader_last
 
         </div>
-        <div *ngIf="isLeader" class="text-center post" >{{leader.job_hu}} </div>
+        <div translate *ngIf="isLeader" class="text-center post" [translateParams]="{ job_hu: leader.job_hu, job_en: leader.job_en}">
+            MEMBERS.job
+        </div>
     </div>
 
     <div *ngFor="let member of members" class="d-flex flex-column col-lg-2 col-sm-2 col-md-2 p-2 member justify-content-center">
@@ -27,7 +29,9 @@
             MEMBERS.member_first
         </div>
 
-        <div translate *ngIf="isLeader" class="text-center post " [translateParams]="{ job_hu: member.job_hu, job_en: member.job_en}">MEMBERS.job</div>
+        <div translate *ngIf="isLeader" class="text-center post " [translateParams]="{ job_hu: member.job_hu, job_en: member.job_en}">
+            MEMBERS.job
+        </div>
     </div>
 
 </div>

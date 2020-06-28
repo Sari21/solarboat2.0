@@ -101,5 +101,19 @@ systemctl restart apache2
 
 admin: körtag felhasználók menedzselése
 
+postman db csapattagok - jsonben
+achievment feltöltés - angolul
+news feltöltés - angolul
+szponzorok - admin cumót nem jeleníti meg
+forditas
+
+felöltés 1. : assets mappába: galéria képek, szponzor képek, achi képek, news képek, kiszedni a faszsag kepeket
+
+mobil nézet:
+
+2. feltöltés DO-ra
+
+3. lelellenõriztetjük, hírek, achik, feltöltése, lefordítása
+
 
  
