@@ -56,6 +56,7 @@ export class SponsorsComponent implements OnInit {
     this.bme = this.allSponsors.filter(
       (s) => s.group == "UNI" && s.row == 1
     )[0];
+    this.uni = [];
     for (let i = 2; i < 10; i++) {
       let t: Sponsor[] = this.allSponsors.filter(
         (s) => s.group == "UNI" && s.row == i
