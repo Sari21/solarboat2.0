@@ -13,15 +13,13 @@ import { GalleryPicture } from "../model/gallery-picture";
 })
 export class GalleryComponent implements OnInit {
   constructor(
-    pictureService: PictureService,
+    private pictureService: PictureService,
     private router: Router,
     private tokenStorage: TokenStorageService
   ) {
-    this.pictureService = pictureService;
   }
   @Output() gallery: GalleryPicture[];
   newPicture: GalleryPicture;
-  pictureService: PictureService;
   failed = false;
   errorMessage = "";
   picturesSelected = false;
@@ -58,7 +56,6 @@ export class GalleryComponent implements OnInit {
   uploadFileToActivity() {
     this.pictureService.postFile(this.fileToUpload, "gallery").subscribe(
       (data) => {
-        // do something, if upload success
         this.fileToUpload = null;
         console.log("pic");
       },
@@ -68,7 +65,6 @@ export class GalleryComponent implements OnInit {
     );
     this.pictureService.postFile(this.smallFileToUpload, "gallery").subscribe(
       (data) => {
-        // do something, if upload success
         this.smallFileToUpload = null;
         console.log("sm");
       },

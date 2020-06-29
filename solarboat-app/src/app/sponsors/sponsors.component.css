@@ -1,3 +1,6 @@
+.sponsorsFull{
+  width: 100%;
+}
 div.sponsors:nth-child(even) {
   background-color: #f3f4f4;
 }
