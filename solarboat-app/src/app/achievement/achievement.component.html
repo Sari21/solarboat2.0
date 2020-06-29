@@ -3,14 +3,14 @@
         <img *ngIf="achievement.isLast" class="last-one" src="../../assets/achievement/cake.png"  width="35"   />
         <img *ngIf="!achievement.isLast"  src="../../assets/achievement/logo.png"  width="35"/>
     </div>
-    <div class="timeline-panel pl-md-5 pr-md-5 pl-lg-5 pr-lg-5 pb-1 pr-3">
+    <div class="timeline-panel pl-md-5 pr-md-5 pl-lg-5 pr-lg-5 pb-4 pr-3">
         <div class="timeline-heading ">
             <div  *ngIf=" authority =='admin'" class="row justify-content-end edit">
                 <a class="col-2"  (click)="openContent(EditForm)"><mat-icon class="update-icon">edit</mat-icon></a>
                 <a class="col-2" (click)="delete(achievement.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
             </div>
             <div class="row timeline-title p-md-3 p-lg-3 pt-md-3 pt-lg-3 pb-3 pr-2">
-                <p id="timeline-location" class="pl-3 pr-1 pt-md-3 pt-lg-3" translate [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
+                <p id="timeline-location" class="pl-3 pr-3 pl-md-0 pl-lg-0 pt-md-3 pt-lg-3" translate [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
                     ACHIEVEMENTS.location</p>
                 <p  class="pt-lg-3 pt-md-3" translate [translateParams]="{ title_hu: achievement.title_hu, title_en: achievement.title_en}">ACHIEVEMENTS.title </p>
             </div>

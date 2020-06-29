@@ -6,6 +6,4 @@ export class News {
     picture: string;
     id: number;
     date: string;
-
-
 }
