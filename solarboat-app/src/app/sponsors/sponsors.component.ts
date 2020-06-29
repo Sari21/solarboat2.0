@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { SponsorService } from "../shared/sponsor.service";
 import { Sponsor } from "../model/sponsor";
 import { PictureService } from "../shared/picture.service";
@@ -11,16 +11,14 @@ import { TokenStorageService } from "../auth/token-storage.service";
 export class SponsorsComponent implements OnInit {
   constructor(
     private sponsorService: SponsorService,
-    pictureService: PictureService,
+    private pictureService: PictureService,
     private tokenStorage: TokenStorageService
-  ) {
-    this.pictureService = pictureService;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.checkAuth();
     this.getSponsores();
-    this.newSponsor = new Sponsor()
+    
   }
   allSponsors: Sponsor[] = [];
   main: Sponsor[] = [];
@@ -29,12 +27,11 @@ export class SponsorsComponent implements OnInit {
   uni = [];
   partner: Sponsor[] = [];
   bme: Sponsor;
-  newSponsor: Sponsor;
+  newSponsor: Sponsor = new Sponsor();
   failed = false;
-  errorMessage = "";
-  pictureService: PictureService;
+  errorMessage: string;
   fileToUpload: File = null;
-  types = [ 'MAIN', 'TOP', 'OTHER', 'PARTNER', 'UNI'];
+  types = ["MAIN", "TOP", "OTHER", "PARTNER", "UNI"];
   public authority: string;
   public roles: string[];
   getSponsores() {
@@ -68,21 +65,18 @@ export class SponsorsComponent implements OnInit {
       }
     }
   }
-  onSubmit( event: Event) {
-    console.log(this.newSponsor);
+  onSubmit(event: Event) {
     event.preventDefault();
     this.sponsorService.postSponsor(this.newSponsor).subscribe(
-
-      data => {
+      (data) => {
         this.uploadFileToActivity();
         this.allSponsors.push(data);
-        this.splitSponsores();       
+        this.splitSponsores();
       },
-      error  => {
+      (error) => {
         console.log(error);
       }
-      );
-
+    );
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -100,39 +94,45 @@ export class SponsorsComponent implements OnInit {
     );
   }
   delete(id: number) {
-  this.sponsorService.deleteSponsor(id).subscribe(
-    (data) => {
-      var du = this.allSponsors.find((a) => a.id == id);
-      const index = this.allSponsors.indexOf(du, 0);
-      if (index > -1) {
-        this.allSponsors.splice(index, 1);
+    this.sponsorService.deleteSponsor(id).subscribe(
+      (data) => {
+        var du = this.allSponsors.find((a) => a.id == id);
+        const index = this.allSponsors.indexOf(du, 0);
+        if (index > -1) {
+          this.allSponsors.splice(index, 1);
+        }
+        this.splitSponsores();
+      },
+      (error) => {
+        console.log(error);
       }
-      this.splitSponsores();
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
-}
-clickMethod(id: number) {
-  var name;
-  this.allSponsors.forEach(t => {if( t.id == id) name = t.name})
-  if (confirm("Biztos, hogy törölni szeretnéd a következő szponzort: " + name + "?")) {
-    this.delete(id);
+    );
   }
-}
-checkAuth() {
-  this.authority = undefined;
-  if (this.tokenStorage.getToken()) {
-    this.roles = this.tokenStorage.getAuthorities();
-    this.roles.every((role) => {
-      if (role === "ROLE_ADMIN") {
-        this.authority = "admin";
-        return false;
-      }
-      this.authority = "user";
-      return true;
+  clickMethod(id: number) {
+    var name: string;
+    this.allSponsors.forEach((t) => {
+      if (t.id == id) name = t.name;
     });
+    if (
+      confirm(
+        "Biztos, hogy törölni szeretnéd a következő szponzort: " + name + "?"
+      )
+    ) {
+      this.delete(id);
+    }
   }
-}
+  checkAuth() {
+    this.authority = undefined;
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every((role) => {
+        if (role === "ROLE_ADMIN") {
+          this.authority = "admin";
+          return false;
+        }
+        this.authority = "user";
+        return true;
+      });
+    }
+  }
 }
