@@ -34,7 +34,7 @@
   right: 10px;
   z-index: 100;
   background-color: #FFF;
-  padding: 5px 2px 2px;
+  padding: 0px;
   color: #000;
   font-weight: bold;
   cursor: pointer;
@@ -58,11 +58,11 @@
   /* Prevent vertical gaps */
   line-height: 0;
 
-  -webkit-column-count: 5;
+  -webkit-column-count: 4;
   -webkit-column-gap: 0px;
-  -moz-column-count: 5;
+  -moz-column-count: 4;
   -moz-column-gap: 0px;
-  column-count: 5;
+  column-count: 4;
   column-gap: 0px;
 }
 
@@ -71,6 +71,13 @@
   width: 100% !important;
   height: auto !important;
 }
+/*@media (max-width: 10000px) {
+  #photos {
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
+  }
+}*/
 @media (max-width: 1200px) {
   #photos {
     -moz-column-count: 4;
