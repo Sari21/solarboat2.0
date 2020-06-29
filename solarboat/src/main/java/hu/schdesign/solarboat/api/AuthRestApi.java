@@ -47,6 +47,16 @@ public class AuthRestApi {
     @Autowired
     JwtProvider jwtProvider;
 
+    @Secured("ROLE_ADMIN")
+    @PostMapping("/setup/clean_users")
+    public ResponseEntity<?> cleanUsers() {
+
+        //hozzáadom a használt szerepeket
+        userRepository.deleteAll();
+
+        return new ResponseEntity<>(new ResponseMessage("Roles have been succesfully removed!"),
+                HttpStatus.OK);
+    }
     @PostMapping("/setup/roles")
     public ResponseEntity<?> setupRoles() {
 
