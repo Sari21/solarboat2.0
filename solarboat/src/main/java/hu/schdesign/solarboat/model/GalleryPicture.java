@@ -15,9 +15,7 @@ public class GalleryPicture {
     private String picture;
     @NotNull
     private String smallPicture;
-    @NotNull
     private String title_hu;
-    @NotNull
     private String title_en;
 
     public GalleryPicture(@JsonProperty("title_hu")String title_hu,
@@ -25,9 +23,9 @@ public class GalleryPicture {
                           @JsonProperty("picture") String picture,
                           @JsonProperty("smallPicture") String smallPicture) {
         this.picture = picture;
+        this.smallPicture = smallPicture;
         this.title_hu = title_hu;
         this.title_en = title_en;
-        this.smallPicture = smallPicture;
     }
     public GalleryPicture() {
     }
