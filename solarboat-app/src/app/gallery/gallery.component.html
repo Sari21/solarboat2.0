@@ -13,18 +13,16 @@
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
-                    <label for="title_hu">Magyar cím</label>
+                    <label for="title_hu">Magyar cím - opcionális</label>
                     <input type="text" class="form-control" id="title_hu"
-                           required
                            [(ngModel)]="newPicture.title_hu" name="title_hu"
                            [ngClass]="{'failed': failed }">
                           
       
                   </div>
                   <div class="form-group">
-                    <label for="title_en">Angol cím</label>
+                    <label for="title_en">Angol cím - opcionális</label>
                     <input type="text" class="form-control" id="title_en"
-                           required
                            [(ngModel)]="newPicture.title_en" name="title_en"
                            [ngClass]="{'failed': failed }">
                           
@@ -54,7 +52,7 @@
               </div>
               
              <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
-              <a class="btn" (click)="uploadGalleryPicture()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid) }" ><span>Feltöltés</span></a>
+              <a class="btn" (click)="uploadGalleryPicture(loginForm)" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid) }" ><span>Feltöltés</span></a>
 
               <div [hidden]="!failed"
                    class="alert alert-danger mt-3">

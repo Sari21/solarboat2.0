@@ -77,7 +77,13 @@ export class GalleryComponent implements OnInit {
       }
     );
   }
-  uploadGalleryPicture() {
+  uploadGalleryPicture(empForm: any) {
+    if (this.newPicture.title_hu == null ) {
+      this.newPicture.title_hu = ' ';
+    }
+    if (this.newPicture.title_en == null) {
+      this.newPicture.title_en = ' ';
+    }
     this.pictureService.postGalleryPicture(this.newPicture).subscribe(
       (data) => {
         // do something, if upload success
@@ -90,6 +96,7 @@ export class GalleryComponent implements OnInit {
         console.log(error);
       }
     );
+    empForm.reset();
   }
 
   loadGallery() {
