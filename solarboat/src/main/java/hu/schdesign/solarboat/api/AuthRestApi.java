@@ -46,7 +46,7 @@ public class AuthRestApi {
 
     @Autowired
     JwtProvider jwtProvider;
-
+/*
     @Secured("ROLE_ADMIN")
     @PostMapping("/setup/clean_users")
     public ResponseEntity<?> cleanUsers() {
@@ -92,7 +92,7 @@ public class AuthRestApi {
         return new ResponseEntity<>(new ResponseMessage("Admin user succesfully added!"),
                 HttpStatus.OK);
     }
-
+*/
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
