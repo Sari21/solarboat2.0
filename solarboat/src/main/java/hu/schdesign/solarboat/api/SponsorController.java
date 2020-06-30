@@ -4,6 +4,7 @@ import hu.schdesign.solarboat.model.Sponsor;
 import hu.schdesign.solarboat.service.SponsorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,13 +27,8 @@ public class SponsorController {
         return sponsorService.addSponsor(sponsor);
     }
     @GetMapping
-    public List<Sponsor> getAllSponsors(){
-        Iterable<Sponsor> it = sponsorService.getAllSponsors();
-        List<Sponsor> list = new ArrayList<>();
-        for(Sponsor s : it){
-            list.add(s);
-        }
-        return list;
+    public Iterable<Sponsor> getAllSponsors(){
+        return sponsorService.getAllSponsors();
     }
     @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
@@ -40,4 +36,9 @@ public class SponsorController {
         sponsorService.deleteSponsorById(id);
     }
 
+    @Secured("ROLE_ADMIN")
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public Iterable<Sponsor> changeAllSponsors(@Valid @RequestBody Iterable<Sponsor> newSponsors){
+        return this.sponsorService.changeAllSponsors(newSponsors);
+    }
 }

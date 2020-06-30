@@ -5,6 +5,8 @@ import hu.schdesign.solarboat.model.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class SponsorService {
     private final SponsorRepository sponsorRepository;
@@ -21,6 +23,10 @@ public class SponsorService {
     }
     public void deleteSponsorById(Long id){
         sponsorRepository.deleteById(id);
+    }
+    public Iterable<Sponsor> changeAllSponsors(Iterable<Sponsor> newSponsors){
+        sponsorRepository.deleteAll();
+        return sponsorRepository.saveAll(newSponsors);
     }
 
 }

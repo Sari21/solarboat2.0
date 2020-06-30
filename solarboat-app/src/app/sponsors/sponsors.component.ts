@@ -26,7 +26,7 @@ export class SponsorsComponent implements OnInit {
   other: Sponsor[] = [];
   uni = [];
   partner: Sponsor[] = [];
-  bme: Sponsor;
+  bme: Sponsor = new Sponsor();
   newSponsor: Sponsor = new Sponsor();
   failed = false;
   errorMessage: string;

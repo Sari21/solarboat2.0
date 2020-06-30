@@ -18,7 +18,7 @@ public class Sponsor {
     @NotNull
     @Size(min=1, max=200)
     private String name;
-    @Size(min=1, max=200)
+    @NotNull
     private String link;
     @NotNull
     private String picture;
