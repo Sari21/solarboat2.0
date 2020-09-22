@@ -16,33 +16,41 @@ import java.util.Optional;
 
 @Service
 public class NewsService {
-    private final NewsRepository newsRepository;
-
     @Autowired
-    public NewsService(NewsRepository newsRepository){
-        this.newsRepository = newsRepository;
+    private NewsRepository newsRepository;
 
+    public NewsService() {
     }
 
-    public News addNews(News news){
+//    @Autowired
+//    public NewsService(NewsRepository newsRepository){
+//        this.newsRepository = newsRepository;
+//    }
+
+    public News addNews(News news) {
         return newsRepository.save(news);
     }
+
     public Iterable<News> getAllNews() {
         return newsRepository.findAll(Sort.by("date").descending());
     }
-    public Optional<News> getNewsById(Long id){
+
+    public Optional<News> getNewsById(Long id) {
         return newsRepository.findById(id);
     }
-    public void deleteNewsById(Long id){
+
+    public void deleteNewsById(Long id) {
         newsRepository.deleteById(id);
     }
-    public void updateNews(News news){
+
+    public void updateNews(News news) {
         newsRepository.save(news);
     }
-    public Page<News> getPage(int pageNo, int pageSize){
+
+    public Page<News> getPage(int pageNo, int pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("date").descending().by("id").descending());
         Page<News> pagedResult = newsRepository.findAll(paging);
-        if(pagedResult.hasContent()) {
+        if (pagedResult.hasContent()) {
             return pagedResult;
         } else {
             return null;
