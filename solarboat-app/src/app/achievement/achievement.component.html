@@ -10,9 +10,9 @@
                 <a class="col-2" (click)="delete(achievement.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
             </div>
             <div class="row timeline-title p-md-3 p-lg-3 pt-md-3 pt-lg-3 pb-3 pr-2">
-                <p id="timeline-location" class="pl-3 pr-3 pl-md-0 pl-lg-0 pt-md-3 pt-lg-3" translate [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
+                <p id="timeline-location" class="pl-3 pl-md-0 pl-lg-0 pt-md-3 pt-lg-3 pt-1 " translate [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
                     ACHIEVEMENTS.location</p>
-                <p  class="pt-lg-3 pt-md-3" translate [translateParams]="{ title_hu: achievement.title_hu, title_en: achievement.title_en}">ACHIEVEMENTS.title </p>
+                <p  class="pt-lg-3 pl-3 pt-1 pt-md-3" translate [translateParams]="{ title_hu: achievement.title_hu, title_en: achievement.title_en}">ACHIEVEMENTS.title </p>
             </div>
             <div class=" .d-block .d-md-none row col-12 date pt-lg-3 pt-md-3 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
