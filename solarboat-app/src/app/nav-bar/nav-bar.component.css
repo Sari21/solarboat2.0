@@ -62,7 +62,11 @@ nav.navbar.navbar-expand-lg.nav-moving{
 nav.navbar.navbar-expand-lg.nav-moving .navbar-brand img{
     transform: scale(0.7);
 }
-.active-link:after{
+a.nav-link:hover:after {
+    width: 100%;
+    left: 0;
+}
+a.nav-link.active-link:after{
     bottom: 0;
     content: "";
     display: block;
@@ -85,10 +89,6 @@ a.nav-link:after {
     background: #000000;
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
-}
-a.nav-link:hover:after {
-    width: 100%;
-    left: 0;
 }
 @media screen and (max-height: 300px) {
     ul {
