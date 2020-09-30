@@ -57,6 +57,7 @@ public class AuthRestApi {
         return new ResponseEntity<>(new ResponseMessage("Roles have been succesfully removed!"),
                 HttpStatus.OK);
     }
+*/
     @PostMapping("/setup/roles")
     public ResponseEntity<?> setupRoles() {
 
@@ -92,7 +93,7 @@ public class AuthRestApi {
         return new ResponseEntity<>(new ResponseMessage("Admin user succesfully added!"),
                 HttpStatus.OK);
     }
-*/
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
