@@ -1,109 +1,111 @@
 <nav
-  class="navbar navbar-expand-lg sticky-top"
-  [class.transparent]="page == '/mainpage' || page == '/mainpage#aboutus'"
+        class="navbar navbar-expand-lg sticky-top"
+        [class.transparent]="page == '/mainpage' || page == '/mainpage#aboutus'"
 >
-  <a class="navbar-brand" href="#"
+    <a class="navbar-brand" href="#"
     ><img src="../../assets/logo.png" alt="logo" title="logo"
-  /></a>
+    /></a>
 
-  <button
-    class="navbar-toggler navbar-light"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button
+            class="navbar-toggler navbar-light ml-auto"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a translate
-          class="nav-link"
-          routerLink="/mainpage"
-          fragment="aboutus"
-          routerLinkActive="active-link"
-          target=""
-          >NAV.aboutUs</a
-        >
-      </li>
-      <li class="nav-item">
-        <a translate class="nav-link" routerLink="/news" routerLinkActive="active-link"
-          >NAV.news</a
-        >
-      </li>
-      <li class="nav-item">
-        <a translate class="nav-link" routerLink="/team" routerLinkActive="active-link"
-          >NAV.team</a
-        >
-      </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a translate
+                   class="nav-link"
+                   routerLink="/mainpage"
+                   fragment="aboutus"
+                   routerLinkActive="active-link"
+                   target=""
+                >NAV.aboutUs</a
+                >
+            </li>
+            <li class="nav-item">
+                <a translate class="nav-link" routerLink="/news" routerLinkActive="active-link"
+                >NAV.news</a
+                >
+            </li>
+            <li class="nav-item">
+                <a translate class="nav-link" routerLink="/team" routerLinkActive="active-link"
+                >NAV.team</a
+                >
+            </li>
 
-      <li class="nav-item">
-        <a translate
-          class="nav-link"
-          routerLink="/achievements"
-          routerLinkActive="active-link"
-          >NAV.achievements</a
-        >
-      </li>
-      <li class="nav-item">
-        <a translate class="nav-link" routerLink="/gallery" routerLinkActive="active-link"
-          >NAV.gallery</a
-        >
-      </li>
-      <li class="nav-item">
-        <a translate
-          class="nav-link"
-          routerLink="/sponsors"
-          routerLinkActive="active-link"
-          >NAV.sponsors</a
-        >
-      </li>
-     
-      <li class="nav-item" *ngIf="authority">
-        <a
-          class="nav-link"
-          routerLink="/boatdata"
-          routerLinkActive="active-link"
-          >adatok</a
-        >
-      </li>
-      <!--
+            <li class="nav-item">
+                <a translate
+                   class="nav-link"
+                   routerLink="/achievements"
+                   routerLinkActive="active-link"
+                >NAV.achievements</a
+                >
+            </li>
+            <li class="nav-item">
+                <a translate class="nav-link" routerLink="/gallery" routerLinkActive="active-link"
+                >NAV.gallery</a
+                >
+            </li>
+            <li class="nav-item">
+                <a translate
+                   class="nav-link"
+                   routerLink="/sponsors"
+                   routerLinkActive="active-link"
+                >NAV.sponsors</a
+                >
+            </li>
 
-        <li class="nav-item" *ngIf="authority == 'admin'">
-          <a
-          class="nav-link"
-          routerLink="/users"
-          routerLinkActive="active-link"
-          >felhasználók</a
-          >
-        </li>
+            <li class="nav-item" *ngIf="authority">
+                <a
+                        class="nav-link"
+                        routerLink="/boatdata"
+                        routerLinkActive="active-link"
+                >adatok</a
+                >
+            </li>
+            <!--
 
-        <li>
-          <label for="">
-            <select #langselect (change)="translate.use(langselect.value)">
-                <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</option>
-            </select>
-          </label>
-        </li>
-      -->
+              <li class="nav-item" *ngIf="authority == 'admin'">
+                <a
+                class="nav-link"
+                routerLink="/users"
+                routerLinkActive="active-link"
+                >felhasználók</a
+                >
+              </li>
 
-      <li *ngIf="authority" class="nav-item">
-        <a class="nav-link" routerLink="/mainpage" (click)="logout()">Logout</a>
-      </li>
-      <li *ngIf=" translate.currentLang == 'en' " >
-        <a class="language" (click)="translate.use('hu')">
-          <img src="../../assets/i18n/hu.png" alt="language" title="en" />
-        </a>
-      </li>
-      <li *ngIf=" translate.currentLang == 'hu' " >
-        <a class="language" (click)="translate.use('en')">
-          <img src="../../assets/i18n/en.png" alt="language" title="en" />
-        </a>
-      </li>
-    </ul>
-  </div>
+              <li>
+                <label for="">
+                  <select #langselect (change)="translate.use(langselect.value)">
+                      <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</option>
+                  </select>
+                </label>
+              </li>
+            -->
+
+            <li *ngIf="authority" class="nav-item">
+                <a class="nav-link" routerLink="/mainpage" (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+  <ul class="nav">
+    <li *ngIf=" translate.currentLang == 'en' ">
+      <a class="language" (click)="translate.use('hu')">
+        <img src="../../assets/i18n/hu.png" alt="language" title="en"/>
+      </a>
+    </li>
+    <li *ngIf=" translate.currentLang == 'hu' ">
+      <a class="language" (click)="translate.use('en')">
+        <img src="../../assets/i18n/en.png" alt="language" title="en"/>
+      </a>
+    </li>
+  </ul>
 </nav>

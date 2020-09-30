@@ -12,7 +12,7 @@
             "job_hu": "Csapatkapitány és Gazdasági vezető",
             "job_en": "Team manager and Financial group leader",
             "picture": "czibere-szilard",
-            "linkedin": "string"
+            "linkedin": "https://hu.linkedin.com/in/szil%C3%A1rd-czibere-861b7b185"
         },
         "members": [
             {
@@ -58,7 +58,7 @@
         "name_hu": "Elektronikai csoport",
         "name_en": "Electronic group",
         "description_hu": "Az elektronikai csoport két részegységből áll: Elektrotechnika és Informatika. Az elektronikai csoport legfontosabb feladatai a hajó energia ellátásának a biztosítása és monitorozása. Számos villamos energetikai, valamint informatikai projekt köthető a csoporthoz, mint például akkumulátor design, töltésvezérlés tervezése, vagy szenzorok közötti kommunikáció. A 2020-as versenyszezontól a csapat nagy figyelmet fordít a felhő alapú IoT technológiákban rejlő lehetőségekre is.",
-        "description_en": "The most important tasks of the this group are to maintain and monitor the energy supply of the boat.\n",
+        "description_en": "The electronic group consists of two parts: Electrical Engineering and Computer Science. The most important tasks of the this group are to maintain and monitor the energy supply of the boat. The electric group deals with electrical power or software design projects, such as battery design, charge control design, or sensor-to-sensor communication. From the 2020 racing season, the team will also pay close attention to the potential of cloud-based IoT technologies.",
         "id": 0,
         "leader": {
             "id": 11,
@@ -67,7 +67,7 @@
             "picture": "kecskes-mark",
             "job_hu": "string",
             "job_en": "string",
-            "linkedin": "string"
+            "linkedin": "https://hu.linkedin.com/in/m%C3%A1rk-kecsk%C3%A9s-b238251b1?trk=people-guest_people_search-card&fbclid=IwAR2CuvM650hzcrkFpuG7aPP0uT6ASazw9XHMwzyL2PoobrerxktERWKwrE4"
         },
         "members": [
             {
@@ -86,7 +86,7 @@
                 "picture": "czibere-szilard",
                 "job_hu": "string",
                 "job_en": "string",
-                "linkedin": "string"
+                "linkedin": "https://hu.linkedin.com/in/szil%C3%A1rd-czibere-861b7b185"
             },
             {
                 "id": 3,
@@ -122,7 +122,7 @@
             "job_hu": "string",
             "job_en": "string",
             "picture": "czibere-szilard",
-            "linkedin": "string"
+            "linkedin": "https://hu.linkedin.com/in/szil%C3%A1rd-czibere-861b7b185"
         },
         "members": [
             {
@@ -176,9 +176,9 @@
     },
     "mechatronics_material": {
         "name_hu": "Anyagtechnológiai csoport",
-        "name_en": "Materials Technology group",
+        "name_en": "Material Technology group",
         "description_hu": "Az Anyagtechnológiai csoport feladatai közé tartozik a különböző elemekhez szükséges gyártástechnológia és anyaghasználat megválasztása, illetve a gyártás kivitelezése",
-        "description_en": "The materials science group is responsible for the production of products that have already been designed and validated by simulation. In addition to the planning and production. we also place high importance on the appropriate material technology.",
+        "description_en": "The material science group is responsible for the production of products that have already been designed and validated by simulation. In addition to the planning and production. we also place high importance on the appropriate material technology.",
         "id": 0,
         "leader": {
             "id": 0,
@@ -279,7 +279,7 @@
                 "picture": "visnyei-abel",
                 "job_hu": "string",
                 "job_en": "string",
-                "linkedin": "string"
+                "linkedin": "https://hu.linkedin.com/in/%C3%A1bel-visnyei-b290951a4?fbclid=IwAR1DcN1YBqSiqE81JAfn4nefhsih76f2I7mccJOjsY7a1MCf2v2WnrFhqxk"
             }
         ],
         "teamType": 6

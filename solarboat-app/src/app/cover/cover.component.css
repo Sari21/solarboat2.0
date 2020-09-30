@@ -1,6 +1,6 @@
 div.cover{
 
-    background-image: linear-gradient(to bottom, rgba(27,38,47,0) 80%, rgba(27,38,47,1)), url("/assets/mainpage/laptop-uj.png");
+    background-image: linear-gradient(to bottom, rgba(27,38,47,0) 80%, rgba(27,38,47,1)), url("/assets/mainpage/laptop-bg.png");
     background-color: #283A43;
     background-size: cover;
     background-repeat: no-repeat;
@@ -9,14 +9,16 @@ div.cover{
     margin: 0px;
 
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 500px) {
     div.cover{
-        background-image: linear-gradient(to bottom, rgba(27,38,47,0) 80%, rgba(27,38,47,1)), url("/assets/mainpage/mobile-bg.png");
+        background-image: linear-gradient(to bottom, rgba(27,38,47,0) 80%, rgba(27,38,47,1)), url("/assets/mainpage/mobile-bg-empty.png");
         background-color: #283A43;
         background-size: cover;
         background-repeat: no-repeat;
-        background-attachment: fixed;
-        height: 100%;
+        background-attachment: local;
+        height: auto;
+        width: 100%;
+        ovetflow-x: hidden;
         margin: 0px;
     }
     .container, .row{
@@ -25,6 +27,9 @@ div.cover{
     }
     .jumbotron{
         padding-bottom: 1rem !important;
+    }
+    p {
+        margin-left:1rem;
     }
 
 }
