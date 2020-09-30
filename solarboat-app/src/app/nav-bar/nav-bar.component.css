@@ -1,3 +1,10 @@
+nav {
+    width: 100%;
+
+}
+nav.navbar{
+    position: relative;
+}
 a.nav-link{
     font-family: 'KelsonSans-Bold';
     letter-spacing: 5px;

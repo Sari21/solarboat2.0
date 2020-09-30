@@ -84,7 +84,7 @@
       <div class="d-flex justify-content-center sponsors pb-5 m-0">
         <div class="title col-md-9 col-11">
           <h3 translate class="title pb-5">SPONSORS.main</h3>
-          <div class="d-flex align-content-start flex-wrap col-md-12">
+          <div class="d-flex justify-content-center flex-wrap col-md-12">
             <div *ngFor="let sponsor of main" class="col-6 col-md-4">
               <a *ngIf="authority == 'admin'"
                 (click)="clickMethod(sponsor.id)"
@@ -108,7 +108,7 @@
       <div class="d-flex justify-content-center sponsors pb-4 sponsorsFull">
         <div class="col-md-9 col-11">
           <h3 translate class="pb-5 pt-5 title">SPONSORS.top</h3>
-          <div class="d-flex align-content-start flex-wrap col-md-12">
+          <div class="d-flex justify-content-center flex-wrap col-md-12">
             <div *ngFor="let sponsor of top"  class="col-6 col-md-3">
               <a *ngIf="authority == 'admin'"
                 (click)="clickMethod(sponsor.id)"

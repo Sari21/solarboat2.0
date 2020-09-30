@@ -19,11 +19,11 @@
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4" [translateParams]="{ electronic_hu: electronics.name_hu, electronic_en: electronics.name_en}">MEMBERS.electronic</h1>
             <div class="row">
-                <div class="col- load-more pb-5 pl-3">
+                <div class="col- load-more pb-lg-5 pb-md-5 pb-1 pl-3">
                     <a class="btn"  data-toggle="collapse" data-target="#collapseElectr" href="javascript:void(0)"><span translate>BUTTON.description</span></a>
                 </div>
                 <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseElectr">
-                    <div translate class="description col- pl-lg-5" [translateParams]="{ electronic_desc_hu: electronics.description_hu, electronic_desc_en: electronics.description_en}">
+                    <div translate class="description col- pl-lg-5 pb-lg-4 pb-md-4 pb-0" [translateParams]="{ electronic_desc_hu: electronics.description_hu, electronic_desc_en: electronics.description_en}">
                         MEMBERS.electronicDesc
                     </div>
                 </div>
@@ -44,8 +44,8 @@
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4" [translateParams]="{ economic_hu: economics.name_hu, economic_en: economics.name_en}">MEMBERS.economic</h1>
             <div class="row">
-                <div class="col- load-more pb-5 pl-3">
-                    <a class="btn"  data-toggle="collapse" data-target="#collapseEcon" href="javascript:void(0)"><span>Leírás</span></a>
+                <div class="col- load-more pb-lg-5 pb-md-5 pb-1  pl-3">
+                    <a class="btn"  data-toggle="collapse" data-target="#collapseEcon" href="javascript:void(0)"><span translate>BUTTON.description</span></a>
                 </div>
                 <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseEcon">
                     <div translate class="description col- pl-lg-5" [translateParams]="{ economic_desc_hu: economics.description_hu, economic_desc_en: economics.description_en}">
@@ -69,7 +69,7 @@
             <h1 translate class="title pb-4" [translateParams]="{ mechanical_hu: mechatronics.name_hu, mechanical_en: mechatronics.name_en}">MEMBERS.mechanical</h1>
             <div class="row">
                 <div class="col- load-more pb-5 pl-3">
-                    <a class="btn"  data-toggle="collapse" data-target="#collapseMech" href="javascript:void(0)"><span>Leírás</span></a>
+                    <a class="btn"  data-toggle="collapse" data-target="#collapseMech" href="javascript:void(0)"><span translate>BUTTON.description</span></a>
                 </div>
                 <div class="collapse col-lg-6 col-md-6 col-sm-12" id="collapseMech">
                     <div translate class="description col- pl-lg-5 pb-1" [translateParams]="{ mechanical_desc_hu: mechatronics.description_hu, mechanical_desc_en: mechatronics.description_en}">
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <h2 translate class="title subtitle pb-4"[translateParams]="{ material_hu: mechatronicsMaterial.name_hu, material_en: mechatronicsMaterial.name_en}">MEMBERS.material</h2>
+            <h2 translate class="title subtitle pb-lg-4 pb-md-4 pb-1 "[translateParams]="{ material_hu: mechatronicsMaterial.name_hu, material_en: mechatronicsMaterial.name_en}">MEMBERS.material</h2>
             <app-team-members *ngIf="mechatronicsMaterial.members"
                               [members]="mechatronicsMaterial.members"
                               [leader]="mechatronicsMaterial.leader"
@@ -92,7 +92,7 @@
             ></app-team-members>
 
 
-            <h2 translate class="title subtitle pb-4" [translateParams]="{ simulation_hu: mechatronicsSimulation.name_hu, simulation_en: mechatronicsSimulation.name_en}">MEMBERS.simulation</h2>
+            <h2 translate class="title subtitle pb-lg-4 pb-md-4 pb-1" [translateParams]="{ simulation_hu: mechatronicsSimulation.name_hu, simulation_en: mechatronicsSimulation.name_en}">MEMBERS.simulation</h2>
             <app-team-members *ngIf="mechatronicsSimulation.members"
                               [members]="mechatronicsSimulation.members"
                               [leader]="mechatronicsSimulation.leader"
