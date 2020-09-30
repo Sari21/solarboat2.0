@@ -5,11 +5,13 @@ import { NewsService} from '../shared/news.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
 import {Globals} from '../globals';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css'],
+  styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
   allnews: News[] = [];
@@ -30,8 +32,10 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNews();
+    console.log('gett');
+    console.log(this.allnews.length);
     this.checkAuth();
-    console.log(this.allnews[0].date);
+    // console.log(this.allnews[0].date);
   }
   onSubmit(empForm: any, event: Event) {
     console.log(this.form.date);
@@ -102,6 +106,7 @@ export class NewsComponent implements OnInit {
       (res) => {
         // tslint:disable-next-line:prefer-const
         let data: any = res;
+        console.log(data);
         <News[]> data.content.forEach((element) => {
           this.allnews.push(element);
         });
@@ -139,5 +144,26 @@ export class NewsComponent implements OnInit {
     }
     this.allnews.unshift(n);
   }
-
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule'
+      ]
+    ]
+  };
 }
