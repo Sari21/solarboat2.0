@@ -27,8 +27,8 @@ export class AchievementsComponent implements OnInit {
   constructor(private globals: Globals, private http: HttpClient, private achievementService: AchievementService,
               private tokenStorage: TokenStorageService, pictureService: PictureService) {
     this.pictureService = pictureService;
-    this.form.place_en = '1st';
-    this.form.place_hu = '1.';
+    this.form.place_en = '1st place';
+    this.form.place_hu = '1. helyezés';
   }
 
   ngOnInit(): void {
@@ -64,6 +64,12 @@ export class AchievementsComponent implements OnInit {
   }
   //post
   onSubmit(empForm: any) {
+    if (this.form.place_hu == null) {
+      this.form.place_hu = ' ';
+    }
+    if (this.form.place_en == null) {
+      this.form.place_en = ' ';
+    }
     this.uploadFileToActivity();
     const o: Object = {
         title_hu: this.form.title_hu,

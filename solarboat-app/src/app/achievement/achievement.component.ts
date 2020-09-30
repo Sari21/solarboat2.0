@@ -31,6 +31,7 @@ export class AchievementComponent implements OnInit {
     this.form.location_en = this.achievement.location_en;
     this.form.place_hu = this.achievement.place_hu;
     this.form.place_en = this.achievement.place_en;
+    this.form.date = this.achievement.date;
   }
 
   delete(id: number) {
