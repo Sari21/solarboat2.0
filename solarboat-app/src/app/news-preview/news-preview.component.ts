@@ -34,8 +34,9 @@ export class NewsPreviewComponent implements OnInit {
     // this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
     // this.shortArticleEn = he.decode(this.news.content_en.replace(/<[^>]+>/g, ''));
     // this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
-    this.shortArticleHu = '...';
-    this.shortArticleEn = '';
+    this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
+    this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
+
     this.form.title = this.news.title_hu;
     this.form.content = this.news.content_hu;
     this.form.title_en = this.news.title_en;

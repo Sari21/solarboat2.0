@@ -31,8 +31,8 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./admin/register/register.component";
 import { TeamMembersComponent } from "./team-members/team-members.component";
 import {
-  AuthGuardService as AuthGuard,
-  AuthGuardService,
+    AuthGuardService as AuthGuard,
+    AuthGuardService,
 } from "./shared/auth-guard.service";
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
@@ -43,36 +43,38 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {Globals} from './globals';
 
+// import { AngularEditorModule } from '@kolkov/angular-editor';
+
 export function HttpLoaderFactory(http: HttpClient){
-  return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainpageComponent,
-    TeamComponent,
-    FooterComponent,
-    NavBarComponent,
-    AboutusComponent,
-    MainpageNewsComponent,
-    NewsPreviewComponent,
-    CoverComponent,
-    NewsComponent,
-    BoatDataComponent,
-    GraphComponent,
-    AchievementsComponent,
-    AchievementComponent,
-    BarChartComponent,
-    SponsorsComponent,
-    LoginComponent,
-    RegisterComponent,
-    TeamMembersComponent,
-    GalleryComponent,
-    NavBarComponent,
-    UsersComponent
-  ],
-  // tslint:disable-next-line:max-line-length
+    declarations: [
+        AppComponent,
+        MainpageComponent,
+        TeamComponent,
+        FooterComponent,
+        NavBarComponent,
+        AboutusComponent,
+        MainpageNewsComponent,
+        NewsPreviewComponent,
+        CoverComponent,
+        NewsComponent,
+        BoatDataComponent,
+        GraphComponent,
+        AchievementsComponent,
+        AchievementComponent,
+        BarChartComponent,
+        SponsorsComponent,
+        LoginComponent,
+        RegisterComponent,
+        TeamMembersComponent,
+        GalleryComponent,
+        NavBarComponent,
+        UsersComponent
+    ],
+    // tslint:disable-next-line:max-line-length
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -88,18 +90,19 @@ export function HttpLoaderFactory(http: HttpClient){
         CommonModule,
         JwtModule,
         ReactiveFormsModule,
+        // AngularEditorModule,
         TranslateModule.forRoot({
-          loader:{
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-          }
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
         })
     ],
-    
-  bootstrap: [AppComponent],
+
+    bootstrap: [AppComponent],
 
 
-  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule, Globals]
+    providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule, Globals]
 })
 export class AppModule {}
