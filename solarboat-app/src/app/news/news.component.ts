@@ -5,13 +5,20 @@ import { NewsService} from '../shared/news.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
 import {Globals} from '../globals';
+// import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css'],
+  styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
+  constructor(private http: HttpClient, private apiService: NewsService,
+              private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
+    this.pictureService = pictureService;
+    this.form.date = new Date();
+  }
   allnews: News[] = [];
   pageNumber = 0;
   isLastPage = false;
@@ -22,16 +29,35 @@ export class NewsComponent implements OnInit {
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
-  constructor(private http: HttpClient, private apiService: NewsService,
-              private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
-    this.pictureService = pictureService;
-    this.form.date = new Date();
-  }
+  // config: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: true,
+  //   height: '15rem',
+  //   minHeight: '5rem',
+  //   placeholder: 'Enter text here...',
+  //   translate: 'no',
+  //   defaultParagraphSeparator: 'p',
+  //   defaultFontName: 'Arial',
+  //   toolbarHiddenButtons: [
+  //     [
+  //       'textColor',
+  //       'backgroundColor',
+  //       'customClasses',
+  //       'link',
+  //       'unlink',
+  //       'insertImage',
+  //       'insertVideo',
+  //       'insertHorizontalRule'
+  //     ]
+  //   ]
+  // };
 
   ngOnInit(): void {
     this.getNews();
+    console.log('gett');
+    console.log(this.allnews.length);
     this.checkAuth();
-    console.log(this.allnews[0].date);
+    // console.log(this.allnews[0].date);
   }
   onSubmit(empForm: any, event: Event) {
     console.log(this.form.date);
@@ -99,18 +125,19 @@ export class NewsComponent implements OnInit {
   }
   public getNews() {
     this.apiService.getNews(this.pageNumber).subscribe(
-      (res) => {
-        // tslint:disable-next-line:prefer-const
-        let data: any = res;
-        <News[]> data.content.forEach((element) => {
-          this.allnews.push(element);
-        });
-        this.pageNumber++;
-        this.isLastPage = data.last;
-      },
-      (err) => {
-        alert('get error');
-      }
+        (res) => {
+          // tslint:disable-next-line:prefer-const
+          let data: any = res;
+          console.log(data);
+          <News[]> data.content.forEach((element) => {
+            this.allnews.push(element);
+          });
+          this.pageNumber++;
+          this.isLastPage = data.last;
+        },
+        (err) => {
+          alert('get error');
+        }
     );
   }
 
@@ -139,5 +166,4 @@ export class NewsComponent implements OnInit {
     }
     this.allnews.unshift(n);
   }
-
 }

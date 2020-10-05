@@ -14,10 +14,13 @@ div.mainpage-news{
 h1.title{
     color: white;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 500px) {
     app-news-preview{
         padding-left: 0px !important;
         padding-right: 0px !important;
+    }
+    div.mainpage-news {
+        background-attachment: local;
     }
 }
 
