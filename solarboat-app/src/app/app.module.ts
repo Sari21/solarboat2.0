@@ -90,13 +90,12 @@ export function HttpLoaderFactory(http: HttpClient){
         CommonModule,
         JwtModule,
         ReactiveFormsModule,
-        // AngularEditorModule,
         TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
+          loader:{
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
         })
     ],
 
