@@ -53,16 +53,18 @@ public class DataGroupService {
     public void deleteById(Long id){dataGroupRepository.deleteById(id);}
     public DataGroup addBoatData(BoatData boatData){
         Optional<DataGroup> optGroup = dataGroupRepository.findTopByOrderByIdDesc();
-        notificationDispatcher.dispatch();
+        DataGroup updatedDataGroup;
         if(optGroup.isPresent()){
             optGroup.get().addBoatData(boatData);
-            return dataGroupRepository.save(optGroup.get());
+            updatedDataGroup = dataGroupRepository.save(optGroup.get());
         }
         else{
             DataGroup newGroup = new DataGroup();
             newGroup.addBoatData(boatData);
-            return dataGroupRepository.save(newGroup);
+            updatedDataGroup = dataGroupRepository.save(newGroup);
         }
+        notificationDispatcher.dispatch(updatedDataGroup.getBoatDataList().get(updatedDataGroup.getBoatDataList().size() - 1));
+        return updatedDataGroup;
     }
 
     public void exportAll(HttpServletResponse response)throws Exception{

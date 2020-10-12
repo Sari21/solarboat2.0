@@ -3,6 +3,7 @@ import {RxStomp} from "@stomp/rx-stomp";
 
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
+import { BoatData } from '../model/boat-data';
 
 @Component({
   selector: 'app-notifications-rx',
@@ -33,9 +34,9 @@ export class NotificationsRxComponent {
     this.client.watch('/user/notification/item')
       .pipe(
         map((response) => {
-          const text: string = JSON.parse(response.body).text;
-          console.log('Got ' + text);
-          return text;
+          const data = JSON.parse(response.body);
+          console.log(data);
+          return data;
         }))
       .subscribe((notification: string) => this.notifications.push(notification));
   }

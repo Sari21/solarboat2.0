@@ -1,6 +1,8 @@
 package hu.schdesign.solarboat.service;
 
 
+import hu.schdesign.solarboat.model.BoatData;
+import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +32,14 @@ public class NotificationDispatcher {
 
     public void add(String sessionId) {
         listeners.add(sessionId);
-        dispatch();
+        dispatch(new BoatData());
     }
 
     public void remove(String sessionId) {
         listeners.remove(sessionId);
     }
 
-    public void dispatch() {
+    public void dispatch(BoatData boatData) {
         for (String listener : listeners) {
             LOGGER.info("Sending notification to " + listener);
 
@@ -49,7 +51,8 @@ public class NotificationDispatcher {
             template.convertAndSendToUser(
                     listener,
                     "/notification/item",
-                    new Notification(Integer.toString(value)),
+                    boatData,
+                    //new Notification(Integer.toString(value)),
                     headerAccessor.getMessageHeaders());
         }
     }
