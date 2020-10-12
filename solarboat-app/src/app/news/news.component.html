@@ -29,19 +29,19 @@
                         <div class="col-md-12 col-lg-12 col-12">
                           <div class="form-group">
                             <label for="content">Tartalom</label>
-                            <input id="content"
-                                   type="text"
-                                   class="form-control"
-                                   required
-                                   [(ngModel)]="form.content" name="content"
-                                   [ngClass]="{'failed': failed }">
-                            <!--                            <angular-editor id="content"-->
-                            <!--                                            required-->
-                            <!--                                            [(ngModel)]="form.content"-->
-                            <!--                                            name="content"-->
-                            <!--                                            [ngClass]="{'failed': failed }"-->
-                            <!--                                            [config]="config"-->
-                            <!--                            ></angular-editor>-->
+<!--                            <input id="content"-->
+<!--                                   type="text"-->
+<!--                                   class="form-control"-->
+<!--                                   required-->
+<!--                                   [(ngModel)]="form.content" name="content"-->
+<!--                                   [ngClass]="{'failed': failed }">-->
+                            <angular-editor id="content"
+                                            required
+                                            [(ngModel)]="form.content"
+                                            name="content"
+                                            [ngClass]="{'failed': failed }"
+                                            [config]="config"
+                            ></angular-editor>
                           </div>
                         </div>
                       </div>
@@ -65,19 +65,19 @@
                         <div class="col-md-12 col-lg-12 col-12">
                           <div class="form-group">
                             <label for="content_en">Content</label>
-                            <input id="content_en"
-                                   type="text"
-                                   class="form-control"
-                                   required
-                                   [(ngModel)]="form.content_en" name="content_en"
-                                   [ngClass]="{'failed': failed }">
-                            <!--                            <angular-editor id="content_en"-->
-                            <!--                                            required-->
-                            <!--                                            [(ngModel)]="form.content_en"-->
-                            <!--                                            name="content_en"-->
-                            <!--                                            [ngClass]="{'failed': failed }"-->
-                            <!--                                            [config]="config"-->
-                            <!--                            ></angular-editor>-->
+<!--                            <input id="content_en"-->
+<!--                                   type="text"-->
+<!--                                   class="form-control"-->
+<!--                                   required-->
+<!--                                   [(ngModel)]="form.content_en" name="content_en"-->
+<!--                                   [ngClass]="{'failed': failed }">-->
+                              <angular-editor id="content_en"
+                                              required
+                                              [(ngModel)]="form.content_en"
+                                              name="content_en"
+                                              [ngClass]="{'failed': failed }"
+                                              [config]="config"
+                              ></angular-editor>
                           </div>
                         </div>
                       </div>

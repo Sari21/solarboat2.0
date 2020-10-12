@@ -5,8 +5,7 @@ import { NewsService} from '../shared/news.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {PictureService} from '../shared/picture.service';
 import {Globals} from '../globals';
-// import { AngularEditorConfig } from '@kolkov/angular-editor';
-
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-news',
@@ -29,28 +28,28 @@ export class NewsComponent implements OnInit {
   errorMessage = '';
   pictureService: PictureService;
   fileToUpload: File = null;
-  // config: AngularEditorConfig = {
-  //   editable: true,
-  //   spellcheck: true,
-  //   height: '15rem',
-  //   minHeight: '5rem',
-  //   placeholder: 'Enter text here...',
-  //   translate: 'no',
-  //   defaultParagraphSeparator: 'p',
-  //   defaultFontName: 'Arial',
-  //   toolbarHiddenButtons: [
-  //     [
-  //       'textColor',
-  //       'backgroundColor',
-  //       'customClasses',
-  //       'link',
-  //       'unlink',
-  //       'insertImage',
-  //       'insertVideo',
-  //       'insertHorizontalRule'
-  //     ]
-  //   ]
-  // };
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule'
+      ]
+    ]
+  };
 
   ngOnInit(): void {
     this.getNews();

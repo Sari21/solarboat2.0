@@ -43,7 +43,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {Globals} from './globals';
 
-// import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 export function HttpLoaderFactory(http: HttpClient){
     return new TranslateHttpLoader(http);
@@ -89,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient){
         NgxChartsModule,
         CommonModule,
         JwtModule,
+        AngularEditorModule,
         ReactiveFormsModule,
         TranslateModule.forRoot({
           loader:{
