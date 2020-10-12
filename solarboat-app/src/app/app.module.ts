@@ -46,6 +46,7 @@ import {Globals} from './globals';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NotificationsRxComponent } from './notifications-rx/notifications-rx.component';
 
+
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
@@ -105,6 +106,11 @@ export function HttpLoaderFactory(http: HttpClient){
   bootstrap: [AppComponent],
 
 
-  providers: [httpInterceptorProviders, AuthGuard, AuthGuardService, JwtModule, Globals]
+  providers: [
+    httpInterceptorProviders, 
+    AuthGuard, 
+    AuthGuardService, 
+    JwtModule, 
+    Globals]
 })
 export class AppModule {}

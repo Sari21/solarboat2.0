@@ -37,7 +37,6 @@ public class NotificationDispatcher {
         listeners.remove(sessionId);
     }
 
-    @Scheduled(fixedDelay = 2000)
     public void dispatch() {
         for (String listener : listeners) {
             LOGGER.info("Sending notification to " + listener);

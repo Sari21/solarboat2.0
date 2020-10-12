@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -22,10 +20,12 @@ import java.util.Optional;
 public class DataGroupService {
     private final DataGroupRepository dataGroupRepository;
     private ArrayList<DataGroup> exportList;
+    private final NotificationDispatcher notificationDispatcher;
 
     @Autowired
-    public DataGroupService(DataGroupRepository dataGroupRepository){
+    public DataGroupService(DataGroupRepository dataGroupRepository, NotificationDispatcher notificationDispatcher){
         this.dataGroupRepository = dataGroupRepository;
+        this.notificationDispatcher = notificationDispatcher;
     }
 
     public DataGroup startDataGroup(DataGroup dataGroup){return dataGroupRepository.save(dataGroup);}
@@ -53,6 +53,7 @@ public class DataGroupService {
     public void deleteById(Long id){dataGroupRepository.deleteById(id);}
     public DataGroup addBoatData(BoatData boatData){
         Optional<DataGroup> optGroup = dataGroupRepository.findTopByOrderByIdDesc();
+        notificationDispatcher.dispatch();
         if(optGroup.isPresent()){
             optGroup.get().addBoatData(boatData);
             return dataGroupRepository.save(optGroup.get());

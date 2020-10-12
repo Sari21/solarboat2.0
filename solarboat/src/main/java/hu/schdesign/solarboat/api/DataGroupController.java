@@ -55,62 +55,61 @@ public class DataGroupController {
         return dataGroupService.getAllDataGroups();
     }
     */
-   @Secured("ROLE_USER")
+   @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "last")
     public Optional<DataGroup> getLastDataGroup(){
         return dataGroupService.getLastDataGroup();
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping
     public ResponseBoatData getResponseBoatData(){ return dataGroupService.getDataGroupLast();}
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "response/{id}")
     public ResponseBoatData getResponseBoatData(@PathVariable("id") Long id){ return dataGroupService.getDataGroupId(id);}
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "ids")
     public ArrayList<dataPair<Long, String>> getIds(){
         return  dataGroupService.getDatesAndIds();
     }
 
-
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "{id}")
     public Optional<DataGroup> getDataGroupById(@PathVariable("id") Long id){
         return dataGroupService.getDataGroupById(id);
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "/date")
     public Optional<DataGroup> getDataGroupByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime date){
         return dataGroupService.getDataGroupByDate(date);
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping
     public void deleteAllDataGroups(){
         dataGroupService.deleteAll();
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping(path = "first")
     public void deleteFirstDataGroups(){
         dataGroupService.deleteFirst();
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping(path = "{id}")
     public void deleteDataGroupById(@PathVariable("id") Long id){
         dataGroupService.deleteById(id);
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path ="export/{id}")
     public ResponseEntity<Resource>  exportById( HttpServletResponse response, HttpServletRequest request, @PathVariable("id") Long id) throws Exception {
         dataGroupService.exportById(id, response);
         return exportFile(request);
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "export/lastfive")
     public ResponseEntity<Resource> exportLast(HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportLast(response);
         return exportFile(request);
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "export")
     public ResponseEntity<Resource> exportAll(HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportAll(response);
