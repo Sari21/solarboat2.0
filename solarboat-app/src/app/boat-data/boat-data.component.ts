@@ -2,6 +2,9 @@ import { Component, OnInit, Output, NgModule, Input } from "@angular/core";
 import { BoatDataService } from "../boat-data.service";
 import { interval, Subscription } from "rxjs";
 import { Dates } from "../model/dates";
+import {RxStomp} from "@stomp/rx-stomp";
+import * as SockJS from 'sockjs-client';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: "app-boat-data",
@@ -26,6 +29,7 @@ export class BoatDataComponent implements OnInit {
   EXPORT_URL = this.BASE_URL;
   show = false;
   showDetails = false;
+  private client: RxStomp;
 
   constructor(private dataService: BoatDataService) {}
 
@@ -33,7 +37,31 @@ export class BoatDataComponent implements OnInit {
     // this.subscription = this.source.subscribe((val) => this.makeGraphs());
     this.lastDataGroup();
     this.getDates();
+
+    if (!this.client || this.client.connected) {
+      this.client = new RxStomp();
+      this.client.configure({
+        webSocketFactory: () => new SockJS('http://localhost:8080/notifications'),
+        debug: (msg: string) => console.log(msg)
+      });
+      this.client.activate();
+
+      this.watchForNotifications();
+
+      console.info('connected!');
+    }
   }
+  private watchForNotifications() {
+    this.client.watch('/user/notification/item')
+      .pipe(
+        map((response) => {
+          const text: string = JSON.parse(response.body).text;
+          console.log('Got ' + text);
+          return text;
+        }))
+      .subscribe((notification: string) =>console.log(notification));
+  }
+
   public setShow() {
     if (this.show == false) {
       this.show = true;

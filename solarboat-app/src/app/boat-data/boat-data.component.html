@@ -1,7 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <div class="justify-content-center d-flex">
   <div class="col-10">
-    
     <div class="input-group mt-5 mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
@@ -11,55 +10,62 @@
           {{ item.value }}
         </option>
       </select>
-</div>
+    </div>
 
+    <a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"
+      ><span>Opciók</span></a
+    >
 
-<a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"  ><span>Opciók</span></a>
+    <div *ngIf="show" class="d-flex mb-3">
+      <a class="btn" href="{{ BASE_URL }}"><span>Összes letöltése</span></a>
+      <a class="btn" href="{{ EXPORT_URL }}"
+        ><span>Kiválasztott letöltése</span></a
+      >
+      <a
+        class="btn"
+        (click)="deleteById(selectedDate.name)"
+        href="javascript:void(0)"
+        ><span>Kiválasztott törlése</span></a
+      >
+      <a class="btn" (click)="deleteAll()" href="javascript:void(0)"
+        ><span>Összes törlése</span></a
+      >
+    </div>
 
-<div *ngIf="show" class="d-flex mb-3">
-  
-  <a class="btn" href="{{ BASE_URL }}"  ><span>Összes letöltése</span></a>
-  <a class="btn" href="{{ EXPORT_URL }}"  ><span>Kiválasztott letöltése</span></a>
-  <a class="btn" (click)="deleteById(selectedDate.name)" href="javascript:void(0)"  ><span>Kiválasztott törlése</span></a>
-  <a class="btn"  (click)="deleteAll()" href="javascript:void(0)" ><span>Összes törlése</span></a>
-  
-  
-</div>
+    <div class="d-flex flex-row justify-content-center" id=" firstrow">
+      <div class="d-inline-flex, flex-row">
+        <app-bar-chart (click)="setShowDetails()" [data]="soc"></app-bar-chart>
+        <app-bar-chart (click)="setShowDetails()" [data]="temp"></app-bar-chart>
+      </div>
 
-<div class="d-flex flex-row justify-content-center" id=" firstrow">
-  <div class="d-inline-flex, flex-row">
-    <app-bar-chart (click)="setShowDetails()" [data]="soc"></app-bar-chart>
-    <app-bar-chart (click)="setShowDetails()" [data]="temp"></app-bar-chart>
+      <table class="col-5" id="errorTable">
+        <thead>
+          <tr>
+            <th class="p-3">Errors:</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr *ngFor="let error of errors">
+            <td class="pl-3 pb-2">{{ error.source }}</td>
+            <td class="pr-3 pl-3 pb-2">{{ error.message }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex align-items-center flex-column">
+      <app-graph
+        *ngIf="showDetails"
+        class="d-inline-flex p-5"
+        [data]="temp_soc"
+      ></app-graph>
+      <app-graph class="d-inline-flex p-5" [data]="battery"></app-graph>
+      <app-graph class="d-inline-flex p-5" [data]="motor"></app-graph>
+      <app-graph class="d-inline-flex p-5" [data]="tilt"></app-graph>
+      <app-graph class="d-inline-flex p-5" [data]="compass"></app-graph>
+      <app-graph class="d-inline-flex p-5" [data]="acceleration"></app-graph>
+    </div>
   </div>
-  
-  <table class="col-5" id="errorTable">
-    <thead>
-      <tr>
-        <th class="p-3">Errors:</th>
-      </tr>
-    </thead>
-    <tbody class="">
-      <tr *ngFor="let error of errors">
-        <td class="pl-3 pb-2">{{ error.source }}</td>
-        <td class="pr-3 pl-3 pb-2">{{ error.message }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="d-flex align-items-center flex-column">
-  <app-graph
-  *ngIf="showDetails"
-    class="d-inline-flex p-5"
-    [data]="temp_soc"
-    ></app-graph>
-    <app-graph class="d-inline-flex p-5" [data]="battery"></app-graph>
-  <app-graph class="d-inline-flex p-5" [data]="motor"></app-graph>
-  <app-graph class="d-inline-flex p-5" [data]="tilt"></app-graph>
-  <app-graph class="d-inline-flex p-5" [data]="compass"></app-graph>
-  <app-graph class="d-inline-flex p-5" [data]="acceleration"></app-graph>
-</div>
-</div>
 </div>
 
 <app-footer></app-footer>

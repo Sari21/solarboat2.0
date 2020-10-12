@@ -1,8 +1,8 @@
 package hu.schdesign.solarboat.service;
 
-import hu.schdesign.solarboat.dao.NewsPagingRepository;
 import hu.schdesign.solarboat.dao.NewsRepository;
 import hu.schdesign.solarboat.model.News;
+import io.reactivex.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,4 +54,5 @@ public class NewsService {
             return null;
         }
     }
+
 }
