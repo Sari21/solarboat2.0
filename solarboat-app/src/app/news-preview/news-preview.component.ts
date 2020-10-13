@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {News} from '../model/news';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {HttpClient} from '@angular/common/http';
 import {NewsService} from '../shared/news.service';
 import {Globals} from '../globals';
-import he from 'he';
+// import {he} from 'he';
 
 @Component({
   selector: 'app-news-preview',
@@ -30,12 +30,12 @@ export class NewsPreviewComponent implements OnInit {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
-    // this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
-    // this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
-    this.shortArticleHu = he.decode(this.news.content_hu.replace(/<[^>]+>/g, ''));
-    this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
-    this.shortArticleEn = he.decode(this.news.content_en.replace(/<[^>]+>/g, ''));
-    this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
+    this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
+    this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
+    // this.shortArticleHu = he.decode(this.news.content_hu.replace(/<[^>]+>/g, ''));
+    // this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
+    // this.shortArticleEn = he.decode(this.news.content_en.replace(/<[^>]+>/g, ''));
+    // this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
 
     this.form.title = this.news.title_hu;
     this.form.content = this.news.content_hu;
