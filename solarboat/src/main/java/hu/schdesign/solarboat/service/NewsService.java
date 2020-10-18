@@ -48,7 +48,7 @@ public class NewsService {
     }
 
     public Page<News> getPage(int pageNo, int pageSize) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("date").descending().by("id").descending());
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("date").descending());
         Page<News> pagedResult = newsRepository.findAll(paging);
         if (pagedResult.hasContent()) {
             return pagedResult;

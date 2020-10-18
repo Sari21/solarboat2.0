@@ -99,6 +99,19 @@
                 </div>
               </div>
 
+              <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                <div class="form-group">
+                  <label class="col-12" for="date">Dátum (opcionális)</label>
+                  <input id="date"
+                         type="text"
+                         class="form-control"
+                         placeholder="YYYY-MM-DD"
+                         [(ngModel)]="form.date" name="date"
+                         [ngClass]="{'failed': failed }">
+                </div>
+              </div>
+
               <div class="row justify-content-end">
                 <a class="btn mr-4" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)"
                    [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
