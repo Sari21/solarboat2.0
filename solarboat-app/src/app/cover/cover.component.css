@@ -1,5 +1,4 @@
 div.cover{
-
     background-image: linear-gradient(to bottom, rgba(27,38,47,0) 80%, rgba(27,38,47,1)), url("/assets/mainpage/laptop-bg.png");
     background-color: #283A43;
     background-size: cover;
@@ -31,7 +30,6 @@ div.cover{
     p {
         margin-left:1rem;
     }
-
 }
 h1.h0.title{
     font-family: 'KelsonSans-Bold';

@@ -115,5 +115,12 @@ mobil nézet:
 
 3. lelellenõriztetjük, hírek, achik, feltöltése, lefordítása
 
+_______________________________
+wtf_image, projekt3 -> minden benne van kivéve he.js, mûködik
+
+projekt 4 -> projekt 3 átalakítás: he.js-el együtt
+		error
+		átalakítás: update npm futtatása
+
 
  
