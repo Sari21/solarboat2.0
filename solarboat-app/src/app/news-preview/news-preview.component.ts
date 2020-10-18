@@ -29,13 +29,29 @@ export class NewsPreviewComponent implements OnInit {
   constructor(private http: HttpClient, private globals: Globals, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
     this.pictureService = pictureService;
   }
+  decodeEntities(str) {
+    // this prevents any overhead from creating the object each time
+    const element = document.createElement('div');
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = '';
+    }
+    return str;
+  }
   ngOnInit(): void {
-    this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
-    this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
-    // this.shortArticleHu = he.decode(this.news.content_hu.replace(/<[^>]+>/g, ''));
-    // this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
-    // this.shortArticleEn = he.decode(this.news.content_en.replace(/<[^>]+>/g, ''));
-    // this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
+    // this.shortArticleHu = this.news.content_hu.substring(0, 100) + '...';
+    // this.shortArticleEn = this.news.content_en.substring(0, 100) + '...';
+    console.log(this.news.content_hu.replace(/<[^>]+>/g, ''));
+    // this.shortArticleHu = decodeURI(this.news.content_hu.replace(/<[^>]+>/g, ''));
+    this.shortArticleHu = this.decodeEntities(this.news.content_hu.replace(/<[^>]+>/g, ''));
+    this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
+    // this.shortArticleEn = decodeURI(this.news.content_en.replace(/<[^>]+>/g, ''));
+    this.shortArticleEn = this.decodeEntities(this.news.content_en.replace(/<[^>]+>/g, ''));
+    this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
 
     this.form.title = this.news.title_hu;
     this.form.content = this.news.content_hu;
