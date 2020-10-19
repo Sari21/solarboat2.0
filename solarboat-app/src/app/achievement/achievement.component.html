@@ -1,125 +1,161 @@
-
-    <div class="timeline-badge">
-        <img *ngIf="achievement.isLast" class="last-one" src="../../assets/achievement/cake.png"  width="35"   />
-        <img *ngIf="!achievement.isLast"  src="../../assets/achievement/logo.png"  width="35"/>
+<div class="timeline-badge">
+    <img *ngIf="achievement.isLast" class="last-one" src="../../assets/achievement/cake.png" width="35"/>
+    <img *ngIf="!achievement.isLast" src="../../assets/achievement/logo.png" width="35"/>
+</div>
+<div class="timeline-panel pl-md-5 pr-md-5 pl-lg-5 pr-lg-5 pb-4 pr-3">
+    <div class="timeline-heading ">
+        <div *ngIf=" authority =='admin'" class="row justify-content-end edit">
+            <a class="col-2" (click)="openContent(EditForm)">
+                <mat-icon class="update-icon">edit</mat-icon>
+            </a>
+            <a class="col-2" (click)="delete(achievement.id)">
+                <mat-icon class="update-icon">delete</mat-icon>
+            </a>
+        </div>
+        <div class="row timeline-title p-md-3 p-lg-3 pt-md-3 pt-lg-3 pb-3 pr-2">
+            <p id="timeline-location" class="pl-3 pl-md-0 pl-lg-0 pt-md-3 pt-lg-3 pt-1 " translate
+               [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
+                ACHIEVEMENTS.location</p>
+            <p class="pt-lg-3 pl-3 pt-1 pt-md-3" translate
+               [translateParams]="{ title_hu: achievement.title_hu, title_en: achievement.title_en}">
+                ACHIEVEMENTS.title </p>
+        </div>
+        <div class=" .d-block .d-md-none row col-12 date pt-lg-3 pt-md-3 mb-2 align-items-center">
+            <mat-icon>calendar_today</mat-icon>
+            <p class="pl-1" translate [translateParams]="{date: achievement.date}">ACHIEVEMENTS.date</p>
+        </div>
     </div>
-    <div class="timeline-panel pl-md-5 pr-md-5 pl-lg-5 pr-lg-5 pb-4 pr-3">
-        <div class="timeline-heading ">
-            <div  *ngIf=" authority =='admin'" class="row justify-content-end edit">
-                <a class="col-2"  (click)="openContent(EditForm)"><mat-icon class="update-icon">edit</mat-icon></a>
-                <a class="col-2" (click)="delete(achievement.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
-            </div>
-            <div class="row timeline-title p-md-3 p-lg-3 pt-md-3 pt-lg-3 pb-3 pr-2">
-                <p id="timeline-location" class="pl-3 pl-md-0 pl-lg-0 pt-md-3 pt-lg-3 pt-1 " translate [translateParams]="{ location_hu: achievement.location_hu, location_en: achievement.location_en}">
-                    ACHIEVEMENTS.location</p>
-                <p  class="pt-lg-3 pl-3 pt-1 pt-md-3" translate [translateParams]="{ title_hu: achievement.title_hu, title_en: achievement.title_en}">ACHIEVEMENTS.title </p>
-            </div>
-            <div class=" .d-block .d-md-none row col-12 date pt-lg-3 pt-md-3 mb-2 align-items-center">
-                <mat-icon>calendar_today</mat-icon>
-                <p class="pl-1" translate [translateParams]="{date: achievement.date}">ACHIEVEMENTS.date</p>
-            </div>
-        </div>
-        <!--
-        <div class="timeline-body pt-3" >
-            <p translate [translateParams]="{description_hu: achievement.description_hu, description_en: achievement.description_en}">ACHIEVEMENTS.description</p>
-        </div>
-        -->
-        <a *ngIf="achievement.picture" class="img">
-            <div *ngIf="achievement.place_hu" class="img__overlay place" translate [translateParams]="{place_hu: achievement.place_hu, place_en: achievement.place_en}">ACHIEVEMENTS.place</div>
-            <img  [src]="achievement.picture"/>
-        </a>
+    <!--
+    <div class="timeline-body pt-3" >
+        <p translate [translateParams]="{description_hu: achievement.description_hu, description_en: achievement.description_en}">ACHIEVEMENTS.description</p>
     </div>
-
-    <ng-template #EditForm let-modal>
-        <div class="modal-header">
-            <h2 class="title mb-2 mt-4">Hír módosítása</h2>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
+    -->
+    <a *ngIf="achievement.picture" class="img">
+        <div *ngIf="achievement.place_hu" class="img__overlay place" translate
+             [translateParams]="{place_hu: achievement.place_hu, place_en: achievement.place_en}">ACHIEVEMENTS.place
         </div>
-        <div class="modal-body pb-5">
-            <form  #loginForm="ngForm">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="location">Helyszín (hu)</label>
-                            <input type="text" class="form-control" id="location"
-                                   required
-                                   [(ngModel)]="form.location" name="location"
-                                   [ngClass]="{'failed': failed }">
+        <img [src]="achievement.picture"/>
+    </a>
+</div>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Verseny/eredmény neve (hu)</label>
-                            <input type="text" class="form-control" id="title"
-                                   required
-                                   [(ngModel)]="form.title" name="title"
-                                   [ngClass]="{'failed': failed }">
+<ng-template #EditForm let-modal>
+    <div class="modal-header">
+        <h2 class="title mb-2 mt-4">Hír módosítása</h2>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body pb-5">
+        <form #Form="ngForm">
+            <div class="localization-tabs">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem>
+                        <a ngbNavLink>Magyar</a>
+                        <ng-template ngbNavContent>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="location_en">Helyszín (en))</label>
-                            <input type="text" class="form-control" id="location_en"
-                                   required
-                                   [(ngModel)]="form.location_en" name="location_en"
-                                   [ngClass]="{'failed': failed }">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="title_en">Verseny/eredmény neve (en)</label>
-                            <input type="text" class="form-control" id="title_en"
-                                   required
-                                   [(ngModel)]="form.title_en" name="title_en"
-                                   [ngClass]="{'failed': failed }">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="location_hu">Helyszín</label>
+                                        <input type="text" class="form-control" id="location_hu"
+                                               placeholder="város vagy ország neve"
+                                               required
+                                               [(ngModel)]="form.location_hu" name="location_hu"
+                                               [ngClass]="{'failed': failed }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="place_hu">Helyezés</label>
+                                        <input type="text" class="form-control" id="place_hu"
+                                               [(ngModel)]="form.place_hu" name="place_hu"
+                                               [ngClass]="{'failed': failed }">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="title_hu">Verseny/eredmény neve</label>
+                                        <input type="text" class="form-control" id="title_hu"
+                                               required
+                                               [(ngModel)]="form.title_hu" name="title_hu"
+                                               [ngClass]="{'failed': failed }">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>Angol</a>
+                        <ng-template ngbNavContent>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="location_en">Location</label>
+                                        <input type="text" class="form-control" id="location_en"
+                                               placeholder="name of city or country"
+                                               required
+                                               [(ngModel)]="form.location_en" name="location_en"
+                                               [ngClass]="{'failed': failed }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="place_en">Place </label>
+                                        <input type="text" class="form-control" id="place_en"
+                                               [(ngModel)]="form.place_en" name="place_en"
+                                               [ngClass]="{'failed': failed }">
 
-                        </div>
+                                    </div>
 
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="place_hu">Helyezés (hu)</label>
-                            <input type="text" class="form-control" id="place_hu"
-                                   required
-                                   [(ngModel)]="form.place_hu" name="place_hu"
-                                   [ngClass]="{'failed': failed }">
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="title_en">Title of achievement/competition</label>
+                                        <input type="text" class="form-control" id="title_en"
+                                               required
+                                               [(ngModel)]="form.title_en" name="title"
+                                               [ngClass]="{'failed': failed }">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="place_en">Helyezés (en) </label>
-                            <input type="text" class="form-control" id="place_en"
-                                   required
-                                   [(ngModel)]="form.place_en" name="place_en"
-                                   [ngClass]="{'failed': failed }">
+                                    </div>
+                                </div>
+                            </div>
 
-                        </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class="localization-tab-content"></div>
+            </div>
 
-                        <div class="form-group">
-                            <label for="date">Dátum</label>
-                            <input type="text" class="form-control" id="date"
-                                   required
-                                   [(ngModel)]="form.date" name="date"
-                                   [ngClass]="{'failed': failed }">
-
-                        </div>
-                        <div class="form-group pt-4 pb-3">
-                            <label for="file">Kép</label>
-                            <input type="file"
-                                   id="file"
-                                   [(ngModel)]="form.file" name="file"
-                                   (change)="handleFileInput($event.target.files)">
-                        </div>
-
+            <div class="row pl-1">
+                <div class="col-md-6 col-lg-6 col-12">
+                    <div class="form-group">
+                        <label for="date">Dátum</label>
+                        <input id="date"
+                               required
+                               type="text"
+                               class="form-control"
+                               placeholder="YYYY-MM-DD"
+                               [(ngModel)]="form.date" name="date"
+                               [ngClass]="{'failed': failed }">
                     </div>
                 </div>
-
-                <a class="btn" (click)="onSubmit(EditForm, achievement.id)" href="javascript:void(0)" ><span>Feltöltés</span></a>
+                <div class="col-md-6 col-lg-6 col-12">
+                    <div class="form-group pt-4 pb-3">
+                        <label for="file">Kép</label>
+                        <input type="file"
+                               id="file"
+                               [(ngModel)]="form.file" name="file"
+                               (change)="handleFileInput($event.target.files)">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end pr-3">
+                <a class="btn" (click)="onSubmit(EditForm, achievement.id)"
+                   href="javascript:void(0)"><span>Feltöltés</span></a>
 
                 <div [hidden]="!failed"
                      class="alert alert-danger mt-3">
                     {{errorMessage}}
                 </div>
-
-            </form>
-        </div>
-    </ng-template>
+            </div>
+        </form>
+    </div>
+</ng-template>
 

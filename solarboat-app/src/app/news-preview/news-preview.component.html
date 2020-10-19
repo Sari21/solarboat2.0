@@ -2,10 +2,10 @@
 <a class="card lift  mb-md-5 mr-md-3 ml-md-3 mb-lg-5 mr-lg-3 ml-lg-3 mr-0 ml-0 mb-5" >
     <div class="card-body m-3">
         <div *ngIf="authority=='admin'" class="row justify-content-end">
-            <a class="col-2" (click)="openContent(Edit)" ><mat-icon class="update-icon">edit</mat-icon></a>
+            <a class="col-2" (click)="openContent(Edit, true)" ><mat-icon class="update-icon">edit</mat-icon></a>
             <a class="col-2" (click)="delete(news.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
         </div>
-        <div (click)="openContent(longContent)">
+        <div (click)="openContent(longContent, false)">
             <h2 translate class="title mb-2 mt-4" [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
             <div class="row date col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
@@ -60,61 +60,103 @@
         </button>
     </div>
     <div class="modal-body pb-5">
-        <form  #EditForm="ngForm">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="title">Cím (hu)</label>
-                        <input type="text" class="form-control" id="title"
-                               required
-                               [(ngModel)]="form.title" name="title"
-                               [placeholder]="news.title_hu"
-                               [ngClass]="{'failed': failed }">
+        <form #EditForm="ngForm">
+            <div class="localization-tabs">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem>
+                        <a ngbNavLink>Magyar</a>
+                        <ng-template ngbNavContent>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="title">Cím</label>
+                                        <input type="text" class="form-control" id="title"
+                                               required
+                                               [(ngModel)]="form.title" name="title"
+                                               [ngClass]="{'failed': failed }">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-12">
+                                    <div class="form-group">
+                                        <label for="content">Tartalom</label>
+                                        <angular-editor id="content"
+                                                        required
+                                                        [(ngModel)]="form.content"
+                                                        name="content"
+                                                        [ngClass]="{'failed': failed }"
+                                                        [config]="config"
+                                        ></angular-editor>
+                                    </div>
+                                </div>
+                            </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Tartalom (hu)</label>
-                        <textarea type="content" class="form-control" id="content" rows="5"
-                                  [(ngModel)]="form.content" name="content"
-                                  [placeholder]="news.content_hu"
-                                  [ngClass]="{'failed': failed }"></textarea>
-                    </div>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>Angol</a>
+                        <ng-template ngbNavContent>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-12">
+                                    <div class="form-group">
+                                        <label for="title_en">Title</label>
+                                        <input type="text" class="form-control" id="title_en"
+                                               required
+                                               [(ngModel)]="form.title_en" name="title_en"
+                                               [ngClass]="{'failed': failed }">
 
-                    <div class="form-group">
-                        <label for="file">Kép</label>
-                        <input type="file"
-                               id="file"
-                               [(ngModel)]="form.file" name="file"
-                               (change)="handleFileInput($event.target.files)">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="title_en">Cím (en)</label>
-                        <input type="text" class="form-control" id="title_en"
-                               required
-                               [(ngModel)]="form.title_en" name="title_en"
-                               [placeholder]="news.title_en"
-                               [ngClass]="{'failed': failed }">
-                    </div>
-                    <div class="form-group">
-                        <label for="content_en">Tartalom (en)</label>
-                        <textarea type="content_en" class="form-control" id="content_en" rows="5"
-                                  [(ngModel)]="form.content_en" name="content_en"
-                                  [placeholder]="news.content_en"
-                                  [ngClass]="{'failed': failed }"></textarea>
-                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-12">
+                                    <div class="form-group">
+                                        <label for="content_en">Content</label>
+                                        <angular-editor id="content_en"
+                                                        required
+                                                        [(ngModel)]="form.content_en"
+                                                        name="content_en"
+                                                        [ngClass]="{'failed': failed }"
+                                                        [config]="config"
+                                        ></angular-editor>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class="localization-tab-content"></div>
+            </div>
 
+
+            <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                <div class="form-group">
+                    <label class="col-12" for="file">Kép (opcionális)</label>
+                    <input type="file"
+                           id="file"
+                           [(ngModel)]="form.file" name="file"
+                           (change)="handleFileInput($event.target.files)">
                 </div>
             </div>
 
-            <a class="btn" (click)="onSubmit(EditForm, news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
+            <div class="col-md-6 col-lg-6 col-12 pb-2">
 
-            <div [hidden]="!failed"
-                 class="alert alert-danger mt-3">
-                {{errorMessage}}
+                <div class="form-group">
+                    <label class="col-12" for="date">Dátum (opcionális)</label>
+                    <input id="date"
+                           type="text"
+                           class="form-control"
+                           placeholder="YYYY-MM-DD"
+                           [(ngModel)]="form.date" name="date"
+                           [ngClass]="{'failed': failed }">
+                </div>
             </div>
 
+            <div class="row justify-content-end pr-2">
+                <a class="btn" (click)="onSubmit(EditForm, news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
+                <div [hidden]="!failed"
+                     class="alert alert-danger mt-3">
+                    {{errorMessage}}
+                </div>
+            </div>
         </form>
     </div>
 </ng-template>

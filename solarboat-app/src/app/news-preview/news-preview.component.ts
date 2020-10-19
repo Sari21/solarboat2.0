@@ -5,7 +5,7 @@ import {PictureService} from '../shared/picture.service';
 import {HttpClient} from '@angular/common/http';
 import {NewsService} from '../shared/news.service';
 import {Globals} from '../globals';
-// import {he} from 'he';
+import {AngularEditorConfig} from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-news-preview',
@@ -59,8 +59,8 @@ export class NewsPreviewComponent implements OnInit {
     this.form.content_en = this.news.content_en;
   }
 
-  openContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true, centered: true, size: 'md' });
+  openContent(content, edit) {
+    this.modalService.open(content, { scrollable: true, centered: true, size: edit ? 'lg' : 'md' });
   }
 
   delete(id: number) {
@@ -72,13 +72,34 @@ export class NewsPreviewComponent implements OnInit {
           console.log(data);
         });
   }
-
-
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule'
+      ]
+    ]
+  };
   onSubmit(empForm: any, id: number) {
     this.news.title_hu = this.form.title;
     this.news.content_hu = this.form.content;
     this.news.title_en = this.form.title_en;
     this.news.content_en = this.form.content_en;
+    this.news.date = this.form.date ? this.form.date : this.news.date;
     const newsId = id;
     let o: Object;
     if (this.fileToUpload != null) {
@@ -91,6 +112,7 @@ export class NewsPreviewComponent implements OnInit {
         content_hu: this.form.content,
         title_en: this.form.title_en,
         content_en: this.form.content_en,
+        date: this.form.date,
         picture: '../../assets/news/' + this.fileToUpload.name
 
       };
@@ -101,6 +123,7 @@ export class NewsPreviewComponent implements OnInit {
         content_hu: this.form.content,
         title_en: this.form.title_en,
         content_en: this.form.content_en,
+        date: this.form.date,
         picture: ''
       };
     }

@@ -189,3 +189,17 @@ mat-icon{
     margin-top: 5px;
 }
 
+.nav-link {
+    color: grey;
+}
+.localization-tab-content{
+    padding: 1rem 1rem 0 1rem;
+    border: solid 1px lightgrey;
+    border-style: none solid solid solid;
+}
+.nav-tabs{
+    padding: 1rem 1rem 0 1rem
+}
+.localization-tabs{
+    margin-bottom: 1rem;
+}

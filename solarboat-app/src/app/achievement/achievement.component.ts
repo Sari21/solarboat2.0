@@ -25,8 +25,8 @@ export class AchievementComponent implements OnInit {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
-    this.form.title = this.achievement.title_hu;
-    this.form.location = this.achievement.location_hu;
+    this.form.title_hu = this.achievement.title_hu;
+    this.form.location_hu = this.achievement.location_hu;
     this.form.title_en = this.achievement.title_en;
     this.form.location_en = this.achievement.location_en;
     this.form.place_hu = this.achievement.place_hu;
@@ -49,8 +49,8 @@ export class AchievementComponent implements OnInit {
   }
 
   onSubmit(empForm: any, id: number) {
-    this.achievement.title_hu = this.form.title;
-    this.achievement.location_hu = this.form.location;
+    this.achievement.title_hu = this.form.title_hu;
+    this.achievement.location_hu = this.form.location_hu;
     this.achievement.title_en = this.form.title_en;
     this.achievement.location_en = this.form.location_en;
     this.achievement.date = this.form.date ;
@@ -63,8 +63,8 @@ export class AchievementComponent implements OnInit {
       this.uploadFileToActivity();
       o = {
         id: achievementId,
-        title_hu: this.form.title,
-        location_hu: this.form.location,
+        title_hu: this.form.title_hu,
+        location_hu: this.form.location_hu,
         title_en: this.form.title_en,
         location_en:this.form.location_en,
         description_hu: "leírás",
@@ -78,8 +78,8 @@ export class AchievementComponent implements OnInit {
     } else {
       o = {
         id: achievementId,
-        title_hu: this.form.title,
-        location_hu: this.form.location,
+        title_hu: this.form.title_hu,
+        location_hu: this.form.location_hu,
         title_en: this.form.title_en,
         location_en:this.form.location_en,
         description_hu: "leírás",
