@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.api;
 
+import hu.schdesign.solarboat.Converter.BoatDataConverter;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
@@ -7,6 +8,7 @@ import hu.schdesign.solarboat.model.dataPair;
 import hu.schdesign.solarboat.service.BoatDataService;
 import hu.schdesign.solarboat.service.DataGroupService;
 import hu.schdesign.solarboat.service.FileStorageService;
+import hu.schdesign.solarboat.service.NotificationDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,90 +33,113 @@ import java.util.Optional;
 public class DataGroupController {
     private final DataGroupService dataGroupService;
     private final BoatDataService boatDataService;
-    private FileStorageService fileStorageService;
+    private final FileStorageService fileStorageService;
+    private final NotificationDispatcher notificationDispatcher;
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
     @Autowired
     DataGroupController(DataGroupService dataGroupService, BoatDataService boatDataService,
-                        FileStorageService fileStorageService){
+                        FileStorageService fileStorageService, NotificationDispatcher notificationDispatcher) {
         this.dataGroupService = dataGroupService;
         this.boatDataService = boatDataService;
         this.fileStorageService = fileStorageService;
+        this.notificationDispatcher = notificationDispatcher;
     }
+
     @PostMapping(path = "boatData", consumes = "application/json", produces = "application/json")
-    public DataGroup addBoatData(@RequestBody BoatData boatData){
-        return dataGroupService.addBoatData(boatDataService.postData(boatData));
+    public DataGroup addBoatData(@RequestBody BoatData boatData) {
+        DataGroup dataGroup =  dataGroupService.addBoatData(boatDataService.postData(boatData));
+        BoatDataConverter converter = new BoatDataConverter();
+        notificationDispatcher.dispatch(converter.convertBoatDataToResponseBoatData(dataGroup.getBoatDataList().get(dataGroup.getBoatDataList().size() - 1)));
+        return dataGroup;
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public DataGroup startDataGroup(){
+    public DataGroup startDataGroup() {
         DataGroup dg = new DataGroup();
         return dataGroupService.startDataGroup(dg);
     }
-   /* @GetMapping
-    public Iterable<DataGroup> getAllDataGroups(){
-        return dataGroupService.getAllDataGroups();
-    }
-    */
-   @Secured({"ROLE_USER", "ROLE_ADMIN"})
+
+    /* @GetMapping
+     public Iterable<DataGroup> getAllDataGroups(){
+         return dataGroupService.getAllDataGroups();
+     }
+     */
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "last")
-    public Optional<DataGroup> getLastDataGroup(){
+    public Optional<DataGroup> getLastDataGroup() {
         return dataGroupService.getLastDataGroup();
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping
-    public ResponseBoatData getResponseBoatData(){ return dataGroupService.getDataGroupLast();}
+    public ResponseBoatData getResponseBoatData() {
+        return dataGroupService.getDataGroupLast();
+    }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "response/{id}")
-    public ResponseBoatData getResponseBoatData(@PathVariable("id") Long id){ return dataGroupService.getDataGroupId(id);}
+    public ResponseBoatData getResponseBoatData(@PathVariable("id") Long id) {
+        return dataGroupService.getDataGroupById(id);
+    }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "ids")
-    public ArrayList<dataPair<Long, String>> getIds(){
-        return  dataGroupService.getDatesAndIds();
+    public ArrayList<dataPair<Long, String>> getIds() {
+        return dataGroupService.getDatesAndIds();
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "{id}")
-    public Optional<DataGroup> getDataGroupById(@PathVariable("id") Long id){
+    public ResponseBoatData getDataGroupById(@PathVariable("id") Long id) {
         return dataGroupService.getDataGroupById(id);
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "/date")
-    public Optional<DataGroup> getDataGroupByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime date){
+    public Optional<DataGroup> getDataGroupByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime date) {
         return dataGroupService.getDataGroupByDate(date);
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping
-    public void deleteAllDataGroups(){
+    public void deleteAllDataGroups() {
         dataGroupService.deleteAll();
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping(path = "first")
-    public void deleteFirstDataGroups(){
+    public void deleteFirstDataGroups() {
         dataGroupService.deleteFirst();
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping(path = "{id}")
-    public void deleteDataGroupById(@PathVariable("id") Long id){
+    public void deleteDataGroupById(@PathVariable("id") Long id) {
         dataGroupService.deleteById(id);
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    @GetMapping(path ="export/{id}")
-    public ResponseEntity<Resource>  exportById( HttpServletResponse response, HttpServletRequest request, @PathVariable("id") Long id) throws Exception {
+    @GetMapping(path = "export/{id}")
+    public ResponseEntity<Resource> exportById(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") Long id) throws Exception {
         dataGroupService.exportById(id, response);
         return exportFile(request);
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "export/lastfive")
     public ResponseEntity<Resource> exportLast(HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportLast(response);
         return exportFile(request);
     }
+
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "export")
     public ResponseEntity<Resource> exportAll(HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportAll(response);
-       return exportFile(request);
+        return exportFile(request);
     }
+
     public ResponseEntity<Resource> exportFile(HttpServletRequest request) throws Exception {
         Resource resource = fileStorageService.loadFileAsResource("boatdata.csv");
 
@@ -127,7 +152,7 @@ public class DataGroupController {
         }
 
         // Fallback to the default content type if type could not be determined
-        if(contentType == null) {
+        if (contentType == null) {
             contentType = "application/octet-stream";
         }
 

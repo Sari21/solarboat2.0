@@ -4,6 +4,7 @@ import {RxStomp} from "@stomp/rx-stomp";
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
 import { BoatData } from '../model/boat-data';
+import {BoatDataComponent} from "../boat-data/boat-data.component"
 
 @Component({
   selector: 'app-notifications-rx',
@@ -11,7 +12,10 @@ import { BoatData } from '../model/boat-data';
 })
 export class NotificationsRxComponent {
 
+  constructor(private boatDataComponent: BoatDataComponent){}
+
   private client: RxStomp;
+
 
   public notifications: string[] = [];
 
@@ -35,7 +39,7 @@ export class NotificationsRxComponent {
       .pipe(
         map((response) => {
           const data = JSON.parse(response.body);
-          console.log(data);
+          this.boatDataComponent.addGraphData(data);
           return data;
         }))
       .subscribe((notification: string) => this.notifications.push(notification));

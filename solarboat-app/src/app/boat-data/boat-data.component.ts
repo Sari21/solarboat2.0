@@ -26,12 +26,13 @@ export class BoatDataComponent implements OnInit {
   EXPORT_URL = this.BASE_URL;
   show = false;
   showDetails = false;
+  data;
 
   constructor(private dataService: BoatDataService) {}
 
   ngOnInit() {
     // this.subscription = this.source.subscribe((val) => this.makeGraphs());
-    this.lastDataGroup();
+    this.getLastDataGroup();
     this.getDates();
   }
   public setShow() {
@@ -57,15 +58,15 @@ export class BoatDataComponent implements OnInit {
 
   public async getDataById(id: number): Promise<Object> {
     return new Promise(() => {
-      var getData = this.dataService.getDataGroupById(id);
-      this.setGraphData(getData);
+      this.data = this.dataService.getDataGroupById(id);
+      this.setGraphData();
     });
   }
-  public async lastDataGroup(): Promise<Object> {
+  public async getLastDataGroup(): Promise<Object> {
     return new Promise(() => {
-      var getData = this.dataService.getLastDataGroup();
+      this.data = this.dataService.getLastDataGroup();
 
-      this.setGraphData(getData);
+      this.setGraphData();
     });
   }
   public async getDates() {
@@ -86,12 +87,65 @@ export class BoatDataComponent implements OnInit {
   public deleteById(id: number) {
     this.dataService.deleteById(id);
     this.getDates();
-    this.lastDataGroup();
+    this.getLastDataGroup();
   }
 
-  public setGraphData(getData) {
+  public addGraphData(newData) {
+   // new Promise(() => {
+      this.tilt.multi[0].series.push(newData.tilt[0][0]);
+      this.tilt.multi[1].series.push(newData.tilt[1][0]);
+      this.tilt.multi[2].series.push(newData.tilt[2][0]);
+      console.log("promise");
+  //  }).then(() => {
+      console.log("then");
+     /* this.tilt.multi[0].series = [...this.tilt.multi[0].series];
+      this.tilt.multi[1].series = [...this.tilt.multi[1].series];
+      this.tilt.multi[2].series = [...this.tilt.multi[2].series];
+    */
+      this.tilt.multi = [...this.tilt.multi];
+      console.log(this.tilt);
+ //   })
+    ;
+    /*this.setColor(
+      newData.battery[3],
+      newData.battery[2]
+    );*/
+    if (newData.tilt != null) {
+      // this.tilt.multi[0].series = null;
+
+    /*  this.tilt.multi[0].series.push(newData.tilt[0][0]);
+      this.tilt.multi[1].series.push(newData.tilt[1][0]);
+      this.tilt.multi[2].series.push(newData.tilt[2][0]); */
+     // this.tilt = [...this.tilt];
+    /*  this.tilt.multi[0].series = [...this.tilt.multi[0].series];
+      this.tilt.multi[1].series = [...this.tilt.multi[1].series];
+      this.tilt.multi[2].series = [...this.tilt.multi[2].series];
+      console.log(this.tilt); */
+
+      // console.log( [...this.tilt]);
+    /* this.tilt.multi = [
+        {
+          name: "x",
+          series: this.tilt.multi[0].series,
+        },
+
+        {
+          name: "y",
+          series: this.tilt.multi[1].series,
+        },
+
+        {
+          name: "z",
+          series: this.tilt.multi[2].series,
+        },
+      ];
+      */
+    }
+  }
+
+  public setGraphData() {
     var res;
-    getData.toPromise().then((data) => {
+    this.data.toPromise().then((data) => {
       res = data;
       this.setColor(
         res.battery[3][res.battery[3].length - 1].value,

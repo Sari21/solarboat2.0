@@ -30,6 +30,7 @@ export class BoatDataService {
   }
 
   public getLastDataGroup() {
+    console.log("lastdataget");
     return this.http.get(this.BASE_URL);
   }
   public getDate() {

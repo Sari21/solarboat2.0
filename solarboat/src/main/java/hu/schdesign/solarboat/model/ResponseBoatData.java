@@ -12,10 +12,11 @@ public class ResponseBoatData {
     private ArrayList<ArrayList<dataPair<String, Integer>>> battery;
     private ArrayList<ArrayList<dataPair<String, Integer>>> motor;
     private ArrayList<Error> errors = new ArrayList<>();
-
     private String id;
+
+    public ResponseBoatData(){}
     //extra temps???
-    public ResponseBoatData(DataGroup dataGroup){
+  /*  public ResponseBoatData(DataGroup dataGroup){
         ArrayList<ArrayList<dataPair<String, Integer>>> tiltTemp = new ArrayList<>();
         ArrayList<ArrayList<dataPair<String, Integer>>> accelerationTemp = new ArrayList<>();
         ArrayList<ArrayList<dataPair<String, Integer>>> compassTemp = new ArrayList<>();
@@ -93,6 +94,8 @@ public class ResponseBoatData {
 
     }
 
+
+   */
     public ArrayList<ArrayList<dataPair<String, Integer>>> getTilt() {
         return tilt;
     }
@@ -119,5 +122,33 @@ public class ResponseBoatData {
 
     public String getId() {
         return id;
+    }
+
+    public void setTilt(ArrayList<ArrayList<dataPair<String, Integer>>> tilt) {
+        this.tilt = tilt;
+    }
+
+    public void setAcceleration(ArrayList<ArrayList<dataPair<String, Integer>>> acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setCompass(ArrayList<ArrayList<dataPair<String, Integer>>> compass) {
+        this.compass = compass;
+    }
+
+    public void setBattery(ArrayList<ArrayList<dataPair<String, Integer>>> battery) {
+        this.battery = battery;
+    }
+
+    public void setMotor(ArrayList<ArrayList<dataPair<String, Integer>>> motor) {
+        this.motor = motor;
+    }
+
+    public void setErrors(ArrayList<Error> errors) {
+        this.errors = errors;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

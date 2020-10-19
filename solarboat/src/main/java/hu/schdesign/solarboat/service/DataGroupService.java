@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.service;
 
+import hu.schdesign.solarboat.Converter.BoatDataConverter;
 import hu.schdesign.solarboat.dao.DataGroupRepository;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
@@ -8,6 +9,7 @@ import hu.schdesign.solarboat.model.dataPair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -20,54 +22,75 @@ import java.util.Optional;
 public class DataGroupService {
     private final DataGroupRepository dataGroupRepository;
     private ArrayList<DataGroup> exportList;
-    private final NotificationDispatcher notificationDispatcher;
 
     @Autowired
-    public DataGroupService(DataGroupRepository dataGroupRepository, NotificationDispatcher notificationDispatcher){
+    public DataGroupService(DataGroupRepository dataGroupRepository) {
         this.dataGroupRepository = dataGroupRepository;
-        this.notificationDispatcher = notificationDispatcher;
     }
 
-    public DataGroup startDataGroup(DataGroup dataGroup){return dataGroupRepository.save(dataGroup);}
-    public Iterable<DataGroup> getAllDataGroups(){return dataGroupRepository.findAll();}
-    public Optional<DataGroup> getLastDataGroup(){return dataGroupRepository.findTopByOrderByIdDesc();}
-    public Optional<DataGroup> getDataGroupById(Long id){return dataGroupRepository.findById(id);}
-    public Optional<DataGroup> getDataGroupByDate(LocalDateTime date){return dataGroupRepository.findByDate(date);
+    public DataGroup startDataGroup(DataGroup dataGroup) {
+        return dataGroupRepository.save(dataGroup);
     }
-    public ResponseBoatData getDataGroupLast(){
-        return  new ResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().get());
+
+    public Iterable<DataGroup> getAllDataGroups() {
+        return dataGroupRepository.findAll();
     }
-    public ResponseBoatData getDataGroupId(long id){
-        return  new ResponseBoatData(dataGroupRepository.findById(id).get());
+
+    public Optional<DataGroup> getLastDataGroup() {
+        return dataGroupRepository.findTopByOrderByIdDesc();
     }
-    public ArrayList<dataPair<Long, String>> getDatesAndIds(){
+
+    public ResponseBoatData getDataGroupById(Long id) {
+        BoatDataConverter boatDataConverter = new BoatDataConverter();
+        return boatDataConverter.convertDataGroupToResponseBoatData(dataGroupRepository.findById(id).orElseThrow(() -> new RuntimeException("Nincs ilyen adat")));
+    }
+
+    public Optional<DataGroup> getDataGroupByDate(LocalDateTime date) {
+        return dataGroupRepository.findByDate(date);
+    }
+
+    public ResponseBoatData getDataGroupLast() {
+        BoatDataConverter boatDataConverter = new BoatDataConverter();
+        return boatDataConverter.convertDataGroupToResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().orElse(new DataGroup()));
+    }
+
+    public ArrayList<dataPair<Long, String>> getDatesAndIds() {
         ArrayList<dataPair<Long, String>> list = new ArrayList<>();
         Iterable<DataGroup> it = dataGroupRepository.findAll();
-        for(DataGroup i : it){
+        for (DataGroup i : it) {
             list.add(new dataPair<Long, String>(i.getId(), i.getDate()));
         }
         return list;
     }
-    public void deleteAll(){dataGroupRepository.deleteAll();}
-    public void deleteFirst(){ dataGroupRepository.deleteTopByOrderByIdAsc();}
-    public void deleteById(Long id){dataGroupRepository.deleteById(id);}
-    public DataGroup addBoatData(BoatData boatData){
+
+    public void deleteAll() {
+        dataGroupRepository.deleteAll();
+    }
+
+    public void deleteFirst() {
+        dataGroupRepository.deleteTopByOrderByIdAsc();
+    }
+
+    public void deleteById(Long id) {
+        dataGroupRepository.deleteById(id);
+    }
+
+    public DataGroup addBoatData(BoatData boatData) {
         Optional<DataGroup> optGroup = dataGroupRepository.findTopByOrderByIdDesc();
         DataGroup updatedDataGroup;
-        if(optGroup.isPresent()){
+        if (optGroup.isPresent()) {
             optGroup.get().addBoatData(boatData);
             updatedDataGroup = dataGroupRepository.save(optGroup.get());
-        }
-        else{
+        } else {
             DataGroup newGroup = new DataGroup();
             newGroup.addBoatData(boatData);
             updatedDataGroup = dataGroupRepository.save(newGroup);
         }
-        notificationDispatcher.dispatch(updatedDataGroup.getBoatDataList().get(updatedDataGroup.getBoatDataList().size() - 1));
+        BoatDataConverter boatDataConverter = new BoatDataConverter();
         return updatedDataGroup;
     }
 
-    public void exportAll(HttpServletResponse response)throws Exception{
+    public void exportAll(HttpServletResponse response) throws Exception {
         Iterable<DataGroup> it = dataGroupRepository.findAll();
         ArrayList<DataGroup> list = new ArrayList<>();
         for (DataGroup b : it) {
@@ -76,22 +99,23 @@ public class DataGroupService {
         this.exportList = list;
         exportCSV(response);
     }
-    public void exportById(Long id, HttpServletResponse response)throws Exception{
+
+    public void exportById(Long id, HttpServletResponse response) throws Exception {
         Optional<DataGroup> it = dataGroupRepository.findById(id);
         ArrayList<DataGroup> list = new ArrayList<>();
-        if(it.isPresent()){
+        if (it.isPresent()) {
 
-        list.add(it.get());
-        this.exportList = list;
-        exportCSV(response);
+            list.add(it.get());
+            this.exportList = list;
+            exportCSV(response);
         }
 
     }
 
-    public void exportLast(HttpServletResponse response)throws Exception{
+    public void exportLast(HttpServletResponse response) throws Exception {
         Optional<DataGroup> opt = dataGroupRepository.findTopByOrderByIdDesc();
         ArrayList<DataGroup> list = new ArrayList<>();
-            list.add(opt.get());
+        list.add(opt.get());
         this.exportList = list;
         exportCSV(response);
     }
@@ -136,7 +160,7 @@ public class DataGroupService {
                 try {
                     writer.append(data.printCsv());
 
-                    } catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
