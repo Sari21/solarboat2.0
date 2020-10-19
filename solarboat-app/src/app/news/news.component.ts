@@ -16,7 +16,6 @@ export class NewsComponent implements OnInit {
   constructor(private http: HttpClient, private apiService: NewsService,
               private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
     this.pictureService = pictureService;
-    this.form.date = new Date();
   }
   allnews: News[] = [];
   pageNumber = 0;
@@ -53,10 +52,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNews();
-    console.log('gett');
-    console.log(this.allnews.length);
     this.checkAuth();
-    // console.log(this.allnews[0].date);
   }
   onSubmit(empForm: any, event: Event) {
     console.log(this.form.date);
