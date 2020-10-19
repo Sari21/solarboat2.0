@@ -1,11 +1,13 @@
 package hu.schdesign.solarboat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 
 @Entity
@@ -15,7 +17,8 @@ public class Achievement {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     @NotNull
-    private String date;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate date;
     @NotNull
     @Size(min=2, max=50)
     private String title_hu;
@@ -45,7 +48,7 @@ public class Achievement {
                        @JsonProperty("description_en") String description_en,
                        @JsonProperty("location_en") String location_en,
                        @JsonProperty("picture") String picture,
-                       @JsonProperty("date") String date,
+                       @JsonProperty("date") LocalDate date,
                        @JsonProperty("place_hu") String place_hu,
                        @JsonProperty("place_en") String place_en,
                         @JsonProperty("isLast") boolean isLast)
@@ -69,13 +72,13 @@ public class Achievement {
 
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
         //return dtf.format(date);
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -51,6 +51,4 @@ public class AchievementController {
     public Page<Achievement> getPage(@PathVariable int pageNum){
         return achievementService.getPage(pageNum, 4);
     }
-
-
 }

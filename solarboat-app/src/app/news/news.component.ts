@@ -65,24 +65,25 @@ export class NewsComponent implements OnInit {
     let o: Object;
     if (this.fileToUpload != null) {
       this.uploadFileToActivity();
-      o = {
-        title_hu: this.form.title,
-        content_hu: this.form.content,
-        title_en: this.form.title_en,
-        content_en: this.form.content_en,
-        date: this.form.date,
-        picture: '../../assets/news/' + this.fileToUpload.name
-      };
-    } else {
-      o = {
-        title_hu: this.form.title,
-        content_hu: this.form.content,
-        title_en: this.form.title_en,
-        content_en: this.form.content_en,
-        date: this.form.date,
-        picture: ''
-      };
     }
+    o = {
+      title_hu: this.form.title,
+      content_hu: this.form.content,
+      title_en: this.form.title_en,
+      content_en: this.form.content_en,
+      date: this.form.date ? this.form.date : null,
+      picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : ''
+    };
+    // } else {
+    //   o = {
+    //     title_hu: this.form.title,
+    //     content_hu: this.form.content,
+    //     title_en: this.form.title_en,
+    //     content_en: this.form.content_en,
+    //     date: this.form.date ? this.form.date : null,
+    //     picture: ''
+    //   };
+    // }
 
     this.http
         .post(this.globals.BASE_URL + '/api/news', o)
@@ -142,27 +143,27 @@ export class NewsComponent implements OnInit {
 
   private pushNews() {
     let n: News;
-    if (this.fileToUpload == null) {
-      n = {
-        id: 0,
-        date: this.form.date,
-        title_hu: this.form.title,
-        content_hu: this.form.content,
-        title_en: this.form.title_en,
-        content_en: this.form.content_en,
-        picture: '',
-      };
-    } else {
-      n = {
-        id: 0,
-        date: this.form.date,
-        title_hu: this.form.title,
-        content_hu: this.form.content,
-        title_en: this.form.title_en,
-        content_en: this.form.content_en,
-        picture: '../../assets/news/' + this.fileToUpload.name,
-      };
-    }
+    // if (this.fileToUpload == null) {
+    n = {
+      id: 0,
+      title_hu: this.form.title,
+      content_hu: this.form.content,
+      title_en: this.form.title_en,
+      content_en: this.form.content_en,
+      date: this.form.date ? this.form.date : this.form.date,
+      picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : ''
+    };
+    // } else {
+    //   n = {
+    //     id: 0,
+    //     date: this.form.date,
+    //     title_hu: this.form.title,
+    //     content_hu: this.form.content,
+    //     title_en: this.form.title_en,
+    //     content_en: this.form.content_en,
+    //     picture: '../../assets/news/' + this.fileToUpload.name,
+    //   };
+    // }
     this.allnews.unshift(n);
   }
 }

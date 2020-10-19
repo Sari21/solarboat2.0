@@ -27,14 +27,15 @@
                                        [ngClass]="{'failed': failed }">
 
                             </div>
-
                             <div class="form-group">
                                 <label for="date">Dátum</label>
-                                <input type="text" class="form-control" id="date"
+                                <input id="date"
                                        required
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="YYYY-MM-DD"
                                        [(ngModel)]="form.date" name="date"
                                        [ngClass]="{'failed': failed }">
-
                             </div>
 
                             <div class="form-group">

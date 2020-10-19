@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -17,6 +18,7 @@ import java.util.Date;
 public class News {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
     private String picture;
     @NotNull
@@ -43,13 +45,16 @@ public class News {
         this.date = null;
     }
 
-    public News(@JsonProperty("title_hu")String title_hu, @JsonProperty("content_hu") String content_hu, @JsonProperty("title_en")String title_en, @JsonProperty("content_en") String content_en, @JsonProperty("picture") String picture){
+    public News(@JsonProperty("date")LocalDate date, @JsonProperty("title_hu")String title_hu, @JsonProperty("content_hu") String content_hu, @JsonProperty("title_en")String title_en, @JsonProperty("content_en") String content_en, @JsonProperty("picture") String picture){
         this.title_hu = title_hu;
         this.content_hu = content_hu;
         this.title_en = title_en;
         this.content_en = content_en;
         this.picture = picture;
         this.date = LocalDate.now();
+        if(date!= null){
+            this.date = date;
+        }
     }
 
     public Long getId() {
