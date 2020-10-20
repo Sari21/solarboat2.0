@@ -67,7 +67,7 @@ export class NewsPreviewComponent implements OnInit {
         const b = this.http
             .delete(this.globals.BASE_URL + '/api/news/'.concat(id.toString()))
             .subscribe((data) => {
-                console.log(data);
+                // console.log(data);
             });
     }
 
@@ -103,7 +103,7 @@ export class NewsPreviewComponent implements OnInit {
         const newsId = id;
         if (this.fileToUpload) {
             this.news.picture = '../../assets/news/' + this.fileToUpload.name;
-            console.log('kep modositas');
+            // console.log('kep modositas');
             this.uploadFileToActivity();
         }
         const o = {
@@ -119,7 +119,7 @@ export class NewsPreviewComponent implements OnInit {
         const b = this.http
             .put(this.globals.BASE_URL + '/api/news', o)
             .subscribe((data) => {
-                console.log(data);
+                // console.log(data);
             });
         this.modalService.dismissAll('put');
         this.form = empForm;
@@ -135,7 +135,7 @@ export class NewsPreviewComponent implements OnInit {
         this.pictureService.postFile(this.fileToUpload, 'news').subscribe(data => {
             // do something, if upload success
         }, error => {
-            console.log(error);
+            // console.log(error);
         });
     }
 }

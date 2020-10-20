@@ -40,7 +40,6 @@ export class AchievementComponent implements OnInit {
     const b = this.http
         .delete(this.globals.BASE_URL + '/api/achievement/'.concat(id.toString()))
         .subscribe((data) => {
-          console.log(data);
         });
   }
 
@@ -94,7 +93,6 @@ export class AchievementComponent implements OnInit {
     const b = this.http
         .put(this.globals.BASE_URL + "/api/achievement", o)
         .subscribe((data) => {
-          console.log(data);
         });
     this.modalService.dismissAll('put');
     this.form = empForm;
@@ -107,7 +105,6 @@ export class AchievementComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
       // do something, if upload success
     }, error => {
-      console.log(error);
     });
   }
 }

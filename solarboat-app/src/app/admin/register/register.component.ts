@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.form);
+    // console.log(this.form);
 
     this.signupInfo = new SignUpInfo(
       this.form.name,
@@ -33,13 +33,13 @@ export class RegisterComponent implements OnInit {
 
     this.authService.signUp(this.signupInfo).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
         this.router.navigateByUrl("/users");
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.errorMessage = error.error.message;
         this.isSignUpFailed = true;
       }

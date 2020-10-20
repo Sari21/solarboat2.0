@@ -55,7 +55,7 @@ export class NewsComponent implements OnInit {
     this.checkAuth();
   }
   onSubmit(empForm: any, event: Event) {
-    console.log(this.form.date);
+    // console.log(this.form.date);
     event.preventDefault();
     // tslint:disable-next-line:ban-types
     let o: Object;
@@ -84,7 +84,7 @@ export class NewsComponent implements OnInit {
     this.http
         .post(this.globals.BASE_URL + '/api/news', o)
         .subscribe((data) => {
-          console.log(data);
+          // console.log(data);
         });
     this.pushNews();
     this.form = empForm;
@@ -99,7 +99,7 @@ export class NewsComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, 'news').subscribe(data => {
       // do something, if upload success
     }, error => {
-      console.log(error);
+      // console.log(error);
     });
   }
   checkAuth() {
@@ -124,7 +124,7 @@ export class NewsComponent implements OnInit {
         (res) => {
           // tslint:disable-next-line:prefer-const
           let data: any = res;
-          console.log(data);
+          // console.log(data);
           <News[]> data.content.forEach((element) => {
             this.allnews.push(element);
           });

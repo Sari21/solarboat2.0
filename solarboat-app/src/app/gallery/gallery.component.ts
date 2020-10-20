@@ -38,7 +38,7 @@ export class GalleryComponent implements OnInit {
     this.newPicture.picture = files.item(0).name;
     this.pic = true;
     if (this.pic && this.smallPic) {
-      console.log("true");
+      // console.log("true");
       this.picturesSelected = true;
     }
   }
@@ -48,7 +48,7 @@ export class GalleryComponent implements OnInit {
     this.newPicture.smallPicture = files.item(0).name;
     this.smallPic = true;
     if (this.pic && this.smallPic) {
-      console.log("true");
+      // console.log("true");
       this.picturesSelected = true;
     }
   }
@@ -57,19 +57,19 @@ export class GalleryComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, "gallery").subscribe(
       (data) => {
         this.fileToUpload = null;
-        console.log("pic");
+        // console.log("pic");
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
     this.pictureService.postFile(this.smallFileToUpload, "gallery").subscribe(
       (data) => {
         this.smallFileToUpload = null;
-        console.log("sm");
+        // console.log("sm");
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -89,7 +89,7 @@ export class GalleryComponent implements OnInit {
         //this.loadGallery();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
     empForm.reset();
@@ -141,7 +141,7 @@ export class GalleryComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

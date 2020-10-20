@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    // console.log(this.form);
 
     this.loginInfo = new AuthLoginInfo(this.form.username, this.form.password);
 
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/mainpage");
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
       }

@@ -87,7 +87,6 @@ export class AchievementsComponent implements OnInit {
     const b = this.http
         .post(this.globals.BASE_URL + "/api/achievement", o)
         .subscribe((data) => {
-          console.log(data);
         });
     this.pushAchievement();
     this.form = empForm;
@@ -102,7 +101,6 @@ export class AchievementsComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
       // do something, if upload success
     }, error => {
-      console.log(error);
     });
   }
   private pushAchievement() {

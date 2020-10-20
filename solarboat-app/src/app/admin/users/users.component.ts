@@ -26,7 +26,7 @@ import {Role} from "../../model/role";
     }
     edit(user: User) {
       this.editing = true;
-      console.log(user);
+      // console.log(user);
     }
     open(content, id: number) {
       this.selectedUser = this.users.find((t) => t.id == id);
@@ -51,7 +51,8 @@ import {Role} from "../../model/role";
       //this.originalUser = this.selectedUser;
       this.userService
         .updateUser(this.selectedUser)
-        .subscribe((error) => console.log(error));
+        .subscribe((error) =>
+      // console.log(error));
     }
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
@@ -66,10 +67,10 @@ import {Role} from "../../model/role";
       this.userService.getUsers().subscribe((t) => {
         this.users = t;
         this.users.forEach((u) => {
-          console.log(u);
+          // console.log(u);
           u.isAdmin = false;
           u.roles.forEach((role) => {
-            console.log(role);
+            // console.log(role);
             if (role.name === "ROLE_ADMIN") {
               u.isAdmin = true;
             }
@@ -95,9 +96,8 @@ import {Role} from "../../model/role";
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         }
       );
     }
   }
-  
