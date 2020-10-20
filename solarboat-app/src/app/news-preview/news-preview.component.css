@@ -67,7 +67,6 @@ a:hover .read-more{opacity:1;-webkit-transform:none;transform:none;-webkit-trans
 a .mat-icon{
     cursor: pointer;
 }
-
 a .update-icon.mat-icon{
     transition: transform .2s ease;
 }
