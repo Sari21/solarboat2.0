@@ -51,8 +51,7 @@ import {Role} from "../../model/role";
       //this.originalUser = this.selectedUser;
       this.userService
         .updateUser(this.selectedUser)
-        .subscribe((error) =>
-      // console.log(error));
+        .subscribe((error) => console.log(error) );
     }
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
