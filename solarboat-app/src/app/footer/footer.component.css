@@ -1,11 +1,8 @@
-
 #footer {
     width: 100%;
     color: white;
     background-color: #1B262F;
-
 }
-
 .contact {
     justify-content: center;
     align-items: center;
@@ -13,21 +10,26 @@
     flex-direction: column;
 }
 
-.mat-icon {
-    transform: scale(1.3);
-}
-
-
 a, a:hover {
     color: white;
 }
-
-#footer i.fab:hover ,i.fa:hover , #footer .mat-icon:hover, #footer img:hover{
-    opacity: 0.7 ;
+.mat-icon {
+    transform: scale(1.3);
+    transition: transform .2s ease;
+}
+.mat-icon:hover {
+    transform: scale(1.6);
+    opacity: 0.7;
     cursor: pointer;
 }
-#footer .schdesign-logo img:hover{
-    opacity: 1 ;
+#footer i.fab ,i.fa, #footer img{
+    transition: transform .2s ease;
+}
+
+#footer i.fab:hover ,i.fa:hover , #footer img:hover{
+    transform: scale(1.3);
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .links {
@@ -44,13 +46,13 @@ a, a:hover {
 .my-tooltip .arrow::before {
     border-top-color: transparent;
 }
-.madeby p{
+/* .madeby p{
     font-family: "Kelson Sans Light";
     font-size: 0.8rem;
     padding: 0;
     margin:0;
     opacity: 0.4;
-}
+} */
 .footer{
     width: 100%;
     ovarlay: hidden;

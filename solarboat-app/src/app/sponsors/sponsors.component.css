@@ -58,5 +58,12 @@ div.news {
   box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
 }
 
+a img{
+  transition: transform .2s ease;
+}
+a img:hover{
+  transform: scale(1.05);
+}
+
 
 

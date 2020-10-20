@@ -3,21 +3,49 @@ import { ScrollToService } from 'ng2-scroll-to-el';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subscription} from 'rxjs';
 import 'rxjs/add/observable/interval';
-import {TranslateService} from '@ngx-translate/core'
+import {TranslateService} from '@ngx-translate/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  group
+} from '@angular/animations';
 
 @Component({
   selector: 'app-cover',
   templateUrl: './cover.component.html',
-  styleUrls: ['./cover.component.css']
+  styleUrls: ['./cover.component.css'],
+  animations: [
+    trigger('flyIn1', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(30px)', opacity: 0}),
+        animate('500ms 100ms ease-in' )
+      ])
+    ]),
+    trigger('flyIn2', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(30px)', opacity: 0}),
+        animate('500ms 300ms ease-in' )
+      ])
+    ]),
+    trigger('flyIn3', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-30px)', opacity: 0}),
+        animate('500ms 600ms ease-in' )
+      ])
+    ])
+  ]
 })
 export class CoverComponent implements OnInit {
 
   public  sub: Subscription;
   public watts;
-  welcome: string;
-  constructor(private scrollService: ScrollToService,  private http: HttpClient, 
-    public translate: TranslateService) { 
-    }
+  constructor(private scrollService: ScrollToService,  private http: HttpClient, public translate: TranslateService) {}
 
   ngOnInit(): void {
     this.getWatts();
@@ -29,11 +57,7 @@ export class CoverComponent implements OnInit {
             this.watts = this.setWatts(data);
           }
         });
-
   }
-
-
-
   public getWatts() {
 
     const storageData = sessionStorage.getItem('solarpower');
