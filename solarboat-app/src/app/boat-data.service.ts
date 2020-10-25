@@ -8,6 +8,7 @@ import { ConditionalExpr } from "@angular/compiler";
 import { Dates } from "./model/dates";
 import { Http, ResponseContentType } from "@angular/http";
 import {Globals} from './globals';
+import {BoatDataComponent} from "./boat-data/boat-data.component"
 
 @Injectable({
   providedIn: "root",
@@ -30,7 +31,6 @@ export class BoatDataService {
   }
 
   public getLastDataGroup() {
-    console.log("lastdataget");
     return this.http.get(this.BASE_URL);
   }
   public getDate() {

@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,13 +43,24 @@ public class DataGroupService {
 
     public ResponseBoatData getDataGroupById(Long id) {
         BoatDataConverter boatDataConverter = new BoatDataConverter();
-        return boatDataConverter.convertDataGroupToResponseBoatData(dataGroupRepository.findById(id).orElseThrow(() -> new RuntimeException("Nincs ilyen adat")));
+        DataGroup group = dataGroupRepository.findById(id).orElseThrow(()
+                -> new RuntimeException("Nincs ilyen adat"));
+        ResponseBoatData response = boatDataConverter.convertDataGroupToResponseBoatData(group);
+        DataGroup lastGroup = dataGroupRepository.findTopByOrderByIdDesc().orElseThrow(() -> new RuntimeException("Nincsenek adatok"));
+        if(group.getId() == lastGroup.getId()){
+            response.setLast(true);
+        }
+        else{
+            response.setLast(false);
+        }
+        return response;
     }
 
     public Optional<DataGroup> getDataGroupByDate(LocalDateTime date) {
         return dataGroupRepository.findByDate(date);
     }
 
+    @Transactional
     public ResponseBoatData getDataGroupLast() {
         BoatDataConverter boatDataConverter = new BoatDataConverter();
         return boatDataConverter.convertDataGroupToResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().orElse(new DataGroup()));
@@ -74,7 +86,7 @@ public class DataGroupService {
     public void deleteById(Long id) {
         dataGroupRepository.deleteById(id);
     }
-
+    @Transactional
     public DataGroup addBoatData(BoatData boatData) {
         Optional<DataGroup> optGroup = dataGroupRepository.findTopByOrderByIdDesc();
         DataGroup updatedDataGroup;

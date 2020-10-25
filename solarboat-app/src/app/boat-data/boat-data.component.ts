@@ -1,14 +1,17 @@
-import { Component, OnInit, Output, NgModule, Input } from "@angular/core";
+import { Component, OnInit, Output, NgModule, Input, OnDestroy } from "@angular/core";
 import { BoatDataService } from "../boat-data.service";
 import { interval, Subscription } from "rxjs";
 import { Dates } from "../model/dates";
+import {RxStomp} from "@stomp/rx-stomp";
+import * as SockJS from 'sockjs-client';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: "app-boat-data",
   templateUrl: "./boat-data.component.html",
   styleUrls: ["./boat-data.component.css"],
 })
-export class BoatDataComponent implements OnInit {
+export class BoatDataComponent implements OnInit, OnDestroy {
   @Output() public tilt;
   @Output() public compass;
   @Output() public acceleration;
@@ -27,6 +30,8 @@ export class BoatDataComponent implements OnInit {
   show = false;
   showDetails = false;
   data;
+  private client: RxStomp;
+
 
   constructor(private dataService: BoatDataService) {}
 
@@ -34,7 +39,62 @@ export class BoatDataComponent implements OnInit {
     // this.subscription = this.source.subscribe((val) => this.makeGraphs());
     this.getLastDataGroup();
     this.getDates();
+    this.connectClicked();
+    this.startClicked();
   }
+  ngOnDestroy(){
+    this.stopClicked();
+    this.disconnectClicked();
+  }
+
+  //NOTIFICATIONS
+  connectClicked() {
+    if (!this.client || this.client.connected) {
+      this.client = new RxStomp();
+      this.client.configure({
+        webSocketFactory: () => new SockJS('http://localhost:8080/notifications'),
+        debug: (msg: string) => console.log(msg)
+      });
+      this.client.activate();
+
+      this.watchForNotifications();
+
+      console.info('connected!');
+    }
+  }
+
+  private watchForNotifications() {
+    this.client.watch('/user/notification/item')
+      .pipe(
+        map((response) => {
+          const data = JSON.parse(response.body);
+       
+          return data;
+        }))
+      .subscribe((data: string) =>  this.addGraphData(data));
+  }
+
+  disconnectClicked() {
+    if (this.client && this.client.connected) {
+      this.client.deactivate();
+      this.client = null;
+      console.info("disconnected :-/");
+    }
+  }
+
+  startClicked() {
+    if (this.client && this.client.connected) {
+      this.client.publish({destination: '/swns/start'});
+    }
+  }
+
+  stopClicked() {
+    if (this.client && this.client.connected) {
+      this.client.publish({destination: '/swns/stop'});
+    }
+  }
+
+  //GRAPH
   public setShow() {
     if (this.show == false) {
       this.show = true;
@@ -53,13 +113,27 @@ export class BoatDataComponent implements OnInit {
     this.EXPORT_URL = this.BASE_URL.concat("/").concat(
       this.selectedDate.name.toString()
     );
-    this.getDataById(this.selectedDate.name);
+    this.getDataById(this.selectedDate.name).then((data) => {
+      var res = data;
+      console.log(this.client);
+      console.log(res);
+      if(this.client == null && this.data.isLast){
+        this.connectClicked();
+        this.startClicked();
+      }
+      if(this.client != null && !this.data.isLast){
+        this.stopClicked();
+        this.disconnectClicked()
+      }
+    })
+   
   }
 
   public async getDataById(id: number): Promise<Object> {
     return new Promise(() => {
       this.data = this.dataService.getDataGroupById(id);
       this.setGraphData();
+     
     });
   }
   public async getLastDataGroup(): Promise<Object> {
@@ -91,57 +165,53 @@ export class BoatDataComponent implements OnInit {
   }
 
   public addGraphData(newData) {
-   // new Promise(() => {
-      this.tilt.multi[0].series.push(newData.tilt[0][0]);
-      this.tilt.multi[1].series.push(newData.tilt[1][0]);
-      this.tilt.multi[2].series.push(newData.tilt[2][0]);
-      console.log("promise");
-  //  }).then(() => {
-      console.log("then");
-     /* this.tilt.multi[0].series = [...this.tilt.multi[0].series];
-      this.tilt.multi[1].series = [...this.tilt.multi[1].series];
-      this.tilt.multi[2].series = [...this.tilt.multi[2].series];
-    */
-      this.tilt.multi = [...this.tilt.multi];
-      console.log(this.tilt);
- //   })
-    ;
-    /*this.setColor(
-      newData.battery[3],
-      newData.battery[2]
-    );*/
-    if (newData.tilt != null) {
-      // this.tilt.multi[0].series = null;
+    console.log(newData.battery[2][0]);
+    this.setColor(newData.battery[2][0].value, newData.battery[3][0].value);
+    this.tilt.multi[0].series.push(newData.tilt[0][0]);
+    this.tilt.multi[1].series.push(newData.tilt[1][0]);
+    this.tilt.multi[2].series.push(newData.tilt[2][0]);
+    this.tilt.multi = [...this.tilt.multi];
 
-    /*  this.tilt.multi[0].series.push(newData.tilt[0][0]);
-      this.tilt.multi[1].series.push(newData.tilt[1][0]);
-      this.tilt.multi[2].series.push(newData.tilt[2][0]); */
-     // this.tilt = [...this.tilt];
-    /*  this.tilt.multi[0].series = [...this.tilt.multi[0].series];
-      this.tilt.multi[1].series = [...this.tilt.multi[1].series];
-      this.tilt.multi[2].series = [...this.tilt.multi[2].series];
-      console.log(this.tilt); */
+    this.compass.multi[0].series.push(newData.compass[0][0]);
+    this.compass.multi[1].series.push(newData.compass[1][0]);
+    this.compass.multi[2].series.push(newData.compass[2][0]);
+    this.compass.multi = [...this.compass.multi];
 
-      // console.log( [...this.tilt]);
-    /* this.tilt.multi = [
-        {
-          name: "x",
-          series: this.tilt.multi[0].series,
-        },
+    this.acceleration.multi[0].series.push(newData.acceleration[0][0]);
+    this.acceleration.multi[1].series.push(newData.acceleration[1][0]);
+    this.acceleration.multi[2].series.push(newData.acceleration[2][0]);
+    this.acceleration.multi = [...this.acceleration.multi];
 
-        {
-          name: "y",
-          series: this.tilt.multi[1].series,
-        },
+    this.battery.multi[0].series.push(newData.battery[0][0]);
+    this.battery.multi[1].series.push(newData.battery[1][0]);
+    this.battery.multi = [...this.battery.multi];
 
-        {
-          name: "z",
-          series: this.tilt.multi[2].series,
-        },
-      ];
-      */
-    }
+    this.motor.multi[0].series.push(newData.motor[0][0]);
+    this.motor.multi[1].series.push(newData.motor[1][0]);
+    this.motor.multi = [...this.motor.multi];
+
+    this.temp_soc.multi[0].series.push(newData.battery[0][0]);
+    this.temp_soc.multi[1].series.push(newData.battery[1][0]);
+    this.temp_soc.multi = [...this.temp_soc.multi];
+
+    this.soc.multi[0].value = (newData.battery[2][0].value);
+    this.soc.multi = [...this.soc.multi];
+
+    this.temp.multi[0].value = (newData.battery[3][0].value);
+    this.temp.multi = [...this.temp.multi];
   }
+
+  onResize(event) {
+    this.tilt.view = [event.target.innerWidth / 1.15, 250];
+    this.compass.view = [event.target.innerWidth / 1.15, 250];
+    this.acceleration.view = [event.target.innerWidth / 1.15, 250];
+    this.battery.view = [event.target.innerWidth / 1.15, 250];
+    this.motor.view = [event.target.innerWidth / 1.15, 250];
+    this.temp_soc.view = [event.target.innerWidth / 1.15, 250];
+    
+
+
+}
 
   public setGraphData() {
     var res;

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 public class DataGroup implements CsvPrintable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -53,18 +53,30 @@ public class DataGroup implements CsvPrintable {
         this.date = LocalDateTime.now();
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBoatDataList(List<BoatData> boatDataList) {
+        this.boatDataList = boatDataList;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public String printCsv() {
 
         StringBuilder data = new StringBuilder();
 
 
-        for(BoatData b : boatDataList){
+        for (BoatData b : boatDataList) {
             data.append(id.toString()).append(CSV_SEPARATOR)
                     .append(getDate()).append(CSV_SEPARATOR)
                     .append(b.printCsv())
                     .append(System.lineSeparator());
-            }
+        }
         return data.toString();
 
     }

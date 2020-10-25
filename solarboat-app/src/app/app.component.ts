@@ -54,6 +54,6 @@ export class AppComponent implements OnInit {
   handleMessage(message){
     this.greeting = message;
     this.tomb.push(message.content);
-    console.log(this.tomb);
+    console.log(message);
   }
 }

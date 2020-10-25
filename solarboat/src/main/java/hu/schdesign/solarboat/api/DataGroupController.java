@@ -133,7 +133,7 @@ public class DataGroupController {
         return exportFile(request);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "export")
     public ResponseEntity<Resource> exportAll(HttpServletResponse response, HttpServletRequest request) throws Exception {
         dataGroupService.exportAll(response);
