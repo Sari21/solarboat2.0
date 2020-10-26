@@ -23,13 +23,25 @@ export class BoatDataComponent implements OnInit, OnDestroy {
   @Output() public errors;
   @Output() dates: Dates[] = [];
   @Input() selectedDate: Dates;
+  private _data;
+  @Input('data') 
+  set data(data){
+    this._data = data;
+    this.setGraphData(data);
+    console.log(data);
+   // data.subscribe(() =>  { this._data = data; this.setGraphData();} );
+    //this.setGraphData();
+    //console.log(this.data);
+  
+    
+  }
+  get proba(): string{return this._data};
   subscription: Subscription;
   source = interval(10000);
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
   show = false;
   showDetails = false;
-  data;
   private client: RxStomp;
 
 
@@ -37,10 +49,10 @@ export class BoatDataComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.subscription = this.source.subscribe((val) => this.makeGraphs());
-    this.getLastDataGroup();
-    this.getDates();
-    this.connectClicked();
-    this.startClicked();
+    //this.getLastDataGroup();
+    //this.getDates();
+    //this.connectClicked();
+    //this.startClicked();
   }
   ngOnDestroy(){
     this.stopClicked();
@@ -132,7 +144,7 @@ export class BoatDataComponent implements OnInit, OnDestroy {
   public async getDataById(id: number): Promise<Object> {
     return new Promise(() => {
       this.data = this.dataService.getDataGroupById(id);
-      this.setGraphData();
+      this.setGraphData(null);
      
     });
   }
@@ -140,7 +152,7 @@ export class BoatDataComponent implements OnInit, OnDestroy {
     return new Promise(() => {
       this.data = this.dataService.getLastDataGroup();
 
-      this.setGraphData();
+      this.setGraphData(null);
     });
   }
   public async getDates() {
@@ -209,32 +221,28 @@ export class BoatDataComponent implements OnInit, OnDestroy {
     this.motor.view = [event.target.innerWidth / 1.15, 250];
     this.temp_soc.view = [event.target.innerWidth / 1.15, 250];
     
-
-
 }
 
-  public setGraphData() {
-    var res;
-    this.data.toPromise().then((data) => {
-      res = data;
+  public setGraphData(data) {
+    //var this.data = this.data;
       this.setColor(
-        res.battery[3][res.battery[3].length - 1].value,
-        res.battery[2][res.battery[2].length - 1].value
+        data.battery[3][data.battery[3].length - 1].value,
+        data.battery[2][data.battery[2].length - 1].value
       );
       this.tilt = {
         multi: [
           {
             name: "x",
-            series: res.tilt[0],
+            series: data.tilt[0],
           },
 
           {
             name: "y",
-            series: res.tilt[1],
+            series: data.tilt[1],
           },
           {
             name: "z",
-            series: res.tilt[2],
+            series: data.tilt[2],
           },
         ],
         view: [1000, 250],
@@ -258,16 +266,16 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "x",
-            series: res.compass[0],
+            series: data.compass[0],
           },
 
           {
             name: "y",
-            series: res.compass[1],
+            series: data.compass[1],
           },
           {
             name: "z",
-            series: res.compass[2],
+            series: data.compass[2],
           },
         ],
         view: [1000, 250],
@@ -291,16 +299,16 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "x",
-            series: res.acceleration[0],
+            series: data.acceleration[0],
           },
 
           {
             name: "y",
-            series: res.acceleration[1],
+            series: data.acceleration[1],
           },
           {
             name: "z",
-            series: res.acceleration[2],
+            series: data.acceleration[2],
           },
         ],
         view: [1000, 250],
@@ -324,12 +332,12 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "in",
-            series: res.battery[0],
+            series: data.battery[0],
           },
 
           {
             name: "out",
-            series: res.battery[1],
+            series: data.battery[1],
           },
         ],
         view: [1000, 250],
@@ -353,12 +361,12 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "RpM",
-            series: res.motor[0],
+            series: data.motor[0],
           },
 
           {
             name: "Temperature",
-            series: res.motor[1],
+            series: data.motor[1],
           },
         ],
         view: [1000, 250],
@@ -381,12 +389,12 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "SoC",
-            series: res.battery[2],
+            series: data.battery[2],
           },
 
           {
             name: "temp",
-            series: res.battery[3],
+            series: data.battery[3],
           },
         ],
         view: [1000, 250],
@@ -409,7 +417,7 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "SoC",
-            value: res.battery[2][res.battery[2].length - 1].value,
+            value: data.battery[2][data.battery[2].length - 1].value,
           },
         ],
         view: [200, 300],
@@ -433,7 +441,7 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         multi: [
           {
             name: "Temperature",
-            value: res.battery[3][res.battery[3].length - 1].value,
+            value: data.battery[3][data.battery[3].length - 1].value,
           },
         ],
         view: [200, 300],
@@ -452,8 +460,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         legend: false,
       };
-      this.errors = res.errors;
-    });
+      this.errors = data.errors;
+  //  });
   }
   public setColor(temp: number, soc: number) {
     if (temp < 60) {

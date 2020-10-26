@@ -45,7 +45,7 @@ import {Globals} from './globals';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NotificationsRxComponent } from './notifications-rx/notifications-rx.component';
-
+import { DataVisualizationComponent } from "./data-visualization/data-visualization.component"
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -75,7 +75,8 @@ export function HttpLoaderFactory(http: HttpClient){
     GalleryComponent,
     NavBarComponent,
     UsersComponent,
-    NotificationsRxComponent
+    NotificationsRxComponent,
+    DataVisualizationComponent
   ],
   // tslint:disable-next-line:max-line-length
     imports: [

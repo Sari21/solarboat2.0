@@ -5,7 +5,7 @@ import { Dates } from "../model/dates";
 import {RxStomp} from "@stomp/rx-stomp";
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
-import { BoatDataComponent } from '../boat-data/boat-data.component';
+//import { BoatDataComponent } from '../boat-data/boat-data.component';
 
 @Component({
   selector: 'app-data-visualization',
@@ -18,12 +18,16 @@ export class DataVisualizationComponent implements OnInit {
   @Input() selectedDate: Dates;
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
-  data:Promise<any>|null = null ;
+  data;
   show = false;
   showDetails = false;
-  proba="Proba adat";
+  proba;
+  
 
-  constructor(private dataService: BoatDataService, private boatDataComponent: BoatDataComponent) {
+  constructor(private dataService: BoatDataService
+    //, 
+    //private boatDataComponent: BoatDataComponent
+    ) {
     this.getLastDataGroupNo2();
   }
 
@@ -31,6 +35,10 @@ export class DataVisualizationComponent implements OnInit {
     this.getDates();
     //this.getLastDataGroup();
   
+  }
+  plus() {
+    console.log("p");
+    this.proba = this.proba.concat(" p");
   }
 
   public async getDates() {
@@ -44,8 +52,25 @@ export class DataVisualizationComponent implements OnInit {
       }
     );
   }
-  public dateChanged() {
-    this.boatDataComponent.dateChanged( this.selectedDate.name.toString());
+    public async getDataById(id: number): Promise<Object> {
+    console.log("getdatabyid")
+    return new Promise(() => {
+      this.data = this.dataService.getDataGroupById(id);
+      console.log(this.data);
+      //this.setGraphData();
+     
+    });
+  }
+  public  dateChanged() {
+    console.log("Datechanged");
+    this.dataService.getDataGroupById(this.selectedDate.name).subscribe((res) => {
+      this.data = res;
+    });
+
+   // this.data = this.getDataById(this.selectedDate.name);
+
+    //this.proba = this.selectedDate.name.toString();
+  //  this.boatDataComponent.dateChanged( this.selectedDate.name.toString());
     /*console.log(this.dataService.getLastDataGroup());
     console.log("datechanged");
     this.EXPORT_URL = this.BASE_URL.concat("/").concat(
@@ -78,10 +103,11 @@ export class DataVisualizationComponent implements OnInit {
     */
       this.dataService.getLastDataGroup().subscribe(
         (res) => {
-          this.data = new Promise(() => res);
-          console.log(res);
+          this.data = res;
+          this.proba = this.data.id;
   
-        })
+          console.log(this.data);
+        });
   }
   /*public async getLastDataGroup(): Promise<Object> {
     console.log("get layt");

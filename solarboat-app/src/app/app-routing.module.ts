@@ -10,6 +10,7 @@ import { RegisterComponent } from "./admin/register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { UsersComponent } from "./admin/users/users.component";
+import { DataVisualizationComponent } from "./data-visualization/data-visualization.component"
 const routes: Routes = [
   { path: "gallery", component: GalleryComponent },
   { path: "auth/login", component: LoginComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: "sponsors", component: SponsorsComponent },
   {
     path: "boatdata",
-    component: BoatDataComponent,
+    component: DataVisualizationComponent,
   },
   { path: "achievements", component: AchievementsComponent },
   { path: "admin", redirectTo: "/auth/login" },

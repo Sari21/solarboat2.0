@@ -1,4 +1,8 @@
-<app-nav-bar></app-nav-bar>
+
+<h1>
+
+  {{proba}}
+</h1>
 <div class="justify-content-center d-flex">
   <div class="col-10">
     <div class="input-group mt-5 mb-3">
@@ -38,19 +42,7 @@
         <app-bar-chart (click)="setShowDetails()" [data]="temp"></app-bar-chart>
       </div>
 
-      <table class="col-5" id="errorTable">
-        <thead>
-          <tr>
-            <th class="p-3">Errors:</th>
-          </tr>
-        </thead>
-        <tbody class="">
-          <tr *ngFor="let error of errors">
-            <td class="pl-3 pb-2">{{ error.source }}</td>
-            <td class="pr-3 pl-3 pb-2">{{ error.message }}</td>
-          </tr>
-        </tbody>
-      </table>
+   
     </div>
 
     <div
@@ -70,7 +62,19 @@
       <app-graph class="d-inline-flex p-5" [data]="compass" id="chart-parent"></app-graph>
       <app-graph class="d-inline-flex p-5" [data]="acceleration" id="chart-parent"></app-graph>
     </div>
+    <table class="col-5" id="errorTable">
+      <thead>
+        <tr>
+          <th class="p-3">Errors:</th>
+        </tr>
+      </thead>
+      <tbody class="">
+        <tr *ngFor="let error of errors">
+          <td class="pl-3 pb-2">{{ error.source }}</td>
+          <td class="pr-3 pl-3 pb-2">{{ error.message }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 <app-notifications-rx></app-notifications-rx>
-<app-footer></app-footer>
