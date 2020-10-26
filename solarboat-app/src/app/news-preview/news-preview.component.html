@@ -1,25 +1,34 @@
-
-<a data-aos="fade-up" class="card lift  mb-md-5 mr-md-3 ml-md-3 mb-lg-5 mr-lg-3 ml-lg-3 mr-0 ml-0 mb-5" >
+<a data-aos="fade-up" class="card lift  mb-md-5 mr-md-3 ml-md-3 mb-lg-5 mr-lg-3 ml-lg-3 mr-0 ml-0 mb-5">
     <div class="card-body m-3">
         <div *ngIf="authority=='admin'" class="row justify-content-end">
-            <a class="col-2" (click)="openContent(Edit, true)" ><mat-icon class="update-icon">edit</mat-icon></a>
-            <a class="col-2" (click)="delete(news.id)" ><mat-icon class="update-icon">delete</mat-icon></a>
+            <a class="col-2" (click)="openContent(Edit, true)">
+                <mat-icon class="update-icon">edit</mat-icon>
+            </a>
+            <a class="col-2" (click)="delete(news.id)">
+                <mat-icon class="update-icon">delete</mat-icon>
+            </a>
         </div>
         <div (click)="openContent(longContent, false)">
-            <h2 translate class="title mb-2 mt-4" [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
+            <h2 translate class="title mb-2 mt-4"
+                [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
             <div class="row date col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>
                 <div class="pl-1">{{news.date}}</div>
             </div>
             <div class="text-wrap col-12 p-0">
-                <p translate class="card-text mt-3 text-break" [translateParams]="{ shortArticle_en: shortArticleEn, shortArticle_hu: shortArticleHu}">NEWS.shortArticle</p>
+                <p translate class="card-text mt-3 text-break"
+                   [translateParams]="{ shortArticle_en: shortArticleEn, shortArticle_hu: shortArticleHu}">
+                    NEWS.shortArticle</p>
             </div>
             <div class="arrow-read col-md-6 offset-md-6 col-lg-6 offset-lg-6 col-10 offset-2 p-0 mt-4 d-none  d-lg-block">
-                <div translate class="read-more m-0"><mat-icon aria-hidden="false" >arrow_right_alt</mat-icon>BUTTON.readAllNews</div>
+                <div translate class="read-more m-0">
+                    <mat-icon aria-hidden="false">arrow_right_alt</mat-icon>
+                    BUTTON.readAllNews
+                </div>
             </div>
             <div *ngIf="news.picture" class="row mt-4 align-items-center">
                 <div class="col-12">
-                    <img [src]="news.picture" alt="logo" title="logo"  />
+                    <img [src]="news.picture" alt="logo" title="logo"/>
                 </div>
             </div>
         </div>
@@ -27,9 +36,10 @@
 
 </a>
 
-<ng-template  #longContent let-modal>
+<ng-template #longContent let-modal>
     <div class="modal-header">
-        <h2 translate class="title mb-2 mt-4" [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
+        <h2 translate class="title mb-2 mt-4"
+            [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -40,19 +50,19 @@
             <div class="pl-1">2020.03.04</div>
         </div>
         <div class="text-wrap col-12 p-0">
-<!--                        <p translate class="card-text mt-3 text-break" [translateParams]="{ content_en: news.content_en, content_hu: news.content_hu}">NEWS.content</p>-->
+            <!--                        <p translate class="card-text mt-3 text-break" [translateParams]="{ content_en: news.content_en, content_hu: news.content_hu}">NEWS.content</p>-->
             <div [innerHTML]="'NEWS.content' | translate: {content_en: news.content_en, content_hu: news.content_hu}"></div>
         </div>
 
         <div *ngIf="news.picture" class="row mt-4 align-items-center">
             <div class="col-12">
-                <img [src]="news.picture" alt="picture" title="picture"  />
+                <img [src]="news.picture" alt="picture" title="picture"/>
             </div>
         </div>
     </div>
 </ng-template>
 
-<ng-template   #Edit let-modal>
+<ng-template #Edit let-modal>
     <div class="modal-header">
         <h2 class="title mb-2 mt-4">Hír módosítása</h2>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -151,7 +161,8 @@
             </div>
 
             <div class="row justify-content-end pr-2">
-                <a class="btn" (click)="onSubmit(EditForm, news.id)" href="javascript:void(0)" [ngClass]="{'disabled': !EditForm.form.valid }" ><span>Feltöltés</span></a>
+                <a class="btn" (click)="onSubmit(EditForm, news.id)" href="javascript:void(0)"
+                   [ngClass]="{'disabled': !EditForm.form.valid }"><span>Feltöltés</span></a>
                 <div [hidden]="!failed"
                      class="alert alert-danger mt-3">
                     {{errorMessage}}
