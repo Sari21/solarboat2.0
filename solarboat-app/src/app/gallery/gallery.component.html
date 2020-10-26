@@ -1,7 +1,5 @@
 <app-nav-bar></app-nav-bar>
 <div class="gallery">
-
-
     <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12 ">
             <h1 translate class="title pb-3">GALLERY.gallery</h1>
@@ -56,12 +54,12 @@
             </div>
             <div class="align-items-center justify-content-center col-12 d-flex flex-column">
                 <div class="row col-12">
-                    <div class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-lg-3 pb-md-3">
+                    <div data-aos="fade-up" data-aos-offset="300" class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-lg-3 pb-md-3">
                         <iframe class="p-3 " width="560" height="315" src="https://www.youtube.com/embed/ezgTLqlOhzs"
                                 frameborder="0"
                                 allow=" encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <div class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-3">
+                    <div data-aos="fade-up" data-aos-offset="300" class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-3">
                         <iframe class="p-3" width="560" height="315" src="https://www.youtube.com/embed/xFjTQf9uCsM"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -76,8 +74,7 @@
                             <a (click)="clickMethod(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
 
                             <a href="{{img.picture}}" data-lightbox="gallery">
-                                <div class="img-wrap">
-
+                                <div data-aos="fade-up"  class="img-wrap">
                                     <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}"/>
                                 </div>
                             </a>

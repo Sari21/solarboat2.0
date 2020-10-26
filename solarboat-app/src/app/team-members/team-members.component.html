@@ -1,5 +1,5 @@
-<div class="d-flex flex-row members mb-3 justify-content-center flex-wrap">
-    <div class="d-flex flex-column flex-wrap col-lg-3 col-6 col-sm-4 col-md-4 ml-3 mr-3 p-md-0 ml-md-0 mr-md-0 p-lg-2 ml-lg-2 leader p-md-3 pl-lg-5 pr-lg-4 pb-3">
+<div  class="d-flex flex-row members mb-3 justify-content-center flex-wrap">
+    <div data-aos="fade-right" class="d-flex flex-column flex-wrap col-lg-3 col-6 col-sm-4 col-md-4 ml-3 mr-3 p-md-0 ml-md-0 mr-md-0 p-lg-2 ml-lg-2 leader p-md-3 pl-lg-5 pr-lg-4 pb-3">
         <img *ngIf="leader.linkedin === 'string'" class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+leader.picture+'.jpg'"/>
         <a *ngIf="leader.linkedin !== 'string' " class="img" [href]="leader.linkedin" target="blank" >
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div *ngFor="let member of members" class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-md-3 p-lg-2 pb-3 member justify-content-center">
+    <div data-aos="fade-left" *ngFor="let member of members" class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-md-3 p-lg-2 pb-3 member justify-content-center">
         <img *ngIf="member.linkedin === 'string' " class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+member.picture+'.jpg'"/>
         <a *ngIf="member.linkedin !== 'string' " class="img" [href]="member.linkedin" target="blank" >
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>

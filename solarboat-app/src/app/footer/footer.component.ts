@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-footer',
@@ -11,6 +12,7 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    AOS.init();
   }
 
 }
