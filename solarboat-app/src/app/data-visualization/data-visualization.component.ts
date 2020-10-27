@@ -5,7 +5,8 @@ import { Dates } from "../model/dates";
 import {RxStomp} from "@stomp/rx-stomp";
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
-//import { BoatDataComponent } from '../boat-data/boat-data.component';
+import {NotificationsService} from '../notifications.service'
+import {NotificationsRxComponent} from '../notifications-rx/notifications-rx.component'
 
 @Component({
   selector: 'app-data-visualization',
@@ -22,25 +23,24 @@ export class DataVisualizationComponent implements OnInit {
   show = false;
   showDetails = false;
   proba;
+  @Input() selectedTabIndex;
+  private boatIsActive: Boolean;
   
 
-  constructor(private dataService: BoatDataService
-    //, 
-    //private boatDataComponent: BoatDataComponent
-    ) {
-    this.getLastDataGroupNo2();
-  }
+  constructor(private dataService: BoatDataService,
+  //   private notifications: NotificationsRxComponent
+  private notifications: NotificationsService
+    ) { }
 
   ngOnInit(): void {
+    this.getLastDataGroup();
     this.getDates();
-    //this.getLastDataGroup();
-  
+    this.connect();
+   
   }
-  plus() {
-    console.log("p");
-    this.proba = this.proba.concat(" p");
+  ngOnDestroy(){
+   this.disconnect();
   }
-
   public async getDates() {
     this.dataService.getDate().subscribe(
       (res) => {
@@ -52,82 +52,37 @@ export class DataVisualizationComponent implements OnInit {
       }
     );
   }
-    public async getDataById(id: number): Promise<Object> {
-    console.log("getdatabyid")
-    return new Promise(() => {
-      this.data = this.dataService.getDataGroupById(id);
-      console.log(this.data);
-      //this.setGraphData();
-     
-    });
+public connect(){
+  if(this.checkBoatIsActive()){
+    this.notifications.connect();
+    this.notifications.startListening();
   }
+}
+public disconnect(){
+  //if(this.notifications.isConnected()){
+    this.notifications.stopListening();
+    this.notifications.disconnect();
+ // }
+}
+public getLastDataGroup(){
+  this.dataService.getLastDataGroup().subscribe((res) => {
+    this.data = res;
+  });  
+}
   public  dateChanged() {
     console.log("Datechanged");
     this.dataService.getDataGroupById(this.selectedDate.name).subscribe((res) => {
       this.data = res;
-    });
-
-   // this.data = this.getDataById(this.selectedDate.name);
-
-    //this.proba = this.selectedDate.name.toString();
-  //  this.boatDataComponent.dateChanged( this.selectedDate.name.toString());
-    /*console.log(this.dataService.getLastDataGroup());
-    console.log("datechanged");
-    this.EXPORT_URL = this.BASE_URL.concat("/").concat(
-      this.selectedDate.name.toString()
-    );
-    this.selectedDate = */
-    /*this.getDataById(this.selectedDate.name).then((data) => {
-      var res = data;
-
-    })
-    */
+    });  
   }
-  /*public async getDataById(id: number): Promise<Object> {
-    console.log("getdatabyid")
-    return new Promise(() => {
-      this.data = this.dataService.getDataGroupById(id);
-      console.log(this.data);
-      //this.setGraphData();
-     
-    });
-  }
-  */
-  public async getLastDataGroupNo2(){
-   /* this.dataService.getLastDataGroup().subscribe(
-      (res) => {
-        this.data = new Promise(() => res);
-        console.log(res);
-
-      });
-    */
-      this.dataService.getLastDataGroup().subscribe(
-        (res) => {
-          this.data = res;
-          this.proba = this.data.id;
-  
-          console.log(this.data);
-        });
-  }
-  /*public async getLastDataGroup(): Promise<Object> {
-    console.log("get layt");
-    return new Promise(() => {
-      this.data = this.dataService.getDataGroupById(12);
-      console.log("stop");
-
-      //this.setGraphData();
-    });
-  }
-  */
+ 
   public deleteAll() {
     this.dataService.deleteAll();
     this.getDates();
-
   }
   public deleteById(id: number) {
     this.dataService.deleteById(id);
     this.getDates();
-    //this.getLastDataGroup();
   }
   public setShow() {
     if (this.show == false) {
@@ -135,5 +90,16 @@ export class DataVisualizationComponent implements OnInit {
     } else {
       this.show = false;
     }
+  }
+  onTabChanged(){
+    if(this.selectedTabIndex === 0){
+      this.connect()
+    }
+    else{
+      this.disconnect();
+    }
+  }
+  checkBoatIsActive(){
+    return true;
   }
 }

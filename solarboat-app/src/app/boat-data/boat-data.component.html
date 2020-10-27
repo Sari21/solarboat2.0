@@ -1,48 +1,12 @@
 
-<h1>
-
-  {{proba}}
-</h1>
 <div class="justify-content-center d-flex">
   <div class="col-10">
-    <div class="input-group mt-5 mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
-      </div>
-      <select [(ngModel)]="selectedDate" (change)="dateChanged()">
-        <option *ngFor="let item of dates" [ngValue]="item">
-          {{ item.value }}
-        </option>
-      </select>
-    </div>
-
-    <a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"
-      ><span>Opciók</span></a
-    >
-
-    <div *ngIf="show" class="d-flex mb-3">
-      <a class="btn" href="{{ BASE_URL }}"><span>Összes letöltése</span></a>
-      <a class="btn" href="{{ EXPORT_URL }}"
-        ><span>Kiválasztott letöltése</span></a
-      >
-      <a
-        class="btn"
-        (click)="deleteById(selectedDate.name)"
-        href="javascript:void(0)"
-        ><span>Kiválasztott törlése</span></a
-      >
-      <a class="btn" (click)="deleteAll()" href="javascript:void(0)"
-        ><span>Összes törlése</span></a
-      >
-    </div>
-
+   
     <div class="d-flex flex-row justify-content-center" id=" firstrow">
       <div class="d-inline-flex, flex-row">
         <app-bar-chart (click)="setShowDetails()" [data]="soc"></app-bar-chart>
         <app-bar-chart (click)="setShowDetails()" [data]="temp"></app-bar-chart>
       </div>
-
-   
     </div>
 
     <div
@@ -77,4 +41,4 @@
     </table>
   </div>
 </div>
-<app-notifications-rx></app-notifications-rx>
+

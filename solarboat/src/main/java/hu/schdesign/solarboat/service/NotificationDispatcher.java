@@ -37,7 +37,7 @@ public class NotificationDispatcher {
 
     public void add(String sessionId) {
         listeners.add(sessionId);
-        dispatch(dataGroupService.getDataGroupLast());
+        //dispatch(dataGroupService.getDataGroupLast());
     }
 
     public void remove(String sessionId) {

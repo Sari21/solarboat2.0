@@ -103,12 +103,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
-		<dependency>
-			<groupId>io.reactivex.rxjava2</groupId>
-			<artifactId>rxjava</artifactId>
-			<version>2.2.19</version>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit -->
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
@@ -142,10 +137,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-
-
-
 	</dependencies>
 
 	<build>

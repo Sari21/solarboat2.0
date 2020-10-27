@@ -3,7 +3,6 @@ import { Routes, RouterModule, CanActivate } from "@angular/router";
 import { MainpageComponent } from "./mainpage/mainpage.component";
 import { TeamComponent } from "./team/team.component";
 import { NewsComponent } from "./news/news.component";
-import { BoatDataComponent } from "./boat-data/boat-data.component";
 import { AchievementsComponent } from "./achievements/achievements.component";
 import { SponsorsComponent } from "./sponsors/sponsors.component";
 import { RegisterComponent } from "./admin/register/register.component";

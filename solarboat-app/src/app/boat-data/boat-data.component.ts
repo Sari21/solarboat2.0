@@ -1,34 +1,32 @@
-import { Component, OnInit, Output, NgModule, Input, OnDestroy } from "@angular/core";
+import { Component, Injectable, OnInit, Output, NgModule, Input, OnDestroy } from "@angular/core";
 import { BoatDataService } from "../boat-data.service";
-import { interval, Subscription } from "rxjs";
-import { Dates } from "../model/dates";
-import {RxStomp} from "@stomp/rx-stomp";
-import * as SockJS from 'sockjs-client';
-import {map} from "rxjs/operators";
-
+import { ChartModel } from '../model/chart-model';
+import { NotificationsService } from '../notifications.service'
 @Component({
   selector: "app-boat-data",
   templateUrl: "./boat-data.component.html",
   styleUrls: ["./boat-data.component.css"],
 })
-export class BoatDataComponent implements OnInit, OnDestroy {
+export class BoatDataComponent implements OnInit {
   @Output() public tilt;
   @Output() public compass;
   @Output() public acceleration;
   @Output() public battery;
   @Output() public motor;
   @Output() public soc;
-  @Output() public temp;
+  @Output() public temp; 
   @Output() public temp_soc;
   @Output() public errors;
-  @Output() dates: Dates[] = [];
-  @Input() selectedDate: Dates;
   private _data;
   @Input('data') 
   set data(data){
-    this._data = data;
-    this.setGraphData(data);
-    console.log(data);
+    if(data){
+      this.setGraphData(data);
+      this.addGraphData(data);
+      this._data = data;
+      console.log(this.tilt);
+    }
+   
    // data.subscribe(() =>  { this._data = data; this.setGraphData();} );
     //this.setGraphData();
     //console.log(this.data);
@@ -36,17 +34,22 @@ export class BoatDataComponent implements OnInit, OnDestroy {
     
   }
   get proba(): string{return this._data};
-  subscription: Subscription;
-  source = interval(10000);
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
   show = false;
   showDetails = false;
-  private client: RxStomp;
 
 
-  constructor(private dataService: BoatDataService) {}
-
+  constructor(private dataService: BoatDataService, private notifService:  NotificationsService) {
+    this.notifService.eventCallback$.subscribe(data => {
+      this.callbackFunction(data);
+  });
+  }
+  callbackFunction(data)
+  {
+    this.addGraphData(data);
+    console.log("Inside MyComponent")
+  }
   ngOnInit() {
     // this.subscription = this.source.subscribe((val) => this.makeGraphs());
     //this.getLastDataGroup();
@@ -54,58 +57,7 @@ export class BoatDataComponent implements OnInit, OnDestroy {
     //this.connectClicked();
     //this.startClicked();
   }
-  ngOnDestroy(){
-    this.stopClicked();
-    this.disconnectClicked();
-  }
-
-  //NOTIFICATIONS
-  connectClicked() {
-    if (!this.client || this.client.connected) {
-      this.client = new RxStomp();
-      this.client.configure({
-        webSocketFactory: () => new SockJS('http://localhost:8080/notifications'),
-        debug: (msg: string) => console.log(msg)
-      });
-      this.client.activate();
-
-      this.watchForNotifications();
-
-      console.info('connected!');
-    }
-  }
-
-  private watchForNotifications() {
-    this.client.watch('/user/notification/item')
-      .pipe(
-        map((response) => {
-          const data = JSON.parse(response.body);
-       
-          return data;
-        }))
-      .subscribe((data: string) =>  this.addGraphData(data));
-  }
-
-  disconnectClicked() {
-    if (this.client && this.client.connected) {
-      this.client.deactivate();
-      this.client = null;
-      console.info("disconnected :-/");
-    }
-  }
-
-  startClicked() {
-    if (this.client && this.client.connected) {
-      this.client.publish({destination: '/swns/start'});
-    }
-  }
-
-  stopClicked() {
-    if (this.client && this.client.connected) {
-      this.client.publish({destination: '/swns/stop'});
-    }
-  }
-
+  
   //GRAPH
   public setShow() {
     if (this.show == false) {
@@ -121,63 +73,10 @@ export class BoatDataComponent implements OnInit, OnDestroy {
       this.showDetails = false;
     }
   }
-  public dateChanged() {
-    this.EXPORT_URL = this.BASE_URL.concat("/").concat(
-      this.selectedDate.name.toString()
-    );
-    this.getDataById(this.selectedDate.name).then((data) => {
-      var res = data;
-      console.log(this.client);
-      console.log(res);
-      if(this.client == null && this.data.isLast){
-        this.connectClicked();
-        this.startClicked();
-      }
-      if(this.client != null && !this.data.isLast){
-        this.stopClicked();
-        this.disconnectClicked()
-      }
-    })
-   
-  }
-
-  public async getDataById(id: number): Promise<Object> {
-    return new Promise(() => {
-      this.data = this.dataService.getDataGroupById(id);
-      this.setGraphData(null);
-     
-    });
-  }
-  public async getLastDataGroup(): Promise<Object> {
-    return new Promise(() => {
-      this.data = this.dataService.getLastDataGroup();
-
-      this.setGraphData(null);
-    });
-  }
-  public async getDates() {
-    this.dataService.getDate().subscribe(
-      (res) => {
-        this.dates = res;
-        this.selectedDate = res[res.length - 1];
-      },
-      (err) => {
-        alert("get error");
-      }
-    );
-  }
-  public deleteAll() {
-    this.dataService.deleteAll();
-    this.getDates();
-  }
-  public deleteById(id: number) {
-    this.dataService.deleteById(id);
-    this.getDates();
-    this.getLastDataGroup();
-  }
 
   public addGraphData(newData) {
-    console.log(newData.battery[2][0]);
+    console.log(newData);
+    console.log(this.tilt);
     this.setColor(newData.battery[2][0].value, newData.battery[3][0].value);
     this.tilt.multi[0].series.push(newData.tilt[0][0]);
     this.tilt.multi[1].series.push(newData.tilt[1][0]);
@@ -260,6 +159,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         autoScale: true,
         legendTitle: "Tilt",
+        yScaleMax:80,
+        legend:false,
       };
 
       this.compass = {
@@ -293,6 +194,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         autoScale: true,
         legendTitle: "Compass",
+        yScaleMax:80,
+        legend:false,
       };
 
       this.acceleration = {
@@ -326,6 +229,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         autoScale: true,
         legendTitle: "Acceleration",
+        yScaleMax:80,
+        legend:false,
       };
 
       this.battery = {
@@ -355,6 +260,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         autoScale: true,
         legendTitle: "Battery",
+        yScaleMax:80,
+        legend:false,
       };
 
       this.motor = {
@@ -384,6 +291,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         autoScale: true,
         legendTitle: "Motor",
+        yScaleMax:80,
+        legend:false,
       };
       this.temp_soc = {
         multi: [
@@ -412,6 +321,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
         autoScale: true,
         legendTitle: "Battery",
+        yScaleMax:80,
+        legend:false,
       };
       this.soc = {
         multi: [
@@ -436,6 +347,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
         },
 
         legend: false,
+        autoScale: true,
+        legendTitle: "Battery",
       };
       this.temp = {
         multi: [
@@ -459,6 +372,8 @@ export class BoatDataComponent implements OnInit, OnDestroy {
           domain: this.tempColor,
         },
         legend: false,
+        autoScale: true,
+        legendTitle: "Battery",
       };
       this.errors = data.errors;
   //  });

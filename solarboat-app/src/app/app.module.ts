@@ -38,15 +38,13 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { UsersComponent } from "./admin/users/users.component";
-
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {Globals} from './globals';
-
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NotificationsRxComponent } from './notifications-rx/notifications-rx.component';
 import { DataVisualizationComponent } from "./data-visualization/data-visualization.component"
-
+import { MatTabsModule } from '@angular/material/tabs'; 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
@@ -95,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient){
         JwtModule,
         ReactiveFormsModule,
         AngularEditorModule,
+        MatTabsModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

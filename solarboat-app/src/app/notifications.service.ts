@@ -1,23 +1,26 @@
-import {Component, Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {RxStomp} from "@stomp/rx-stomp";
+import {Subject} from "rxjs/Subject"
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
-import {BoatDataComponent} from "../boat-data/boat-data.component"
+import { BoatData } from './model/boat-data';
+import {BoatDataComponent} from "./boat-data/boat-data.component"
 
 @Injectable({
   providedIn: 'root'
 })
-@Component({
-  selector: 'app-notifications-rx',
-  templateUrl: './notifications-rx.component.html'
-})
-export class NotificationsRxComponent {
+export class NotificationsService {
 
-  constructor(private boatDataComponent: BoatDataComponent){}
+  constructor(){}
 
   private client: RxStomp;
 
   public notifications: string[] = [];
+  private eventCallback = new Subject<string>(); // Source
+eventCallback$ = this.eventCallback.asObservable(); // Stream
+
+
+
 
   connect() {
     if (!this.client || this.client.connected) {
@@ -39,7 +42,8 @@ export class NotificationsRxComponent {
       .pipe(
         map((response) => {
           const data = JSON.parse(response.body);
-          this.boatDataComponent.setGraphData(data);
+          //this.boatDataComponent.addGraphData(data);
+          this.eventCallback.next(data);
           return data;
         }))
       .subscribe((notification: string) => this.notifications.push(notification));
@@ -64,5 +68,7 @@ export class NotificationsRxComponent {
       this.client.publish({destination: '/swns/stop'});
     }
   }
-
+  isConnected(){
+    return this.client.connected;
+  }
 }
