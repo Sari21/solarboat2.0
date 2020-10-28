@@ -1,0 +1,18 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Average</th>
+        <th scope="col">Maximum</th>
+        <th scope="col">Minimum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let data of datas">
+        <th scope="row">{{data.name}}</th>
+        <td>{{data.average}}</td>
+        <td>{{data.max}}</td>
+        <td>{{data.min}}</td>
+      </tr>
+    </tbody>
+  </table>

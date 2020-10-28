@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.model;
 
+import hu.schdesign.solarboat.model.Boat.DataAnalysis;
 import hu.schdesign.solarboat.model.Boat.Error;
 
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ public class ResponseBoatData {
     private ArrayList<Error> errors = new ArrayList<>();
     private String id;
     private  boolean isLast = false;
+    private ArrayList<DataAnalysis> tiltAnalysis;
+    private ArrayList<DataAnalysis> accelerationAnalysis;
+    private ArrayList<DataAnalysis> compassAnalysis;
+    private ArrayList<DataAnalysis> batteryAnalysis;
+    private ArrayList<DataAnalysis> motorAnalysis;
 
     public ResponseBoatData(){}
 
@@ -80,5 +86,45 @@ public class ResponseBoatData {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ArrayList<DataAnalysis> getTiltAnalysis() {
+        return tiltAnalysis;
+    }
+
+    public void setTiltAnalysis(ArrayList<DataAnalysis> tiltAnalysis) {
+        this.tiltAnalysis = tiltAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getAccelerationAnalysis() {
+        return accelerationAnalysis;
+    }
+
+    public void setAccelerationAnalysis(ArrayList<DataAnalysis> accelerationAnalysis) {
+        this.accelerationAnalysis = accelerationAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getCompassAnalysis() {
+        return compassAnalysis;
+    }
+
+    public void setCompassAnalysis(ArrayList<DataAnalysis> compassAnalysis) {
+        this.compassAnalysis = compassAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getBatteryAnalysis() {
+        return batteryAnalysis;
+    }
+
+    public void setBatteryAnalysis(ArrayList<DataAnalysis> batteryAnalysis) {
+        this.batteryAnalysis = batteryAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getMotorAnalysis() {
+        return motorAnalysis;
+    }
+
+    public void setMotorAnalysis(ArrayList<DataAnalysis> motorAnalysis) {
+        this.motorAnalysis = motorAnalysis;
     }
 }

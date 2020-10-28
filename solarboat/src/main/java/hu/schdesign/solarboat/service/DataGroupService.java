@@ -47,6 +47,7 @@ public class DataGroupService {
                 -> new RuntimeException("Nincs ilyen adat"));
         ResponseBoatData response = boatDataConverter.convertDataGroupToResponseBoatData(group);
         DataGroup lastGroup = dataGroupRepository.findTopByOrderByIdDesc().orElseThrow(() -> new RuntimeException("Nincsenek adatok"));
+
         if(group.getId() == lastGroup.getId()){
             response.setLast(true);
         }

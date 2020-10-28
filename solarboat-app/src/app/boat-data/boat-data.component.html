@@ -15,16 +15,31 @@
     >
       <app-graph
         *ngIf="showDetails"
-        class="d-inline-flex p-5"
+        class="d-inline-flex p-5 col-md-6"
         [data]="temp_soc"
         id="chart-parent"
       ></app-graph>
-      <app-graph class="d-inline-flex p-5" [data]="battery" id="chart-parent"></app-graph>
+      <div class="row">
+        <div class="flex-column">
+        <app-graph class="d-inline-flex col-md-6" [data]="battery" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="accelerationStatistics" [datas] ="accelerationStatistics"></app-statistics>
+        </div>
+        
+        <app-graph class="d-inline-flex col-md-6" [data]="motor" id="chart-parent"></app-graph>
+      </div>
+      <div class="row">
 
-      <app-graph class="d-inline-flex p-5" [data]="motor" id="chart-parent"></app-graph>
-      <app-graph class="d-inline-flex p-5" [data]="tilt" id="chart-parent"></app-graph>
-      <app-graph class="d-inline-flex p-5" [data]="compass" id="chart-parent"></app-graph>
-      <app-graph class="d-inline-flex p-5" [data]="acceleration" id="chart-parent"></app-graph>
+      <app-graph class="d-inline-flex col-md-6" [data]="tilt" id="chart-parent"></app-graph>
+      <app-graph class="d-inline-flex col-md-6" [data]="compass" id="chart-parent"></app-graph>
+      </div>
+      <div class="row">
+
+     
+      <div class="flex-column">
+        <app-graph class="d-inline-flex p-5 col-md-6" [data]="acceleration" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="accelerationStatistics" [datas] ="accelerationStatistics"></app-statistics>
+        </div>
+      </div>
     </div>
     <table class="col-5" id="errorTable">
       <thead>

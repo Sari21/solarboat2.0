@@ -17,6 +17,7 @@ export class BoatDataComponent implements OnInit {
   @Output() public temp; 
   @Output() public temp_soc;
   @Output() public errors;
+  @Output() public accelerationStatistics;
   private _data;
   @Input('data') 
   set data(data){
@@ -113,17 +114,18 @@ export class BoatDataComponent implements OnInit {
   }
 
   onResize(event) {
-    this.tilt.view = [event.target.innerWidth / 1.15, 250];
-    this.compass.view = [event.target.innerWidth / 1.15, 250];
-    this.acceleration.view = [event.target.innerWidth / 1.15, 250];
-    this.battery.view = [event.target.innerWidth / 1.15, 250];
-    this.motor.view = [event.target.innerWidth / 1.15, 250];
-    this.temp_soc.view = [event.target.innerWidth / 1.15, 250];
+    this.tilt.view = [event.target.innerWidth / 2.7, 250];
+    this.compass.view = [event.target.innerWidth / 2.7, 250];
+    this.acceleration.view = [event.target.innerWidth / 2.7, 250];
+    this.battery.view = [event.target.innerWidth / 2.7, 250];
+    this.motor.view = [event.target.innerWidth / 2.7, 250];
+    this.temp_soc.view = [event.target.innerWidth / 2.7, 250];
     
 }
 
   public setGraphData(data) {
     //var this.data = this.data;
+    this.accelerationStatistics = data.accelerationAnalysis;
       this.setColor(
         data.battery[3][data.battery[3].length - 1].value,
         data.battery[2][data.battery[2].length - 1].value
