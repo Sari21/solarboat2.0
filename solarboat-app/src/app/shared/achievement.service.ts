@@ -1,9 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { News } from "../model/news";
-import { Achievement } from "../model/achievement";
-import { GalleryPicture } from "../model/gallery-picture";
 import {Globals} from '../globals';
 
 @Injectable({
@@ -15,7 +11,7 @@ export class AchievementService {
 
   getAchievements(pageNum: number) {
     return this.http.get(
-        this.BASE_URL + "/api/achievement/page/".concat(pageNum.toString())
+        this.BASE_URL + '/api/achievement/page/'.concat(pageNum.toString())
     );
   }
 

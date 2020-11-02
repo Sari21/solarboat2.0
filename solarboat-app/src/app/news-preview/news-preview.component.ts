@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {News} from '../model/news';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
-import {HttpClient} from '@angular/common/http';
 import {NewsService} from '../shared/news.service';
 import {Globals} from '../globals';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
@@ -14,6 +13,10 @@ import AOS from 'aos';
     styleUrls: ['./news-preview.component.css']
 })
 export class NewsPreviewComponent implements OnInit {
+    constructor(private globals: Globals, private apiService: NewsService,
+                private modalService: NgbModal, pictureService: PictureService) {
+        this.pictureService = pictureService;
+    }
     // tslint:disable-next-line:variable-name
     shortArticleEn: string;
     shortArticleHu: string;
@@ -25,11 +28,28 @@ export class NewsPreviewComponent implements OnInit {
     @Input() authority: string;
     @Input() news: News;
     @Output() onRemove = new EventEmitter<News>();
-
-
-    constructor(private http: HttpClient, private globals: Globals, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
-        this.pictureService = pictureService;
-    }
+    config: AngularEditorConfig = {
+        editable: true,
+        spellcheck: true,
+        height: '15rem',
+        minHeight: '5rem',
+        placeholder: 'Enter text here...',
+        translate: 'no',
+        defaultParagraphSeparator: 'p',
+        defaultFontName: 'Arial',
+        toolbarHiddenButtons: [
+            [
+                'textColor',
+                'backgroundColor',
+                'customClasses',
+                'link',
+                'unlink',
+                'insertImage',
+                'insertVideo',
+                'insertHorizontalRule'
+            ]
+        ]
+    };
 
     decodeEntities(str) {
         // this prevents any overhead from creating the object each time
@@ -67,35 +87,8 @@ export class NewsPreviewComponent implements OnInit {
     delete(id: number) {
         this.onRemove.emit(this.news);
         //TODO: kép törlése
-        const b = this.http
-            .delete(this.globals.BASE_URL + '/api/news/'.concat(id.toString()))
-            .subscribe((data) => {
-                // console.log(data);
-            });
+        this.apiService.deleteNews(id);
     }
-
-    config: AngularEditorConfig = {
-        editable: true,
-        spellcheck: true,
-        height: '15rem',
-        minHeight: '5rem',
-        placeholder: 'Enter text here...',
-        translate: 'no',
-        defaultParagraphSeparator: 'p',
-        defaultFontName: 'Arial',
-        toolbarHiddenButtons: [
-            [
-                'textColor',
-                'backgroundColor',
-                'customClasses',
-                'link',
-                'unlink',
-                'insertImage',
-                'insertVideo',
-                'insertHorizontalRule'
-            ]
-        ]
-    };
 
     onSubmit(empForm: any, id: number) {
         this.news.title_hu = this.form.title;
@@ -119,11 +112,7 @@ export class NewsPreviewComponent implements OnInit {
             picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : this.news.picture
 
         };
-        const b = this.http
-            .put(this.globals.BASE_URL + '/api/news', o)
-            .subscribe((data) => {
-                // console.log(data);
-            });
+        this.apiService.putNews(o);
         this.modalService.dismissAll('put');
         this.form = empForm;
         this.form.reset();

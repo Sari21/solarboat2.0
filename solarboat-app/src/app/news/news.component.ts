@@ -80,12 +80,7 @@ export class NewsComponent implements OnInit {
     //     picture: ''
     //   };
     // }
-
-    this.http
-        .post(this.globals.BASE_URL + '/api/news', o)
-        .subscribe((data) => {
-          // console.log(data);
-        });
+    this.apiService.addNews(o);
     this.pushNews();
     this.form = empForm;
     this.form.reset();
