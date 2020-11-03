@@ -43,11 +43,12 @@ import {
   ]
 })
 export class CoverComponent implements OnInit {
+  constructor(private scrollService: ScrollToService, public translate: TranslateService,
+              private solarApiService: SolarForecastService, private sessionStorage: SessionStorageService) {}
 
   public  sub: Subscription;
   public watts;
-  constructor(private scrollService: ScrollToService, public translate: TranslateService,
-              private solarApiService: SolarForecastService, private sessionStorage: SessionStorageService) {}
+
 
   ngOnInit(): void {
     this.setWatts();
@@ -97,4 +98,5 @@ export class CoverComponent implements OnInit {
     }
     return 0;
   }
+
 }

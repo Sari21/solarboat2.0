@@ -1,134 +1,133 @@
 <app-nav-bar></app-nav-bar>
 
-
 <div class="news">
-  <div class="container col-12  col-lg-10 col-md-11 align-items-center">
-    <div class="jumbotron col-12">
-      <h1 translate class="title pb-4">NEWS.news</h1>
+    <div class="container col-12  col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron col-12">
+            <h1 translate class="title pb-4">NEWS.news</h1>
 
-      <div class="container col-lg-10 col-12 mt-5">
-        <div *ngIf="authority == 'admin'" class="card mb-5 mr-md-3 mr-lg-3 ml-md-3 ml-lg-3" id="news-form">
-          <h2 class="title pb-3">Új hír hozzáadása</h2>
-          <div>
-            <form #AddForm="ngForm">
-              <div class="localization-tabs">
-                <ul ngbNav #nav="ngbNav" class="nav-tabs">
-                  <li ngbNavItem>
-                    <a ngbNavLink>Magyar</a>
-                    <ng-template ngbNavContent>
-                      <div class="row">
-                        <div class="col-md-6 col-lg-6 col-12">
-                          <div class="form-group">
-                            <label for="title">Cím</label>
-                            <input type="text" class="form-control" id="title"
-                                   required
-                                   [(ngModel)]="form.title" name="title"
-                                   [ngClass]="{'failed': failed }">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12 col-12">
-                          <div class="form-group">
-                            <label for="content">Tartalom</label>
-                            <angular-editor id="content"
-                                            required
-                                            [(ngModel)]="form.content"
-                                            name="content"
-                                            [ngClass]="{'failed': failed }"
-                                            [config]="config"
-                            ></angular-editor>
-                          </div>
-                        </div>
-                      </div>
+            <div class="container col-lg-10 col-12 mt-5">
+                <div *ngIf="authority == 'admin'" class="card mb-5 mr-md-3 mr-lg-3 ml-md-3 ml-lg-3" id="news-form">
+                    <h2 class="title pb-3">Új hír hozzáadása</h2>
+                    <div>
+                        <form #AddForm="ngForm">
+                            <div class="localization-tabs">
+                                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                                    <li ngbNavItem>
+                                        <a ngbNavLink>Magyar</a>
+                                        <ng-template ngbNavContent>
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="title">Cím</label>
+                                                        <input type="text" class="form-control" id="title"
+                                                               required
+                                                               [(ngModel)]="form.title" name="title"
+                                                               [ngClass]="{'failed': failed }">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="content">Tartalom</label>
+                                                        <angular-editor id="content"
+                                                                        required
+                                                                        [(ngModel)]="form.content"
+                                                                        name="content"
+                                                                        [ngClass]="{'failed': failed }"
+                                                                        [config]="config"
+                                                        ></angular-editor>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                    </ng-template>
-                  </li>
-                  <li ngbNavItem>
-                    <a ngbNavLink>Angol</a>
-                    <ng-template ngbNavContent>
-                      <div class="row">
-                        <div class="col-md-6 col-lg-6 col-12">
-                          <div class="form-group">
-                            <label for="title_en">Title</label>
-                            <input type="text" class="form-control" id="title_en"
-                                   required
-                                   [(ngModel)]="form.title_en" name="title_en"
-                                   [ngClass]="{'failed': failed }">
+                                        </ng-template>
+                                    </li>
+                                    <li ngbNavItem>
+                                        <a ngbNavLink>Angol</a>
+                                        <ng-template ngbNavContent>
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="title_en">Title</label>
+                                                        <input type="text" class="form-control" id="title_en"
+                                                               required
+                                                               [(ngModel)]="form.title_en" name="title_en"
+                                                               [ngClass]="{'failed': failed }">
 
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12 col-12">
-                          <div class="form-group">
-                            <label for="content_en">Content</label>
-                              <angular-editor id="content_en"
-                                              required
-                                              [(ngModel)]="form.content_en"
-                                              name="content_en"
-                                              [ngClass]="{'failed': failed }"
-                                              [config]="config"
-                              ></angular-editor>
-                          </div>
-                        </div>
-                      </div>
-                    </ng-template>
-                  </li>
-                </ul>
-                <div [ngbNavOutlet]="nav" class="localization-tab-content"></div>
-              </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="content_en">Content</label>
+                                                        <angular-editor id="content_en"
+                                                                        required
+                                                                        [(ngModel)]="form.content_en"
+                                                                        name="content_en"
+                                                                        [ngClass]="{'failed': failed }"
+                                                                        [config]="config"
+                                                        ></angular-editor>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                                <div [ngbNavOutlet]="nav" class="localization-tab-content"></div>
+                            </div>
 
 
-              <div class="col-md-6 col-lg-6 col-12 pb-2">
+                            <div class="col-md-6 col-lg-6 col-12 pb-2">
 
-                <div class="form-group">
-                  <label class="col-12" for="file">Kép (opcionális)</label>
-                  <input type="file"
-                         id="file"
-                         [(ngModel)]="form.file" name="file"
-                         (change)="handleFileInput($event.target.files)">
+                                <div class="form-group">
+                                    <label class="col-12" for="file">Kép (opcionális)</label>
+                                    <input type="file"
+                                           id="file"
+                                           [(ngModel)]="form.file" name="file"
+                                           (change)="handleFileInput($event.target.files)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                                <div class="form-group">
+                                    <label class="col-12" for="date">Dátum (opcionális)</label>
+                                    <input id="date"
+                                           type="text"
+                                           class="form-control"
+                                           placeholder="YYYY-MM-DD"
+                                           [(ngModel)]="form.date" name="date"
+                                           [ngClass]="{'failed': failed }">
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-end">
+                                <a class="btn mr-4" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)"
+                                   [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
+
+                                <div [hidden]="!failed"
+                                     class="alert alert-danger mt-3">
+                                    {{errorMessage}}
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-              </div>
-
-              <div class="col-md-6 col-lg-6 col-12 pb-2">
-
-                <div class="form-group">
-                  <label class="col-12" for="date">Dátum (opcionális)</label>
-                  <input id="date"
-                         type="text"
-                         class="form-control"
-                         placeholder="YYYY-MM-DD"
-                         [(ngModel)]="form.date" name="date"
-                         [ngClass]="{'failed': failed }">
+                <div class="row justify-content-between">
+                    <app-news-preview
+                            *ngFor="let news of allnews"
+                            [news]="news" [authority]="authority"
+                            (onRemove)="onDeleteNews($event)"
+                            class="col-lg-6 col-md-6 col-12 col-sm-12"
+                    ></app-news-preview>
                 </div>
-              </div>
-
-              <div class="row justify-content-end">
-                <a class="btn mr-4" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)"
-                   [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
-
-                <div [hidden]="!failed"
-                     class="alert alert-danger mt-3">
-                  {{errorMessage}}
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <div class="col- load-more pt-5">
+                    <a class="btn" *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)"><span translate>BUTTON.more</span></a>
                 </div>
-              </div>
-
-            </form>
-          </div>
+            </div>
         </div>
-        <div class="row justify-content-between">
-          <app-news-preview
-                  *ngFor="let news of allnews"
-                  [news]="news" [authority]="authority"
-                  (onRemove)="onDeleteNews($event)"
-                  class="col-lg-6 col-md-6 col-12 col-sm-12"
-          ></app-news-preview>
-        </div>
-      </div>
-      <div class="row align-items-center justify-content-center">
-        <div class="col- load-more pt-5">
-          <a class="btn" *ngIf="!isLastPage" (click)="getNews()" href="javascript:void(0)"><span translate>BUTTON.more</span></a>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <app-footer></app-footer>

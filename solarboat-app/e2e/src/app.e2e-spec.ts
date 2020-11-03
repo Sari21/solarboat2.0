@@ -9,8 +9,27 @@ describe('workspace-project App', () => {
   });
 
   it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('solarboat-app app is running!');
+    page.navigateToNews();
+    const title = page.getTitleText();
+    expect(title).toEqual('HÍREK');
+    // const p = page.getParagraphText();
+    // expect(p).toEqual('0');
+    // page.clickBtn();
+    // const p2 = page.getParagraphText();
+    // expect(p2).toEqual('1');
+  });
+
+  it('should sign in as admin', () => {
+    page.navigateToLogin();
+    page.setUsernameField('sb-admin');
+    browser.sleep(1000);
+    page.setPasswordField('uszikAhajo!');
+    browser.sleep(1000);
+    page.clickLoginBtn();
+    browser.sleep(1000);
+    page.navigateToNews();
+    const title = page.getTitleText();
+    expect(title).toEqual('HÍREK');
   });
 
   afterEach(async () => {
