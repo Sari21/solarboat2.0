@@ -3,7 +3,7 @@ import { SponsorService } from "../shared/sponsor.service";
 import { Sponsor } from "../model/sponsor";
 import { PictureService } from "../shared/picture.service";
 import { TokenStorageService } from "../auth/token-storage.service";
-import AOS from 'aos';
+// import AOS from 'aos';
 @Component({
   selector: "app-sponsors",
   templateUrl: "./sponsors.component.html",
@@ -17,7 +17,7 @@ export class SponsorsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    AOS.init();
+    // AOS.init();
     this.checkAuth();
     this.getSponsores();
     

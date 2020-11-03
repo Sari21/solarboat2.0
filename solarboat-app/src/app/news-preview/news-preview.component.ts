@@ -5,7 +5,7 @@ import {PictureService} from '../shared/picture.service';
 import {NewsService} from '../shared/news.service';
 import {Globals} from '../globals';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
-import AOS from 'aos';
+// import AOS from 'aos';
 
 @Component({
     selector: 'app-news-preview',
@@ -66,7 +66,7 @@ export class NewsPreviewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        AOS.init();
+        // AOS.init();
 
         this.shortArticleHu = this.decodeEntities(this.news.content_hu.replace(/<[^>]+>/g, ''));
         this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';

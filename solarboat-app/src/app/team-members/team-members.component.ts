@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Member} from '../model/member';
-import AOS from 'aos';
+// import AOS from 'aos';
 
 @Component({
   selector: 'app-team-members',
@@ -14,7 +14,7 @@ export class TeamMembersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    AOS.init();
+    // AOS.init();
   }
 
 }

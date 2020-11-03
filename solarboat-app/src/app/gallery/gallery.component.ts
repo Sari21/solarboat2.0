@@ -6,7 +6,7 @@ import { TokenStorageService } from "../auth/token-storage.service";
 
 import { GalleryPicture } from "../model/gallery-picture";
 
-import AOS from 'aos';
+// import AOS from 'aos';
 
 @Component({
   selector: "app-gallery",
@@ -30,7 +30,7 @@ export class GalleryComponent implements OnInit {
   public authority: string;
   public roles: string[];
   ngOnInit(): void {
-    AOS.init();
+    // AOS.init();
     this.checkAuth();
     this.loadGallery();
     this.newPicture = new GalleryPicture();
