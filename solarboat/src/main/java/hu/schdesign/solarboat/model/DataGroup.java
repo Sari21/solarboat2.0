@@ -25,6 +25,7 @@ public class DataGroup implements CsvPrintable {
     @DateTimeFormat(pattern = "yyyy:MM:dd'T'HH:mm")
     private LocalDateTime date;
     private final char CSV_SEPARATOR = ';';
+    private boolean isActive;
 
 
     public DataGroup() {
@@ -79,5 +80,13 @@ public class DataGroup implements CsvPrintable {
         }
         return data.toString();
 
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

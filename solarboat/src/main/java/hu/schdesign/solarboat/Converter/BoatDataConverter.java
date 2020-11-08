@@ -1,13 +1,14 @@
 package hu.schdesign.solarboat.Converter;
 
+import hu.schdesign.solarboat.model.Boat.Coordinates;
 import hu.schdesign.solarboat.model.Boat.DataAnalysis;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
 import hu.schdesign.solarboat.model.dataPair;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class BoatDataConverter {
@@ -37,10 +38,8 @@ public class BoatDataConverter {
         ArrayList<dataPair<String, Integer>> RmP = new ArrayList<>();
         ArrayList<dataPair<String, Integer>> mTemp = new ArrayList<>();
 
-
-
-
         response.setId(bd.getDate());
+
         tiltX.add(new dataPair<String, Integer>(response.getId(), bd.getTilt().getX()));
         tiltY.add(new dataPair<String, Integer>(response.getId(), bd.getTilt().getY()));
         tiltZ.add(new dataPair<String, Integer>(response.getId(), bd.getTilt().getZ()));
@@ -95,6 +94,13 @@ public class BoatDataConverter {
         response.setMotor(motorTemp);
 
         return response;
+    }
+    public ArrayList<dataPair<String, Integer>> coordinatesToList(Coordinates coordinates, String date){
+        ArrayList<dataPair<String, Integer>> resultList = new ArrayList<>();
+        resultList.add(new dataPair<>(date, coordinates.getX()));
+        resultList.add(new dataPair<>(date, coordinates.getY()));
+        resultList.add(new dataPair<String, Integer>(date, coordinates.getZ()));
+        return resultList;
     }
 
     public ResponseBoatData convertDataGroupToResponseBoatData(DataGroup dataGroup) {
@@ -177,8 +183,6 @@ public class BoatDataConverter {
             if (bd.getError() != null) {
                 response.getErrors().add(bd.getError());
             }
-
-
         }
         tiltTemp.add(x);
         tiltTemp.add(y);
@@ -225,7 +229,86 @@ public class BoatDataConverter {
         response.getAccelerationAnalysis().add(analAccelerationY);
         response.getAccelerationAnalysis().add(analAccelerationZ);
 
+        DataAnalysis analTiltX = new DataAnalysis();
+        analTiltX.setMax(analysis_tiltX.stream().max(Integer::compareTo).orElse(null));
+        analTiltX.setMin(analysis_tiltX.stream().min(Integer::compareTo).orElse(null));
+        analTiltX.setAverage(analysis_tiltX.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analTiltX.setName("X");
+        DataAnalysis analTiltY = new DataAnalysis();
+        analTiltY.setMax(analysis_tiltY.stream().max(Integer::compareTo).orElse(null));
+        analTiltY.setMin(analysis_tiltY.stream().min(Integer::compareTo).orElse(null));
+        analTiltY.setAverage(analysis_tiltY.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analTiltY.setName("Y");
+        DataAnalysis analTiltZ = new DataAnalysis();
+        analTiltZ.setMax(analysis_tiltZ.stream().max(Integer::compareTo).orElse(null));
+        analTiltZ.setMin(analysis_tiltZ.stream().min(Integer::compareTo).orElse(null));
+        analTiltZ.setAverage(analysis_tiltZ.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analTiltZ.setName("Z");
+        response.setTiltAnalysis(new ArrayList<>());
+        response.getTiltAnalysis().add(analTiltX);
+        response.getTiltAnalysis().add(analTiltY);
+        response.getTiltAnalysis().add(analTiltZ);
 
+        DataAnalysis analCompassX = new DataAnalysis();
+        analCompassX.setMax(analysis_compassX.stream().max(Integer::compareTo).orElse(null));
+        analCompassX.setMin(analysis_compassX.stream().min(Integer::compareTo).orElse(null));
+        analCompassX.setAverage(analysis_compassX.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analCompassX.setName("X");
+        DataAnalysis analCompassY = new DataAnalysis();
+        analCompassY.setMax(analysis_compassY.stream().max(Integer::compareTo).orElse(null));
+        analCompassY.setMin(analysis_compassY.stream().min(Integer::compareTo).orElse(null));
+        analCompassY.setAverage(analysis_compassY.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analCompassY.setName("Y");
+        DataAnalysis analCompassZ = new DataAnalysis();
+        analCompassZ.setMax(analysis_compassZ.stream().max(Integer::compareTo).orElse(null));
+        analCompassZ.setMin(analysis_compassZ.stream().min(Integer::compareTo).orElse(null));
+        analCompassZ.setAverage(analysis_compassZ.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analCompassZ.setName("Z");
+        response.setCompassAnalysis(new ArrayList<>());
+        response.getCompassAnalysis().add(analCompassX);
+        response.getCompassAnalysis().add(analCompassY);
+        response.getCompassAnalysis().add(analCompassZ);
+
+        DataAnalysis analBatteryIn = new DataAnalysis();
+        analBatteryIn.setMax(analysis_in.stream().max(Integer::compareTo).orElse(null));
+        analBatteryIn.setMin(analysis_in.stream().min(Integer::compareTo).orElse(null));
+        analBatteryIn.setAverage(analysis_in.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analBatteryIn.setName("Battery in");
+        DataAnalysis analBatteryOut = new DataAnalysis();
+        analBatteryOut.setMax(analysis_out.stream().max(Integer::compareTo).orElse(null));
+        analBatteryOut.setMin(analysis_out.stream().min(Integer::compareTo).orElse(null));
+        analBatteryOut.setAverage(analysis_out.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analBatteryOut.setName("Battery out");
+        DataAnalysis analBatterySoC = new DataAnalysis();
+        analBatterySoC.setMax(analysis_SoC.stream().max(Integer::compareTo).orElse(null));
+        analBatterySoC.setMin(analysis_SoC.stream().min(Integer::compareTo).orElse(null));
+        analBatterySoC.setAverage(analysis_SoC.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analBatterySoC.setName("Battery SoC");
+        DataAnalysis analBatteryTemp = new DataAnalysis();
+        analBatteryTemp.setMax(analysis_temp.stream().max(Integer::compareTo).orElse(null));
+        analBatteryTemp.setMin(analysis_temp.stream().min(Integer::compareTo).orElse(null));
+        analBatteryTemp.setAverage(analysis_temp.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analBatteryTemp.setName("Battery Temperature");
+        response.setBatteryAnalysis(new ArrayList<>());
+        response.getBatteryAnalysis().add(analBatteryIn);
+        response.getBatteryAnalysis().add(analBatteryOut);
+        response.getBatteryAnalysis().add(analBatterySoC);
+        response.getBatteryAnalysis().add(analBatteryTemp);
+
+        DataAnalysis analMotorRmP = new DataAnalysis();
+        analMotorRmP.setMax(analysis_RmP.stream().max(Integer::compareTo).orElse(null));
+        analMotorRmP.setMin(analysis_RmP.stream().min(Integer::compareTo).orElse(null));
+        analMotorRmP.setAverage(analysis_RmP.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analMotorRmP.setName("Motor RmP");
+        DataAnalysis analMotorTemp = new DataAnalysis();
+        analMotorTemp.setMax(analysis_mTemp.stream().max(Integer::compareTo).orElse(null));
+        analMotorTemp.setMin(analysis_mTemp.stream().min(Integer::compareTo).orElse(null));
+        analMotorTemp.setAverage(analysis_mTemp.stream().collect(Collectors.averagingInt(Integer::intValue)));
+        analMotorTemp.setName("Motor SoC");
+
+        response.setMotorAnalysis(new ArrayList<>());
+        response.getMotorAnalysis().add(analMotorRmP);
+        response.getMotorAnalysis().add(analMotorTemp);
         return response;
     }
 

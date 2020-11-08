@@ -1,47 +1,41 @@
 <app-nav-bar></app-nav-bar>
-<div class="justify-content-center d-flex">
-  <div class="col-10">
-    <mat-tab-group mat-align-tabs="start"  [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChanged()">
-      <mat-tab label="First">
-        <app-boat-data [(data)]="data"></app-boat-data>
-      </mat-tab>
-      <mat-tab label="Second">
-        <div class="input-group mt-5 mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Dátum</label>
+<div class="data-vis">
+  <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
+    <div class="jumbotron col-12">
+      <h1 translate class="title pb-4">STATISTICS.datas</h1>
+      <button (click)="setActive()">datavis</button>
+      <!-- <div class="justify-content-center d-flex"> -->
+      <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChanged()">
+        <mat-tab label="{{'STATISTICS.realTime' | translate}}">
+          <app-boat-data *ngIf="isActive"  [showStatistics]="false" [(isActive)]="isActive"  (isActiveChange)="change($event)"></app-boat-data>
+          <div *ngIf="!isActive" translate>STATISTICS.boatIsNotOperating</div>
+        </mat-tab>
+        <mat-tab label="{{'STATISTICS.previousStatistics' | translate}}">
+          <div class="input-group mt-5 mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" translate>STATISTICS.date</label>
+            </div>
+            <select [(ngModel)]="selectedDate" (change)="dateChanged()">
+              <option *ngFor="let item of dates" [ngValue]="item">
+                {{ item.value }}
+              </option>
+            </select>
           </div>
-          <select [(ngModel)]="selectedDate" (change)="dateChanged()">
-            <option *ngFor="let item of dates" [ngValue]="item">
-              {{ item.value }}
-            </option>
-          </select>
-        </div>
-    
-        <a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"
-          ><span>Opciók</span></a
-        >
-    
-        <div *ngIf="show" class="d-flex mb-3">
-          <a class="btn" href="{{ BASE_URL }}"><span>Összes letöltése</span></a>
-          <a class="btn" href="{{ EXPORT_URL }}"
-            ><span>Kiválasztott letöltése</span></a
-          >
-          <a
-            class="btn"
-            (click)="deleteById(selectedDate.name)"
-            href="javascript:void(0)"
-            ><span>Kiválasztott törlése</span></a
-          >
-          <a class="btn" (click)="deleteAll()" href="javascript:void(0)"
-            ><span>Összes törlése</span></a
-          >
-        </div>
-        <app-boat-data [data]="data"></app-boat-data>
-        
-      </mat-tab>
-      <mat-tab label="Third">Content 3</mat-tab>
-    </mat-tab-group>
- 
+
+          <a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"><span translate>STATISTICS.options</span></a>
+
+          <div *ngIf="show" class="d-flex mb-3">
+            <a class="btn" href="{{ BASE_URL }}"><span translate>STATISTICS.downloadAll</span></a>
+            <a class="btn" href="{{ EXPORT_URL }}"><span translate>STATISTICS.downloadOne</span></a>
+            <a class="btn" (click)="openDeleteOneConfirmDialog(selectedDate.name)" href="javascript:void(0)">
+              <span translate>STATISTICS.deleteAll</span></a>
+              <a class="btn" (click)="openDeleteAllConfirmDialog()" href="javascript:void(0)">
+                <span translate>STATISTICS.deleteOne</span></a>
+          </div>
+          <app-boat-data [data]="data" [showStatistics]="true"></app-boat-data>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
 

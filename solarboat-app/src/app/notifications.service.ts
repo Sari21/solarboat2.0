@@ -14,13 +14,8 @@ export class NotificationsService {
   constructor(){}
 
   private client: RxStomp;
-
-  public notifications: string[] = [];
   private eventCallback = new Subject<string>(); // Source
-eventCallback$ = this.eventCallback.asObservable(); // Stream
-
-
-
+  eventCallback$ = this.eventCallback.asObservable(); // Stream
 
   connect() {
     if (!this.client || this.client.connected) {
@@ -31,22 +26,33 @@ eventCallback$ = this.eventCallback.asObservable(); // Stream
       });
       this.client.activate();
 
+      this.watchForData();
       this.watchForNotifications();
+
 
       console.info('connected!');
     }
   }
 
-  private watchForNotifications() {
-    this.client.watch('/user/notification/item')
+  private watchForData() {
+    this.client.watch('/user/notification/data')
       .pipe(
         map((response) => {
           const data = JSON.parse(response.body);
-          //this.boatDataComponent.addGraphData(data);
-          this.eventCallback.next(data);
+         // this.eventCallback.next(data);
           return data;
         }))
-      .subscribe((notification: string) => this.notifications.push(notification));
+      .subscribe((notification) =>  this.eventCallback.next(notification));
+  }
+  private watchForNotifications() {
+    this.client.watch('/user/notification/activity')
+      .pipe(
+        map((response) => {
+          const data = JSON.parse(response.body);
+          console.log(data);
+         // this.eventCallback.next(data);
+          return data;
+        }));
   }
 
   disconnect() {

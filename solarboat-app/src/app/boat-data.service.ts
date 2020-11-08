@@ -30,8 +30,12 @@ export class BoatDataService {
     );
   }
 
-  public getLastDataGroup() {
-    return this.http.get(this.BASE_URL);
+  public getLastClosedDataGroup() {
+    console.log(this.http.get(this.BASE_URL + "/lastclosed"));
+    return this.http.get(this.BASE_URL + "/lastclosed");
+  }
+  public getActiveDataGroup() {
+    return this.http.get(this.BASE_URL + "/active");
   }
   public getDate() {
     return this.http.get<Dates[]>(this.BASE_URL.concat("/ids"));

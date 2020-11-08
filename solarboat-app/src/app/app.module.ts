@@ -46,6 +46,8 @@ import { NotificationsRxComponent } from './notifications-rx/notifications-rx.co
 import { DataVisualizationComponent } from "./data-visualization/data-visualization.component"
 import { MatTabsModule } from '@angular/material/tabs';
 import { StatisticsComponent } from './statistics/statistics.component'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmComponent } from './confirm/confirm.component'; 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
@@ -76,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient){
     UsersComponent,
     NotificationsRxComponent,
     DataVisualizationComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ConfirmComponent
   ],
   // tslint:disable-next-line:max-line-length
     imports: [
@@ -96,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient){
         ReactiveFormsModule,
         AngularEditorModule,
         MatTabsModule,
+        MatDialogModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

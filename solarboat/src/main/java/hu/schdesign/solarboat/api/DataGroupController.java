@@ -48,27 +48,38 @@ public class DataGroupController {
 
     @PostMapping(path = "boatData", consumes = "application/json", produces = "application/json")
     public DataGroup addBoatData(@RequestBody BoatData boatData) {
-        DataGroup dataGroup =  dataGroupService.addBoatData(boatDataService.postData(boatData));
-        BoatDataConverter converter = new BoatDataConverter();
-        notificationDispatcher.dispatch(converter.convertBoatDataToResponseBoatData(dataGroup.getBoatDataList().get(dataGroup.getBoatDataList().size() - 1)));
+        DataGroup dataGroup = dataGroupService.addBoatData(boatDataService.postData(boatData));
+//        BoatDataConverter converter = new BoatDataConverter();
+//        notificationDispatcher.dispatch(converter.convertBoatDataToResponseBoatData(dataGroup.getBoatDataList().get(dataGroup.getBoatDataList().size() - 1)));
         return dataGroup;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(path="start", consumes = "application/json", produces = "application/json")
     public DataGroup startDataGroup() {
-        DataGroup dg = new DataGroup();
-        return dataGroupService.startDataGroup(dg);
+        return dataGroupService.startDataGroup();
     }
 
-    /* @GetMapping
-     public Iterable<DataGroup> getAllDataGroups(){
-         return dataGroupService.getAllDataGroups();
-     }
-     */
+    @PostMapping(path = "close" ,consumes = "application/json", produces = "application/json")
+    public void closeDataGroup() {
+         dataGroupService.closeDataGroup();
+    }
+
+    /*
+     @GetMapping
+         public Iterable<DataGroup> getAllDataGroups(){
+             return dataGroupService.getAllDataGroups();
+         }
+         */
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    @GetMapping(path = "last")
-    public Optional<DataGroup> getLastDataGroup() {
-        return dataGroupService.getLastDataGroup();
+    @GetMapping(path = "lastclosed")
+    public ResponseBoatData getLastClosedDataGroup() {
+        return dataGroupService.getLastClosedDataGroup();
+    }
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping(path = "active")
+    public ResponseBoatData getActiveDataGroup() {
+        return dataGroupService.getActiveDataGroup();
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -161,5 +172,4 @@ public class DataGroupController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
-
 }

@@ -14,7 +14,6 @@ public class ResponseBoatData {
     private ArrayList<ArrayList<dataPair<String, Integer>>> motor;
     private ArrayList<Error> errors = new ArrayList<>();
     private String id;
-    private  boolean isLast = false;
     private ArrayList<DataAnalysis> tiltAnalysis;
     private ArrayList<DataAnalysis> accelerationAnalysis;
     private ArrayList<DataAnalysis> compassAnalysis;
@@ -70,14 +69,6 @@ public class ResponseBoatData {
 
     public void setErrors(ArrayList<Error> errors) {
         this.errors = errors;
-    }
-
-    public boolean isLast() {
-        return isLast;
-    }
-
-    public void setLast(boolean last) {
-        isLast = last;
     }
 
     public String getId() {

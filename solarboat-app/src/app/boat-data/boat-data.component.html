@@ -1,44 +1,39 @@
-
 <div class="justify-content-center d-flex">
-  <div class="col-10">
-   
-    <div class="d-flex flex-row justify-content-center" id=" firstrow">
+  <div class="col-12">
+    <div class="d-flex flex-row justify-content-center mb-5" id=" firstrow">
       <div class="d-inline-flex, flex-row">
-        <app-bar-chart (click)="setShowDetails()" [data]="soc"></app-bar-chart>
-        <app-bar-chart (click)="setShowDetails()" [data]="temp"></app-bar-chart>
+        <app-bar-chart (click)="setShowDetails()" [data]="soc" class="pr-3"></app-bar-chart>
+        <app-bar-chart (click)="setShowDetails()" [data]="temp" class="pl-3"></app-bar-chart>
       </div>
     </div>
-
-    <div
-      class="d-flex align-items-center flex-column"
-      (window:resize)="onResize($event)"
-    >
-      <app-graph
-        *ngIf="showDetails"
-        class="d-inline-flex p-5 col-md-6"
-        [data]="temp_soc"
-        id="chart-parent"
-      ></app-graph>
-      <div class="row">
-        <div class="flex-column">
-        <app-graph class="d-inline-flex col-md-6" [data]="battery" id="chart-parent"></app-graph>
-        <app-statistics *ngIf="accelerationStatistics" [datas] ="accelerationStatistics"></app-statistics>
-        </div>
-        
-        <app-graph class="d-inline-flex col-md-6" [data]="motor" id="chart-parent"></app-graph>
+    <button (click)="setActive()">click</button>
+    <div class="d-flex justify-content-between flex-wrap" (window:resize)="onResize($event)">
+      <div class="row col-md-6 pb-5 d-flex justify-content-center"  *ngIf="showDetails">
+        <app-graph class="d-inline-flex" [data]="temp_soc" id="chart-parent">
+        </app-graph>
+        <app-statistics *ngIf="batteryTempSoCStatistics && showStatistics"
+          [datas]="batteryTempSoCStatistics"></app-statistics>
       </div>
-      <div class="row">
-
-      <app-graph class="d-inline-flex col-md-6" [data]="tilt" id="chart-parent"></app-graph>
-      <app-graph class="d-inline-flex col-md-6" [data]="compass" id="chart-parent"></app-graph>
+      <div class="row col-md-6 mb-5  d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="battery" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="batteryInOutStatistics && showStatistics" [datas]="batteryInOutStatistics | translate">
+        </app-statistics>
       </div>
-      <div class="row">
-
-     
-      <div class="flex-column">
-        <app-graph class="d-inline-flex p-5 col-md-6" [data]="acceleration" id="chart-parent"></app-graph>
-        <app-statistics *ngIf="accelerationStatistics" [datas] ="accelerationStatistics"></app-statistics>
-        </div>
+      <div class="row col-md-6 mb-5  d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="motor" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="motorStatistics && showStatistics" [datas]="motorStatistics"></app-statistics>
+      </div>
+      <div class="row col-md-6 mb-5  d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="tilt" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="tiltStatistics && showStatistics" [datas]="tiltStatistics"></app-statistics>
+      </div>
+      <div class="row col-md-6 mb-5  d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="compass" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="compassStatistics && showStatistics" [datas]="compassStatistics"></app-statistics>
+      </div>
+      <div class="row col-md-6 mb-5  d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="acceleration" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="accelerationStatistics && showStatistics" [datas]="accelerationStatistics"></app-statistics>
       </div>
     </div>
     <table class="col-5" id="errorTable">
@@ -56,4 +51,3 @@
     </table>
   </div>
 </div>
-

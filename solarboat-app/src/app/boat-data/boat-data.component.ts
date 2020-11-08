@@ -1,7 +1,8 @@
-import { Component, Injectable, OnInit, Output, NgModule, Input, OnDestroy } from "@angular/core";
+import { Component, Injectable, OnInit, Output, NgModule, Input, OnDestroy, EventEmitter } from "@angular/core";
 import { BoatDataService } from "../boat-data.service";
 import { ChartModel } from '../model/chart-model';
 import { NotificationsService } from '../notifications.service'
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: "app-boat-data",
   templateUrl: "./boat-data.component.html",
@@ -18,30 +19,50 @@ export class BoatDataComponent implements OnInit {
   @Output() public temp_soc;
   @Output() public errors;
   @Output() public accelerationStatistics;
-  private _data;
+  @Output() public tiltStatistics;
+  @Output() public compassStatistics;
+  @Output() public batteryInOutStatistics;
+  @Output() public batteryTempSoCStatistics;
+  @Output() public motorStatistics;
+  @Input() showStatistics;
+  //@Input() @Output() public isActive: Boolean = true;
+ // private _data;
   @Input('data') 
   set data(data){
     if(data){
       this.setGraphData(data);
       this.addGraphData(data);
-      this._data = data;
-      console.log(this.tilt);
+      this.onResize(null);
+      console.log("setter");
+    }
+ 
     }
    
    // data.subscribe(() =>  { this._data = data; this.setGraphData();} );
     //this.setGraphData();
     //console.log(this.data);
-  
-    
+   /* private _isActive;
+  @Input('isActive') @Output('isActive')
+  set isActive(isActive){
+    this._isActive = isActive;
+    console.log(isActive);
   }
-  get proba(): string{return this._data};
+  get isActive(){
+    return this._isActive;
+  }
+  */
+ @Input() isActive: boolean;
+ @Output() isActiveChange = new EventEmitter();
+
+ // get proba(): string{return this._data};
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
   show = false;
   showDetails = false;
 
 
-  constructor(private dataService: BoatDataService, private notifService:  NotificationsService) {
+  constructor(private notifService:  NotificationsService,
+    private translate: TranslateService) {
     this.notifService.eventCallback$.subscribe(data => {
       this.callbackFunction(data);
   });
@@ -57,8 +78,20 @@ export class BoatDataComponent implements OnInit {
     //this.getDates();
     //this.connectClicked();
     //this.startClicked();
+    //console.log(this.translate.getTranslation("en"));
+    //console.log(this.translate.getTranslation("hu"));
+    this.translate.get("realTime").subscribe((res) => console.log(res));
+   // this.translate.get('realTime').subscribe((res: string) => {
+   //   console.log(res);
+      //=> 'hello world'
+  //});
+
   }
-  
+  public setActive(){
+    console.log(this.isActive);
+    this.isActive = !this.isActive;
+    this.isActiveChange.emit(this.isActive);
+  }
   //GRAPH
   public setShow() {
     if (this.show == false) {
@@ -76,8 +109,6 @@ export class BoatDataComponent implements OnInit {
   }
 
   public addGraphData(newData) {
-    console.log(newData);
-    console.log(this.tilt);
     this.setColor(newData.battery[2][0].value, newData.battery[3][0].value);
     this.tilt.multi[0].series.push(newData.tilt[0][0]);
     this.tilt.multi[1].series.push(newData.tilt[1][0]);
@@ -114,18 +145,26 @@ export class BoatDataComponent implements OnInit {
   }
 
   onResize(event) {
-    this.tilt.view = [event.target.innerWidth / 2.7, 250];
-    this.compass.view = [event.target.innerWidth / 2.7, 250];
-    this.acceleration.view = [event.target.innerWidth / 2.7, 250];
-    this.battery.view = [event.target.innerWidth / 2.7, 250];
-    this.motor.view = [event.target.innerWidth / 2.7, 250];
-    this.temp_soc.view = [event.target.innerWidth / 2.7, 250];
+    if(this.tilt){
+      this.tilt.view = [window.innerWidth / 2.7, 250];
+      this.compass.view = [window.innerWidth / 2.7, 250];
+      this.acceleration.view = [window.innerWidth / 2.7, 250];
+      this.battery.view = [window.innerWidth / 2.7, 250];
+      this.motor.view = [window.innerWidth / 2.7, 250];
+      this.temp_soc.view = [window.innerWidth / 2.7, 250];
+    }
     
 }
 
   public setGraphData(data) {
     //var this.data = this.data;
     this.accelerationStatistics = data.accelerationAnalysis;
+    this.tiltStatistics = data.tiltAnalysis;
+    this.compassStatistics = data.compassAnalysis;
+    this.accelerationStatistics = data.accelerationAnalysis;
+    this.batteryInOutStatistics = [data.batteryAnalysis[0], data.batteryAnalysis[1]];
+    this.batteryTempSoCStatistics = [data.batteryAnalysis[2], data.batteryAnalysis[3]];
+    this.motorStatistics = data.motorAnalysis;
       this.setColor(
         data.battery[3][data.battery[3].length - 1].value,
         data.battery[2][data.battery[2].length - 1].value
@@ -133,16 +172,16 @@ export class BoatDataComponent implements OnInit {
       this.tilt = {
         multi: [
           {
-            name: "x",
+            name: "STATISTICS.x",
             series: data.tilt[0],
           },
 
           {
-            name: "y",
+            name: "STATISTICS.y",
             series: data.tilt[1],
           },
           {
-            name: "z",
+            name: "STATISTICS.z",
             series: data.tilt[2],
           },
         ],
@@ -160,7 +199,7 @@ export class BoatDataComponent implements OnInit {
           domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
         },
         autoScale: true,
-        legendTitle: "Tilt",
+        legendTitle: "STATISTICS.tilt",
         yScaleMax:80,
         legend:false,
       };
@@ -168,16 +207,16 @@ export class BoatDataComponent implements OnInit {
       this.compass = {
         multi: [
           {
-            name: "x",
+            name: "STATISTICS.x",
             series: data.compass[0],
           },
 
           {
-            name: "y",
+            name: "STATISTICS.y",
             series: data.compass[1],
           },
           {
-            name: "z",
+            name: "STATISTICS.z",
             series: data.compass[2],
           },
         ],
@@ -195,7 +234,7 @@ export class BoatDataComponent implements OnInit {
           domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
         },
         autoScale: true,
-        legendTitle: "Compass",
+        legendTitle: "STATISTICS.compass",
         yScaleMax:80,
         legend:false,
       };
@@ -203,16 +242,16 @@ export class BoatDataComponent implements OnInit {
       this.acceleration = {
         multi: [
           {
-            name: "x",
+            name: "STATISTICS.x",
             series: data.acceleration[0],
           },
 
           {
-            name: "y",
+            name: "STATISTICS.y",
             series: data.acceleration[1],
           },
           {
-            name: "z",
+            name: "STATISTICS.z",
             series: data.acceleration[2],
           },
         ],
@@ -230,7 +269,7 @@ export class BoatDataComponent implements OnInit {
           domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
         },
         autoScale: true,
-        legendTitle: "Acceleration",
+        legendTitle: "STATISTICS.acceleration",
         yScaleMax:80,
         legend:false,
       };
@@ -238,12 +277,12 @@ export class BoatDataComponent implements OnInit {
       this.battery = {
         multi: [
           {
-            name: "in",
+            name: "STATISTICS.batteryIn",
             series: data.battery[0],
           },
 
           {
-            name: "out",
+            name: "STATISTICS.batteryOut | translate",
             series: data.battery[1],
           },
         ],
@@ -261,7 +300,7 @@ export class BoatDataComponent implements OnInit {
           domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
         },
         autoScale: true,
-        legendTitle: "Battery",
+        legendTitle: "STATISTICS.battery",
         yScaleMax:80,
         legend:false,
       };
@@ -269,12 +308,12 @@ export class BoatDataComponent implements OnInit {
       this.motor = {
         multi: [
           {
-            name: "RpM",
+            name: "STATISTICS.motorRpM",
             series: data.motor[0],
           },
 
           {
-            name: "Temperature",
+            name: "STATISTICS.motorTemp",
             series: data.motor[1],
           },
         ],
@@ -292,19 +331,19 @@ export class BoatDataComponent implements OnInit {
           domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
         },
         autoScale: true,
-        legendTitle: "Motor",
+        legendTitle: "STATISTICS.motor",
         yScaleMax:80,
         legend:false,
       };
       this.temp_soc = {
         multi: [
           {
-            name: "SoC",
+            name: "STATISTICS.batterySoC",
             series: data.battery[2],
           },
 
           {
-            name: "temp",
+            name: "STATISTICS.batteryTemp",
             series: data.battery[3],
           },
         ],
@@ -322,14 +361,14 @@ export class BoatDataComponent implements OnInit {
           domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
         },
         autoScale: true,
-        legendTitle: "Battery",
+        legendTitle: "STATISTICS.battery",
         yScaleMax:80,
         legend:false,
       };
       this.soc = {
         multi: [
           {
-            name: "SoC",
+            name: "STATISTICS.batterySoC",
             value: data.battery[2][data.battery[2].length - 1].value,
           },
         ],
@@ -350,12 +389,12 @@ export class BoatDataComponent implements OnInit {
 
         legend: false,
         autoScale: true,
-        legendTitle: "Battery",
+        legendTitle: "STATISTICS.battery",
       };
       this.temp = {
         multi: [
           {
-            name: "Temperature",
+            name: "STATISTICS.batteryTemp",
             value: data.battery[3][data.battery[3].length - 1].value,
           },
         ],
@@ -375,7 +414,7 @@ export class BoatDataComponent implements OnInit {
         },
         legend: false,
         autoScale: true,
-        legendTitle: "Battery",
+        legendTitle: "STATISTICS.battery",
       };
       this.errors = data.errors;
   //  });
