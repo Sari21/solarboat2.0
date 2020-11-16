@@ -3,7 +3,7 @@ import { NewsPreviewComponent } from './news-preview.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {Globals} from '../globals';
 
-describe('NewsPreviewComponent', () => {
+xdescribe('NewsPreviewComponent', () => {
   // let component: NewsPreviewComponent;
   // let fixture: ComponentFixture<NewsPreviewComponent>;
   //

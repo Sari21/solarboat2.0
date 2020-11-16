@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AchievementService } from './achievement.service';
 
-describe('AchievementService', () => {
+xdescribe('AchievementService', () => {
   // let service: AchievementService;
   //
   // beforeEach(() => {

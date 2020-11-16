@@ -9,7 +9,7 @@
             </a>
         </div>
         <div (click)="openContent(longContent, false)">
-            <h2 translate class="title mb-2 mt-4"
+            <h2 id="news-title" translate class="title mb-2 mt-4"
                 [translateParams]="{ title_hu: news.title_hu, title_en: news.title_en}">NEWS.title</h2>
             <div class="row date col-12 date mt-2 mb-2 align-items-center">
                 <mat-icon>calendar_today</mat-icon>

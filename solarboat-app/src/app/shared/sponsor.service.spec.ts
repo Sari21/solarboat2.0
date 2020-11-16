@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { SponsorService } from './sponsor.service';
 
-describe('SponsorService', () => {
+xdescribe('SponsorService', () => {
   // let service: SponsorService;
   //
   // beforeEach(() => {

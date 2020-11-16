@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BarChartComponent } from './bar-chart.component';
 
-describe('BarChartComponent', () => {
+xdescribe('BarChartComponent', () => {
   // let component: BarChartComponent;
   // let fixture: ComponentFixture<BarChartComponent>;
   //

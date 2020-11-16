@@ -7,7 +7,7 @@
 
             <div class="container col-lg-10 col-12 mt-5">
                 <div *ngIf="authority == 'admin'" class="card mb-5 mr-md-3 mr-lg-3 ml-md-3 ml-lg-3" id="news-form">
-                    <h2 class="title pb-3">Új hír hozzáadása</h2>
+                    <h2 class="title pb-3" id="form-title">Új hír hozzáadása</h2>
                     <div>
                         <form #AddForm="ngForm">
                             <div class="localization-tabs">
@@ -41,7 +41,7 @@
 
                                         </ng-template>
                                     </li>
-                                    <li ngbNavItem>
+                                    <li id="english-tab" ngbNavItem>
                                         <a ngbNavLink>Angol</a>
                                         <ng-template ngbNavContent>
                                             <div class="row">
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="row justify-content-end">
-                                <a class="btn mr-4" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)"
+                                <a class="btn mr-4" id="submit-btn" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)"
                                    [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
 
                                 <div [hidden]="!failed"
