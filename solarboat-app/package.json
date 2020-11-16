@@ -30,7 +30,6 @@
     "@ngx-translate/http-loader": "^5.0.0",
     "@swimlane/ngx-charts": "^13.0.4",
     "angular-bootstrap-md": "^9.4.0",
-    "aos": "^2.3.4",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
@@ -41,7 +40,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1001.7",
+    "@angular-devkit/build-angular": "^0.901.9",
     "@angular/cli": "~9.0.3",
     "@angular/compiler-cli": "~9.0.2",
     "@angular/language-service": "~9.0.2",

@@ -22,7 +22,6 @@
             "assets": ["src/assets/favicon.png", "src/assets"],
             "styles": [
               "src/custom-theme.scss",
-              "node_modules/aos/dist/aos.css",
               "src/styles.css",
               "src/lightbox.min.css"
             ],

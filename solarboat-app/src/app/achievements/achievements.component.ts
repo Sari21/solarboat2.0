@@ -53,11 +53,11 @@ export class AchievementsComponent implements OnInit {
     );
   }
 
-  public sortby(date: string) {
-    return this.achievements.sort((a, b) =>
-      a[date] < b[date] ? 1 : a[date] === b[date] ? 0 : -1
-    );
-  }
+  // public sortby(date: string) {
+  //   return this.achievements.sort((a, b) =>
+  //     a[date] < b[date] ? 1 : a[date] === b[date] ? 0 : -1
+  //   );
+  // }
 
   onDeleteAchievement(a: Achievement) {
     this.achievements = this.achievements.filter(rowObj => rowObj.id !== a.id);

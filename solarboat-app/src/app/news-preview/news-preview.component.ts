@@ -2,11 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {News} from '../model/news';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
-import {HttpClient} from '@angular/common/http';
 import {NewsService} from '../shared/news.service';
 import {Globals} from '../globals';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
-import AOS from 'aos';
+// import AOS from 'aos';
 
 @Component({
     selector: 'app-news-preview',
@@ -14,6 +13,10 @@ import AOS from 'aos';
     styleUrls: ['./news-preview.component.css']
 })
 export class NewsPreviewComponent implements OnInit {
+    constructor(private globals: Globals, private apiService: NewsService,
+                private modalService: NgbModal, pictureService: PictureService) {
+        this.pictureService = pictureService;
+    }
     // tslint:disable-next-line:variable-name
     shortArticleEn: string;
     shortArticleHu: string;
@@ -25,55 +28,6 @@ export class NewsPreviewComponent implements OnInit {
     @Input() authority: string;
     @Input() news: News;
     @Output() onRemove = new EventEmitter<News>();
-
-
-    constructor(private http: HttpClient, private globals: Globals, private apiService: NewsService, private modalService: NgbModal, pictureService: PictureService) {
-        this.pictureService = pictureService;
-    }
-
-    decodeEntities(str) {
-        // this prevents any overhead from creating the object each time
-        const element = document.createElement('div');
-        if (str && typeof str === 'string') {
-            // strip script/html tags
-            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-            element.innerHTML = str;
-            str = element.textContent;
-            element.textContent = '';
-        }
-        return str;
-    }
-
-    ngOnInit(): void {
-        AOS.init();
-
-        this.shortArticleHu = this.decodeEntities(this.news.content_hu.replace(/<[^>]+>/g, ''));
-        this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
-        this.shortArticleEn = this.decodeEntities(this.news.content_en.replace(/<[^>]+>/g, ''));
-        this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
-
-        this.form.title = this.news.title_hu;
-        this.form.content = this.news.content_hu;
-        this.form.title_en = this.news.title_en;
-        this.form.content_en = this.news.content_en;
-        this.form.date = this.news.date;
-    }
-
-    openContent(content, edit) {
-        this.modalService.open(content, {scrollable: true, centered: true, size: edit ? 'lg' : 'md'});
-    }
-
-    delete(id: number) {
-        this.onRemove.emit(this.news);
-        //TODO: kép törlése
-        const b = this.http
-            .delete(this.globals.BASE_URL + '/api/news/'.concat(id.toString()))
-            .subscribe((data) => {
-                // console.log(data);
-            });
-    }
-
     config: AngularEditorConfig = {
         editable: true,
         spellcheck: true,
@@ -97,6 +51,45 @@ export class NewsPreviewComponent implements OnInit {
         ]
     };
 
+    decodeEntities(str) {
+        // this prevents any overhead from creating the object each time
+        const element = document.createElement('div');
+        if (str && typeof str === 'string') {
+            // strip script/html tags
+            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+            element.innerHTML = str;
+            str = element.textContent;
+            element.textContent = '';
+        }
+        return str;
+    }
+
+    ngOnInit(): void {
+        // AOS.init();
+
+        this.shortArticleHu = this.decodeEntities(this.news.content_hu.replace(/<[^>]+>/g, ''));
+        this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
+        this.shortArticleEn = this.decodeEntities(this.news.content_en.replace(/<[^>]+>/g, ''));
+        this.shortArticleEn = this.shortArticleEn.substring(0, 100) + '...';
+
+        this.form.title = this.news.title_hu;
+        this.form.content = this.news.content_hu;
+        this.form.title_en = this.news.title_en;
+        this.form.content_en = this.news.content_en;
+        this.form.date = this.news.date;
+    }
+
+    openContent(content, edit) {
+        this.modalService.open(content, {scrollable: true, centered: true, size: edit ? 'lg' : 'md'});
+    }
+
+    delete(id: number) {
+        this.onRemove.emit(this.news);
+        //TODO: kép törlése
+        this.apiService.deleteNews(id);
+    }
+
     onSubmit(empForm: any, id: number) {
         this.news.title_hu = this.form.title;
         this.news.content_hu = this.form.content;
@@ -119,11 +112,7 @@ export class NewsPreviewComponent implements OnInit {
             picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : this.news.picture
 
         };
-        const b = this.http
-            .put(this.globals.BASE_URL + '/api/news', o)
-            .subscribe((data) => {
-                // console.log(data);
-            });
+        this.apiService.putNews(o);
         this.modalService.dismissAll('put');
         this.form = empForm;
         this.form.reset();

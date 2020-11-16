@@ -5,7 +5,7 @@ import {PictureService} from '../shared/picture.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AchievementService} from '../shared/achievement.service';
 import {Globals} from '../globals';
-import AOS from 'aos';
+// import AOS from 'aos';
 
 @Component({
   selector: 'app-achievement',
@@ -26,7 +26,7 @@ export class AchievementComponent implements OnInit {
     this.pictureService = pictureService;
   }
   ngOnInit(): void {
-    AOS.init();
+    // AOS.init();
     this.form.title_hu = this.achievement.title_hu;
     this.form.location_hu = this.achievement.location_hu;
     this.form.title_en = this.achievement.title_en;
