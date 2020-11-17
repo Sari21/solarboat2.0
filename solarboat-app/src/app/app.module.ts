@@ -47,7 +47,9 @@ import { DataVisualizationComponent } from "./data-visualization/data-visualizat
 import { MatTabsModule } from '@angular/material/tabs';
 import { StatisticsComponent } from './statistics/statistics.component'; 
 import {MatDialogModule} from '@angular/material/dialog';
-import { ConfirmComponent } from './confirm/confirm.component'; 
+import { ConfirmComponent } from './confirm/confirm.component';
+import { CompassComponent } from './compass/compass.component';
+import { MileageComponent } from './mileage/mileage.component'; 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
@@ -79,7 +81,9 @@ export function HttpLoaderFactory(http: HttpClient){
     NotificationsRxComponent,
     DataVisualizationComponent,
     StatisticsComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    CompassComponent,
+    MileageComponent
   ],
   // tslint:disable-next-line:max-line-length
     imports: [

@@ -12,13 +12,14 @@ public class Battery implements CsvPrintable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private final int _in;
-    private final int _out;
-    private final int SoC;
-    private final int temp;
+    private final double _in;
+    private final double _out;
+    private final double SoC;
+    private final double temp;
     public static final char CSV_SEPARATOR = ';';
 
-    public Battery(@JsonProperty("in") int in, @JsonProperty("out") int out, @JsonProperty("soC") int soC, @JsonProperty("temp") int temp) {
+    public Battery(@JsonProperty("in") double in, @JsonProperty("out") double out,
+                   @JsonProperty("soC") double soC, @JsonProperty("temp") double temp) {
         this._in = in;
         this._out = out;
         this.SoC = soC;
@@ -36,19 +37,19 @@ public class Battery implements CsvPrintable {
         return id;
     }
 
-    public int getIn() {
+    public double get_in() {
         return _in;
     }
 
-    public int getOut() {
+    public double get_out() {
         return _out;
     }
 
-    public int getSoC() {
+    public double getSoC() {
         return SoC;
     }
 
-    public int getTemp() {
+    public double getTemp() {
         return temp;
     }
 

@@ -58,12 +58,10 @@ public class NotificationDispatcher implements INotificationDispatcher {
             headerAccessor.setSessionId(listener);
             headerAccessor.setLeaveMutable(true);
 
-            int value = (int) Math.round(Math.random() * 100d);
             template.convertAndSendToUser(
                     listener,
-                    "/notification/item",
+                    "/notification/data",
                     boatData,
-                    //new Notification(Integer.toString(value)),
                     headerAccessor.getMessageHeaders());
         }
     }
@@ -76,12 +74,10 @@ public class NotificationDispatcher implements INotificationDispatcher {
             headerAccessor.setSessionId(listener);
             headerAccessor.setLeaveMutable(true);
 
-            int value = (int) Math.round(Math.random() * 100d);
             template.convertAndSendToUser(
                     listener,
                     "/notification/activity",
                     isActive,
-                    //new Notification(Integer.toString(value)),
                     headerAccessor.getMessageHeaders());
         }
     }

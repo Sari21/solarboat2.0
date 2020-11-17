@@ -35,8 +35,12 @@ public class BoatData implements CsvPrintable {
     private final Battery battery;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private final Error error;
+    private double velocity;
+    private double distance;
+    private double sumDistance;
 
     private final String date;
+    private final LocalDateTime rawDate;
     @ElementCollection
     private final List<Integer> extraTemps;
     private static final char CSV_SEPARATOR = ';';
@@ -54,6 +58,7 @@ public class BoatData implements CsvPrintable {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         date =  sdf.format(now);
+        rawDate = now;
     }
 
     public BoatData() {
@@ -65,6 +70,7 @@ public class BoatData implements CsvPrintable {
         this.error = null;
         this.extraTemps = null;
         this.date = null;
+        this.rawDate = null;
     }
 
     @Override
@@ -134,7 +140,35 @@ public class BoatData implements CsvPrintable {
 
      */
 
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public LocalDateTime getRawDate() {
+        return rawDate;
+    }
+
+    public double getSumDistance() {
+        return sumDistance;
+    }
+
+    public void setSumDistance(double sumDistance) {
+        this.sumDistance = sumDistance;
     }
 }

@@ -9,8 +9,8 @@ import {
 import { BoatDataService } from "../boat-data.service";
 import { Dates } from "../model/dates";
 import { NotificationsService } from "../notifications.service";
-import {MatDialog} from '@angular/material/dialog';
-import { ConfirmComponent } from '../confirm/confirm.component';
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmComponent } from "../confirm/confirm.component";
 
 @Component({
   selector: "app-data-visualization",
@@ -21,12 +21,15 @@ export class DataVisualizationComponent implements OnInit {
   @Output() dates: Dates[] = [];
   @Input() selectedDate: Dates;
   private _isActive;
-  @Input('isActive') @Output('isActive')
-  set isActive(isActive){
+  @Input("isActive")
+  @Output("isActive")
+  set isActive(isActive) {
     this._isActive = isActive;
-    console.log(isActive);
+    if (isActive) {
+      this.getActiveDataGroup();
+    }
   }
-  get isActive(){
+  get isActive() {
     return this._isActive;
   }
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
@@ -36,8 +39,7 @@ export class DataVisualizationComponent implements OnInit {
   showDetails = false;
   proba;
   @Input() selectedTabIndex;
- // private boatIsActive: Boolean;
-
+  // private boatIsActive: Boolean;
 
   constructor(
     private dataService: BoatDataService,
@@ -55,9 +57,6 @@ export class DataVisualizationComponent implements OnInit {
     this.disconnect();
   }
 
-  public setActive(){
-    this.isActive = !this.isActive;
-  }
   public async getDates() {
     this.dataService.getDate().subscribe(
       (res) => {
@@ -69,9 +68,8 @@ export class DataVisualizationComponent implements OnInit {
       }
     );
   }
-  public change(e){
-    console.log(e);
-    this.isActive=e;
+  public change(e) {
+    this.isActive = e;
   }
 
   public connect() {
@@ -94,8 +92,12 @@ export class DataVisualizationComponent implements OnInit {
   public getActiveDataGroup() {
     this.dataService.getActiveDataGroup().subscribe((res) => {
       this.data = res;
-      if (res != null) {
+     /* if(res){
+        this.isActive = true; 
+        /////////////////
       }
+      */
+      console.log(this.data);
     });
   }
   public dateChanged() {
@@ -117,20 +119,20 @@ export class DataVisualizationComponent implements OnInit {
   openDeleteOneConfirmDialog(id) {
     const dialogRef = this.dialog.open(ConfirmComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-     if(result){
-       this.deleteById(id)
-     }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteById(id);
+      }
     });
   }
   openDeleteAllConfirmDialog() {
     const dialogRef = this.dialog.open(ConfirmComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
         this.deleteAll();
       }
-     });
+    });
   }
   public setShow() {
     if (this.show == false) {

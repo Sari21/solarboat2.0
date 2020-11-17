@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class DataAnalysis {
     private Double average;
-    private Integer max;
-    private Integer min;
-    private ArrayList<Integer> localMaxPoints;
-    private ArrayList<Integer> localMinPoints;
+    private Double max;
+    private Double min;
+    private ArrayList<Double> localMaxPoints;
+    private ArrayList<Double> localMinPoints;
     private String name;
 
     public Double getAverage() {
@@ -18,35 +18,35 @@ public class DataAnalysis {
         this.average = average;
     }
 
-    public Integer getMax() {
+    public Double getMax() {
         return max;
     }
 
-    public void setMax(Integer max) {
+    public void setMax(Double max) {
         this.max = max;
     }
 
-    public Integer getMin() {
+    public Double getMin() {
         return min;
     }
 
-    public void setMin(Integer min) {
+    public void setMin(Double min) {
         this.min = min;
     }
 
-    public ArrayList<Integer> getLocalMaxPoints() {
+    public ArrayList<Double> getLocalMaxPoints() {
         return localMaxPoints;
     }
 
-    public void setLocalMaxPoints(ArrayList<Integer> localMaxPoints) {
+    public void setLocalMaxPoints(ArrayList<Double> localMaxPoints) {
         this.localMaxPoints = localMaxPoints;
     }
 
-    public ArrayList<Integer> getLocalMinPoints() {
+    public ArrayList<Double> getLocalMinPoints() {
         return localMinPoints;
     }
 
-    public void setLocalMinPoints(ArrayList<Integer> localMinPoints) {
+    public void setLocalMinPoints(ArrayList<Double> localMinPoints) {
         this.localMinPoints = localMinPoints;
     }
 

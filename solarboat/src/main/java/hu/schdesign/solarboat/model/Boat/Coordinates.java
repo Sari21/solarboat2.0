@@ -9,16 +9,16 @@ import java.util.ArrayList;
 
 @Entity
 @Table
-public class Coordinates implements CsvPrintable  {
+public class Coordinates implements CsvPrintable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private final int x;
-    private final int y;
-    private final int z;
+    private final double x;
+    private final double y;
+    private final double z;
     public static final char CSV_SEPARATOR = ';';
 
-    public Coordinates(@JsonProperty("x") int x, @JsonProperty("y")int y,@JsonProperty("z") int z) {
+    public Coordinates(@JsonProperty("x") int x, @JsonProperty("y") int y, @JsonProperty("z") int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -30,15 +30,15 @@ public class Coordinates implements CsvPrintable  {
         this.z = 0;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public int getZ() {
+    public double getZ() {
         return z;
     }
 
