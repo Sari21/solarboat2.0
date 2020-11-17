@@ -322,7 +322,6 @@ public class BoatDataConverter {
         response.getMotorAnalysis().add(analMotorRmP);
         response.getMotorAnalysis().add(analMotorTemp);
 
-        System.out.println("Compass2: " + response.getCompass().toString());
         return response;
     }
 

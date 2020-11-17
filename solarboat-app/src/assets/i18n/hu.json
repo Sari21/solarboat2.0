@@ -103,6 +103,11 @@
     "compass":"Iránytű",
     "acceleration":"Gyorsulás",
     "errors":"Hibaüzenetek:",
-    "date":"Dátum"
+    "date":"Dátum",
+    "deleteData":"Adatok törlése",
+    "confirm":"Biztos, hogy törölni szeretnéd?",
+    "cancel":"Mégse",
+    "delete":"Törlés"
+
   }
 }

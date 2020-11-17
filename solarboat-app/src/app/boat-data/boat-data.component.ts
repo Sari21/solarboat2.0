@@ -36,7 +36,6 @@ export class BoatDataComponent implements OnInit {
   @Input() showStatistics;
   @Input() isActive: boolean;
   @Output() isActiveChange = new EventEmitter();
-  // get proba(): string{return this._data};
   BASE_URL = "http://localhost:8080/api/dataGroup/export";
   EXPORT_URL = this.BASE_URL;
   show = false;
@@ -44,36 +43,21 @@ export class BoatDataComponent implements OnInit {
 
   tempColor  = ["#CDDC39"];
   socColor  = ["#CDDC39"];
-  //@Input() @Output() public isActive: Boolean = true;
-  // private _data;
   @Input("data")
-  set data(data) {
-    if (data) {
+  set dataGroup(dataGroup) {
+    if (dataGroup) {
       if (this.tilt) {
-        this.addGraphData(data);
+        this.addGraphData(dataGroup);
       } else {
-        this.setGraphData(data);
+        this.setGraphData(dataGroup);
       }    
-
-      //this.addGraphData(data);
       this.onResize(null);
+      console.log(this.showStatistics);
+      console.log(this.batteryTempSoCStatistics);
     }
   }
-
-  // data.subscribe(() =>  { this._data = data; this.setGraphData();} );
-  //this.setGraphData();
-  //console.log(this.data);
-  /* private _isActive;
-  @Input('isActive') @Output('isActive')
-  set isActive(isActive){
-    this._isActive = isActive;
-    console.log(isActive);
-  }
-  get isActive(){
-    return this._isActive;
-  }
-  */
-
+  
+  
   constructor(private notifService: NotificationsService) {
     this.notifService.dataCallback$.subscribe((data) => {
       this.dataCallbackFunction(data);
@@ -93,7 +77,8 @@ export class BoatDataComponent implements OnInit {
     this.isActive = data;
     this.isActiveChange.emit(this.isActive);
   }
-  ngOnInit() {}
+  ngOnInit() {
+  }
   public setActive() {
     this.isActive = !this.isActive;
     this.isActiveChange.emit(this.isActive);
@@ -105,6 +90,8 @@ export class BoatDataComponent implements OnInit {
     } else {
       this.showDetails = false;
     }
+    console.log(this.showDetails);
+
   }
 
   public addGraphData(newData) {
@@ -170,9 +157,9 @@ export class BoatDataComponent implements OnInit {
       this.isActiveChange.emit(this.isActive);    }
 
     //var this.data = this.data;
-  /*  this.accelerationStatistics = data.accelerationAnalysis;
+    this.accelerationStatistics = data.accelerationAnalysis;
     this.tiltStatistics = data.tiltAnalysis;
-    this.compassStatistics = data.compassAnalysis;
+   // this.compassStatistics = data.compassAnalysis;
     this.accelerationStatistics = data.accelerationAnalysis;
     this.batteryInOutStatistics = [
       data.batteryAnalysis[0],
@@ -187,7 +174,7 @@ export class BoatDataComponent implements OnInit {
       data.battery[3][data.battery[3].length - 1].value,
       data.battery[2][data.battery[2].length - 1].value
     );
-    */
+    
     this.tilt = {
       multi: [
         {
@@ -443,7 +430,6 @@ export class BoatDataComponent implements OnInit {
     };
     this.errors = data.errors;
 
-    //  });
   }
   public setColor(temp: number, soc: number) {
     if (temp < 60) {

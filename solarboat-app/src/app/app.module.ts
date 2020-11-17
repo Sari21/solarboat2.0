@@ -49,7 +49,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { CompassComponent } from './compass/compass.component';
-import { MileageComponent } from './mileage/mileage.component'; 
+import { MileageComponent } from './mileage/mileage.component';
+import { WavesComponent } from './waves/waves.component'; 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
@@ -83,7 +84,8 @@ export function HttpLoaderFactory(http: HttpClient){
     StatisticsComponent,
     ConfirmComponent,
     CompassComponent,
-    MileageComponent
+    MileageComponent,
+    WavesComponent
   ],
   // tslint:disable-next-line:max-line-length
     imports: [

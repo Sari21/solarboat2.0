@@ -62,6 +62,7 @@ export class DataVisualizationComponent implements OnInit {
       (res) => {
         this.dates = res;
         this.selectedDate = res[res.length - 1];
+        console.log(res);
       },
       (err) => {
         alert("get error");
@@ -91,19 +92,18 @@ export class DataVisualizationComponent implements OnInit {
   }
   public getActiveDataGroup() {
     this.dataService.getActiveDataGroup().subscribe((res) => {
-      this.data = res;
-     /* if(res){
-        this.isActive = true; 
-        /////////////////
+      if(res == null){
+        this.data = null;
+        this.isActive = false;
       }
-      */
-      console.log(this.data);
+      this.data = res;
     });
   }
   public dateChanged() {
     this.dataService
       .getDataGroupById(this.selectedDate.name)
       .subscribe((res) => {
+        console.log(res);
         this.data = res;
       });
   }
@@ -115,6 +115,7 @@ export class DataVisualizationComponent implements OnInit {
   public deleteById(id: number) {
     this.dataService.deleteById(id);
     this.getDates();
+    this.getLastClosedDataGroup();
   }
   openDeleteOneConfirmDialog(id) {
     const dialogRef = this.dialog.open(ConfirmComponent);
@@ -147,6 +148,7 @@ export class DataVisualizationComponent implements OnInit {
       this.connect();
     } else {
       this.disconnect();
+      this.getDates();
       this.getLastClosedDataGroup();
     }
   }
