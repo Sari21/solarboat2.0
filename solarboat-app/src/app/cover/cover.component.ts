@@ -87,11 +87,11 @@ export class CoverComponent implements OnInit {
   }
 
   public getWattsFromJsonByDate(data, currentDateAndHour: string) {
-    console.log(data);
-    console.log(currentDateAndHour);
+    // console.log(data);
+    // console.log(currentDateAndHour);
     const rawData = data;
     for (const [key, value] of Object.entries(rawData.result)) {
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
       if ( key.substring(0, 13) === currentDateAndHour) {
          return value;
       }

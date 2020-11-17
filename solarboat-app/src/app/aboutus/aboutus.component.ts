@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import AOS from 'aos';
 
 @Component({
   selector: 'app-aboutus',
@@ -11,7 +10,26 @@ export class AboutusComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // AOS.init();
+    const myImgs = document.querySelectorAll('.animate-me');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.intersectionRatio > 0) {
+          entry.target.classList.add('animated');
+        } else {
+          // entry.target.classList.remove('animated');
+        }
+      });
+    });
+    myImgs.forEach(image => {
+      observer.observe(image);
+    });
+    // this.windowScrollService.scrollY$.subscribe((data) => {
+    //    this.scrollY = data;
+    // });
   }
 
+  // isVisible(id: string) {
+  //   const div = document.getElementById(id);
+  //   return (div.offsetTop + div.offsetHeight) < this.scrollY;
+  // }
 }

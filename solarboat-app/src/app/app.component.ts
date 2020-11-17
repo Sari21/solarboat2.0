@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TokenStorageService} from './auth/token-storage.service';
 import {TranslateService} from '@ngx-translate/core';
 import {NavigationEnd, Router} from '@angular/router';
@@ -7,13 +7,17 @@ import {NavigationEnd, Router} from '@angular/router';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
     title = 'solarboat-app';
     public roles: string[];
     public authority: string;
+    // scrollY$: Observable<number>;
 
-constructor(private router: Router, private tokenStorage: TokenStorageService, public translate: TranslateService) {
+constructor(private router: Router, private tokenStorage: TokenStorageService,
+            public translate: TranslateService) {
+    // this.scrollY$ = this.windowScrollService.scrollY$;
     this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
             (window as any).ga('set', 'page', event.urlAfterRedirects);
@@ -39,4 +43,22 @@ constructor(private router: Router, private tokenStorage: TokenStorageService, p
             });
         }
     }
+    // @HostListener('window:scroll')
+    // onScroll(): void {
+    //     console.log('scroll event');
+    //     // this.scrollHostlistener.windowYAxis = this.getYPosition();
+    //     // console.log(this.scrollHostlistener.windowYAxis);
+    //     this.windowScrollService.scrollY.next(this.getYPosition());
+    //     // console.log(this.windowScrollService.scrollY);
+    // }
+    // getYPosition(): number {
+    //     return window.scrollY;
+    // }
+    //
+    // onWindowScroll($event: any) {
+    //         // this.scrollHostlistener.windowYAxis = this.getYPosition();
+    //         // console.log(this.scrollHostlistener.windowYAxis);
+    //     this.windowScrollService.scrollY.next(this.getYPosition());
+    //         // console.log(this.windowScrollService.scrollY);
+    // }
 }

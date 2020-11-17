@@ -37,3 +37,17 @@ p {
         z-index: 0;
     }
 }
+.animate-me.animated {
+    animation: anim .7s ease-out;
+}
+
+@keyframes anim {
+    0% {
+        opacity: 0;
+        transform: translateY(5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
