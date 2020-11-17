@@ -74,10 +74,9 @@ export class DataVisualizationComponent implements OnInit {
   }
 
   public connect() {
-    if (this.checkBoatIsActive()) {
       this.notifications.connect();
       this.notifications.startListening();
-    }
+    
   }
   public disconnect() {
     //if(this.notifications.isConnected()){
@@ -152,7 +151,5 @@ export class DataVisualizationComponent implements OnInit {
       this.getLastClosedDataGroup();
     }
   }
-  checkBoatIsActive() {
-    return true;
-  }
+
 }

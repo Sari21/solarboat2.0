@@ -45,12 +45,14 @@ export class BoatDataComponent implements OnInit {
   socColor  = ["#CDDC39"];
   @Input("data")
   set dataGroup(dataGroup) {
+    console.log("setdata0");
     if (dataGroup) {
-      if (this.tilt) {
-        this.addGraphData(dataGroup);
-      } else {
+      console.log("setdata1");
+      // if (this.tilt) {
         this.setGraphData(dataGroup);
-      }    
+      // } else {
+      //   this.setGraphData(dataGroup);
+      // }   
       this.onResize(null);
       console.log(this.showStatistics);
       console.log(this.batteryTempSoCStatistics);
@@ -153,8 +155,9 @@ export class BoatDataComponent implements OnInit {
 
   public setGraphData(data) {
     if(data.id){
-      this.isActive = true;
-      this.isActiveChange.emit(this.isActive);    }
+      console.log(data.id);
+      // this.isActive = true;
+      // this.isActiveChange.emit(this.isActive);    }
 
     //var this.data = this.data;
     this.accelerationStatistics = data.accelerationAnalysis;
@@ -431,6 +434,8 @@ export class BoatDataComponent implements OnInit {
     this.errors = data.errors;
 
   }
+}
+
   public setColor(temp: number, soc: number) {
     if (temp < 60) {
       this.tempColor = ["#CDDC39"];
