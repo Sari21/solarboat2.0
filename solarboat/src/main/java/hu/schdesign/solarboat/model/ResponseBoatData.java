@@ -5,15 +5,15 @@ import hu.schdesign.solarboat.model.Boat.DataAnalysis;
 import hu.schdesign.solarboat.model.Boat.Error;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResponseBoatData {
-    private ArrayList<ArrayList<dataPair<String, Double>>> tilt;
-    private ArrayList<ArrayList<dataPair<String, Double>>> acceleration;
+    private ArrayList<ArrayList<DataPair<String, Double>>> tilt;
+    private ArrayList<ArrayList<DataPair<String, Double>>> acceleration;
     private ArrayList<Coordinates> compass;
     private ArrayList<Double> velocity;
-    private ArrayList<ArrayList<dataPair<String, Double>>> battery;
-    private ArrayList<ArrayList<dataPair<String, Double>>> motor;
+    private ArrayList<DataPair<String, Double>> distance;
+    private ArrayList<ArrayList<DataPair<String, Double>>> battery;
+    private ArrayList<ArrayList<DataPair<String, Double>>> motor;
     private ArrayList<Error> errors = new ArrayList<>();
     private String id;
     private ArrayList<DataAnalysis> tiltAnalysis;
@@ -28,35 +28,35 @@ public class ResponseBoatData {
         return errors;
     }
 
-    public ArrayList<ArrayList<dataPair<String, Double>>> getTilt() {
+    public ArrayList<ArrayList<DataPair<String, Double>>> getTilt() {
         return tilt;
     }
 
-    public void setTilt(ArrayList<ArrayList<dataPair<String, Double>>> tilt) {
+    public void setTilt(ArrayList<ArrayList<DataPair<String, Double>>> tilt) {
         this.tilt = tilt;
     }
 
-    public ArrayList<ArrayList<dataPair<String, Double>>> getAcceleration() {
+    public ArrayList<ArrayList<DataPair<String, Double>>> getAcceleration() {
         return acceleration;
     }
 
-    public void setAcceleration(ArrayList<ArrayList<dataPair<String, Double>>> acceleration) {
+    public void setAcceleration(ArrayList<ArrayList<DataPair<String, Double>>> acceleration) {
         this.acceleration = acceleration;
     }
 
-    public ArrayList<ArrayList<dataPair<String, Double>>> getBattery() {
+    public ArrayList<ArrayList<DataPair<String, Double>>> getBattery() {
         return battery;
     }
 
-    public void setBattery(ArrayList<ArrayList<dataPair<String, Double>>> battery) {
+    public void setBattery(ArrayList<ArrayList<DataPair<String, Double>>> battery) {
         this.battery = battery;
     }
 
-    public ArrayList<ArrayList<dataPair<String, Double>>> getMotor() {
+    public ArrayList<ArrayList<DataPair<String, Double>>> getMotor() {
         return motor;
     }
 
-    public void setMotor(ArrayList<ArrayList<dataPair<String, Double>>> motor) {
+    public void setMotor(ArrayList<ArrayList<DataPair<String, Double>>> motor) {
         this.motor = motor;
     }
 
@@ -126,5 +126,13 @@ public class ResponseBoatData {
 
     public void setVelocity(ArrayList<Double> velocity) {
         this.velocity = velocity;
+    }
+
+    public ArrayList<DataPair<String, Double>> getDistance() {
+        return distance;
+    }
+
+    public void setDistance(ArrayList<DataPair<String, Double>> distance) {
+        this.distance = distance;
     }
 }

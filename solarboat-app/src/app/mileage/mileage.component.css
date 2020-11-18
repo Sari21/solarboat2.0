@@ -3,6 +3,7 @@ body,
 html {
   height: 100%;
   width: 100%;
+  padding-right: 200px;
 }
 
 :host() {
@@ -24,6 +25,9 @@ html {
   position: absolute;
   width: 200px;
   height: 200px;
+  margin-right: 250;
+  margin-bottom: 250px;
+  margin-left: 50;
 }
 :host() .circle {
   position: absolute;

@@ -3,7 +3,7 @@ package hu.schdesign.solarboat.service.serviceInterface;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
-import hu.schdesign.solarboat.model.dataPair;
+import hu.schdesign.solarboat.model.DataPair;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ public interface IDataGroupService {
     ResponseBoatData getDataGroupById(Long id);
     Optional<DataGroup> getDataGroupByDate(LocalDateTime date);
     ResponseBoatData getDataGroupLast();
-    ArrayList<dataPair<Long, String>> getDatesAndIds();
+    ArrayList<DataPair<Long, String>> getDatesAndIds();
     void deleteAll();
     void deleteFirst();
     void deleteById(Long id);

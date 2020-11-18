@@ -21,17 +21,12 @@ export class MileageComponent implements OnInit {
   name = "mileage";
   @Input("velocity")
   set velocity(velocity) {
-    console.log(velocity);
-    // if(compass.x && compass.y){
     this.setMileage(velocity);
-    //}
   }
   constructor(private sanitizer: DomSanitizer) {}
 
   setMileage(velocity) {
-    let mileage;
-    mileage = this.circle.nativeElement;
-    this.angle = 50 * 3 - 90; 
+    this.angle = velocity * 3 - 90; 
     if(this.angle > 90){
       this.angle += 180;
     }

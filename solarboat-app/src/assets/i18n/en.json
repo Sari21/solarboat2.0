@@ -102,5 +102,8 @@
     "compass":"Compass",
     "acceleration":"Acceleration",
     "errors":"Errors",
-    "date":"Date"
+    "date":"Date",
+    "stateOfCharge":"State of charge",
+    "temperature":"Temperature"
+  }
 }

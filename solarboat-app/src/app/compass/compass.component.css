@@ -7,6 +7,7 @@ body, html {
   user-select: none;
   font: 16px/100% Arial, Tahoma, Verdana, sans-serif;
   font-weight: bold;
+
 }
 :host() .debug {
   color: #E91E63;
@@ -22,6 +23,8 @@ body, html {
   position: absolute;
   width: 200px;
   height: 200px;
+  margin-left:250px;
+  margin-bottom: 250px;
 }
 :host() .circle {
   position: absolute;

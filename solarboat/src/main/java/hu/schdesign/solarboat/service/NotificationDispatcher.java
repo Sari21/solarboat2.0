@@ -22,8 +22,6 @@ import java.util.Set;
 
 @Service
 public class NotificationDispatcher implements INotificationDispatcher {
-    private final BoatDataService boatDataService;
-    private final IDataGroupService dataGroupService;
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationDispatcher.class);
     private final SimpMessagingTemplate template;
     private Set<String> listeners = new HashSet<>();
@@ -33,15 +31,12 @@ public class NotificationDispatcher implements INotificationDispatcher {
             BoatDataService boatDataService,
             @Lazy IDataGroupService dataGroupService,
             SimpMessagingTemplate template) {
-        this.boatDataService = boatDataService;
-        this.dataGroupService = dataGroupService;
         this.template = template;
     }
 
     @Override
     public void add(String sessionId) {
         listeners.add(sessionId);
-        //dispatch(dataGroupService.getDataGroupLast());
     }
 
     @Override

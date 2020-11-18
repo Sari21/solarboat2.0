@@ -8,14 +8,15 @@
 
       <!-- <div class="justify-content-center d-flex"> -->
       <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChanged()">
-        <mat-tab label="{{'STATISTICS.realTime' | translate}}">
+        <mat-tab label="{{'STATISTICS.realTime' | translate}}" class="pt-3">
           <app-boat-data [hidden]="!isActive" [data]="data" [showStatistics]="false" [(isActive)]="isActive"
             (isActiveChange)="change($event)"></app-boat-data>
-          <app-waves *ngIf="!isActive"></app-waves>
+          <app-waves [text]="'A hajó jelenleg nem üzemel'" *ngIf="!isActive"></app-waves>
         
         </mat-tab>
-        <mat-tab label="{{'STATISTICS.previousStatistics' | translate}}">
-          <div class="input-group mt-5 mb-3">
+        <mat-tab label="{{'STATISTICS.previousStatistics' | translate}}" class="pt-3">
+          <app-waves [text]="'Nincsenek rögzített adatok'" *ngIf="dates.length === 0"></app-waves>
+          <div class="input-group mt-5 mb-3" *ngIf="dates.length != 0">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01" translate>STATISTICS.date</label>
             </div>
@@ -26,7 +27,7 @@
             </select>
           </div>
 
-          <a class="btn mb-3" (click)="setShow()" href="javascript:void(0)"><span
+          <a  *ngIf="dates.length != 0" class="btn mb-3" (click)="setShow()" href="javascript:void(0)"><span
               translate>STATISTICS.options</span></a>
 
           <div *ngIf="show" class="d-flex mb-3">
@@ -37,7 +38,7 @@
             <a class="btn" (click)="openDeleteAllConfirmDialog()" href="javascript:void(0)">
               <span translate>STATISTICS.deleteAll</span></a>
           </div>
-          <app-boat-data [data]="data" [showStatistics]="true"></app-boat-data>
+          <app-boat-data  *ngIf="dates.length != 0" [data]="data" [showStatistics]="true"></app-boat-data>
         </mat-tab>
       </mat-tab-group>
     </div>

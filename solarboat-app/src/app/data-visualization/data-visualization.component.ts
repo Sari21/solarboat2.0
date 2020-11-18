@@ -50,7 +50,8 @@ export class DataVisualizationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDates();
-    this.getActiveDataGroup();
+    this.isActive = true;
+    //this.getActiveDataGroup();
     this.connect();
   }
   ngOnDestroy() {
@@ -95,7 +96,11 @@ export class DataVisualizationComponent implements OnInit {
         this.data = null;
         this.isActive = false;
       }
+      else{
+       // this.isActive = true;
+      }
       this.data = res;
+      
     });
   }
   public dateChanged() {

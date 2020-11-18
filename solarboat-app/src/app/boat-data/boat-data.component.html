@@ -1,26 +1,32 @@
-<div class="justify-content-center d-flex">
+<div class="justify-content-center d-flex pt-5">
   <div class="col-12">
     <!-- <div class="d-inline mb-5" id="firstrow">
       <div class="d-inline-flex, flex-row">
         <app-compass *ngIf="compass && !showStatistics" [compass]="compass"></app-compass>
       </div>
     </div> -->
+    <div class="row d-flex flex-wrap">
 
-    <div class="d-flex d-inline flex-row flex-wrap justify-content-center mb-5" id="firstrow">
-      <div class="d-inline-flex">
-        <app-bar-chart (click)="setShowDetails()" [data]="soc" class="pr-3"></app-bar-chart>
-        <app-bar-chart (click)="setShowDetails()" [data]="temp" class="pl-3"></app-bar-chart>
-      </div>     
+      <div class="d-flex justify-content-start flex-wrap mb-5 col-md-6" >
+        <app-mileage *ngIf="velocity && !showStatistics" [velocity]="velocity" ></app-mileage>
+        <app-compass *ngIf="compass && !showStatistics" [compass]="compass" ></app-compass>
+      </div>
+      
+      <div class="d-flex d-inline flex-row flex-wrap justify-content-center mb-5 col-md-6" id="firstrow">
+        <div class="d-inline-flex">
+          <div class="column">
+            <p translate class="text-center">STATISTICS.stateOfCharge</p>
+            <app-bar-chart (click)="setShowDetails()" [data]="soc" class="pr-3"></app-bar-chart>
+          </div>
+          <div class="column">
+            <p translate class="text-center">STATISTICS.temperature</p>
+          <app-bar-chart (click)="setShowDetails()" [data]="temp" class="pl-3"></app-bar-chart>
+          </div>
+        </div>     
+      </div>
     </div>
 
-      <div class="d-flex d-inline flex-row flex-wrap justify-content-center mb-5" id="firstrow">
-        <div class="d-inline-block">
-          <app-mileage *ngIf="velocity && !showStatistics" [velocity]="velocity"></app-mileage>
-        </div>
-        <div class="d-inline-flex">
-          <app-compass *ngIf="compass && !showStatistics" [compass]="compass"></app-compass>
-        </div>
-      </div>
+  
 
     <div class="d-flex justify-content-between flex-wrap" (window:resize)="onResize($event)">
       <div class="row col-md-6 pb-5 d-flex justify-content-center" *ngIf="showDetails">
@@ -42,17 +48,20 @@
         <app-graph class="d-inline-flex" [data]="tilt" id="chart-parent"></app-graph>
         <app-statistics *ngIf="tiltStatistics && showStatistics" [datas]="tiltStatistics"></app-statistics>
       </div>
-      <!-- <div class="row col-md-6 mb-5  d-flex justify-content-center">
-        <app-graph class="d-inline-flex" [data]="compass" id="chart-parent"></app-graph>
-        <app-statistics *ngIf="compassStatistics && showStatistics" [datas]="compassStatistics"></app-statistics>
-      </div>
-    -->
       <div class="row col-md-6 mb-5 d-flex justify-content-center">
         <app-graph class="d-inline-flex" [data]="acceleration" id="chart-parent"></app-graph>
         <app-statistics *ngIf="accelerationStatistics && showStatistics" [datas]="accelerationStatistics">
         </app-statistics>
       </div>
     </div>
+      <!-- <div class="row col-md-6 mb-5 d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="distance" id="chart-parent"></app-graph>
+      </div> -->
+      <!-- <div class="row col-md-6 mb-5  d-flex justify-content-center">
+        <app-graph class="d-inline-flex" [data]="compass" id="chart-parent"></app-graph>
+        <app-statistics *ngIf="compassStatistics && showStatistics" [datas]="compassStatistics"></app-statistics>
+      </div>
+    -->
     <table class="col-5" id="errorTable">
       <thead>
         <tr>

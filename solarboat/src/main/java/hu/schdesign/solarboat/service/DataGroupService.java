@@ -5,7 +5,7 @@ import hu.schdesign.solarboat.dao.DataGroupRepository;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
-import hu.schdesign.solarboat.model.dataPair;
+import hu.schdesign.solarboat.model.DataPair;
 import hu.schdesign.solarboat.service.serviceInterface.IDataGroupService;
 import hu.schdesign.solarboat.service.serviceInterface.INotificationDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Optional;
 
 @Service
@@ -94,11 +93,11 @@ public class DataGroupService implements IDataGroupService {
     }
 
     @Override
-    public ArrayList<dataPair<Long, String>> getDatesAndIds() {
-        ArrayList<dataPair<Long, String>> list = new ArrayList<>();
-        Iterable<DataGroup> it = dataGroupRepository.findAll();
+    public ArrayList<DataPair<Long, String>> getDatesAndIds() {
+        ArrayList<DataPair<Long, String>> list = new ArrayList<>();
+        Iterable<DataGroup> it = dataGroupRepository.findAllByIsActiveIsFalseOrderByIdAsc();
         for (DataGroup i : it) {
-            list.add(new dataPair<Long, String>(i.getId(), i.getDate()));
+            list.add(new DataPair<Long, String>(i.getId(), i.getDate()));
         }
         return list;
     }

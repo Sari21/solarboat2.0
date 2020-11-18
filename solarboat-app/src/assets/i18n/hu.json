@@ -107,7 +107,9 @@
     "deleteData":"Adatok törlése",
     "confirm":"Biztos, hogy törölni szeretnéd?",
     "cancel":"Mégse",
-    "delete":"Törlés"
+    "delete":"Törlés",
+    "stateOfCharge":"Töltésállapot",
+    "temperature":"Hőmérséklet"
 
   }
 }

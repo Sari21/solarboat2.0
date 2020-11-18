@@ -25,6 +25,7 @@ export class BoatDataComponent implements OnInit {
   @Output() public motor;
   @Output() public soc;
   @Output() public temp;
+  @Output() public distance;
   @Output() public temp_soc;
   @Output() public errors;
   @Output() public accelerationStatistics;
@@ -45,20 +46,11 @@ export class BoatDataComponent implements OnInit {
   socColor  = ["#CDDC39"];
   @Input("data")
   set dataGroup(dataGroup) {
-    console.log("setdata0");
     if (dataGroup) {
-      console.log("setdata1");
-      // if (this.tilt) {
-        this.setGraphData(dataGroup);
-      // } else {
-      //   this.setGraphData(dataGroup);
-      // }   
+        this.setGraphData(dataGroup);  
       this.onResize(null);
-      console.log(this.showStatistics);
-      console.log(this.batteryTempSoCStatistics);
     }
   }
-  
   
   constructor(private notifService: NotificationsService) {
     this.notifService.dataCallback$.subscribe((data) => {
@@ -76,6 +68,9 @@ export class BoatDataComponent implements OnInit {
     }
   }
   activityCallbackFunction(data) {
+    if(data){
+      this.dataGroup = null;
+    }
     this.isActive = data;
     this.isActiveChange.emit(this.isActive);
   }
@@ -99,7 +94,6 @@ export class BoatDataComponent implements OnInit {
   public addGraphData(newData) {
     if (this.tilt) {
       if (newData.id) {
-
         this.setColor(newData.battery[2][0].value, newData.battery[3][0].value);
         this.tilt.multi[0].series.push(newData.tilt[0][0]);
         this.tilt.multi[1].series.push(newData.tilt[1][0]);
@@ -136,6 +130,10 @@ export class BoatDataComponent implements OnInit {
 
         this.temp.multi[0].value = newData.battery[3][0].value;
         this.temp.multi = [...this.temp.multi];
+        
+        // this.distance.multi[0].series.push(newData.distance[0]);
+        // this.distance.multi = [...this.distance.multi];
+
       }
     } else {
       this.setGraphData(newData);
@@ -150,16 +148,12 @@ export class BoatDataComponent implements OnInit {
       this.battery.view = [window.innerWidth / 2.7, 250];
       this.motor.view = [window.innerWidth / 2.7, 250];
       this.temp_soc.view = [window.innerWidth / 2.7, 250];
+      // this.distance.view = [window.innerWidth / 2.7, 250];
     }
   }
 
   public setGraphData(data) {
-    if(data.id){
-      console.log(data.id);
-      // this.isActive = true;
-      // this.isActiveChange.emit(this.isActive);    }
-
-    //var this.data = this.data;
+    console.log(data.id);
     this.accelerationStatistics = data.accelerationAnalysis;
     this.tiltStatistics = data.tiltAnalysis;
    // this.compassStatistics = data.compassAnalysis;
@@ -173,24 +167,26 @@ export class BoatDataComponent implements OnInit {
       data.batteryAnalysis[3],
     ];
     this.motorStatistics = data.motorAnalysis;
-    this.setColor(
-      data.battery[3][data.battery[3].length - 1].value,
-      data.battery[2][data.battery[2].length - 1].value
-    );
+    if(data.battery[3].length > 0){
+      this.setColor(
+        data.battery[3][data.battery[3].length - 1].value,
+        data.battery[2][data.battery[2].length - 1].value
+      );
+    }
     
     this.tilt = {
       multi: [
         {
-          name: "STATISTICS.x",
+          name: "x",
           series: data.tilt[0],
         },
 
         {
-          name: "STATISTICS.y",
+          name: "y",
           series: data.tilt[1],
         },
         {
-          name: "STATISTICS.z",
+          name: "z",
           series: data.tilt[2],
         },
       ],
@@ -212,6 +208,31 @@ export class BoatDataComponent implements OnInit {
       yScaleMax: 80,
       legend: false,
     };
+    // this.distance = {
+    //   multi: [
+    //     {
+    //       name: "s",
+    //       series: data.distance[0],
+    //     }
+    //   ],
+    //   view: [1000, 250],
+    //   showXAxis: false,
+    //   showYAxis: true,
+    //   gradient: false,
+    //   showLegend: true,
+    //   showXAxisLabel: true,
+    //   xAxisLabel: "Number",
+    //   showYAxisLabel: true,
+    //   yAxisLabel: "data",
+    //   timeline: true,
+    //   colorScheme: {
+    //     domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
+    //   },
+    //   autoScale: true,
+    //   legendTitle: "STATISTICS.distance",
+    //   yScaleMax: 80,
+    //   legend: false,
+    // };
 
     /*this.compass = {
       multi: [
@@ -251,22 +272,19 @@ export class BoatDataComponent implements OnInit {
    this.compass = (data.compass.length > 0) ? data.compass[data.compass.length - 1] : {x:0, y:0, z:0};
    this.velocity = (data.velocity.length > 0) ? data.velocity[data.velocity.length - 1] : {x:0, y:0, z:0};
 
-
-   
-
     this.acceleration = {
       multi: [
         {
-          name: "STATISTICS.x",
+          name: "x",
           series: data.acceleration[0],
         },
 
         {
-          name: "STATISTICS.y",
+          name: "y",
           series: data.acceleration[1],
         },
         {
-          name: "STATISTICS.z",
+          name: "z",
           series: data.acceleration[2],
         },
       ],
@@ -292,12 +310,12 @@ export class BoatDataComponent implements OnInit {
     this.battery = {
       multi: [
         {
-          name: "STATISTICS.batteryIn",
+          name: "battery in",
           series: data.battery[0],
         },
 
         {
-          name: "STATISTICS.batteryOut | translate",
+          name: "battery out",
           series: data.battery[1],
         },
       ],
@@ -323,12 +341,12 @@ export class BoatDataComponent implements OnInit {
     this.motor = {
       multi: [
         {
-          name: "STATISTICS.motorRpM",
+          name: "RpM",
           series: data.motor[0],
         },
 
         {
-          name: "STATISTICS.motorTemp",
+          name: "T",
           series: data.motor[1],
         },
       ],
@@ -353,12 +371,12 @@ export class BoatDataComponent implements OnInit {
     this.temp_soc = {
       multi: [
         {
-          name: "STATISTICS.batterySoC",
+          name: "SoC",
           series: data.battery[2],
         },
 
         {
-          name: "STATISTICS.batteryTemp",
+          name: "T",
           series: data.battery[3],
         },
       ],
@@ -383,7 +401,7 @@ export class BoatDataComponent implements OnInit {
     this.soc = {
       multi: [
         {
-          name: "STATISTICS.batterySoC",
+          name: "SoC",
           value: (data.battery[2][0]  ? (data.battery[2][data.battery[2].length - 1].value) : 0),
         },
       ],
@@ -395,7 +413,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: false,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-      yAxisLabel: "data",
+      yAxisLabel: "%",
       timeline: false,
       yScaleMax: 100,
       colorScheme: {
@@ -409,7 +427,7 @@ export class BoatDataComponent implements OnInit {
     this.temp = {
       multi: [
         {
-          name: "STATISTICS.batteryTemp",
+          name: "T",
           value: (data.battery[3][0] ? (data.battery[3][data.battery[3].length - 1].value) : 0 ),
         },
       ],
@@ -432,8 +450,9 @@ export class BoatDataComponent implements OnInit {
       legendTitle: "STATISTICS.battery",
     };
     this.errors = data.errors;
+    
 
-  }
+  // }
 }
 
   public setColor(temp: number, soc: number) {
@@ -442,7 +461,7 @@ export class BoatDataComponent implements OnInit {
     } else {
       this.tempColor = ["#E91E63"];
     }
-    if (soc < 80) {
+    if (soc > 20) {
       this.socColor = ["#CDDC39"];
     } else {
       this.socColor = ["#E91E63"];

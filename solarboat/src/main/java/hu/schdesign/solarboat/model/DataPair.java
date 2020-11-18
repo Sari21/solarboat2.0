@@ -1,9 +1,9 @@
 package hu.schdesign.solarboat.model;
 
-public class dataPair<T, U> {
+public class DataPair<T, U> {
     private final T name;
     private final U value;
-    public dataPair(T id, U data){
+    public DataPair(T id, U data){
         this.name = id;
         this.value = data;
     }

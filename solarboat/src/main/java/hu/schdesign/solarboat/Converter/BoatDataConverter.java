@@ -5,51 +5,50 @@ import hu.schdesign.solarboat.model.Boat.DataAnalysis;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
-import hu.schdesign.solarboat.model.dataPair;
+import hu.schdesign.solarboat.model.DataPair;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class BoatDataConverter {
     public ResponseBoatData convertBoatDataToResponseBoatData(BoatData bd) {
         ResponseBoatData response = new ResponseBoatData();
 
-        ArrayList<ArrayList<dataPair<String, Double>>> tiltTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Double>>> accelerationTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> tiltTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> accelerationTemp = new ArrayList<>();
         ArrayList<Coordinates> compassTemp = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> distanceTemp = new ArrayList<>();
         ArrayList<Double> velocityTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Double>>> batteryTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Double>>> motorTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> batteryTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> motorTemp = new ArrayList<>();
 
 
-        ArrayList<dataPair<String, Double>> tiltX = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> tiltY = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> tiltZ = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> accelerationX = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> accelerationY = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> accelerationZ = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> compassX = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> compassY = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> compassZ = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> in = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> out = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> SoC = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> temp = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> RmP = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> mTemp = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> tiltX = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> tiltY = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> tiltZ = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> accelerationX = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> accelerationY = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> accelerationZ = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> compassX = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> compassY = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> compassZ = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> in = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> out = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> SoC = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> temp = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> RmP = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> mTemp = new ArrayList<>();
 
         response.setId(bd.getDate());
 
-        tiltX.add(new dataPair<String, Double>(response.getId(), bd.getTilt().getX()));
-        tiltY.add(new dataPair<String, Double>(response.getId(), bd.getTilt().getY()));
-        tiltZ.add(new dataPair<String, Double>(response.getId(), bd.getTilt().getZ()));
+        tiltX.add(new DataPair<String, Double>(response.getId(), bd.getTilt().getX()));
+        tiltY.add(new DataPair<String, Double>(response.getId(), bd.getTilt().getY()));
+        tiltZ.add(new DataPair<String, Double>(response.getId(), bd.getTilt().getZ()));
 
 
-        accelerationX.add(new dataPair<String, Double>(response.getId(), bd.getAcceleration().getX()));
-        accelerationY.add(new dataPair<String, Double>(response.getId(), bd.getAcceleration().getY()));
-        accelerationZ.add(new dataPair<String, Double>(response.getId(), bd.getAcceleration().getZ()));
+        accelerationX.add(new DataPair<String, Double>(response.getId(), bd.getAcceleration().getX()));
+        accelerationY.add(new DataPair<String, Double>(response.getId(), bd.getAcceleration().getY()));
+        accelerationZ.add(new DataPair<String, Double>(response.getId(), bd.getAcceleration().getZ()));
 
 
 //        compassX.add(new dataPair<String, Integer>(response.getId(), bd.getCompass().getX()));
@@ -57,14 +56,14 @@ public class BoatDataConverter {
 //        compassZ.add(new dataPair<String, Integer>(response.getId(), bd.getCompass().getZ()));
 
 
-        in.add(new dataPair<String, Double>(response.getId(), bd.getBattery().get_in()));
-        out.add(new dataPair<String, Double>(response.getId(), bd.getBattery().get_out()));
-        SoC.add(new dataPair<String, Double>(response.getId(), bd.getBattery().getSoC())); //ezt majd nem így kell!
-        temp.add(new dataPair<String, Double>(response.getId(), bd.getBattery().getTemp())); //ezt sem!!
+        in.add(new DataPair<String, Double>(response.getId(), bd.getBattery().get_in()));
+        out.add(new DataPair<String, Double>(response.getId(), bd.getBattery().get_out()));
+        SoC.add(new DataPair<String, Double>(response.getId(), bd.getBattery().getSoC()));
+        temp.add(new DataPair<String, Double>(response.getId(), bd.getBattery().getTemp()));
 
 
-        RmP.add(new dataPair<String, Double>(response.getId(), bd.getMotor().getRpM()));
-        mTemp.add(new dataPair<String, Double>(response.getId(), bd.getMotor().getTemp()));
+        RmP.add(new DataPair<String, Double>(response.getId(), bd.getMotor().getRpM()));
+        mTemp.add(new DataPair<String, Double>(response.getId(), bd.getMotor().getTemp()));
 
         if (bd.getError() != null) {
             response.getErrors().add(bd.getError());
@@ -87,6 +86,8 @@ public class BoatDataConverter {
 
         velocityTemp.add(bd.getVelocity());
         response.setVelocity(velocityTemp);
+        distanceTemp.add(new DataPair<String, Double>(response.getId(), bd.getSumDistance()));
+        response.setDistance(distanceTemp);
 
         batteryTemp.add(in);
         batteryTemp.add(out);
@@ -103,39 +104,40 @@ public class BoatDataConverter {
         return response;
     }
 
-    public ArrayList<dataPair<String, Double>> coordinatesToList(Coordinates coordinates, String date) {
-        ArrayList<dataPair<String, Double>> resultList = new ArrayList<>();
-        resultList.add(new dataPair<String, Double>(date, coordinates.getX()));
-        resultList.add(new dataPair<String, Double>(date, coordinates.getY()));
-        resultList.add(new dataPair<String, Double>(date, coordinates.getZ()));
+    public ArrayList<DataPair<String, Double>> coordinatesToList(Coordinates coordinates, String date) {
+        ArrayList<DataPair<String, Double>> resultList = new ArrayList<>();
+        resultList.add(new DataPair<String, Double>(date, coordinates.getX()));
+        resultList.add(new DataPair<String, Double>(date, coordinates.getY()));
+        resultList.add(new DataPair<String, Double>(date, coordinates.getZ()));
         return resultList;
     }
 
     public ResponseBoatData convertDataGroupToResponseBoatData(DataGroup dataGroup) {
         ResponseBoatData response = new ResponseBoatData();
-        ArrayList<ArrayList<dataPair<String, Double>>> tiltTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Double>>> accelerationTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> tiltTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> accelerationTemp = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> distanceTemp = new ArrayList<>();
         ArrayList<Coordinates> compassTemp = new ArrayList<>();
         ArrayList<Double> velocityTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Double>>> batteryTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Double>>> motorTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> batteryTemp = new ArrayList<>();
+        ArrayList<ArrayList<DataPair<String, Double>>> motorTemp = new ArrayList<>();
 
 
-        ArrayList<dataPair<String, Double>> x = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> y = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> z = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> ax = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> ay = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> az = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> x = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> y = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> z = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> ax = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> ay = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> az = new ArrayList<>();
 //        ArrayList<dataPair<String, Integer>> cx = new ArrayList<>();
 //        ArrayList<dataPair<String, Integer>> cy = new ArrayList<>();
 //        ArrayList<dataPair<String, Integer>> cz = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> in = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> out = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> SoC = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> temp = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> RmP = new ArrayList<>();
-        ArrayList<dataPair<String, Double>> mTemp = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> in = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> out = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> SoC = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> temp = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> RmP = new ArrayList<>();
+        ArrayList<DataPair<String, Double>> mTemp = new ArrayList<>();
 
         ArrayList<Double> analysis_tiltX = new ArrayList<>();
         ArrayList<Double> analysis_tiltY = new ArrayList<>();
@@ -155,16 +157,16 @@ public class BoatDataConverter {
 
         for (BoatData bd : dataGroup.getBoatDataList()) {
             response.setId(bd.getDate());
-            x.add(new dataPair<String, Double>(response.getId(), bd.getTilt().getX()));
-            y.add(new dataPair<String, Double>(response.getId(), bd.getTilt().getY()));
-            z.add(new dataPair<String, Double>(response.getId(), bd.getTilt().getZ()));
+            x.add(new DataPair<String, Double>(response.getId(), bd.getTilt().getX()));
+            y.add(new DataPair<String, Double>(response.getId(), bd.getTilt().getY()));
+            z.add(new DataPair<String, Double>(response.getId(), bd.getTilt().getZ()));
             analysis_tiltX.add(bd.getTilt().getX());
             analysis_tiltY.add(bd.getTilt().getY());
             analysis_tiltZ.add(bd.getTilt().getZ());
 
-            ax.add(new dataPair<String, Double>(response.getId(), bd.getAcceleration().getX()));
-            ay.add(new dataPair<String, Double>(response.getId(), bd.getAcceleration().getY()));
-            az.add(new dataPair<String, Double>(response.getId(), bd.getAcceleration().getZ()));
+            ax.add(new DataPair<String, Double>(response.getId(), bd.getAcceleration().getX()));
+            ay.add(new DataPair<String, Double>(response.getId(), bd.getAcceleration().getY()));
+            az.add(new DataPair<String, Double>(response.getId(), bd.getAcceleration().getZ()));
             analysis_accelerationX.add(bd.getAcceleration().getX());
             analysis_accelerationY.add(bd.getAcceleration().getY());
             analysis_accelerationZ.add(bd.getAcceleration().getZ());
@@ -178,22 +180,23 @@ public class BoatDataConverter {
             analysis_compassY.add(bd.getCompass().getY());
             analysis_compassZ.add(bd.getCompass().getZ());
 
-            in.add(new dataPair<String, Double>(response.getId(), bd.getBattery().get_in()));
-            out.add(new dataPair<String, Double>(response.getId(), bd.getBattery().get_out()));
-            SoC.add(new dataPair<String, Double>(response.getId(), bd.getBattery().getSoC())); //ezt majd nem így kell!
-            temp.add(new dataPair<String, Double > (response.getId(), bd.getBattery().getTemp())); //ezt sem!!
+            in.add(new DataPair<String, Double>(response.getId(), bd.getBattery().get_in()));
+            out.add(new DataPair<String, Double>(response.getId(), bd.getBattery().get_out()));
+            SoC.add(new DataPair<String, Double>(response.getId(), bd.getBattery().getSoC())); //ezt majd nem így kell!
+            temp.add(new DataPair<String, Double >(response.getId(), bd.getBattery().getTemp())); //ezt sem!!
             analysis_in.add(bd.getBattery().get_in());
             analysis_out.add(bd.getBattery().get_out());
             analysis_SoC.add(bd.getBattery().getSoC()); //ezt majd nem így kell!
             analysis_temp.add(bd.getBattery().getTemp()); //ezt sem!!
 
-            RmP.add(new dataPair<String, Double>(response.getId(), bd.getMotor().getRpM()));
-            mTemp.add(new dataPair<String, Double>(response.getId(), bd.getMotor().getTemp()));
+            RmP.add(new DataPair<String, Double>(response.getId(), bd.getMotor().getRpM()));
+            mTemp.add(new DataPair<String, Double>(response.getId(), bd.getMotor().getTemp()));
             analysis_RmP.add(bd.getMotor().getRpM());
             analysis_mTemp.add(bd.getMotor().getTemp());
             if (bd.getError() != null) {
                 response.getErrors().add(bd.getError());
             }
+            distanceTemp.add(new DataPair<>(response.getId(), bd.getSumDistance()));
         }
         tiltTemp.add(x);
         tiltTemp.add(y);
@@ -210,6 +213,7 @@ public class BoatDataConverter {
 //        compassTemp.add(cz);
         response.setCompass(compassTemp);
         response.setVelocity(velocityTemp);
+        response.setDistance(distanceTemp);
 
         batteryTemp.add(in);
         batteryTemp.add(out);

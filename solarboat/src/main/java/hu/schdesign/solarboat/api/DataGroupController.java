@@ -1,10 +1,9 @@
 package hu.schdesign.solarboat.api;
 
-import hu.schdesign.solarboat.Converter.BoatDataConverter;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
-import hu.schdesign.solarboat.model.dataPair;
+import hu.schdesign.solarboat.model.DataPair;
 import hu.schdesign.solarboat.service.BoatDataService;
 import hu.schdesign.solarboat.service.DataGroupService;
 import hu.schdesign.solarboat.service.FileStorageService;
@@ -96,7 +95,7 @@ public class DataGroupController {
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "ids")
-    public ArrayList<dataPair<Long, String>> getIds() {
+    public ArrayList<DataPair<Long, String>> getIds() {
         return dataGroupService.getDatesAndIds();
     }
 

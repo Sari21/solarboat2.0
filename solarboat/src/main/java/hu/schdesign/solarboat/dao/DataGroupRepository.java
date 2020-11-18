@@ -13,6 +13,7 @@ public interface DataGroupRepository extends CrudRepository<DataGroup, Long> {
     Optional<DataGroup> findTopByOrderByIdDesc();
     Optional<DataGroup> findTopByIsActiveIsTrueOrderByIdDesc();
     Optional<DataGroup> findTopByIsActiveIsFalseOrderByIdDesc();
+    Iterable<DataGroup> findAllByIsActiveIsFalseOrderByIdAsc();
    // Iterable<DataGroup> findTop5ByOrderByIdDesc();
     Optional<DataGroup> deleteTopByOrderByIdAsc();
     Iterable<DataGroup> findAll();
