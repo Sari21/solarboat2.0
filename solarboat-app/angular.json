@@ -21,6 +21,7 @@
             "aot": true,
             "assets": ["src/assets/favicon.png", "src/assets"],
             "styles": [
+              "src/styles-app-loading.css",
               "src/custom-theme.scss",
               "src/styles.css",
               "src/lightbox.min.css"
