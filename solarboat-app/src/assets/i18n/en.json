@@ -13,7 +13,7 @@
     "gallery": "gallery"
   },
   "COVER": {
-    "solarPower": "Our boat produces currently {{ watts }} watts"
+    "solarPower": "Our boat currently produces {{ watts }} watts"
   },
   "ABOUT_US":{
     "about_us":"about us",
