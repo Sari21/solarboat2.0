@@ -42,6 +42,7 @@ constructor(private router: Router, private tokenStorage: TokenStorageService,
                 return true;
             });
         }
+
     }
     // @HostListener('window:scroll')
     // onScroll(): void {
@@ -54,7 +55,7 @@ constructor(private router: Router, private tokenStorage: TokenStorageService,
     // getYPosition(): number {
     //     return window.scrollY;
     // }
-    //
+
     // onWindowScroll($event: any) {
     //         // this.scrollHostlistener.windowYAxis = this.getYPosition();
     //         // console.log(this.scrollHostlistener.windowYAxis);

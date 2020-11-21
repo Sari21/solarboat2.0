@@ -92,7 +92,7 @@ export function HttpLoaderFactory(http: HttpClient){
         AngularEditorModule,
         ReactiveFormsModule,
         TranslateModule.forRoot({
-          loader:{
+          loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]

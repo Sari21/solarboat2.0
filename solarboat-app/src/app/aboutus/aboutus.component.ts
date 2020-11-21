@@ -10,7 +10,7 @@ export class AboutusComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const myImgs = document.querySelectorAll('.animate-me');
+    const elements = document.querySelectorAll('.animate-me');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
@@ -20,8 +20,8 @@ export class AboutusComponent implements OnInit {
         }
       });
     });
-    myImgs.forEach(image => {
-      observer.observe(image);
+    elements.forEach(el => {
+      observer.observe(el);
     });
     // this.windowScrollService.scrollY$.subscribe((data) => {
     //    this.scrollY = data;
