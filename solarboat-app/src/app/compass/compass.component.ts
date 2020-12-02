@@ -14,15 +14,13 @@ export class CompassComponent {
   name = 'Compass';
   @Input('compass') 
   set compass(compass){
-     // if(compass.x && compass.y){
         this.setCompass(compass.x, compass.y);
-      //}
   }  
   constructor(private sanitizer: DomSanitizer){ }
     setCompass(x, y){
-        this.angle = Math.atan2(y, x) * (180 / Math.PI); // Calculate Angle between circle center and mouse pos
+        this.angle = Math.atan2(y, x) * (180 / Math.PI); 
         if (this.angle < 0) {
-          this.angle = 360 + this.angle; // Always show angle positive
+          this.angle = 360 + this.angle;
         }
         this.angle = Math.round(this.angle);
         this.styleRotate = this.sanitizer.bypassSecurityTrustStyle(`transform: rotate(${this.angle}deg)`);           

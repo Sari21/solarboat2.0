@@ -14,7 +14,6 @@ public class Coordinates implements CsvPrintable {
     private final double x;
     private final double y;
     private final double z;
-    public static final char CSV_SEPARATOR = ';';
 
     public Coordinates(@JsonProperty("x") int x, @JsonProperty("y") int y, @JsonProperty("z") int z) {
         this.x = x;

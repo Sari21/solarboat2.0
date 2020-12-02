@@ -31,7 +31,6 @@ export class BoatDataService {
   }
 
   public getLastClosedDataGroup() {
-    console.log(this.http.get(this.BASE_URL + "/lastclosed"));
     return this.http.get(this.BASE_URL + "/lastclosed");
   }
   public getActiveDataGroup() {

@@ -24,7 +24,6 @@ public class DataGroup implements CsvPrintable {
     private List<BoatData> boatDataList;
     @DateTimeFormat(pattern = "yyyy:MM:dd'T'HH:mm")
     private LocalDateTime date;
-    private final char CSV_SEPARATOR = ';';
     private boolean isActive;
 
     public DataGroup() {

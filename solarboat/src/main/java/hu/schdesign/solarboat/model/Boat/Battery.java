@@ -16,7 +16,6 @@ public class Battery implements CsvPrintable {
     private final double _out;
     private final double SoC;
     private final double temp;
-    public static final char CSV_SEPARATOR = ';';
 
     public Battery(@JsonProperty("in") double in, @JsonProperty("out") double out,
                    @JsonProperty("soC") double soC, @JsonProperty("temp") double temp) {

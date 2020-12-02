@@ -28,8 +28,8 @@ public class NotificationDispatcher implements INotificationDispatcher {
 
     @Autowired
     public NotificationDispatcher(
-            BoatDataService boatDataService,
-            @Lazy IDataGroupService dataGroupService,
+//            BoatDataService boatDataService,
+//            @Lazy IDataGroupService dataGroupService,
             SimpMessagingTemplate template) {
         this.template = template;
     }

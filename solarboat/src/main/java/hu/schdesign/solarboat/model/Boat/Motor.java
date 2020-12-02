@@ -13,7 +13,6 @@ public class Motor implements CsvPrintable {
     private Long id;
     private final double RpM;
     private final double temp;
-    public static final char CSV_SEPARATOR = ';';
 
     public Motor(@JsonProperty("rpM") double rpM, @JsonProperty ("temp") double temp) {
         RpM = rpM;

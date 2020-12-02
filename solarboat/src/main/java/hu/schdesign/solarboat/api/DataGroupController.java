@@ -58,7 +58,7 @@ public class DataGroupController {
         return dataGroupService.startDataGroup();
     }
 
-    @PostMapping(path = "close" ,consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "stop" ,consumes = "application/json", produces = "application/json")
     public void closeDataGroup() {
          dataGroupService.closeDataGroup();
     }
@@ -150,7 +150,7 @@ public class DataGroupController {
         return exportFile(request);
     }
 
-    public ResponseEntity<Resource> exportFile(HttpServletRequest request) throws Exception {
+    private ResponseEntity<Resource> exportFile(HttpServletRequest request) throws Exception {
         Resource resource = fileStorageService.loadFileAsResource("boatdata.csv");
 
         // Try to determine file's content type
