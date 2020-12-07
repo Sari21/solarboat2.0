@@ -37,4 +37,9 @@ public class Error implements CsvPrintable {
         return new StringBuilder().append(this.source).append(CSV_SEPARATOR)
                 .append(this.message).toString();
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

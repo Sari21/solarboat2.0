@@ -48,4 +48,7 @@ public class Coordinates implements CsvPrintable {
 
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

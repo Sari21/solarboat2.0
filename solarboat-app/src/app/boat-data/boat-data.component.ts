@@ -1,15 +1,10 @@
 import {
   Component,
-  Injectable,
   OnInit,
   Output,
-  NgModule,
   Input,
-  OnDestroy,
   EventEmitter,
 } from "@angular/core";
-import { BoatDataService } from "../boat-data.service";
-import { ChartModel } from "../model/chart-model";
 import { NotificationsService } from "../notifications.service";
 @Component({
   selector: "app-boat-data",
@@ -121,8 +116,8 @@ export class BoatDataComponent implements OnInit {
         this.motor.multi[1].series.push(newData.motor[1][0]);
         this.motor.multi = [...this.motor.multi];
 
-        this.temp_soc.multi[0].series.push(newData.battery[0][0]);
-        this.temp_soc.multi[1].series.push(newData.battery[1][0]);
+        this.temp_soc.multi[0].series.push(newData.battery[2][0]);
+        this.temp_soc.multi[1].series.push(newData.battery[3][0]);
         this.temp_soc.multi = [...this.temp_soc.multi];
 
         this.soc.multi[0].value = newData.battery[2][0].value;
@@ -162,6 +157,7 @@ export class BoatDataComponent implements OnInit {
       data.batteryAnalysis[0],
       data.batteryAnalysis[1],
     ];
+    console.log( this.batteryInOutStatistics);
     this.batteryTempSoCStatistics = [
       data.batteryAnalysis[2],
       data.batteryAnalysis[3],
@@ -198,7 +194,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: true,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-      yAxisLabel: "data",
+      //yAxisLabel: "data",
       timeline: true,
       colorScheme: {
         domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
@@ -296,7 +292,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: true,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-      yAxisLabel: "data",
+     // yAxisLabel: "data",
       timeline: true,
       colorScheme: {
         domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
@@ -310,12 +306,12 @@ export class BoatDataComponent implements OnInit {
     this.battery = {
       multi: [
         {
-          name: "battery in",
+          name: "in",
           series: data.battery[0],
         },
 
         {
-          name: "battery out",
+          name: "out",
           series: data.battery[1],
         },
       ],
@@ -327,7 +323,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: true,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-      yAxisLabel: "data",
+      //yAxisLabel: "data",
       timeline: true,
       colorScheme: {
         domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
@@ -358,7 +354,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: true,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-      yAxisLabel: "data",
+      //yAxisLabel: "data",
       timeline: true,
       colorScheme: {
         domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
@@ -388,7 +384,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: true,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-      yAxisLabel: "data",
+      //yAxisLabel: "data",
       timeline: true,
       colorScheme: {
         domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],

@@ -3,8 +3,6 @@ import {RxStomp} from "@stomp/rx-stomp";
 import {Subject} from "rxjs/Subject"
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
-import { BoatData } from './model/boat-data';
-import {BoatDataComponent} from "./boat-data/boat-data.component"
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +28,6 @@ export class NotificationsService {
 
       this.watchForData();
       this.watchForActivity();
-
 
       console.info('connected!');
     }
@@ -69,6 +66,7 @@ export class NotificationsService {
   startListening() {
     if (this.client && this.client.connected) {
       this.client.publish({destination: '/swns/start'});
+      console.log(this.client.publish({destination: '/swns/start'}));
     }
   }
 

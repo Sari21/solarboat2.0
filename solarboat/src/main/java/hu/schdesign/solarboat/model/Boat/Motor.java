@@ -38,4 +38,8 @@ public class Motor implements CsvPrintable {
                 .append(this.RpM).append(CSV_SEPARATOR)
                 .append(this.temp).toString();
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -7,12 +7,12 @@
     </div> -->
     <div class="row d-flex flex-wrap">
 
-      <div class="d-flex justify-content-start flex-wrap mb-5 col-md-6" >
-        <app-mileage *ngIf="velocity && !showStatistics" [velocity]="velocity" ></app-mileage>
-        <app-compass *ngIf="compass && !showStatistics" [compass]="compass" ></app-compass>
+      <div class="d-flex justify-content-start flex-wrap mb-5 col-md-6" *ngIf=!showStatistics>
+        <app-mileage *ngIf="velocity " [velocity]="velocity" ></app-mileage>
+        <app-compass *ngIf="compass " [compass]="compass" ></app-compass>
       </div>
       
-      <div class="d-flex d-inline flex-row flex-wrap justify-content-center mb-5 col-md-6" id="firstrow">
+      <div class="d-flex d-inline flex-row flex-wrap justify-content-center mb-5 col-md-6" id="firstrow" *ngIf=!showStatistics>
         <div class="d-inline-flex">
           <div class="column">
             <p translate class="text-center">STATISTICS.stateOfCharge</p>
@@ -29,7 +29,7 @@
   
 
     <div class="d-flex justify-content-between flex-wrap" (window:resize)="onResize($event)">
-      <div class="row col-md-6 pb-5 d-flex justify-content-center" *ngIf="showDetails">
+      <div class="row col-md-6 pb-5 d-flex justify-content-center" *ngIf="showDetails || showStatistics">
         <app-graph class="d-inline-flex" [data]="temp_soc" id="chart-parent">
         </app-graph>
         <app-statistics *ngIf="batteryTempSoCStatistics && showStatistics" [datas]="batteryTempSoCStatistics">
@@ -65,7 +65,7 @@
     <table class="col-5" id="errorTable">
       <thead>
         <tr>
-          <th class="p-3">Errors:</th>
+          <th translate class="p-3">STATISTICS.errors</th>
         </tr>
       </thead>
       <tbody class="">

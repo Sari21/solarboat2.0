@@ -59,4 +59,8 @@ public class Battery implements CsvPrintable {
                 .append(this.SoC).append(CSV_SEPARATOR)
                 .append(this.temp).toString();
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

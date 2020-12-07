@@ -18,7 +18,7 @@ public interface IDataGroupService {
     ResponseBoatData getActiveDataGroup();
     ResponseBoatData getDataGroupById(Long id);
     Optional<DataGroup> getDataGroupByDate(LocalDateTime date);
-    ResponseBoatData getDataGroupLast();
+    ResponseBoatData getLastDataGroup();
     ArrayList<DataPair<Long, String>> getDatesAndIds();
     void deleteAll();
     void deleteFirst();
@@ -28,4 +28,5 @@ public interface IDataGroupService {
     void exportById(Long id, HttpServletResponse response) throws Exception;
     void exportLast(HttpServletResponse response) throws Exception;
     void exportCSV(HttpServletResponse response) throws Exception;
+    Optional<DataGroup> findById(Long id);
 }

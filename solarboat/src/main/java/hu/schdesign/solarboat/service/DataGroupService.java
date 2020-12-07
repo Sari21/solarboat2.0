@@ -24,15 +24,13 @@ import java.util.Optional;
 
 @Service
 public class DataGroupService implements IDataGroupService {
-    private final DataGroupRepository dataGroupRepository;
-    private ArrayList<DataGroup> exportList;
-    private final INotificationDispatcher notificationDispatcher;
-
     @Autowired
-    public DataGroupService(DataGroupRepository dataGroupRepository,
-                            INotificationDispatcher notificationDispatcher) {
-        this.dataGroupRepository = dataGroupRepository;
-        this.notificationDispatcher = notificationDispatcher;
+    private DataGroupRepository dataGroupRepository;
+    private ArrayList<DataGroup> exportList;
+    @Autowired
+    private  INotificationDispatcher notificationDispatcher;
+
+    public DataGroupService() {
     }
 
     @Override
@@ -57,6 +55,11 @@ public class DataGroupService implements IDataGroupService {
     }
 
     @Override
+    public Optional<DataGroup> findById(Long id) {
+        return dataGroupRepository.findById(id);
+    }
+
+    @Override
     public ResponseBoatData getLastClosedDataGroup() {
         Optional<DataGroup> lastGroup = dataGroupRepository.findTopByIsActiveIsFalseOrderByIdDesc();
         BoatDataConverter converter = new BoatDataConverter();
@@ -75,9 +78,7 @@ public class DataGroupService implements IDataGroupService {
         BoatDataConverter boatDataConverter = new BoatDataConverter();
         DataGroup group = dataGroupRepository.findById(id).orElseThrow(()
                 -> new RuntimeException("Nincs ilyen adat"));
-        ResponseBoatData response = boatDataConverter.convertDataGroupToResponseBoatData(group);
-        DataGroup lastGroup = dataGroupRepository.findTopByOrderByIdDesc().orElseThrow(() -> new RuntimeException("Nincsenek adatok"));
-        return response;
+        return boatDataConverter.convertDataGroupToResponseBoatData(group);
     }
 
     @Override
@@ -87,7 +88,7 @@ public class DataGroupService implements IDataGroupService {
 
     @Transactional
     @Override
-    public ResponseBoatData getDataGroupLast() {
+    public ResponseBoatData getLastDataGroup() {
         BoatDataConverter boatDataConverter = new BoatDataConverter();
         return boatDataConverter.convertDataGroupToResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().orElse(new DataGroup()));
     }
@@ -117,6 +118,7 @@ public class DataGroupService implements IDataGroupService {
         dataGroupRepository.deleteById(id);
     }
 
+
     @Transactional
     @Override
     public DataGroup addBoatData(BoatData boatData) {
@@ -126,16 +128,17 @@ public class DataGroupService implements IDataGroupService {
         double distance = 0;
         if (originalDataGroup.getBoatDataList().size() > 0) {
             BoatData previous = originalDataGroup.getBoatDataList().get(originalDataGroup.getBoatDataList().size() - 1);
-             previousVelocity = previous.getVelocity();
-             actualVelocity = this.calculateVelocity(previous, boatData);
-             distance = calculateDistance(previousVelocity, actualVelocity, previous, boatData);
-             boatData.setVelocity(actualVelocity);
-             boatData.setDistance(distance);
-             boatData.setSumDistance(distance + previous.getSumDistance());
+            previousVelocity = previous.getVelocity();
+            actualVelocity = this.calculateVelocity(previous, boatData);
+            distance = calculateDistance(previousVelocity, actualVelocity, previous, boatData);
+            boatData.setVelocity(actualVelocity);
+            boatData.setDistance(distance);
+            boatData.setSumDistance(distance + previous.getSumDistance());
         }
         originalDataGroup.addBoatData(boatData);
         originalDataGroup = dataGroupRepository.save(originalDataGroup);
         BoatDataConverter converter = new BoatDataConverter();
+        notificationDispatcher.getListeners();
         notificationDispatcher.dispatchData(converter.convertBoatDataToResponseBoatData(originalDataGroup.getBoatDataList().get(originalDataGroup.getBoatDataList().size() - 1)));
 
         return originalDataGroup;

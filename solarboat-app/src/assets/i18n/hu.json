@@ -76,6 +76,11 @@
 
   },
   "STATISTICS":{
+    "batterySoC":"Akkumulátor töltöttsége",
+    "batteryTemp":"Akkumulátor hőmérséklete",
+    "battery":"Akkumulátor",
+    "motor":"Motor",
+    "motorTemp": "Motor hőmérséklete",
     "datas":"ADATOK",
     "boatIsNotOperating":"A hajó jelenleg nem üzemel.",
     "realTime":"Valós idejű statisztika",
@@ -90,11 +95,6 @@
     "minimum":"Minimum",
     "batteryIn":"Akkumulátor be",
     "batteryOut":"Akkumulátor ki",
-    "batterySoC":"Akkumulátor töltöttsége",
-    "batteryTemp":"Akkumulátor hőmérséklete",
-    "battery":"Akkumulátor",
-    "motor":"Motor",
-    "motorTemp": "Motor hőmérséklete",
     "motorSoC":"Motor töltöttsége?",
     "tilt":"Dőlésszög",
     "x": "X",

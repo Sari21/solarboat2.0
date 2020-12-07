@@ -84,7 +84,7 @@ public class DataGroupController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping
     public ResponseBoatData getResponseBoatData() {
-        return dataGroupService.getDataGroupLast();
+        return dataGroupService.getLastDataGroup();
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})

@@ -57,4 +57,5 @@ public class DataAnalysis {
     public void setName(String name) {
         this.name = name;
     }
+
 }
