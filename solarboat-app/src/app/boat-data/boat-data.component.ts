@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  Input,
-  EventEmitter,
-} from "@angular/core";
+import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
 import { NotificationsService } from "../notifications.service";
 @Component({
   selector: "app-boat-data",
@@ -37,16 +31,16 @@ export class BoatDataComponent implements OnInit {
   show = false;
   showDetails = false;
 
-  tempColor  = ["#CDDC39"];
-  socColor  = ["#CDDC39"];
+  tempColor = ["#CDDC39"];
+  socColor = ["#CDDC39"];
   @Input("data")
   set dataGroup(dataGroup) {
     if (dataGroup) {
-        this.setGraphData(dataGroup);  
+      this.setGraphData(dataGroup);
       this.onResize(null);
     }
   }
-  
+
   constructor(private notifService: NotificationsService) {
     this.notifService.dataCallback$.subscribe((data) => {
       this.dataCallbackFunction(data);
@@ -63,14 +57,13 @@ export class BoatDataComponent implements OnInit {
     }
   }
   activityCallbackFunction(data) {
-    if(data){
+    if (data) {
       this.dataGroup = null;
     }
     this.isActive = data;
     this.isActiveChange.emit(this.isActive);
   }
-  ngOnInit() {
-  }
+  ngOnInit() {}
   public setActive() {
     this.isActive = !this.isActive;
     this.isActiveChange.emit(this.isActive);
@@ -82,8 +75,6 @@ export class BoatDataComponent implements OnInit {
     } else {
       this.showDetails = false;
     }
-    console.log(this.showDetails);
-
   }
 
   public addGraphData(newData) {
@@ -98,8 +89,14 @@ export class BoatDataComponent implements OnInit {
         /*this.compass.multi[0].series.push(newData.compass[0][0]);
         this.compass.multi[1].series.push(newData.compass[1][0]);
         this.compass.multi[2].series.push(newData.compass[2][0]);*/
-        this.compass = (newData.compass.length > 0) ? newData.compass[newData.compass.length - 1] : {x:0, y:0, z:0};
-        this.velocity = (newData.velocity.length > 0) ? newData.velocity[newData.velocity.length - 1] : {x:0, y:0, z:0};
+        this.compass =
+          newData.compass.length > 0
+            ? newData.compass[newData.compass.length - 1]
+            : { x: 0, y: 0, z: 0 };
+        this.velocity =
+          newData.velocity.length > 0
+            ? newData.velocity[newData.velocity.length - 1]
+            : { x: 0, y: 0, z: 0 };
 
         //this.compass = [...this.compass];
 
@@ -125,10 +122,9 @@ export class BoatDataComponent implements OnInit {
 
         this.temp.multi[0].value = newData.battery[3][0].value;
         this.temp.multi = [...this.temp.multi];
-        
+
         // this.distance.multi[0].series.push(newData.distance[0]);
         // this.distance.multi = [...this.distance.multi];
-
       }
     } else {
       this.setGraphData(newData);
@@ -137,8 +133,7 @@ export class BoatDataComponent implements OnInit {
 
   onResize(event) {
     if (this.tilt) {
-      if(window.innerWidth >= 768){
-
+      if (window.innerWidth >= 768) {
         this.tilt.view = [window.innerWidth / 2.7, 250];
         //this.compass.view = [window.innerWidth / 2.7, 250];
         this.acceleration.view = [window.innerWidth / 2.7, 250];
@@ -146,9 +141,7 @@ export class BoatDataComponent implements OnInit {
         this.motor.view = [window.innerWidth / 2.7, 250];
         this.temp_soc.view = [window.innerWidth / 2.7, 250];
         // this.distance.view = [window.innerWidth / 2.7, 250];
-      }
-      else{
-        
+      } else {
         this.tilt.view = [window.innerWidth / 1.3, 200];
         //this.compass.view = [window.innerWidth / 2.7, 250];
         this.acceleration.view = [window.innerWidth / 1.3, 200];
@@ -161,28 +154,26 @@ export class BoatDataComponent implements OnInit {
   }
 
   public setGraphData(data) {
-    console.log(data.id);
     this.accelerationStatistics = data.accelerationAnalysis;
     this.tiltStatistics = data.tiltAnalysis;
-   // this.compassStatistics = data.compassAnalysis;
+    // this.compassStatistics = data.compassAnalysis;
     this.accelerationStatistics = data.accelerationAnalysis;
     this.batteryInOutStatistics = [
       data.batteryAnalysis[0],
       data.batteryAnalysis[1],
     ];
-    console.log( this.batteryInOutStatistics);
     this.batteryTempSoCStatistics = [
       data.batteryAnalysis[2],
       data.batteryAnalysis[3],
     ];
     this.motorStatistics = data.motorAnalysis;
-    if(data.battery[3].length > 0){
+    if (data.battery[3].length > 0) {
       this.setColor(
         data.battery[3][data.battery[3].length - 1].value,
         data.battery[2][data.battery[2].length - 1].value
       );
     }
-    
+
     this.tilt = {
       multi: [
         {
@@ -278,8 +269,14 @@ export class BoatDataComponent implements OnInit {
       legend: false,
     };
     */
-   this.compass = (data.compass.length > 0) ? data.compass[data.compass.length - 1] : {x:0, y:0, z:0};
-   this.velocity = (data.velocity.length > 0) ? data.velocity[data.velocity.length - 1] : {x:0, y:0, z:0};
+    this.compass =
+      data.compass.length > 0
+        ? data.compass[data.compass.length - 1]
+        : { x: 0, y: 0, z: 0 };
+    this.velocity =
+      data.velocity.length > 0
+        ? data.velocity[data.velocity.length - 1]
+        : { x: 0, y: 0, z: 0 };
 
     this.acceleration = {
       multi: [
@@ -305,7 +302,7 @@ export class BoatDataComponent implements OnInit {
       showXAxisLabel: true,
       xAxisLabel: "Number",
       showYAxisLabel: true,
-     // yAxisLabel: "data",
+      // yAxisLabel: "data",
       timeline: true,
       colorScheme: {
         domain: ["#E91E63", "#CDDC39", "#3F51B5", "#AAAAAA"],
@@ -411,7 +408,9 @@ export class BoatDataComponent implements OnInit {
       multi: [
         {
           name: "SoC",
-          value: (data.battery[2][0]  ? (data.battery[2][data.battery[2].length - 1].value) : 0),
+          value: data.battery[2][0]
+            ? data.battery[2][data.battery[2].length - 1].value
+            : 0,
         },
       ],
       view: [200, 300],
@@ -437,7 +436,9 @@ export class BoatDataComponent implements OnInit {
       multi: [
         {
           name: "T",
-          value: (data.battery[3][0] ? (data.battery[3][data.battery[3].length - 1].value) : 0 ),
+          value: data.battery[3][0]
+            ? data.battery[3][data.battery[3].length - 1].value
+            : 0,
         },
       ],
       view: [200, 300],
@@ -459,10 +460,9 @@ export class BoatDataComponent implements OnInit {
       legendTitle: "STATISTICS.battery",
     };
     this.errors = data.errors;
-    
 
-  // }
-}
+    // }
+  }
 
   public setColor(temp: number, soc: number) {
     if (temp < 60) {
@@ -476,5 +476,4 @@ export class BoatDataComponent implements OnInit {
       this.socColor = ["#E91E63"];
     }
   }
-
 }

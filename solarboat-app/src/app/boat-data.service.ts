@@ -1,14 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { BoatData } from "./model/boat-data";
-import { DataGroup } from "./model/data-group";
-import { MyCoordinates } from "./model/my-coordinates";
-import { ConditionalExpr } from "@angular/compiler";
 import { Dates } from "./model/dates";
-import { Http, ResponseContentType } from "@angular/http";
 import {Globals} from './globals';
-import {BoatDataComponent} from "./boat-data/boat-data.component"
 
 @Injectable({
   providedIn: "root",

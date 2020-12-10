@@ -38,7 +38,6 @@ export class GalleryComponent implements OnInit {
     this.newPicture.picture = files.item(0).name;
     this.pic = true;
     if (this.pic && this.smallPic) {
-      console.log("true");
       this.picturesSelected = true;
     }
   }
@@ -48,7 +47,6 @@ export class GalleryComponent implements OnInit {
     this.newPicture.smallPicture = files.item(0).name;
     this.smallPic = true;
     if (this.pic && this.smallPic) {
-      console.log("true");
       this.picturesSelected = true;
     }
   }
@@ -57,7 +55,6 @@ export class GalleryComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, "gallery").subscribe(
       (data) => {
         this.fileToUpload = null;
-        console.log("pic");
       },
       (error) => {
         console.log(error);
@@ -66,7 +63,6 @@ export class GalleryComponent implements OnInit {
     this.pictureService.postFile(this.smallFileToUpload, "gallery").subscribe(
       (data) => {
         this.smallFileToUpload = null;
-        console.log("sm");
       },
       (error) => {
         console.log(error);
@@ -98,7 +94,6 @@ export class GalleryComponent implements OnInit {
   loadGallery() {
     this.pictureService.getGallery().subscribe((res) => {
       this.gallery = res;
-      //console.log(res);
       this.gallery.forEach((s) => {
         s.picture = "./assets/gallery/".concat(s.picture);
       });
@@ -108,32 +103,9 @@ export class GalleryComponent implements OnInit {
     });
   }
   delete(id: number) {
-    //var pic = this.gallery.find((g) => g.id == id);
-    /*this.pictureService.deletePicture(pic.picture).subscribe(
-      (data) => {
-        // do something, if upload success
-        console.log("pic");
-        //this.loadGallery();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.pictureService.deletePicture(pic.smallPicture).subscribe(
-      (data) => {
-        // do something, if upload success
-        console.log("smallpic");
-        //this.loadGallery();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    */
-
+   
     this.pictureService.deleteGalleryPicture(id).subscribe(
       (data) => {
-        // do something, if upload success
         var du = this.gallery.find((a) => a.id == id);
         const index = this.gallery.indexOf(du, 0);
         if (index > -1) {

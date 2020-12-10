@@ -64,7 +64,6 @@ export class NewsPreviewComponent implements OnInit {
     let o: Object;
     if (this.fileToUpload != null) {
       this.news.picture = '../../assets/news/' + this.fileToUpload.name;
-      console.log('kep modositas');
       this.uploadFileToActivity();
       o = {
         id: newsId,

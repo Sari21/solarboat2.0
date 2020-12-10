@@ -32,13 +32,9 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNews();
-    console.log('gett');
-    console.log(this.allnews.length);
     this.checkAuth();
-    // console.log(this.allnews[0].date);
   }
   onSubmit(empForm: any, event: Event) {
-    console.log(this.form.date);
     event.preventDefault();
     // tslint:disable-next-line:ban-types
     let o: Object;

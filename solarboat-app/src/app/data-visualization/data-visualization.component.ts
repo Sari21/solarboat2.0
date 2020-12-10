@@ -63,7 +63,6 @@ export class DataVisualizationComponent implements OnInit {
       (res) => {
         this.dates = res;
         this.selectedDate = res[res.length - 1];
-        console.log(res);
       },
       (err) => {
         alert("get error");
@@ -107,7 +106,6 @@ export class DataVisualizationComponent implements OnInit {
     this.dataService
       .getDataGroupById(this.selectedDate.name)
       .subscribe((res) => {
-        console.log(res);
         this.data = res;
       });
   }

@@ -38,7 +38,6 @@ export class NotificationsService {
       .pipe(
         map((response) => {
         const data = JSON.parse(response.body);
-        console.log(data);
          // this.eventCallback.next(data);
         return data;
         }))
@@ -49,7 +48,6 @@ export class NotificationsService {
       .pipe(
         map((response) => {
           const data = JSON.parse(response.body);
-          console.log(data);
          // this.eventCallback.next(data);
           return data;
         })).subscribe((notification) =>  this.activityCallback.next(notification));
@@ -66,7 +64,6 @@ export class NotificationsService {
   startListening() {
     if (this.client && this.client.connected) {
       this.client.publish({destination: '/swns/start'});
-      console.log(this.client.publish({destination: '/swns/start'}));
     }
   }
 

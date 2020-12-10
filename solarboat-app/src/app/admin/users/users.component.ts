@@ -26,7 +26,6 @@ import {Role} from "../../model/role";
     }
     edit(user: User) {
       this.editing = true;
-      console.log(user);
     }
     open(content, id: number) {
       this.selectedUser = this.users.find((t) => t.id == id);
@@ -66,10 +65,8 @@ import {Role} from "../../model/role";
       this.userService.getUsers().subscribe((t) => {
         this.users = t;
         this.users.forEach((u) => {
-          console.log(u);
           u.isAdmin = false;
           u.roles.forEach((role) => {
-            console.log(role);
             if (role.name === "ROLE_ADMIN") {
               u.isAdmin = true;
             }

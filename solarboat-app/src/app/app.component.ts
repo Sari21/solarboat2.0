@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { TokenStorageService } from "./auth/token-storage.service";
 import { TranslateService} from "@ngx-translate/core"
-import { WebSocketAPI } from './WebSocketAPI';
 
 @Component({
   selector: "app-root",
@@ -12,7 +11,6 @@ export class AppComponent implements OnInit {
   title = "solarboat-app";
   public roles: string[];
   public authority: string;
-  webSocketAPI: WebSocketAPI;
   greeting: any;
   @Input() name: string;
   tomb = ['alma', 'korte']
@@ -23,7 +21,6 @@ export class AppComponent implements OnInit {
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|hu/) ? browserLang : 'en'); }
   ngOnInit() {
-    this.webSocketAPI = new WebSocketAPI(this);
 
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
@@ -38,21 +35,5 @@ export class AppComponent implements OnInit {
     }
   }
 
-  connect(){
-    this.webSocketAPI._connect();
-  }
-
-  disconnect(){
-    this.webSocketAPI._disconnect();
-  }
-
-  sendMessage(){
-    this.webSocketAPI._send(this.name);
-  }
-
-  handleMessage(message){
-    this.greeting = message;
-    this.tomb.push(message.content);
-    console.log(message);
-  }
+ 
 }

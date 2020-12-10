@@ -41,14 +41,11 @@ export class CoverComponent implements OnInit {
       this.http
           .get('https://api.forecast.solar/estimate/watts/47.475498098/19.05333312/0/0/2.1')
           .subscribe((data) => {
-            //console.log("using GET");
             this.watts = this.setWatts(data);
             sessionStorage.setItem('solarpower', JSON.stringify(data));
-            // console.log('service ' + this.watts);
             return this.watts;
           });
     } else {
-      //console.log("using SessionStorage");
       const data = JSON.parse(sessionStorage.getItem('solarpower'));
       this.watts = this.setWatts(data);
       return this.watts;
@@ -64,15 +61,11 @@ export class CoverComponent implements OnInit {
     // dátum + óra: "2020-04-14 05"
     const currentDateHours = date.getFullYear() + '-' + addZero(month) + '-' + addZero(date.getDate()) + ' ' + addZero(date.getHours());
    // const currentDateHours = '2020-04-15 10';
-    //console.log(currentDateHours);
 
     // tslint:disable-next-line:only-arrow-functions
     Object.keys(rawData.result).forEach(function(element) {
-      //console.log(element, rawData.result[element]);
 
       if ( element.substring(0, 13) == currentDateHours.toString()) {
-       // console.log(element);
-        //console.log('if 1 ' + rawData.result[element]);
         watts = rawData.result[element];
       }
     });
