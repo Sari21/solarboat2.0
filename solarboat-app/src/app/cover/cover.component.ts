@@ -20,10 +20,9 @@ import {
   styleUrls: ['./cover.component.css'],
   animations: [
     trigger('flyIn1', [
-      state('in', style({ transform: 'translateX(0)' })),
-      transition('void => *', [
+      transition(':enter', [
         style({ transform: 'translateX(30px)', opacity: 0}),
-        animate('500ms 100ms ease-in' )
+        animate('500ms 100ms ease-in', style({ transform: 'translateX(0)', opacity: 1 }))
       ])
     ]),
     trigger('flyIn2', [

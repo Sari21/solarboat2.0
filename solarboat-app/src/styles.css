@@ -169,13 +169,6 @@ a:hover{
 .fade-up.animate-me.animated {
     animation: anim-fade-up .7s ease-out;
 }
-.fade-right.animate-me.animated {
-    animation: anim-fade-right .7s ease-out;
-}
-.fade-left.animate-me.animated {
-    animation: anim-fade-left .7s ease-out;
-}
-
 @keyframes anim-fade-up {
     0% {
         opacity: 0;
@@ -186,6 +179,14 @@ a:hover{
         transform: scale(1);
     }
 }
+.fade-right.animate-me.animated {
+    animation: anim-fade-right .7s ease-out;
+}
+.fade-left.animate-me.animated {
+    animation: anim-fade-left .7s ease-out;
+}
+
+
 @keyframes anim-fade-right {
     0% {
         opacity: 0;
