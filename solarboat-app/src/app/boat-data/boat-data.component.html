@@ -37,7 +37,7 @@
       </div>
       <div class="row col-md-6 mb-5 d-flex justify-content-center">
         <app-graph class="d-inline-flex" [data]="battery" id="chart-parent"></app-graph>
-        <app-statistics *ngIf="batteryInOutStatistics && showStatistics" [datas]="batteryInOutStatistics | translate">
+        <app-statistics *ngIf="batteryInOutStatistics && showStatistics" [datas]="batteryInOutStatistics">
         </app-statistics>
       </div>
       <div class="row col-md-6 mb-5 d-flex justify-content-center">

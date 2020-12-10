@@ -28,7 +28,7 @@ public class NotificationsController {
     }
 
     @MessageMapping("/stop")
-    public void stop(StompHeaderAccessor stompHeaderAccessor) {
+    public void stop(StompHeaderAccessor stompHeaderAccessor, @Header("simpSessionId")String sessionId) {
         dispatcher.remove(stompHeaderAccessor.getSessionId());
     }
 
@@ -37,8 +37,6 @@ public class NotificationsController {
     public void handleSessionSubscribeEvent(SessionSubscribeEvent event) {
         GenericMessage message = (GenericMessage) event.getMessage();
         String simpDestination = (String) message.getHeaders().get("simpDestination");
-        System.out.println("subscribe " + simpDestination);
-
     }
 
 }

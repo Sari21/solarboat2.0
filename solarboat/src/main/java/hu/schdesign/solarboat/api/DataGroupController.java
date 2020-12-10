@@ -129,7 +129,7 @@ public class DataGroupController {
         dataGroupService.deleteById(id);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+   // @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "export/{id}")
     public ResponseEntity<Resource> exportById(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") Long id) throws Exception {
         dataGroupService.exportById(id, response);

@@ -99,8 +99,6 @@ public class BoatDataConverter {
         motorTemp.add(mTemp);
         response.setMotor(motorTemp);
 
-        System.out.println("Compass: " + response.getCompass().get(response.getCompass().size() - 1).getX());
-
         return response;
     }
 

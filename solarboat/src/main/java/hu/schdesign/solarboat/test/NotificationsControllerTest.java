@@ -1,13 +1,11 @@
 package hu.schdesign.solarboat.test;
 
-
 import hu.schdesign.solarboat.dao.DataGroupRepository;
 import hu.schdesign.solarboat.model.Boat.Battery;
 import hu.schdesign.solarboat.model.Boat.Coordinates;
 import hu.schdesign.solarboat.model.Boat.Motor;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
-import hu.schdesign.solarboat.model.ResponseBoatData;
 import hu.schdesign.solarboat.service.DataGroupService;
 import hu.schdesign.solarboat.service.NotificationDispatcher;
 import org.junit.Before;
@@ -16,14 +14,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.context.annotation.Bean;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.StringMessageConverter;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
@@ -38,36 +31,17 @@ import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 
 //@WebAppConfiguration
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class NotificationsControllerTest {
-
-    @TestConfiguration
-    static class DataGroupServiceIntegrationTestContextConfiguration {
-        @Bean
-        public DataGroupService dataGroupService() {
-            return new DataGroupService();
-        }
-    }
-
-    @TestConfiguration
-    static class NotificationDispatcherIntegrationTestContextConfiguration {
-        @Bean
-        public NotificationDispatcher notificationDispatcher() {
-            return new NotificationDispatcher();
-        }
-    }
-
     @LocalServerPort
     private int port;
     @Mock
@@ -75,9 +49,8 @@ public class NotificationsControllerTest {
 
     @InjectMocks
     private DataGroupService dataGroupService;
-    @InjectMocks
+    @Mock
     private NotificationDispatcher notificationDispatcher;
-
 
 
     private WebSocketStompClient webSocketStompClient;
@@ -111,21 +84,20 @@ public class NotificationsControllerTest {
         Mockito.when(dataGroupRepository.findById((long) 1)).thenReturn(java.util.Optional.of(dataGroup));
         Mockito.when(dataGroupRepository.findTopByIsActiveIsTrueOrderByIdDesc()).thenReturn(java.util.Optional.of(dataGroup));
         Mockito.when(dataGroupRepository.save(any(DataGroup.class))).thenReturn(dataGroup2);
-
     }
 
     @Test
     public void startListeningTest() throws InterruptedException, ExecutionException, TimeoutException {
-
         BlockingQueue<String> blockingQueue = new ArrayBlockingQueue(1);
 
         webSocketStompClient.setMessageConverter(new StringMessageConverter());
 
         StompSession session = null;
         session = webSocketStompClient
-                .connect(getWsPath(), new StompSessionHandlerAdapter() {})
+                .connect(getWsPath(), new StompSessionHandlerAdapter() {
+                })
                 .get(1, SECONDS);
-        session.send("/swns/start", null);
+
         session.subscribe("/user/notification/watchForData", new StompFrameHandler() {
 
             @Override
@@ -138,21 +110,21 @@ public class NotificationsControllerTest {
                 blockingQueue.add((String) payload);
             }
         });
+        session.send("/swns/start", null);
         assertEquals("Sikeres feliratkozás!", blockingQueue.poll(10, SECONDS));
-
     }
+
     @Test
     public void stopListeningTest() throws InterruptedException, ExecutionException, TimeoutException {
-
         BlockingQueue<String> blockingQueue = new ArrayBlockingQueue(1);
 
         webSocketStompClient.setMessageConverter(new StringMessageConverter());
 
         StompSession session = null;
         session = webSocketStompClient
-                .connect(getWsPath(), new StompSessionHandlerAdapter() {})
+                .connect(getWsPath(), new StompSessionHandlerAdapter() {
+                })
                 .get(1, SECONDS);
-        session.send("/swns/stop", null);
         session.subscribe("/user/notification/watchForData", new StompFrameHandler() {
 
             @Override
@@ -165,48 +137,9 @@ public class NotificationsControllerTest {
                 blockingQueue.add((String) payload);
             }
         });
+        session.send("/swns/stop", null);
         assertEquals("Sikeres leiratkozás!", blockingQueue.poll(10, SECONDS));
-
     }
-
-    @Test
-    public void testAddBoatData() throws InterruptedException, ExecutionException, TimeoutException {
-
-        BlockingQueue<ResponseBoatData> blockingQueue = new ArrayBlockingQueue(1);
-
-        webSocketStompClient.setMessageConverter(new MappingJackson2MessageConverter());
-
-        StompSession session = null;
-        session = webSocketStompClient
-                .connect(getWsPath(), new StompSessionHandlerAdapter() {})
-                .get(1, SECONDS);
-        session.send("/swns/start", null);
-        session.subscribe("/user/notification/data", new StompFrameHandler() {
-
-            @Override
-            public Type getPayloadType(StompHeaders headers) {
-                return ResponseBoatData.class;
-            }
-
-            @Override
-            public void handleFrame(StompHeaders headers, Object payload) {
-                System.out.println("Received message: ");
-                blockingQueue.add((ResponseBoatData) payload);
-            }
-        });
-
-        notificationDispatcher.add(session.getSessionId());
-        BoatData newBD = this.createBoatData();
-        newBD.setId(null);
-        DataGroup response = dataGroupService.addBoatData(newBD);
-        // ResponseBoatData responseBoatData = completableFuture.get(5, SECONDS);
-
-        //assertNotNull(r);
-        assertNotNull(response);
-        assertEquals("Hello, Mike!", blockingQueue.poll(10, SECONDS));
-        //   assertNotNull(responseBoatData);
-    }
-
 
     private String getWsPath() {
         return String.format("ws://localhost:%d/notifications", port);
@@ -233,5 +166,4 @@ public class NotificationsControllerTest {
         newBoatData.setRawDate(now);
         return newBoatData;
     }
-
 }

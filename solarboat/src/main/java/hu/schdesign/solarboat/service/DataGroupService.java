@@ -28,9 +28,10 @@ public class DataGroupService implements IDataGroupService {
     private DataGroupRepository dataGroupRepository;
     private ArrayList<DataGroup> exportList;
     @Autowired
-    private  INotificationDispatcher notificationDispatcher;
+    private INotificationDispatcher notificationDispatcher;
 
     public DataGroupService() {
+
     }
 
     @Override
@@ -138,7 +139,6 @@ public class DataGroupService implements IDataGroupService {
         originalDataGroup.addBoatData(boatData);
         originalDataGroup = dataGroupRepository.save(originalDataGroup);
         BoatDataConverter converter = new BoatDataConverter();
-        notificationDispatcher.getListeners();
         notificationDispatcher.dispatchData(converter.convertBoatDataToResponseBoatData(originalDataGroup.getBoatDataList().get(originalDataGroup.getBoatDataList().size() - 1)));
 
         return originalDataGroup;

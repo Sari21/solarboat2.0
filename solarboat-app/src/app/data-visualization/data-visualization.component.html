@@ -30,12 +30,12 @@
           <a  *ngIf="dates.length != 0" class="btn mb-3" (click)="setShow()" href="javascript:void(0)"><span
               translate>STATISTICS.options</span></a>
 
-          <div *ngIf="show" class="d-flex mb-3">
-            <a class="btn" href="{{ BASE_URL }}"><span translate>STATISTICS.downloadAll</span></a>
-            <a class="btn" href="{{ EXPORT_URL }}"><span translate>STATISTICS.downloadOne</span></a>
-            <a class="btn" (click)="openDeleteOneConfirmDialog(selectedDate.name)" href="javascript:void(0)">
+          <div *ngIf="show" class="d-flex mb-3 flex-wrap">
+            <a class="btn m-3" href="{{ BASE_URL }}"><span translate>STATISTICS.downloadAll</span></a>
+            <a class="btn m-3" href="{{ BASE_URL + '/' + selectedDate.name}}"><span translate>STATISTICS.downloadOne</span></a>
+            <a class="btn m-3" (click)="openDeleteOneConfirmDialog(selectedDate.name)" href="javascript:void(0)">
               <span translate>STATISTICS.deleteOne</span></a>
-            <a class="btn" (click)="openDeleteAllConfirmDialog()" href="javascript:void(0)">
+            <a class="btn m-3" (click)="openDeleteAllConfirmDialog()" href="javascript:void(0)">
               <span translate>STATISTICS.deleteAll</span></a>
           </div>
           <app-boat-data  *ngIf="dates.length != 0" [data]="data" [showStatistics]="true"></app-boat-data>

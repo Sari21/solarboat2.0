@@ -137,13 +137,26 @@ export class BoatDataComponent implements OnInit {
 
   onResize(event) {
     if (this.tilt) {
-      this.tilt.view = [window.innerWidth / 2.7, 250];
-      //this.compass.view = [window.innerWidth / 2.7, 250];
-      this.acceleration.view = [window.innerWidth / 2.7, 250];
-      this.battery.view = [window.innerWidth / 2.7, 250];
-      this.motor.view = [window.innerWidth / 2.7, 250];
-      this.temp_soc.view = [window.innerWidth / 2.7, 250];
-      // this.distance.view = [window.innerWidth / 2.7, 250];
+      if(window.innerWidth >= 768){
+
+        this.tilt.view = [window.innerWidth / 2.7, 250];
+        //this.compass.view = [window.innerWidth / 2.7, 250];
+        this.acceleration.view = [window.innerWidth / 2.7, 250];
+        this.battery.view = [window.innerWidth / 2.7, 250];
+        this.motor.view = [window.innerWidth / 2.7, 250];
+        this.temp_soc.view = [window.innerWidth / 2.7, 250];
+        // this.distance.view = [window.innerWidth / 2.7, 250];
+      }
+      else{
+        
+        this.tilt.view = [window.innerWidth / 1.3, 200];
+        //this.compass.view = [window.innerWidth / 2.7, 250];
+        this.acceleration.view = [window.innerWidth / 1.3, 200];
+        this.battery.view = [window.innerWidth / 1.3, 200];
+        this.motor.view = [window.innerWidth / 1.3, 200];
+        this.temp_soc.view = [window.innerWidth / 1.3, 200];
+        // this.distance.view = [window.innerWidth / 2.7, 250];
+      }
     }
   }
 

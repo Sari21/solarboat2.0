@@ -13,7 +13,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,16 +20,12 @@ import java.util.Set;
 public class NotificationDispatcher implements INotificationDispatcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationDispatcher.class);
     @Autowired
-    private SimpMessagingTemplate template;
+    private  SimpMessagingTemplate template;
     private Set<String> listeners = new HashSet<>();
 
     @Autowired
-    public NotificationDispatcher(
-//            BoatDataService boatDataService,
-//            @Lazy IDataGroupService dataGroupService,
-            //  SimpMessagingTemplate template
-    ) {
-        // this.template = template;
+    public NotificationDispatcher() {
+
     }
 
     @Override
@@ -42,6 +37,7 @@ public class NotificationDispatcher implements INotificationDispatcher {
             SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor.create(SimpMessageType.MESSAGE);
             headerAccessor.setSessionId(sessionId);
             headerAccessor.setLeaveMutable(true);
+//            template = new SimpMessagingTemplate((message, l) -> true);
 
             template.convertAndSendToUser(
                     sessionId,

@@ -72,8 +72,6 @@ public class DataGroupTest {
         }
     }
 
-    @LocalServerPort
-    private int port;
     @Mock
     private static DataGroupRepository dataGroupRepository;
     @InjectMocks
@@ -85,8 +83,6 @@ public class DataGroupTest {
 
     private WebSocketStompClient webSocketStompClient;
     BlockingQueue<String> blockingQueue;
-
-    private static final TimeUnit SECONDS = TimeUnit.SECONDS;
 
     @Before
     public void setupDataGroup() {
@@ -282,49 +278,6 @@ public class DataGroupTest {
         assertEquals(expected.get(2).getValue(), result.get(2).getValue());
     }
 
-    //    private String getWsPath() {
-//        return String.format("ws://localhost:%d/notifications", port);
-//    }
-//    @Test
-//    public void startDataGroupTest() {
-//        BlockingQueue<Boolean> blockingQueue = new ArrayBlockingQueue(1);
-//
-//        //webSocketStompClient.setMessageConverter()
-//
-//        when(dataGroupRepository.save(any(DataGroup.class)))
-//                .thenAnswer((Answer) invocation -> {
-//                    Object[] args = invocation.getArguments();
-//                    DataGroup saved = (DataGroup) args[0];
-//                    return saved;
-//                });
-//
-//        StompSession session = null;
-////        session = webSocketStompClient
-////                .connect(getWsPath(), new StompSessionHandlerAdapter() {
-////                })
-////                .get(1, SECONDS);
-////        //session.send("/swns/start", null);
-//
-//        //this.mockMvc.perform(get("api/dataGroup/start"));
-//        notificationDispatcher.add(session.getSessionId());
-//        session.subscribe("/user/notification/activity", new StompFrameHandler() {
-//
-//            @Override
-//            public Type getPayloadType(StompHeaders headers) {
-//                return Boolean.class;
-//            }
-//
-//            @Override
-//            public void handleFrame(StompHeaders headers, Object payload) {
-//                blockingQueue.add((Boolean) payload);
-//            }
-//        });
-//        DataGroup dataGroup = dataGroupService.startDataGroup();
-//        //assertTrue(blockingQueue.poll(10, SECONDS));
-//        // assertEquals("Hello, Mike!", blockingQueue.poll(10, SECONDS));
-//           assertNotNull(dataGroup);
-//
-//    }
 
     private DataGroup createDataGroup(Long id, boolean isActive) {
         DataGroup newGroup = new DataGroup();
@@ -356,29 +309,4 @@ public class DataGroupTest {
         newBoatData.setRawDate(now);
         return newBoatData;
     }
-
-    private BoatData createBoatData(Long id) {
-        BoatData newBoatData = new BoatData();
-        newBoatData.setId(id);
-        newBoatData.setId(Math.abs(new Random().nextLong()));
-        newBoatData.setAcceleration(new Coordinates(20, 30, 40));
-        newBoatData.getAcceleration().setId(Math.abs(new Random().nextLong()));
-        newBoatData.setBattery(new Battery(10, 20, 30, 40));
-        newBoatData.getBattery().setId(Math.abs(new Random().nextLong()));
-        newBoatData.setCompass(new Coordinates(1, 1, 2));
-        newBoatData.getCompass().setId(Math.abs(new Random().nextLong()));
-        newBoatData.setMotor(new Motor(22, 33));
-        newBoatData.getMotor().setId(Math.abs(new Random().nextLong()));
-        newBoatData.setTilt(new Coordinates(44, 33, 22));
-        newBoatData.getTilt().setId(Math.abs(new Random().nextLong()));
-        newBoatData.setError(new hu.schdesign.solarboat.model.Boat.Error("source", "error message"));
-        newBoatData.getError().setId(Math.abs(new Random().nextLong()));
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        newBoatData.setDate(sdf.format(now));
-        newBoatData.setRawDate(now);
-        return newBoatData;
-    }
-
-
 }
