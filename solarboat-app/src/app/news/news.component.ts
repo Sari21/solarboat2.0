@@ -55,7 +55,6 @@ export class NewsComponent implements OnInit {
     this.checkAuth();
   }
   onSubmit(empForm: any, event: Event) {
-    // console.log(this.form.date);
     event.preventDefault();
     // tslint:disable-next-line:ban-types
     let o: Object;

@@ -13,7 +13,6 @@ public class Error implements CsvPrintable {
     private Long id;
     private final String source;
     private final String message;
-    public static final char CSV_SEPARATOR = ';';
 
     public Error(@JsonProperty("source") String source, @JsonProperty("message") String message) {
         this.source = source;
@@ -38,4 +37,9 @@ public class Error implements CsvPrintable {
         return new StringBuilder().append(this.source).append(CSV_SEPARATOR)
                 .append(this.message).toString();
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

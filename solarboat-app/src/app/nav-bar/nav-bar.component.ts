@@ -17,7 +17,6 @@ export class NavBarComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     public translate: TranslateService
   ) {
-    // console.log(this.router.url);
     this.page = this.router.url;
   }
 

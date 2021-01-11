@@ -12,13 +12,14 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
+@WebAppConfiguration
 @RunWith(SpringRunner.class)
-public class NewsServiceIntegrationTest {
+public class NewsServiceTest {
     @TestConfiguration
     static class NewsServiceIntegrationTestContextConfiguration {
         @Bean

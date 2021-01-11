@@ -1,12 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { BoatData } from "./model/boat-data";
-import { DataGroup } from "./model/data-group";
-import { MyCoordinates } from "./model/my-coordinates";
-import { ConditionalExpr } from "@angular/compiler";
 import { Dates } from "./model/dates";
-import { Http, ResponseContentType } from "@angular/http";
 import {Globals} from './globals';
 
 @Injectable({
@@ -29,8 +23,11 @@ export class BoatDataService {
     );
   }
 
-  public getLastDataGroup() {
-    return this.http.get(this.BASE_URL);
+  public getLastClosedDataGroup() {
+    return this.http.get(this.BASE_URL + "/lastclosed");
+  }
+  public getActiveDataGroup() {
+    return this.http.get(this.BASE_URL + "/active");
   }
   public getDate() {
     return this.http.get<Dates[]>(this.BASE_URL.concat("/ids"));

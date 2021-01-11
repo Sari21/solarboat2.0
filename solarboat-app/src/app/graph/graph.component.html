@@ -1,4 +1,5 @@
-<ngx-charts-line-chart
+<ngx-charts-line-chart 
+  *ngIf="data"
   [view]="data.view"
   [scheme]="data.colorScheme"
   [results]="data.multi"
@@ -8,9 +9,9 @@
   [legend]="data.showLegend"
   [showXAxisLabel]="data.showXAxisLabel"
   [showYAxisLabel]="data.showYAxisLabel"
-  [xAxisLabel]="data.xAxisLabel"
-  [yAxisLabel]="data.yAxisLabel"
+  [xAxisLabel]="data.xAxisLabel | translate"
+  [yAxisLabel]="data.yAxisLabel | translate"
   [autoScale]="data.autoScale"
-  [legendTitle]="data.legendTitle"
+  [legendTitle]="data.legendTitle | translate"
 >
 </ngx-charts-line-chart>

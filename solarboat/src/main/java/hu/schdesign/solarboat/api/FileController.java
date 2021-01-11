@@ -14,6 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URI;
@@ -27,16 +28,18 @@ public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     private FileStorageService fileStorageService;
+
     @Autowired
-    FileController(FileStorageService fileStorageService){
+    FileController(FileStorageService fileStorageService) {
         this.fileStorageService = fileStorageService;
     }
-    @Secured("ROLE_ADMIN")
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/uploadFile")
     public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("path") String path) throws URISyntaxException {
         String fileName = fileStorageService.storeFile(file, path);
 
-        if(fileName == null){
+        if (fileName == null) {
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.setLocation(new URI("/uploadFile"));
             responseHeaders.set("Error", "The file is not an image");
@@ -54,15 +57,15 @@ public class FileController {
                 file.getContentType(), file.getSize()), responseHeaders, HttpStatus.CREATED);
     }
 
-  /*  @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
-    }
-    */
-    @Secured("ROLE_USER")
+    /*  @PostMapping("/uploadMultipleFiles")
+      public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+          return Arrays.asList(files)
+                  .stream()
+                  .map(file -> uploadFile(file))
+                  .collect(Collectors.toList());
+      }
+      */
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
@@ -77,7 +80,7 @@ public class FileController {
         }
 
         // Fallback to the default content type if type could not be determined
-        if(contentType == null) {
+        if (contentType == null) {
             contentType = "application/octet-stream";
         }
 
@@ -86,9 +89,10 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
-    @Secured("ROLE_ADMIN")
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping(path = "/deleteFile")
-    public void deleteFile(@RequestBody String fileName){
+    public void deleteFile(@RequestBody String fileName) {
         this.fileStorageService.deleteFile(fileName);
     }
 }

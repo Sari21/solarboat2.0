@@ -86,7 +86,6 @@ export class SponsorsComponent implements OnInit {
     this.newSponsor.picture = files.item(0).name;
   }
   uploadFileToActivity() {
-    // console.log("fileupload");
     this.pictureService.postSponsorLogo(this.fileToUpload).subscribe(
       (data) => {
         // do something, if upload success

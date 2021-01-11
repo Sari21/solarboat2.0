@@ -1,70 +1,168 @@
 package hu.schdesign.solarboat.service;
 
+import hu.schdesign.solarboat.Converter.BoatDataConverter;
 import hu.schdesign.solarboat.dao.DataGroupRepository;
 import hu.schdesign.solarboat.model.BoatData;
 import hu.schdesign.solarboat.model.DataGroup;
 import hu.schdesign.solarboat.model.ResponseBoatData;
-import hu.schdesign.solarboat.model.dataPair;
+import hu.schdesign.solarboat.model.DataPair;
+import hu.schdesign.solarboat.service.serviceInterface.IDataGroupService;
+import hu.schdesign.solarboat.service.serviceInterface.INotificationDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
+import javax.transaction.Transactional;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class DataGroupService {
-    private final DataGroupRepository dataGroupRepository;
-    private ArrayList<DataGroup> exportList;
-
+public class DataGroupService implements IDataGroupService {
     @Autowired
-    public DataGroupService(DataGroupRepository dataGroupRepository){
-        this.dataGroupRepository = dataGroupRepository;
+    private DataGroupRepository dataGroupRepository;
+    private ArrayList<DataGroup> exportList;
+    @Autowired
+    private INotificationDispatcher notificationDispatcher;
+
+    public DataGroupService() {
+
     }
 
-    public DataGroup startDataGroup(DataGroup dataGroup){return dataGroupRepository.save(dataGroup);}
-    public Iterable<DataGroup> getAllDataGroups(){return dataGroupRepository.findAll();}
-    public Optional<DataGroup> getLastDataGroup(){return dataGroupRepository.findTopByOrderByIdDesc();}
-    public Optional<DataGroup> getDataGroupById(Long id){return dataGroupRepository.findById(id);}
-    public Optional<DataGroup> getDataGroupByDate(LocalDateTime date){return dataGroupRepository.findByDate(date);
+    @Override
+    public DataGroup startDataGroup() {
+        DataGroup dataGroup = new DataGroup();
+        dataGroup.setActive(true);
+        notificationDispatcher.dispatchBoatActivity(true);
+        return dataGroupRepository.save(dataGroup);
     }
-    public ResponseBoatData getDataGroupLast(){
-        return  new ResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().get());
+
+    @Override
+    public DataGroup closeDataGroup() {
+        DataGroup lastGroup = dataGroupRepository.findTopByIsActiveIsTrueOrderByIdDesc().orElseThrow(() -> new RuntimeException("Nincs aktív datacsoport"));
+        lastGroup.setActive(false);
+        notificationDispatcher.dispatchBoatActivity(false);
+        return dataGroupRepository.save(lastGroup);
     }
-    public ResponseBoatData getDataGroupId(long id){
-        return  new ResponseBoatData(dataGroupRepository.findById(id).get());
+
+    @Override
+    public Iterable<DataGroup> getAllDataGroups() {
+        return dataGroupRepository.findAll();
     }
-    public ArrayList<dataPair<Long, String>> getDatesAndIds(){
-        ArrayList<dataPair<Long, String>> list = new ArrayList<>();
-        Iterable<DataGroup> it = dataGroupRepository.findAll();
-        for(DataGroup i : it){
-            list.add(new dataPair<Long, String>(i.getId(), i.getDate()));
+
+    @Override
+    public Optional<DataGroup> findById(Long id) {
+        return dataGroupRepository.findById(id);
+    }
+
+    @Override
+    public ResponseBoatData getLastClosedDataGroup() {
+        Optional<DataGroup> lastGroup = dataGroupRepository.findTopByIsActiveIsFalseOrderByIdDesc();
+        BoatDataConverter converter = new BoatDataConverter();
+        return lastGroup.map(converter::convertDataGroupToResponseBoatData).orElse(null);
+    }
+
+    @Override
+    public ResponseBoatData getActiveDataGroup() {
+        Optional<DataGroup> lastGroup = dataGroupRepository.findTopByIsActiveIsTrueOrderByIdDesc();
+        BoatDataConverter converter = new BoatDataConverter();
+        return lastGroup.map(converter::convertDataGroupToResponseBoatData).orElse(null);
+    }
+
+    @Override
+    public ResponseBoatData getDataGroupById(Long id) {
+        BoatDataConverter boatDataConverter = new BoatDataConverter();
+        DataGroup group = dataGroupRepository.findById(id).orElseThrow(()
+                -> new RuntimeException("Nincs ilyen adat"));
+        return boatDataConverter.convertDataGroupToResponseBoatData(group);
+    }
+
+    @Override
+    public Optional<DataGroup> getDataGroupByDate(LocalDateTime date) {
+        return dataGroupRepository.findByDate(date);
+    }
+
+    @Transactional
+    @Override
+    public ResponseBoatData getLastDataGroup() {
+        BoatDataConverter boatDataConverter = new BoatDataConverter();
+        return boatDataConverter.convertDataGroupToResponseBoatData(dataGroupRepository.findTopByOrderByIdDesc().orElse(new DataGroup()));
+    }
+
+    @Override
+    public ArrayList<DataPair<Long, String>> getDatesAndIds() {
+        ArrayList<DataPair<Long, String>> list = new ArrayList<>();
+        Iterable<DataGroup> it = dataGroupRepository.findAllByIsActiveIsFalseOrderByIdAsc();
+        for (DataGroup i : it) {
+            list.add(new DataPair<Long, String>(i.getId(), i.getDate()));
         }
         return list;
     }
-    public void deleteAll(){dataGroupRepository.deleteAll();}
-    public void deleteFirst(){ dataGroupRepository.deleteTopByOrderByIdAsc();}
-    public void deleteById(Long id){dataGroupRepository.deleteById(id);}
-    public DataGroup addBoatData(BoatData boatData){
-        Optional<DataGroup> optGroup = dataGroupRepository.findTopByOrderByIdDesc();
-        if(optGroup.isPresent()){
-            optGroup.get().addBoatData(boatData);
-            return dataGroupRepository.save(optGroup.get());
-        }
-        else{
-            DataGroup newGroup = new DataGroup();
-            newGroup.addBoatData(boatData);
-            return dataGroupRepository.save(newGroup);
-        }
+
+    @Override
+    public void deleteAll() {
+        dataGroupRepository.deleteAll();
     }
 
-    public void exportAll(HttpServletResponse response)throws Exception{
+    @Override
+    public void deleteFirst() {
+        dataGroupRepository.deleteTopByOrderByIdAsc();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        dataGroupRepository.deleteById(id);
+    }
+
+
+    @Transactional
+    @Override
+    public DataGroup addBoatData(BoatData boatData) {
+        DataGroup originalDataGroup = dataGroupRepository.findTopByIsActiveIsTrueOrderByIdDesc().orElseThrow(() -> new RuntimeException("Nincs aktív adatcsoport!"));
+        double actualVelocity = 0;
+        double previousVelocity = 0;
+        double distance = 0;
+        if (originalDataGroup.getBoatDataList().size() > 0) {
+            BoatData previous = originalDataGroup.getBoatDataList().get(originalDataGroup.getBoatDataList().size() - 1);
+            previousVelocity = previous.getVelocity();
+            actualVelocity = this.calculateVelocity(previous, boatData);
+            distance = calculateDistance(previousVelocity, actualVelocity, previous, boatData);
+            boatData.setVelocity(actualVelocity);
+            boatData.setDistance(distance);
+            boatData.setSumDistance(distance + previous.getSumDistance());
+        }
+        originalDataGroup.addBoatData(boatData);
+        originalDataGroup = dataGroupRepository.save(originalDataGroup);
+        BoatDataConverter converter = new BoatDataConverter();
+        notificationDispatcher.dispatchData(converter.convertBoatDataToResponseBoatData(originalDataGroup.getBoatDataList().get(originalDataGroup.getBoatDataList().size() - 1)));
+
+        return originalDataGroup;
+    }
+
+    private double calculateDistance(double v1, double v2, BoatData previous, BoatData actual) {
+        int deltaT = (int) ChronoUnit.SECONDS.between(previous.getRawDate(), actual.getRawDate());
+        return RiemannIntegration(v1, v2, deltaT);
+    }
+
+    private double calculateVelocity(BoatData previous, BoatData actual) {
+        int deltaT = (int) ChronoUnit.SECONDS.between(previous.getRawDate(), actual.getRawDate());
+        double vx = RiemannIntegration(previous.getAcceleration().getX(), actual.getAcceleration().getX(), deltaT);
+        double vy = RiemannIntegration(previous.getAcceleration().getY(), actual.getAcceleration().getY(), deltaT);
+
+        return Math.sqrt(vx * vx + vy * vy);
+    }
+
+    public static double RiemannIntegration(Double x1, Double x2, int deltaT) {
+        return (x2 + x1) * deltaT / 2;
+    }
+
+    @Override
+    public void exportAll(HttpServletResponse response) throws Exception {
         Iterable<DataGroup> it = dataGroupRepository.findAll();
         ArrayList<DataGroup> list = new ArrayList<>();
         for (DataGroup b : it) {
@@ -73,26 +171,30 @@ public class DataGroupService {
         this.exportList = list;
         exportCSV(response);
     }
-    public void exportById(Long id, HttpServletResponse response)throws Exception{
+
+    @Override
+    public void exportById(Long id, HttpServletResponse response) throws Exception {
         Optional<DataGroup> it = dataGroupRepository.findById(id);
         ArrayList<DataGroup> list = new ArrayList<>();
-        if(it.isPresent()){
+        if (it.isPresent()) {
 
-        list.add(it.get());
-        this.exportList = list;
-        exportCSV(response);
+            list.add(it.get());
+            this.exportList = list;
+            exportCSV(response);
         }
 
     }
 
-    public void exportLast(HttpServletResponse response)throws Exception{
+    @Override
+    public void exportLast(HttpServletResponse response) throws Exception {
         Optional<DataGroup> opt = dataGroupRepository.findTopByOrderByIdDesc();
         ArrayList<DataGroup> list = new ArrayList<>();
-            list.add(opt.get());
+        list.add(opt.get());
         this.exportList = list;
         exportCSV(response);
     }
 
+    @Override
     public void exportCSV(HttpServletResponse response) throws Exception {
 
         //set file name and content type
@@ -133,7 +235,7 @@ public class DataGroupService {
                 try {
                     writer.append(data.printCsv());
 
-                    } catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             });

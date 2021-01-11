@@ -24,22 +24,25 @@ public class BoatData implements CsvPrintable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Coordinates tilt;
+    private Coordinates tilt;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Coordinates acceleration;
+    private Coordinates acceleration;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Coordinates compass;
+    private Coordinates compass;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Motor motor;
+    private Motor motor;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Battery battery;
+    private Battery battery;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Error error;
+    private Error error;
+    private double velocity;
+    private double distance;
+    private double sumDistance;
 
-    private final String date;
+    private String date;
+    private LocalDateTime rawDate;
     @ElementCollection
     private final List<Integer> extraTemps;
-    private static final char CSV_SEPARATOR = ';';
 
     public BoatData(@JsonProperty("tilt") Coordinates tilt, @JsonProperty("acceleration")Coordinates acceleration,
                     @JsonProperty("compass")Coordinates compass, @JsonProperty("motor")Motor motor,
@@ -54,6 +57,7 @@ public class BoatData implements CsvPrintable {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         date =  sdf.format(now);
+        rawDate = now;
     }
 
     public BoatData() {
@@ -65,6 +69,7 @@ public class BoatData implements CsvPrintable {
         this.error = null;
         this.extraTemps = null;
         this.date = null;
+        this.rawDate = null;
     }
 
     @Override
@@ -92,9 +97,12 @@ public class BoatData implements CsvPrintable {
         return list.toString();
     }
 
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Coordinates getTilt() {
@@ -117,24 +125,75 @@ public class BoatData implements CsvPrintable {
         return battery;
     }
 
-
-
     public Error getError() {
         return error;
+    }
+
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public double getSumDistance() {
+        return sumDistance;
+    }
+
+    public void setSumDistance(double sumDistance) {
+        this.sumDistance = sumDistance;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public LocalDateTime getRawDate() {
+        return rawDate;
     }
 
     public List<Integer> getExtraTemps() {
         return extraTemps;
     }
 
-    /*public String getDate() {
-        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        return sdf.format(date);
+    public void setTilt(Coordinates tilt) {
+        this.tilt = tilt;
     }
 
-     */
+    public void setAcceleration(Coordinates acceleration) {
+        this.acceleration = acceleration;
+    }
 
-    public String getDate() {
-        return date;
+    public void setCompass(Coordinates compass) {
+        this.compass = compass;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+
+    public void setBattery(Battery battery) {
+        this.battery = battery;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setRawDate(LocalDateTime rawDate) {
+        this.rawDate = rawDate;
     }
 }

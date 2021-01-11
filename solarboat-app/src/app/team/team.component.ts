@@ -65,9 +65,6 @@ export class TeamComponent implements OnInit {
     this.mechatronics = data.mechatronics;
     this.mechatronicsMaterial = data.mechatronics_material;
     this.mechatronicsSimulation = data.mechatronics_simulation;
-    // console.log(data);
-
-
   }
 
 }

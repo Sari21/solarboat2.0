@@ -3,13 +3,13 @@ import { Routes, RouterModule, CanActivate } from "@angular/router";
 import { MainpageComponent } from "./mainpage/mainpage.component";
 import { TeamComponent } from "./team/team.component";
 import { NewsComponent } from "./news/news.component";
-import { BoatDataComponent } from "./boat-data/boat-data.component";
 import { AchievementsComponent } from "./achievements/achievements.component";
 import { SponsorsComponent } from "./sponsors/sponsors.component";
 import { RegisterComponent } from "./admin/register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { UsersComponent } from "./admin/users/users.component";
+import { DataVisualizationComponent } from "./data-visualization/data-visualization.component"
 const routes: Routes = [
   { path: "gallery", component: GalleryComponent },
   { path: "auth/login", component: LoginComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: "sponsors", component: SponsorsComponent },
   {
     path: "boatdata",
-    component: BoatDataComponent,
+    component: DataVisualizationComponent,
   },
   { path: "achievements", component: AchievementsComponent },
   { path: "admin", redirectTo: "/auth/login" },

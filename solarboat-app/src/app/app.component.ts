@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {TokenStorageService} from './auth/token-storage.service';
-import {TranslateService} from '@ngx-translate/core';
 import {NavigationEnd, Router} from '@angular/router';
+
+import { Component, OnInit, Input } from "@angular/core";
+import { TokenStorageService } from "./auth/token-storage.service";
+import { TranslateService} from "@ngx-translate/core"
 
 @Component({
     selector: 'app-root',

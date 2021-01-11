@@ -1,0 +1,47 @@
+<app-nav-bar></app-nav-bar>
+<div class="data-vis">
+  <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
+    <div class="jumbotron col-12">
+      <h1 translate class="title pb-4">STATISTICS.datas</h1>
+      <div class="p-3">
+      </div>
+
+      <!-- <div class="justify-content-center d-flex"> -->
+      <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChanged()">
+        <mat-tab label="{{'STATISTICS.realTime' | translate}}" class="pt-3">
+          <app-boat-data [hidden]="!isActive" [data]="data" [showStatistics]="false" [(isActive)]="isActive"
+            (isActiveChange)="change($event)"></app-boat-data>
+          <app-waves [text]="'A hajó jelenleg nem üzemel'" *ngIf="!isActive"></app-waves>
+        
+        </mat-tab>
+        <mat-tab label="{{'STATISTICS.previousStatistics' | translate}}" class="pt-3">
+          <app-waves [text]="'Nincsenek rögzített adatok'" *ngIf="dates.length === 0"></app-waves>
+          <div class="input-group mt-5 mb-3" *ngIf="dates.length != 0">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" translate>STATISTICS.date</label>
+            </div>
+            <select [(ngModel)]="selectedDate" (change)="dateChanged()">
+              <option *ngFor="let item of dates" [ngValue]="item">
+                {{ item.value }}
+              </option>
+            </select>
+          </div>
+
+          <a  *ngIf="dates.length != 0" class="btn mb-3" (click)="setShow()" href="javascript:void(0)"><span
+              translate>STATISTICS.options</span></a>
+
+          <div *ngIf="show" class="d-flex mb-3 flex-wrap">
+            <a class="btn m-3" href="{{ BASE_URL }}"><span translate>STATISTICS.downloadAll</span></a>
+            <a class="btn m-3" href="{{ BASE_URL + '/' + selectedDate.name}}"><span translate>STATISTICS.downloadOne</span></a>
+            <a class="btn m-3" (click)="openDeleteOneConfirmDialog(selectedDate.name)" href="javascript:void(0)">
+              <span translate>STATISTICS.deleteOne</span></a>
+            <a class="btn m-3" (click)="openDeleteAllConfirmDialog()" href="javascript:void(0)">
+              <span translate>STATISTICS.deleteAll</span></a>
+          </div>
+          <app-boat-data  *ngIf="dates.length != 0" [data]="data" [showStatistics]="true"></app-boat-data>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

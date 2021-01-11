@@ -1,123 +1,138 @@
 package hu.schdesign.solarboat.model;
 
+import hu.schdesign.solarboat.model.Boat.Coordinates;
+import hu.schdesign.solarboat.model.Boat.DataAnalysis;
 import hu.schdesign.solarboat.model.Boat.Error;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResponseBoatData {
-    private ArrayList<ArrayList<dataPair<String, Integer>>> tilt;
-    private ArrayList<ArrayList<dataPair<String, Integer>>> acceleration;
-    private ArrayList<ArrayList<dataPair<String, Integer>>> compass;
-    private ArrayList<ArrayList<dataPair<String, Integer>>> battery;
-    private ArrayList<ArrayList<dataPair<String, Integer>>> motor;
+    private ArrayList<ArrayList<DataPair<String, Double>>> tilt;
+    private ArrayList<ArrayList<DataPair<String, Double>>> acceleration;
+    private ArrayList<Coordinates> compass;
+    private ArrayList<Double> velocity;
+    private ArrayList<DataPair<String, Double>> distance;
+    private ArrayList<ArrayList<DataPair<String, Double>>> battery;
+    private ArrayList<ArrayList<DataPair<String, Double>>> motor;
     private ArrayList<Error> errors = new ArrayList<>();
-
     private String id;
-    //extra temps???
-    public ResponseBoatData(DataGroup dataGroup){
-        ArrayList<ArrayList<dataPair<String, Integer>>> tiltTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Integer>>> accelerationTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Integer>>> compassTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Integer>>> batteryTemp = new ArrayList<>();
-        ArrayList<ArrayList<dataPair<String, Integer>>> motorTemp = new ArrayList<>();
+    private ArrayList<DataAnalysis> tiltAnalysis;
+    private ArrayList<DataAnalysis> accelerationAnalysis;
+    private ArrayList<DataAnalysis> compassAnalysis;
+    private ArrayList<DataAnalysis> batteryAnalysis;
+    private ArrayList<DataAnalysis> motorAnalysis;
 
-
-        ArrayList<dataPair<String, Integer>> x = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> y = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> z = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> ax = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> ay = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> az = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> cx = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> cy = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> cz = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> in = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> out = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> SoC = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> temp = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> RmP = new ArrayList<>();
-        ArrayList<dataPair<String, Integer>> mTemp = new ArrayList<>();
-
-        for(BoatData bd : dataGroup.getBoatDataList()){
-            id = bd.getDate();
-            x.add(new dataPair<String, Integer>(id, bd.getTilt().getX()));
-            y.add(new dataPair<String, Integer>(id, bd.getTilt().getY()));
-            z.add(new dataPair<String, Integer>(id, bd.getTilt().getZ()));
-
-            ax.add(new dataPair<String, Integer>(id, bd.getAcceleration().getX()));
-            ay.add(new dataPair<String, Integer>(id, bd.getAcceleration().getY()));
-            az.add(new dataPair<String, Integer>(id, bd.getAcceleration().getZ()));
-
-            cx.add(new dataPair<String, Integer>(id, bd.getCompass().getX()));
-            cy.add(new dataPair<String, Integer>(id, bd.getCompass().getY()));
-            cz.add(new dataPair<String, Integer>(id, bd.getCompass().getZ()));
-
-            in.add(new dataPair<String, Integer>(id, bd.getBattery().getIn()));
-            out.add(new dataPair<String, Integer>(id, bd.getBattery().getOut()));
-            SoC.add(new dataPair<String, Integer>(id, bd.getBattery().getSoC())); //ezt majd nem így kell!
-            temp.add(new dataPair<String, Integer>(id, bd.getBattery().getTemp())); //ezt sem!!
-
-            RmP.add(new dataPair<String, Integer>(id, bd.getMotor().getRpM()));
-            mTemp.add(new dataPair<String, Integer>(id, bd.getMotor().getTemp()));
-           if(bd.getError() != null){
-               errors.add(bd.getError());
-           }
-
-
-        }
-        tiltTemp.add(x);
-        tiltTemp.add(y);
-        tiltTemp.add(z);
-        tilt = tiltTemp;
-
-        accelerationTemp.add(ax);
-        accelerationTemp.add(ay);
-        accelerationTemp.add(az);
-        acceleration = accelerationTemp;
-
-        compassTemp.add(cx);
-        compassTemp.add(cy);
-        compassTemp.add(cz);
-        compass = compassTemp;
-
-        batteryTemp.add(in);
-        batteryTemp.add(out);
-        batteryTemp.add(SoC);
-        batteryTemp.add(temp);
-        battery = batteryTemp;
-
-        motorTemp.add(RmP);
-        motorTemp.add(mTemp);
-        motor = motorTemp;
-
-    }
-
-    public ArrayList<ArrayList<dataPair<String, Integer>>> getTilt() {
-        return tilt;
-    }
-
-    public ArrayList<ArrayList<dataPair<String, Integer>>> getAcceleration() {
-        return acceleration;
-    }
-
-    public ArrayList<ArrayList<dataPair<String, Integer>>> getCompass() {
-        return compass;
-    }
-
-    public ArrayList<ArrayList<dataPair<String, Integer>>> getBattery() {
-        return battery;
-    }
-
-    public ArrayList<ArrayList<dataPair<String, Integer>>> getMotor() {
-        return motor;
-    }
+    public ResponseBoatData(){}
 
     public ArrayList<Error> getErrors() {
         return errors;
     }
 
+    public ArrayList<ArrayList<DataPair<String, Double>>> getTilt() {
+        return tilt;
+    }
+
+    public void setTilt(ArrayList<ArrayList<DataPair<String, Double>>> tilt) {
+        this.tilt = tilt;
+    }
+
+    public ArrayList<ArrayList<DataPair<String, Double>>> getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(ArrayList<ArrayList<DataPair<String, Double>>> acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public ArrayList<ArrayList<DataPair<String, Double>>> getBattery() {
+        return battery;
+    }
+
+    public void setBattery(ArrayList<ArrayList<DataPair<String, Double>>> battery) {
+        this.battery = battery;
+    }
+
+    public ArrayList<ArrayList<DataPair<String, Double>>> getMotor() {
+        return motor;
+    }
+
+    public void setMotor(ArrayList<ArrayList<DataPair<String, Double>>> motor) {
+        this.motor = motor;
+    }
+
+    public void setErrors(ArrayList<Error> errors) {
+        this.errors = errors;
+    }
+
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<DataAnalysis> getTiltAnalysis() {
+        return tiltAnalysis;
+    }
+
+    public void setTiltAnalysis(ArrayList<DataAnalysis> tiltAnalysis) {
+        this.tiltAnalysis = tiltAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getAccelerationAnalysis() {
+        return accelerationAnalysis;
+    }
+
+    public void setAccelerationAnalysis(ArrayList<DataAnalysis> accelerationAnalysis) {
+        this.accelerationAnalysis = accelerationAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getCompassAnalysis() {
+        return compassAnalysis;
+    }
+
+    public void setCompassAnalysis(ArrayList<DataAnalysis> compassAnalysis) {
+        this.compassAnalysis = compassAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getBatteryAnalysis() {
+        return batteryAnalysis;
+    }
+
+    public void setBatteryAnalysis(ArrayList<DataAnalysis> batteryAnalysis) {
+        this.batteryAnalysis = batteryAnalysis;
+    }
+
+    public ArrayList<DataAnalysis> getMotorAnalysis() {
+        return motorAnalysis;
+    }
+
+    public void setMotorAnalysis(ArrayList<DataAnalysis> motorAnalysis) {
+        this.motorAnalysis = motorAnalysis;
+    }
+
+    public ArrayList<Coordinates> getCompass() {
+        return compass;
+    }
+
+    public void setCompass(ArrayList<Coordinates> compass) {
+        this.compass = compass;
+    }
+
+    public ArrayList<Double> getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(ArrayList<Double> velocity) {
+        this.velocity = velocity;
+    }
+
+    public ArrayList<DataPair<String, Double>> getDistance() {
+        return distance;
+    }
+
+    public void setDistance(ArrayList<DataPair<String, Double>> distance) {
+        this.distance = distance;
     }
 }

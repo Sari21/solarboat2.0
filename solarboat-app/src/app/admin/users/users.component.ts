@@ -66,10 +66,8 @@ import {Role} from "../../model/role";
       this.userService.getUsers().subscribe((t) => {
         this.users = t;
         this.users.forEach((u) => {
-          // console.log(u);
           u.isAdmin = false;
           u.roles.forEach((role) => {
-            // console.log(role);
             if (role.name === "ROLE_ADMIN") {
               u.isAdmin = true;
             }

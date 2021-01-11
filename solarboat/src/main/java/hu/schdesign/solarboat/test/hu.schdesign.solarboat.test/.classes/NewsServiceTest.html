@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NewsServiceTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">hu.schdesign.solarboat.test</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NewsServiceTest (hu.schdesign.solarboat.test)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NewsServiceTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NewsServiceTest$NewsServiceIntegrationTestContextConfiguration</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package hu.schdesign.solarboat.test;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import hu.schdesign.solarboat.dao.NewsRepository;
+<i>4</i>&nbsp;import hu.schdesign.solarboat.model.News;
+<i>5</i>&nbsp;import hu.schdesign.solarboat.service.NewsService;
+<i>6</i>&nbsp;import org.junit.Before;
+<i>7</i>&nbsp;import org.junit.Test;
+<i>8</i>&nbsp;import org.junit.runner.RunWith;
+<i>9</i>&nbsp;import org.mockito.Mockito;
+<i>10</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>11</i>&nbsp;import org.springframework.boot.test.context.TestConfiguration;
+<i>12</i>&nbsp;import org.springframework.boot.test.mock.mockito.MockBean;
+<i>13</i>&nbsp;import org.springframework.context.annotation.Bean;
+<i>14</i>&nbsp;import org.springframework.test.context.junit4.SpringRunner;
+<i>15</i>&nbsp;import org.springframework.test.context.web.WebAppConfiguration;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import static org.hamcrest.Matchers.is;
+<i>18</i>&nbsp;import static org.junit.Assert.*;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;@WebAppConfiguration
+<i>21</i>&nbsp;@RunWith(SpringRunner.class)
+<b class="nc"><i>22</i>&nbsp;public class NewsServiceTest {</b>
+<i>23</i>&nbsp;    @TestConfiguration
+<b class="nc"><i>24</i>&nbsp;    static class NewsServiceIntegrationTestContextConfiguration {</b>
+<i>25</i>&nbsp;        @Bean
+<i>26</i>&nbsp;        public NewsService newsService() {
+<b class="nc"><i>27</i>&nbsp;            return new NewsService();</b>
+<i>28</i>&nbsp;        }
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Autowired
+<i>32</i>&nbsp;    private NewsService newsService;
+<i>33</i>&nbsp;    @MockBean
+<i>34</i>&nbsp;    private NewsRepository newsRepository;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    @Before
+<i>37</i>&nbsp;    public void setup() {
+<b class="nc"><i>38</i>&nbsp;        News news = new News();</b>
+<b class="nc"><i>39</i>&nbsp;        news.setTitle_hu(&quot;Cim&quot;);</b>
+<b class="nc"><i>40</i>&nbsp;        news.setTitle_en(&quot;Title&quot;);</b>
+<b class="nc"><i>41</i>&nbsp;        news.setContent_en(&quot;Content&quot;);</b>
+<b class="nc"><i>42</i>&nbsp;        news.setContent_hu(&quot;Tartalom&quot;);</b>
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        Long newsId = (long) 1;</b>
+<b class="nc"><i>45</i>&nbsp;        Mockito.when(newsRepository.findById(newsId)).thenReturn(java.util.Optional.of(news));</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    @Test
+<i>49</i>&nbsp;    public void whenValidId_thenNewsShouldBeFound() {
+<b class="nc"><i>50</i>&nbsp;        Long id = (long) 1;</b>
+<b class="nc"><i>51</i>&nbsp;        String Title_hu = &quot;Cim&quot;;</b>
+<b class="nc"><i>52</i>&nbsp;        newsService.getNewsById(id).ifPresent(found -&gt; assertThat(found.getTitle_hu(), is(Title_hu)));</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-12-07 10:36</div>
+</div>
+</body>
+</html>
