@@ -33,10 +33,10 @@ public class NotificationsController {
     }
 
 
-    @EventListener
-    public void handleSessionSubscribeEvent(SessionSubscribeEvent event) {
-        GenericMessage message = (GenericMessage) event.getMessage();
-        String simpDestination = (String) message.getHeaders().get("simpDestination");
-    }
+//    @EventListener
+//    public void handleSessionSubscribeEvent(SessionSubscribeEvent event) {
+//        GenericMessage message = (GenericMessage) event.getMessage();
+//        String simpDestination = (String) message.getHeaders().get("simpDestination");
+//    }
 
 }

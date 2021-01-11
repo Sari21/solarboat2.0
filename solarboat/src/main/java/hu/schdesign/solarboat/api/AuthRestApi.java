@@ -79,8 +79,8 @@ public class AuthRestApi {
         //hozzáadom az admint
         //username: sb-admin
         //password: uszikAhajo!
-        User user = new User("SBT Admin", "sb-admin", "info@solarboatteam.hu",
-                encoder.encode("uszikAhajo!"));
+        User user = new User("SBT Admin", "admin", "info@email.hu",
+                encoder.encode("PaSsWoRd*"));
 
         Set<Role> roles = new HashSet<>();
         Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)

@@ -9,7 +9,4 @@ import java.util.Optional;
 @Repository
 public interface BoatDataRepository extends CrudRepository<BoatData, Long> {
     Optional<BoatData> findTopByOrderByIdDesc();
-
-
-
 }

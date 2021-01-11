@@ -16,14 +16,13 @@ public class BoatDataService {
     BoatDataService(BoatDataRepository boatDataRepository){
         this.boatDataRepository = boatDataRepository;
     }
+    public BoatData postData(BoatData boatData){return boatDataRepository.save(boatData);}
     public Optional<BoatData> getTheLastData(){
         return boatDataRepository.findTopByOrderByIdDesc();
     }
     public Iterable<BoatData> getAllData(){
         return boatDataRepository.findAll();
     }
-    public BoatData postData(BoatData boatData){
-        return boatDataRepository.save(boatData);
-    }
+
 
 }
