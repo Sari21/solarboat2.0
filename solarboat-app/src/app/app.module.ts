@@ -1,4 +1,4 @@
-import { BrowserModule} from "@angular/platform-browser";
+import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule, NgForm } from "@angular/forms";
@@ -31,98 +31,98 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./admin/register/register.component";
 import { TeamMembersComponent } from "./team-members/team-members.component";
 import {
-    AuthGuardService as AuthGuard,
-    AuthGuardService,
+  AuthGuardService as AuthGuard,
+  AuthGuardService,
 } from "./shared/auth-guard.service";
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { GalleryComponent } from "./gallery/gallery.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { UsersComponent } from "./admin/users/users.component";
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {Globals} from './globals';
-import { AngularEditorModule } from '@kolkov/angular-editor';
-import { NotificationsRxComponent } from './notifications-rx/notifications-rx.component';
-import { DataVisualizationComponent } from "./data-visualization/data-visualization.component"
-import { MatTabsModule } from '@angular/material/tabs';
-import { StatisticsComponent } from './statistics/statistics.component'; 
-import {MatDialogModule} from '@angular/material/dialog';
-import { ConfirmComponent } from './confirm/confirm.component';
-import { CompassComponent } from './compass/compass.component';
-import { MileageComponent } from './mileage/mileage.component';
-import { WavesComponent } from './waves/waves.component'; 
-export function HttpLoaderFactory(http: HttpClient){
-    return new TranslateHttpLoader(http);
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { Globals } from "./globals";
+import { AngularEditorModule } from "@kolkov/angular-editor";
+import { NotificationsRxComponent } from "./notifications-rx/notifications-rx.component";
+import { DataVisualizationComponent } from "./data-visualization/data-visualization.component";
+import { MatTabsModule } from "@angular/material/tabs";
+import { StatisticsComponent } from "./statistics/statistics.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { ConfirmComponent } from "./confirm/confirm.component";
+import { CompassComponent } from "./compass/compass.component";
+import { MileageComponent } from "./mileage/mileage.component";
+import { WavesComponent } from "./waves/waves.component";
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MainpageComponent,
-        TeamComponent,
-        FooterComponent,
-        NavBarComponent,
-        AboutusComponent,
-        MainpageNewsComponent,
-        NewsPreviewComponent,
-        CoverComponent,
-        NewsComponent,
-        BoatDataComponent,
-        GraphComponent,
-        AchievementsComponent,
-        AchievementComponent,
-        BarChartComponent,
-        SponsorsComponent,
-        LoginComponent,
-        RegisterComponent,
-        TeamMembersComponent,
-        GalleryComponent,
-        NavBarComponent,
-        UsersComponent
-    // tslint:disable-next-line:max-line-length
+  declarations: [
+    AppComponent,
+    MainpageComponent,
+    TeamComponent,
+    FooterComponent,
+    NavBarComponent,
+    AboutusComponent,
+    MainpageNewsComponent,
+    NewsPreviewComponent,
+    CoverComponent,
+    NewsComponent,
+    BoatDataComponent,
+    GraphComponent,
+    AchievementsComponent,
+    AchievementComponent,
+    BarChartComponent,
+    SponsorsComponent,
+    LoginComponent,
+    RegisterComponent,
+    TeamMembersComponent,
+    GalleryComponent,
+    NavBarComponent,
+    UsersComponent,
     NotificationsRxComponent,
     DataVisualizationComponent,
     StatisticsComponent,
     ConfirmComponent,
     CompassComponent,
     MileageComponent,
-    WavesComponent
+    WavesComponent,
   ],
   // tslint:disable-next-line:max-line-length
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        NgbModule,
-        MatTooltipModule,
-        MatIconModule,
-        BrowserAnimationsModule,
-        MDBBootstrapModule,
-        ScrollToModule.forRoot(),
-        NgxChartsModule,
-        CommonModule,
-        JwtModule,
-        AngularEditorModule,
-        MatTabsModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-          }
-        })
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
+    MatTooltipModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MDBBootstrapModule,
+    ScrollToModule.forRoot(),
+    NgxChartsModule,
+    CommonModule,
+    JwtModule,
+    AngularEditorModule,
+    MatTabsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+  ],
 
-    bootstrap: [AppComponent],
+  bootstrap: [AppComponent],
 
   providers: [
-    httpInterceptorProviders, 
-    AuthGuard, 
-    AuthGuardService, 
-    JwtModule, 
-    Globals]
+    httpInterceptorProviders,
+    AuthGuard,
+    AuthGuardService,
+    JwtModule,
+    Globals,
+  ],
 })
 export class AppModule {}
