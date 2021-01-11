@@ -46,4 +46,21 @@
 .img__overlay:hover {
     opacity: 1;
 }
-
+/*.break {*/
+/*    content: "\A";*/
+/*    white-space: pre;*/
+/*}*/
+.flex-row::after {
+    content: '';
+    width: 100%;
+}
+.break { /* or `:nth-child(n + 4)` */
+    order: 1;
+}
+/*.flex-row::after {*/
+/*    content: '';*/
+/*    width: 100%;*/
+/*}*/
+/*.flex-column:last-child { !* or `:nth-child(n + 4)` *!*/
+/*    order: 1;*/
+/*}*/

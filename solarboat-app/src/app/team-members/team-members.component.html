@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div  *ngFor="let member of members" class="animate-me fade-right d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-md-3 p-lg-2 pb-3 member justify-content-center">
+    <div  *ngFor="let member of members; index as i" [class.break] = " members.length>4 && i>=3 " class="animate-me fade-right d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-md-3 p-lg-2 pb-3 member justify-content-center">
         <img *ngIf="member.linkedin === 'string' " class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+member.picture+'.jpg'"/>
         <a *ngIf="member.linkedin !== 'string' " class="img" [href]="member.linkedin" target="blank" >
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
