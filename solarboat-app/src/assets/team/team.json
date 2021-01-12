@@ -10,7 +10,7 @@
       "firstName": "Szilárd",
       "lastName": "Czibere",
       "job_hu": "Csapatkapitány",
-      "job_en": "Team manager and Financial group leader",
+      "job_en": "Team leader",
       "picture": "czibere-szilard",
       "linkedin": "https://hu.linkedin.com/in/szil%C3%A1rd-czibere-861b7b185"
     },
@@ -66,8 +66,8 @@
   "electronics": {
     "name_hu": "Elektronikai csoport",
     "name_en": "Electronic group",
-    "description_hu": "Az elektronikai csoport két részegységből áll: Elektrotechnika és Informatika. Az elektronikai csoport legfontosabb feladatai a hajó energia ellátásának a biztosítása és monitorozása. Számos villamos energetikai, valamint informatikai projekt köthető a csoporthoz, mint például akkumulátor design, töltésvezérlés tervezése, vagy szenzorok közötti kommunikáció. A 2020-as versenyszezontól a csapat nagy figyelmet fordít a felhő alapú IoT technológiákban rejlő lehetőségekre is.",
-    "description_en": "The electronic group consists of two parts: Electrical Engineering and Computer Science. The most important tasks of the this group are to maintain and monitor the energy supply of the boat. The electric group deals with electrical power or software design projects, such as battery design, charge control design, or sensor-to-sensor communication. From the 2020 racing season, the team will also pay close attention to the potential of cloud-based IoT technologies.",
+    "description_hu": "Az elektronikai csoport két részegységből áll: Elektrotechnika és Informatika. Az elektronikai csoport legfontosabb feladatai a hajó energia ellátásának a biztosítása és monitorozása. Számos villamos energetikai, valamint informatikai projekt köthető a csoporthoz, mint például akkumulátor design, töltésvezérlés tervezése, szenzorok közötti kommunikáció vagy a csapat weboldalának fejlesztése és karbantartása. A 2020-as versenyszezontól a csapat nagy figyelmet fordít a felhő alapú IoT technológiákban rejlő lehetőségekre is.",
+    "description_en": "The electronic group consists of two parts: Electrical Engineering and Computer Science. The most important tasks of the this group are to maintain and monitor the energy supply of the boat. The electric group deals with electrical power or software design projects, such as battery design, charge control design, sensor-to-sensor communication or website development and maintenance. From the 2020 racing season, the team will also pay close attention to the potential of cloud-based IoT technologies.",
     "id": 0,
     "leader": {
       "id": 11,
@@ -148,6 +148,7 @@
         "firstName": "Szilárd",
         "lastName": "Czibere",
         "job_hu": "string",
+
         "job_en": "string",
         "picture": "czibere-szilard",
         "linkedin": "https://hu.linkedin.com/in/szil%C3%A1rd-czibere-861b7b185"

@@ -27,7 +27,6 @@ export class TeamMembersComponent implements OnInit {
     elements.forEach(el => {
       observer.observe(el);
     });
-    // AOS.init();
   }
 
 }
