@@ -31,7 +31,7 @@
         "job_hu": "Gazdasági vezető",
         "job_en": "Financial group leader",
         "picture": "domaniczki-viktoria",
-        "linkedin": "string"
+        "linkedin": "https://www.linkedin.com/in/vikt%C3%B3ria-domaniczki-6a8798186/"
       },
       {
         "id": 3,
@@ -76,7 +76,7 @@
       "job_hu": "string",
       "job_en": "string",
       "picture": "martini-david",
-      "linkedin": "string"
+      "linkedin": "https://www.linkedin.com/in/d%C3%A1vid-martini-a159621ab/"
     },
     "members": [
       {
@@ -91,8 +91,8 @@
       {
         "id": 13,
         "firstName": "Levente",
-        "lastName": "Ludman",
-        "picture": "ludman-levente",
+        "lastName": "Ludmann",
+        "picture": "ludmann-levente",
         "job_hu": "string",
         "job_en": "string",
         "linkedin": "string"
