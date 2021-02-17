@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
 import { NotificationsService } from "../notifications.service";
+import {Globals} from '../globals';
+
 @Component({
   selector: "app-boat-data",
   templateUrl: "./boat-data.component.html",
@@ -26,8 +28,8 @@ export class BoatDataComponent implements OnInit {
   @Input() showStatistics;
   @Input() isActive: boolean;
   @Output() isActiveChange = new EventEmitter();
-  BASE_URL = "http://localhost:8080/api/dataGroup/export";
-  EXPORT_URL = this.BASE_URL;
+  private BASE_URL = this.globals.BASE_URL;
+  EXPORT_URL = this.BASE_URL + "/api/dataGroup/export";
   show = false;
   showDetails = false;
 
@@ -41,7 +43,7 @@ export class BoatDataComponent implements OnInit {
     }
   }
 
-  constructor(private notifService: NotificationsService) {
+  constructor(private notifService: NotificationsService,  public globals: Globals) {
     this.notifService.dataCallback$.subscribe((data) => {
       this.dataCallbackFunction(data);
     });

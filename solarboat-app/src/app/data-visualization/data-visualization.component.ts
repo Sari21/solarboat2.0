@@ -11,6 +11,7 @@ import { Dates } from "../model/dates";
 import { NotificationsService } from "../notifications.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmComponent } from "../confirm/confirm.component";
+import {Globals} from '../globals';
 
 @Component({
   selector: "app-data-visualization",
@@ -32,8 +33,8 @@ export class DataVisualizationComponent implements OnInit {
   get isActive() {
     return this._isActive;
   }
-  BASE_URL = "http://localhost:8080/api/dataGroup/export";
-  EXPORT_URL = this.BASE_URL;
+  private BASE_URL = this.globals.BASE_URL;
+  EXPORT_URL = this.BASE_URL + "/api/dataGroup/export";
   data;
   show = false;
   showDetails = false;
@@ -45,7 +46,8 @@ export class DataVisualizationComponent implements OnInit {
     private dataService: BoatDataService,
     //   private notifications: NotificationsRxComponent
     private notifications: NotificationsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public globals: Globals
   ) {}
 
   ngOnInit(): void {

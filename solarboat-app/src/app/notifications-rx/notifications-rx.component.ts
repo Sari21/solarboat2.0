@@ -3,6 +3,7 @@ import {RxStomp} from "@stomp/rx-stomp";
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
 import {BoatDataComponent} from "../boat-data/boat-data.component"
+import {Globals} from '../globals';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,17 @@ import {BoatDataComponent} from "../boat-data/boat-data.component"
 })
 export class NotificationsRxComponent {
 
-  constructor(private boatDataComponent: BoatDataComponent){}
+  constructor(private boatDataComponent: BoatDataComponent, public globals: Globals){}
 
   private client: RxStomp;
-
   public notifications: string[] = [];
+  private BASE_URL = this.globals.BASE_URL;
 
   connect() {
     if (!this.client || this.client.connected) {
       this.client = new RxStomp();
       this.client.configure({
-        webSocketFactory: () => new SockJS('http://localhost:8080/notifications'),
+        webSocketFactory: () => new SockJS(this.BASE_URL + '/notifications'),
         debug: (msg: string) => console.log(msg)
       });
       this.client.activate();

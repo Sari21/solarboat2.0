@@ -3,13 +3,17 @@ import {RxStomp} from "@stomp/rx-stomp";
 import {Subject} from "rxjs/Subject"
 import * as SockJS from 'sockjs-client';
 import {map} from "rxjs/operators";
+import {Globals} from './globals';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
 
-  constructor(){}
+  private BASE_URL = this.globals.BASE_URL;
+  constructor(public globals: Globals){}
+
 
   private client: RxStomp;
   private dataCallback = new Subject<string>(); // Source
@@ -21,7 +25,7 @@ export class NotificationsService {
     if (!this.client || this.client.connected) {
       this.client = new RxStomp();
       this.client.configure({
-        webSocketFactory: () => new SockJS('http://localhost:8080/notifications'),
+        webSocketFactory: () => new SockJS(this.BASE_URL + '/notifications'),
         debug: (msg: string) => console.log(msg)
       });
       this.client.activate();
