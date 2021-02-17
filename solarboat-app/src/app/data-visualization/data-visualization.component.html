@@ -31,8 +31,8 @@
               translate>STATISTICS.options</span></a>
 
           <div *ngIf="show" class="d-flex mb-3 flex-wrap">
-            <a class="btn m-3" href="{{ BASE_URL }}"><span translate>STATISTICS.downloadAll</span></a>
-            <a class="btn m-3" href="{{ BASE_URL + '/' + selectedDate.name}}"><span translate>STATISTICS.downloadOne</span></a>
+            <a class="btn m-3" href="{{ EXPORT_URL }}"><span translate>STATISTICS.downloadAll</span></a>
+            <a class="btn m-3" href="{{ EXPORT_URL + '/' + selectedDate.name}}"><span translate>STATISTICS.downloadOne</span></a>
             <a class="btn m-3" (click)="openDeleteOneConfirmDialog(selectedDate.name)" href="javascript:void(0)">
               <span translate>STATISTICS.deleteOne</span></a>
             <a class="btn m-3" (click)="openDeleteAllConfirmDialog()" href="javascript:void(0)">
