@@ -240,9 +240,9 @@
     "teamType": 5
   },
   "mechatronics_simulation": {
-    "name_hu": "Konstrukció tervezés & Szimuláció",
+    "name_hu": "Konstrukciós tervezés & Szimuláció",
     "name_en": "Design & Simulation",
-    "description_hu": "A Konstrukció tervezés & Szimuláció csoport elsődleges feladata a gépészeti tervek megalkotása, illetve azok gyártás előtti szimulációval végzett validálása.",
+    "description_hu": "A Konstrukciós tervezés & Szimuláció csoport elsődleges feladata a gépészeti tervek megalkotása, illetve azok gyártás előtti szimulációval végzett validálása.",
     "description_en": "The Design & Simultion group is responsible for the design and simulation of mechanical components. Tasks of this group, for instance, are the design of the hull and the foils. Moreover, the required validation simulations are conducted by this team as well.",
     "id": 0,
     "leader": {
