@@ -26,13 +26,14 @@ public class NewsController {
     private final NewsService newsService;
 
     @Autowired
-    public NewsController(NewsService newsService){
+    public NewsController(NewsService newsService) {
         this.newsService = newsService;
     }
+
     @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json")
-    public News addNews( @Valid @RequestBody News news ){
-        if(news.getPicture() == null){
+    public News addNews(@Valid @RequestBody News news) {
+        if (news.getPicture() == null) {
 //            System.out.println("nincs kep");
         }
         return newsService.addNews(news);
@@ -40,11 +41,11 @@ public class NewsController {
     }
 
     @GetMapping
-    public List<News> getAllNews(){
+    public List<News> getAllNews() {
 
         Iterable<News> it = newsService.getAllNews();
         List<News> list = new ArrayList<>();
-        for(News s : it){
+        for (News s : it) {
             list.add(s);
         }
         return list;
@@ -54,22 +55,26 @@ public class NewsController {
     public Optional<News> getNewsById(@PathVariable("id") Long id) {
         return newsService.getNewsById(id);
     }
-    @GetMapping(path= "page/{pageNum}")
-    public Page<News> getPage(@PathVariable int pageNum){
+
+    @GetMapping(path = "page/{pageNum}")
+    public Page<News> getPage(@PathVariable int pageNum) {
         return newsService.getPage(pageNum, 10);
     }
-    @GetMapping(path= "mainpage")
-    public Page<News> getMainPage(){
+
+    @GetMapping(path = "mainpage")
+    public Page<News> getMainPage() {
         return newsService.getPage(0, 2);
     }
+
     @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
-    public void deleteNewsById(@PathVariable("id") Long id){
+    public void deleteNewsById(@PathVariable("id") Long id) {
         newsService.deleteNewsById(id);
     }
+
     @Secured("ROLE_ADMIN")
     @PutMapping()
-    public void updateNewsById(@Valid @RequestBody News news){
+    public void updateNewsById(@Valid @RequestBody News news) {
         newsService.updateNews(news);
     }
 }

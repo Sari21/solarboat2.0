@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -19,8 +20,8 @@ public class Team {
     @NotNull
     @Size(min=2, max=30)
     private String name_en;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Member> members;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Member> members;
     @OneToOne(cascade = CascadeType.ALL)
     private Member leader;
     @NotNull
@@ -34,7 +35,7 @@ public class Team {
 
 
     public Team(@JsonProperty("name_hu") String name_hu, @JsonProperty("name_en") String name_en,
-                @JsonProperty("members") List<Member> members, @JsonProperty("leader") Member leader,
+                @JsonProperty("members") Set<Member> members, @JsonProperty("leader") Member leader,
                 @JsonProperty("description_hu") String description_hu, @JsonProperty("description_en") String description_en,
                 @JsonProperty("teamType") long teamType) {
 
@@ -80,11 +81,11 @@ public class Team {
         this.name_en = name_en;
     }
 
-    public List<Member> getMembers() {
+    public Set<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(Set<Member> members) {
         this.members = members;
     }
 

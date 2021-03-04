@@ -10,18 +10,17 @@ import javax.validation.constraints.Size;
 @Table
 public class Member {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min=1, max=20)
+    @Size(min = 1, max = 20)
     private String firstName;
     @NotNull
-    @Size(min=1, max=20)
+    @Size(min = 1, max = 20)
     private String lastName;
-    @NotNull
-    @Size(min=1, max=50)
+    @Size(min = 1, max = 50)
     private String job_hu;
-    @Size(min=1, max=50)
+    @Size(min = 1, max = 50)
     private String job_en;
     @NotNull
     private String picture;
