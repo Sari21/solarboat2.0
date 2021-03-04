@@ -51,6 +51,7 @@ import { ConfirmComponent } from "./confirm/confirm.component";
 import { CompassComponent } from "./compass/compass.component";
 import { MileageComponent } from "./mileage/mileage.component";
 import { WavesComponent } from "./waves/waves.component";
+import { NgxDropzoneModule } from 'ngx-dropzone';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -106,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTabsModule,
     MatDialogModule,
     ReactiveFormsModule,
+    NgxDropzoneModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

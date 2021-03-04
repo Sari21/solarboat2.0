@@ -33,7 +33,9 @@ export class SponsorsComponent implements OnInit {
   failed = false;
   errorMessage: string;
   fileToUpload: File = null;
+  files: File[] = [];
   types = ["MAIN", "TOP", "OTHER", "PARTNER", "UNI"];
+
   public authority: string;
   public roles: string[];
   getSponsores() {
@@ -81,12 +83,12 @@ export class SponsorsComponent implements OnInit {
       }
     );
   }
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    this.newSponsor.picture = files.item(0).name;
-  }
+  // handleFileInput(files: FileList) {
+  //   this.fileToUpload = this.files[0];
+  //   this.newSponsor.picture = this.files[0].name;
+  // }
   uploadFileToActivity() {
-    this.pictureService.postSponsorLogo(this.fileToUpload).subscribe(
+    this.pictureService.postSponsorLogo(this.files[0]).subscribe(
       (data) => {
         // do something, if upload success
       },
@@ -122,6 +124,17 @@ export class SponsorsComponent implements OnInit {
     ) {
       this.delete(id);
     }
+  }
+  onSelect(event) {
+    console.log(event);
+    if(this.files.length > 0){
+      this.files = [];
+    }
+    this.files.push(...event.addedFiles);
+  }
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
   checkAuth() {
     this.authority = undefined;
