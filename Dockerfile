@@ -22,6 +22,8 @@ COPY solarboat/src src
 COPY --from=frontend-build /usr/src/app/dist src/main/resources/public/
 RUN /etc/init.d/mysql start && mvn -f pom.xml package
 
+VOLUME /var/www/html/assets/images/uploads
+
 EXPOSE 8080
 
 VOLUME /var/lib/mysql
