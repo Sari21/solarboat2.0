@@ -86,7 +86,7 @@ export class NewsPreviewComponent implements OnInit {
 
     delete(id: number) {
         this.onRemove.emit(this.news);
-        //TODO: kép törlése
+        // TODO: kép törlése
         this.apiService.deleteNews(id);
     }
 

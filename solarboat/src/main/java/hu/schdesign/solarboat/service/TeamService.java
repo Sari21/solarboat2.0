@@ -20,9 +20,9 @@ public class TeamService {
         this.memberRepository = memberRepository;
     }
 
-    public Team addTeam(Team team) {
+    /*public Team addTeam(Team team) {
         return teamRepository.save(team);
-    }
+    }*/
 
     public Iterable<Team> getAllTeams() {
         return teamRepository.findAll();
@@ -69,6 +69,16 @@ public class TeamService {
         return null;
     }
 
+    public Team updateTitle(Long id, String name_hu, String name_en) {
+        Optional<Team> optTeam = teamRepository.findById(id);
+        if (optTeam.isPresent()) {
+            optTeam.get().setName_en(name_en);
+            optTeam.get().setName_hu(name_hu);
+            return teamRepository.save(optTeam.get());
+        }
+        return null;
+    }
+
     public Team updateLeader(Long teamId, Long memberId) {
         Optional<Member> optMemb = memberRepository.findById(memberId);
         if (optMemb.isPresent()) {
@@ -105,4 +115,6 @@ public class TeamService {
             this.deleteMember(entry.getKey(),entry.getValue());
         }
     }
+
+
 }
