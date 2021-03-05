@@ -6,6 +6,7 @@ import hu.schdesign.solarboat.model.Team;
 import hu.schdesign.solarboat.service.MemberService;
 import hu.schdesign.solarboat.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,11 +25,6 @@ public class MemberController {
         this.memberService = memberService;
         this.teamService = teamService;
     }
-//    GET /allmember
-//    GET /member/{id}
-//    POST /member
-//    PUT /member/{id} - keresztnév, vezetéknév, kép, linkedin módosítása egyben és  tudni kell külön módosítani a leírást
-//    DELETE /member/{id}
 
     @GetMapping
     public List<Member> getAllMembers() {
@@ -45,22 +41,21 @@ public class MemberController {
         return memberService.getMemberById(id);
     }
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public Member addMember(@RequestBody Member member) {
         return memberService.addMember(member);
     }
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @PutMapping(path = "{id}")
     public Member updateMember(@RequestBody Member member) {
         return memberService.updateMember(member);
     }
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
     public void deleteMemberById(@PathVariable("id") Long id) {
-        //
         teamService.deleteMemberFromEveryTeamIfNotLeader(id);
         memberService.deleteMemberById(id);
     }
