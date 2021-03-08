@@ -1,1 +1,19 @@
-<p>team-editmembers works!</p>
+<div  class="d-flex flex-row mb-3 flex-wrap members">
+    <div  class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-3 align-self-center">
+        <mat-icon class="add-icon align-self-center">add_circle</mat-icon>
+    </div>
+    <div  *ngFor="let member of members; index as i" class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-3 pb-3">
+        <img *ngIf="member.linkedin === null " class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+member.picture"/>
+        <a *ngIf="member.linkedin !== null " class="img" [href]="member.linkedin" target="blank" >
+            <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
+            <img  [src]="'../../assets/members/' + member.picture"/>
+        </a>
+
+        <div translate class="text-center name" [translateParams]="{ member_lastName: member.lastName, member_firstName: member.firstName}">
+            MEMBERS.member_first
+            <br />
+            MEMBERS.member_last
+        </div>
+    </div>
+
+</div>

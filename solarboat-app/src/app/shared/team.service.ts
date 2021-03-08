@@ -19,4 +19,8 @@ export class TeamService {
     getTeams() {
         return this.http.get(this.BASE_URL + '/team');
     }
+
+  getMembers() {
+    return this.http.get(this.BASE_URL + '/member');
+  }
 }

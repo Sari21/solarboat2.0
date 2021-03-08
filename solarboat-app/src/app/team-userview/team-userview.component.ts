@@ -11,8 +11,6 @@ import {News} from '../model/news';
   styleUrls: ['./team-userview.component.css']
 })
 export class TeamUserviewComponent implements OnInit {
-  teams: Team[] = [];
-
   leaders: Team;
   electronics: Team;
   economics: Team;
