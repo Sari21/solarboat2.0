@@ -3,7 +3,7 @@
         <img *ngIf="leader.linkedin === 'string'" class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+leader.picture+'.jpg'"/>
         <a *ngIf="leader.linkedin !== 'string' " class="img" [href]="leader.linkedin" target="blank" >
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
-            <img  [src]="'../../assets/members/'+leader.picture+'.jpg'"/>
+            <img  [src]="'../../assets/members/'+leader.picture"/>
         </a>
         <div translate class="text-center name" [translateParams]="{ leader_lastName: leader.lastName, leader_firstName: leader.firstName}">
             MEMBERS.leader_first
@@ -20,7 +20,7 @@
         <img *ngIf="member.linkedin === 'string' " class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+member.picture+'.jpg'"/>
         <a *ngIf="member.linkedin !== 'string' " class="img" [href]="member.linkedin" target="blank" >
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
-            <img  [src]="'../../assets/members/' + member.picture + '.jpg'"/>
+            <img  [src]="'../../assets/members/' + member.picture"/>
         </a>
 
         <div translate class="text-center name" [translateParams]="{ member_lastName: member.lastName, member_firstName: member.firstName}">

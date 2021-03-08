@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Team} from '../model/team';
 import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
-import * as data from '../../assets/team/team.json';
+import {News} from '../model/news';
+// import * as data from '../../assets/team/team.json';
 
 @Component({
   selector: 'app-team-userview',
@@ -10,7 +11,7 @@ import * as data from '../../assets/team/team.json';
   styleUrls: ['./team-userview.component.css']
 })
 export class TeamUserviewComponent implements OnInit {
-  //teams: Team[] = [];
+  teams: Team[] = [];
 
   leaders: Team;
   electronics: Team;
@@ -27,43 +28,55 @@ export class TeamUserviewComponent implements OnInit {
   }
 
   public getTeams() {
-    //var data = this.apiService.getTeams();
-    /* this.apiService.getTeams().subscribe(
+    // this.apiService.getTeams().subscribe(
+    //     (res) => {
+    //       // tslint:disable-next-line:prefer-const
+    //       let data: any = res;
+    //       console.log(data);
+    //       <Team[]> data.content.forEach((element) => {
+    //         this.teams.push(element);
+    //       });
+    //     },
+    //     (err) => {
+    //       alert('get error');
+    //     }
+    // );
+     this.apiService.getTeams().subscribe(
          (res) => {
-           var data: any = res;
-          // console.log(data);
+           let data: any = res;
+           console.log(data);
            <Team[]> data.forEach((element) => {
             // console.log(element.members);
-             if (element.teamType == 1 ) {
+             if (element.teamType === 1 ) {
                this.leaders = element;
              }
-             if (element.teamType == 2 ) {
+             if (element.teamType === 2 ) {
                this.electronics = element;
              }
-             if (element.teamType == 3 ) {
+             if (element.teamType === 3 ) {
                this.economics = element;
              }
-             if (element.teamType == 4 ) {
+             if (element.teamType === 4 ) {
                this.mechatronics = element;
              }
-             if (element.teamType == 5 ) {
-               this.mechatronics_material = element;
+             if (element.teamType === 5 ) {
+               this.mechatronicsMaterial = element;
              }
-             if (element.teamType == 6 ) {
-               this.mechatronics_simulation = element;
+             if (element.teamType === 6 ) {
+               this.mechatronicsSimulation = element;
              }
            });
          },
          (err) => {
            alert('get error');
          }
-     );*/
-    this.leaders = data.leaders;
-    this.electronics = data.electronics;
-    this.economics = data.economics;
-    this.mechatronics = data.mechatronics;
-    this.mechatronicsMaterial = data.mechatronics_material;
-    this.mechatronicsSimulation = data.mechatronics_simulation;
+     );
+    // this.leaders = data.leaders;
+    // this.electronics = data.electronics;
+    // this.economics = data.economics;
+    // this.mechatronics = data.mechatronics;
+    // this.mechatronicsMaterial = data.mechatronics_material;
+    // this.mechatronicsSimulation = data.mechatronics_simulation;
   }
 
 }
