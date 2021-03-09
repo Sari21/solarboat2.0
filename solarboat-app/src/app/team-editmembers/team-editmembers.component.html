@@ -1,19 +1,153 @@
-<div  class="d-flex flex-row mb-3 flex-wrap members">
-    <div  class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-3 align-self-center">
-        <mat-icon class="add-icon align-self-center">add_circle</mat-icon>
+<div class="d-flex flex-row mb-3 flex-wrap members">
+    <div class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-3 align-self-center">
+        <mat-icon (click)="openAddMemberForm(AddMember)" class="add-icon align-self-center">add_circle</mat-icon>
     </div>
-    <div  *ngFor="let member of members; index as i" class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 p-3 pb-3">
-        <img *ngIf="member.linkedin === null " class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex" [src]="'../../assets/members/'+member.picture"/>
-        <a *ngIf="member.linkedin !== null " class="img" [href]="member.linkedin" target="blank" >
+    <div *ngFor="let member of members; index as i"
+         class="d-flex flex-column col-lg-2 col-sm-4 col-md-4 col-6 pl-3 pr-3 pt-3 mb-3">
+        <img *ngIf="member.linkedin === null " class="rounded-circle p-0 img-fluid flex-grow-0 flex-shrink-0 d-flex"
+             [src]="'../../assets/members/'+member.picture"/>
+        <a *ngIf="member.linkedin !== null " class="img" [href]="member.linkedin" target="blank">
             <div class="img__overlay"><i class="fab fa-linkedin-in left"></i></div>
-            <img  [src]="'../../assets/members/' + member.picture"/>
+            <img [src]="'../../assets/members/' + member.picture"/>
         </a>
 
-        <div translate class="text-center name" [translateParams]="{ member_lastName: member.lastName, member_firstName: member.firstName}">
+        <div translate class="text-center name" (click)="openEditMemberForm(EditMember, member)"
+             [translateParams]="{ member_lastName: member.lastName, member_firstName: member.firstName}">
             MEMBERS.member_first
-            <br />
+            <br/>
             MEMBERS.member_last
         </div>
     </div>
 
 </div>
+
+<ng-template #EditMember let-modal>
+    <div class="modal-header">
+        <h2 class="title mb-2 mt-4">Csapattag módosítása</h2>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body pb-5">
+        <form #EditForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-12">
+                    <div class="form-group">
+                        <label for="lastName">Vezetéknév</label>
+                        <input type="text" class="form-control" id="lastName"
+                               required
+                               [(ngModel)]="form.lastName" name="lastName"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-12">
+                    <div class="form-group">
+                        <label for="firstName">Keresztnév</label>
+                        <input type="text" class="form-control" id="firstName"
+                               required
+                               [(ngModel)]="form.firstName" name="firstName"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                    <div class="form-group">
+                        <label class="col-12" for="file">Kép</label>
+                        <input type="file"
+                               id="file"
+                               name="picture"
+                               (change)="handleFileInput($event.target.files)">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                    <div class="form-group">
+                        <label class="col-12" for="linkedin">Linkedin link</label>
+                        <input id="linkedin"
+                               type="text"
+                               class="form-control"
+                               [(ngModel)]="form.linkedin" name="linkedin"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                </div>
+
+                <div class="row justify-content-end pr-2">
+                    <a class="btn" (click)="onSubmit(EditForm)" href="javascript:void(0)"
+                       [ngClass]="{'disabled': !EditForm.form.valid }"><span>Feltöltés</span></a>
+                    <div [hidden]="!failed"
+                         class="alert alert-danger mt-3">
+                        {{errorMessage}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #AddMember let-modal>
+    <div class="modal-header">
+        <h2 class="title mb-2 mt-4">Csapattag hozzáadása</h2>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body pb-5">
+        <form #AddForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-12">
+                    <div class="form-group">
+                        <label for="lastName1">Vezetéknév</label>
+                        <input type="text" class="form-control" id="lastName1"
+                               required
+                               [(ngModel)]="form.lastName" name="lastName1"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-12">
+                    <div class="form-group">
+                        <label for="firstName1">Keresztnév</label>
+                        <input type="text" class="form-control" id="firstName1"
+                               required
+                               [(ngModel)]="form.firstName" name="firstName1"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                    <div class="form-group">
+                        <label class="col-12" for="file">Kép</label>
+                        <input type="file"
+                               required
+                               id="file"
+                               name="picture"
+                               (change)="handleFileInput($event.target.files)">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-12 pb-2">
+
+                    <div class="form-group">
+                        <label class="col-12" for="linkedin1">Linkedin link</label>
+                        <input id="linkedin1"
+                               type="text"
+                               class="form-control"
+                               [(ngModel)]="form.linkedin" name="linkedin1"
+                               [ngClass]="{'failed': failed }">
+                    </div>
+                </div>
+
+                <div class="row justify-content-end pr-2">
+                    <a class="btn" (click)="onSubmitAddForm(AddForm)" href="javascript:void(0)"
+                       [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
+                    <div [hidden]="!failed"
+                         class="alert alert-danger mt-3">
+                        {{errorMessage}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+

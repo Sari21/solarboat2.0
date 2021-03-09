@@ -6,6 +6,7 @@ import {Achievement} from '../model/achievement';
 import {GalleryPicture} from '../model/gallery-picture';
 import {Globals} from '../globals';
 import * as team from '../../assets/team/team.json';
+import {Member} from '../model/member';
 
 @Injectable({
     providedIn: 'root',
@@ -20,7 +21,17 @@ export class TeamService {
         return this.http.get(this.BASE_URL + '/team');
     }
 
-  getMembers() {
-    return this.http.get(this.BASE_URL + '/member');
-  }
+    getMembers() {
+        return this.http.get(this.BASE_URL + '/member');
+    }
+
+    updateMember(member: Member) {
+        return this.http
+            .put(this.globals.BASE_URL + '/api/member/' + member.id, member);
+    }
+
+    addMember(member: any): Observable<any> {
+        return this.http
+            .post(this.globals.BASE_URL + '/api/member', member);
+    }
 }

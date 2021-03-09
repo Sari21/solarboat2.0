@@ -1,8 +1,8 @@
-<div class="team-boss">
+<div *ngIf="leaders" class="team-boss">
     <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
-        <div class="jumbotron col-12">
+        <div  class="jumbotron col-12">
             <h1 translate class="title pb-4"
-                [translateParams]="{ management_hu: leaders.name_hu, management_en: leaders.name_en}">
+                [translateParams]="{ management_hu: leaders?.name_hu, management_en: leaders?.name_en}">
                 MEMBERS.management</h1>
             <app-team-members *ngIf="leaders.members"
                               [members]="leaders.members"
@@ -13,11 +13,11 @@
         </div>
     </div>
 </div>
-<div class="team-electr">
+<div *ngIf="electronics" class="team-electr">
     <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
-        <div class="jumbotron col-12">
+        <div   class="jumbotron col-12">
             <h1 translate class="title pb-4"
-                [translateParams]="{ electronic_hu: electronics.name_hu, electronic_en: electronics.name_en}">
+                [translateParams]="{ electronic_hu: electronics?.name_hu, electronic_en: electronics?.name_en}">
                 MEMBERS.electronic</h1>
             <div class="row">
                 <div class="col- load-more pb-lg-5 pb-md-5 pb-1 pl-3">
@@ -42,11 +42,11 @@
         </div>
     </div>
 </div>
-<div class="team-econ">
+<div *ngIf="economics" class="team-econ">
     <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
-        <div class="jumbotron col-12">
+        <div  class="jumbotron col-12">
             <h1 translate class="title pb-4"
-                [translateParams]="{ economic_hu: economics.name_hu, economic_en: economics.name_en}">
+                [translateParams]="{ economic_hu: economics?.name_hu, economic_en: economics?.name_en}">
                 MEMBERS.economic</h1>
             <div class="row">
                 <div class="load-more pb-lg-5 pb-md-5 pb-1 pl-3">
@@ -69,11 +69,11 @@
         </div>
     </div>
 </div>
-<div class="team-mech">
+<div *ngIf="mechatronicsMaterial && mechatronicsSimulation" class="team-mech">
     <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4"
-                [translateParams]="{ mechanical_hu: mechatronics.name_hu, mechanical_en: mechatronics.name_en}">
+                [translateParams]="{ mechanical_hu: mechatronics?.name_hu, mechanical_en: mechatronics?.name_en}">
                 MEMBERS.mechanical</h1>
             <div class="row">
                 <div class="col- load-more pb-5 pl-3">
@@ -97,7 +97,7 @@
             </div>
 
             <h2 translate class="title subtitle pb-lg-4 pb-md-4 pb-1 "
-                [translateParams]="{ material_hu: mechatronicsMaterial.name_hu, material_en: mechatronicsMaterial.name_en}">
+                [translateParams]="{ material_hu: mechatronicsMaterial?.name_hu, material_en: mechatronicsMaterial?.name_en}">
                 MEMBERS.material</h2>
             <app-team-members *ngIf="mechatronicsMaterial.members"
                               [members]="mechatronicsMaterial.members"
@@ -107,7 +107,7 @@
 
 
             <h2 translate class="title subtitle pb-lg-4 pb-md-4 pb-1"
-                [translateParams]="{ simulation_hu: mechatronicsSimulation.name_hu, simulation_en: mechatronicsSimulation.name_en}">
+                [translateParams]="{ simulation_hu: mechatronicsSimulation?.name_hu, simulation_en: mechatronicsSimulation?.name_en}">
                 MEMBERS.simulation</h2>
             <app-team-members *ngIf="mechatronicsSimulation.members"
                               [members]="mechatronicsSimulation.members"

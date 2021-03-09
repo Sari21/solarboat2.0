@@ -5,7 +5,7 @@
         <div class="jumbotron col-12">
             <h1 translate class="title pb-4">TEAM.team</h1>
             <div class="p-3"></div>
-            <mat-tab-group *ngIf="authority == 'admin'" mat-align-tabs="start">
+            <mat-tab-group *ngIf="authority == 'admin'" mat-align-tabs="start" (selectedTabChange)="onTabChanged($event)">
                 <mat-tab label="{{'TEAM.userview' | translate}}" class="pt-3">
                     <app-team-userview></app-team-userview>
                 </mat-tab>

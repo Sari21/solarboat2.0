@@ -36,7 +36,7 @@ export class NewsService {
 
   addNews(o: Object): Observable<any> {
     return this.http
-        .post(this.globals.BASE_URL + '/api/news', o)
+        .post(this.globals.BASE_URL + '/api/news', o);
   }
 
 }
