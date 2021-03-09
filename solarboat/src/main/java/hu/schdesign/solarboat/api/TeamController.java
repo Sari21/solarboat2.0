@@ -52,17 +52,17 @@ public class TeamController {
         return this.teamService.deleteMember(teamId, memberId);
     }
 
-    //@Secured("ROLE_ADMIN")
-    @PutMapping(path = "{teamId}/description")
-    public Team updateDescription(@PathVariable("teamId") Long teamId, @Valid @RequestBody TeamTexts texts) {
-        return this.teamService.updateDescription(teamId, texts.getText_hu(), texts.getText_en());
-    }
+//    //@Secured("ROLE_ADMIN")
+//    @PutMapping(path = "{teamId}/description")
+//    public Team updateDescription(@PathVariable("teamId") Long teamId, @Valid @RequestBody TeamTexts texts) {
+//        return this.teamService.updateDescription(teamId, texts.getText_hu(), texts.getText_en());
+//    }
 
-    //@Secured("ROLE_ADMIN")
-    @PutMapping(path = "{teamId}/title")
-    public Team updateTitle(@PathVariable("teamId") Long teamId, @Valid @RequestBody TeamTexts texts) {
-        return this.teamService.updateTitle(teamId, texts.getText_hu(), texts.getText_en());
-    }
+//    //@Secured("ROLE_ADMIN")
+//    @PutMapping(path = "{teamId}/title")
+//    public Team updateTitle(@PathVariable("teamId") Long teamId, @Valid @RequestBody TeamTexts texts) {
+//        return this.teamService.updateTitle(teamId, texts.getText_hu(), texts.getText_en());
+//    }
 
     //@Secured("ROLE_ADMIN")
     @PutMapping(path = "{teamId}/leader/{memberId}")

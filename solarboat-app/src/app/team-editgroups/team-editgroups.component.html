@@ -4,11 +4,27 @@
             <h1 translate class="title pb-4"
                 [translateParams]="{ management_hu: leaders?.name_hu, management_en: leaders?.name_en}">
                 MEMBERS.management</h1>
+            <div translate class="section_title pb-2">
+                TEAM.nameOfTeam
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+<!--                    <form>-->
+<!--                        <mat-form-field>-->
+<!--                            <input matInput name="job_hu" type="text" placeholder="Feladatkör magyarul"-->
+<!--                                   [(ngModel)]="leaders.name_hu" required (change)="changedTeamName(leaders.id)">-->
+<!--                            <mat-error>Kötelező mező</mat-error>-->
+<!--                        </mat-form-field>-->
+<!--                    </form>-->
+                </div>
+            </div>
             <app-team-editgroup-panel *ngIf="leaders.members"
                                       [members]="leaders.members"
                                       [leader]="leaders.leader"
                                       [isLeader]="true"
                                       [teamId]="leaders.id"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, leaders.id)"
                                       class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-editgroup-panel>
 
@@ -35,7 +51,8 @@
                                       [members]="electronics.members"
                                       [leader]="electronics.leader"
                                       [teamId]="electronics.id"
-                                      (onRemove)="onRemoveMember($event)"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, electronics.id)"
                                       class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-editgroup-panel>
 
@@ -61,7 +78,8 @@
                                       [members]="economics.members"
                                       [leader]="economics.leader"
                                       [teamId]="economics.id"
-                                      (onRemove)="onRemoveMember($event)"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, economics.id)"
                                       class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-editgroup-panel>
         </div>
@@ -97,7 +115,8 @@
                                       [members]="mechatronicsMaterial.members"
                                       [leader]="mechatronicsMaterial.leader"
                                       [teamId]="mechatronicsMaterial.id"
-                                      (onRemove)="onRemoveMember($event)"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, mechatronicsMaterial.id)"
                                       class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-editgroup-panel>
 
@@ -109,7 +128,8 @@
                                       [members]="mechatronicsSimulation.members"
                                       [leader]="mechatronicsSimulation.leader"
                                       [teamId]="mechatronicsSimulation.id"
-                                      (onRemove)="onRemoveMember($event)"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, mechatronicsSimulation.id)"
                                       class="col-lg-6 col-md-6 col-12 col-sm-12"
             ></app-team-editgroup-panel>
 

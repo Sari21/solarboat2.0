@@ -6,6 +6,7 @@ import {map, startWith} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
 import {News} from '../model/news';
+import {MatSelectChange} from '@angular/material/select';
 
 interface Food {
     value: string;
@@ -22,10 +23,11 @@ export class TeamEditgroupPanelComponent implements OnInit {
     @Input() leader: Member;
     @Input() isLeader: boolean;
     @Input() teamId: number;
-    @Output() onRemove = new EventEmitter();
+    @Output() onChange = new EventEmitter<number>();
+    @Output() onChangedLeaderOfTeam = new EventEmitter<number>();
     allmember: Member[];
     selected = null;
-    newMemberId: number = null;
+
     constructor(private http: HttpClient, private apiService: TeamService) {
     }
 
@@ -51,9 +53,25 @@ export class TeamEditgroupPanelComponent implements OnInit {
     }
 
     deleteMemberFromTeam(memberId: number) {
-        this.apiService.removeMemberFromTeam( memberId, this.teamId).subscribe((data) => {
-            console.log(data);
-            this.onRemove.emit();
+        this.apiService.removeMemberFromTeam(memberId, this.teamId).subscribe((data) => {
+            this.onChange.emit(memberId);
         });
+    }
+
+    addMember($event: MatSelectChange) {
+        this.apiService.addMemberToTeam($event.value, this.teamId).subscribe((data) => {
+            this.onChange.emit($event.value);
+        });
+    }
+
+    changedMember(member: Member) {
+        this.apiService.updateMember(member).subscribe((data) => {
+            // this.onChange.emit($event.value);
+        });
+    }
+
+    changeLeader($event: MatSelectChange) {
+        console.log($event);
+        this.onChangedLeaderOfTeam.emit($event.value);
     }
 }
