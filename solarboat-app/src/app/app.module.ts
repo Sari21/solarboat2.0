@@ -54,6 +54,11 @@ import { WavesComponent } from "./waves/waves.component";
 import { TeamUserviewComponent } from './team-userview/team-userview.component';
 import { TeamEditmembersComponent } from './team-editmembers/team-editmembers.component';
 import { TeamEditgroupsComponent } from './team-editgroups/team-editgroups.component';
+import { TeamEditgroupPanelComponent } from './team-editgroup-panel/team-editgroup-panel.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -92,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TeamUserviewComponent,
     TeamEditmembersComponent,
     TeamEditgroupsComponent,
+    TeamEditgroupPanelComponent,
   ],
   // tslint:disable-next-line:max-line-length
   imports: [
@@ -119,6 +125,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
 
   bootstrap: [AppComponent],

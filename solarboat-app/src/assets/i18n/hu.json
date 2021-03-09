@@ -59,7 +59,9 @@
     "team":"Csapatunk",
     "userview": "Felhasználói nézet",
     "editmembers": "Csapattagok kezelése",
-    "editteams": "Csoportok módosítása"
+    "editteams": "Csoportok módosítása",
+    "leader": "Csapat vezetője",
+    "members": "Csapattagok"
   },
   "MEMBERS":{
     "management":"{{management_hu}}",

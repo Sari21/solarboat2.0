@@ -73,11 +73,17 @@
                 </div>
 
                 <div class="row justify-content-end pr-2">
-                    <a class="btn" (click)="onSubmit(EditForm)" href="javascript:void(0)"
-                       [ngClass]="{'disabled': !EditForm.form.valid }"><span>Feltöltés</span></a>
-                    <div [hidden]="!failed"
-                         class="alert alert-danger mt-3">
-                        {{errorMessage}}
+                    <div class="column">
+                        <a class="btn" (click)="onSubmit(EditForm)" href="javascript:void(0)"
+                           [ngClass]="{'disabled': !EditForm.form.valid }"><span>Feltöltés</span></a>
+                        <div [hidden]="!failed"
+                             class="alert alert-danger mt-3">
+                            {{errorMessage}}
+                        </div>
+                    </div>
+                    <div class="column">
+                        <a class="btn" (click)="deleteMember(form.id)" href="javascript:void(0)">
+                            <span>Tag törlése</span></a>
                     </div>
                 </div>
             </div>

@@ -59,7 +59,9 @@
     "team":"Our team",
     "userview": "User view",
     "editmembers": "Edit members",
-    "editteams": "Edit groups"
+    "editteams": "Edit groups",
+    "leader": "Team leader",
+    "members": "Members"
   },
   "MEMBERS":{
     "management":"{{management_en}}",

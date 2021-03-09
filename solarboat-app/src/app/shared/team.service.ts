@@ -34,4 +34,14 @@ export class TeamService {
         return this.http
             .post(this.globals.BASE_URL + '/api/member', member);
     }
+
+    removeMemberFromTeam(memberId: number, teamId: number) {
+       return this.http
+            .delete(this.globals.BASE_URL + '/api/team/' + teamId + '/members/' + memberId);
+    }
+
+    deleteMember(memberId: any) {
+        return this.http
+            .delete(this.globals.BASE_URL + '/api/member/' + memberId);
+    }
 }

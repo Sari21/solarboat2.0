@@ -94,4 +94,12 @@ export class TeamEditmembersComponent implements OnInit {
     }
 
 
+    deleteMember(id: any) {
+        this.apiService.deleteMember(id).subscribe((data) => {
+            console.log(data);
+            this.getMembers();
+        });
+        this.modalService.dismissAll('put');
+        this.form = null;
+    }
 }
