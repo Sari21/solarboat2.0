@@ -61,7 +61,9 @@
     "editmembers": "Csapattagok kezelése",
     "editteams": "Csoportok módosítása",
     "leader": "Csapat vezetője",
-    "members": "Csapattagok"
+    "members": "Csapattagok",
+    "nameOfTeam": "Csapat neve",
+    "descriptionOfTeam": "Csapat leírása"
   },
   "MEMBERS":{
     "management":"{{management_hu}}",

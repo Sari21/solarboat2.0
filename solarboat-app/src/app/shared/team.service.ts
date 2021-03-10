@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Globals} from '../globals';
 import {Member} from '../model/member';
+import {TeamTexts} from "../model/team-texts";
 
 @Injectable({
     providedIn: 'root',
@@ -49,5 +50,15 @@ export class TeamService {
     updateLeaderOfTeam(memberId: number, teamId: number) {
         return this.http
             .put(this.globals.BASE_URL + '/api/team/' + teamId + '/leader/' + memberId, null);
+    }
+
+    updateDescriptionOfTeam(teamId: any, texts: TeamTexts) {
+        return this.http
+            .put(this.globals.BASE_URL + '/api/team/' + teamId + '/description', texts);
+    }
+
+    updateNameOfTeam(teamId: any, texts: TeamTexts) {
+        return this.http
+            .put(this.globals.BASE_URL + '/api/team/' + teamId + '/name', texts);
     }
 }

@@ -61,7 +61,9 @@
     "editmembers": "Edit members",
     "editteams": "Edit groups",
     "leader": "Team leader",
-    "members": "Members"
+    "members": "Members",
+    "nameOfTeam": "Name of team",
+    "descriptionOfTeam": "Description of team"
   },
   "MEMBERS":{
     "management":"{{management_en}}",

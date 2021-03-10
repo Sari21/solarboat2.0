@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Team} from '../model/team';
 import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
+import {TeamTexts} from "../model/team-texts";
 
 @Component({
     selector: 'app-team-editgroups',
@@ -17,6 +18,7 @@ export class TeamEditgroupsComponent implements OnInit {
     mechatronicsMaterial: Team;
     mechatronicsSimulation: Team;
 
+
     constructor(private http: HttpClient, private apiService: TeamService) {
     }
 
@@ -28,7 +30,7 @@ export class TeamEditgroupsComponent implements OnInit {
         this.apiService.getTeams().subscribe(
             (res) => {
                 let data: any = res;
-                <Team[]> data.forEach((element) => {
+                <Team[]>data.forEach((element) => {
                     if (element.teamType === 1) {
                         this.leaders = element;
                     }
@@ -62,6 +64,18 @@ export class TeamEditgroupsComponent implements OnInit {
     onChangedLeaderOfTeam(memberId: number, teamId: number) {
         this.apiService.updateLeaderOfTeam(memberId, teamId).subscribe((data) => {
             this.ngOnInit();
+        });
+    }
+
+    changedTeamDescription(team: Team) {
+        const texts = new TeamTexts(team.description_hu, team.description_en);
+        this.apiService.updateDescriptionOfTeam(team.id, texts).subscribe((data) => {
+        });
+    }
+
+    changedTeamName(team: Team) {
+        const texts = new TeamTexts( team.name_hu, team.name_en);
+        this.apiService.updateNameOfTeam(team.id, texts).subscribe((data) => {
         });
     }
 }
