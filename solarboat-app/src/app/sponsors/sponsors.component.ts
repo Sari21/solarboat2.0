@@ -131,6 +131,8 @@ export class SponsorsComponent implements OnInit {
       this.files = [];
     }
     this.files.push(...event.addedFiles);
+    this.newSponsor.picture = this.files[0].name;
+    console.log(this.newSponsor);
   }
   onRemove(event) {
     console.log(event);
