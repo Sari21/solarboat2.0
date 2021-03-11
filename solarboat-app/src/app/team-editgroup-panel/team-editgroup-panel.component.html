@@ -1,0 +1,100 @@
+<div class="members">
+    <div translate class="section_title pb-2">
+        TEAM.leader
+    </div>
+    <div class="leader d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column align-self-center ">
+            <form>
+                <mat-form-field appearance="fill">
+                    <mat-label>Név</mat-label>
+                    <mat-select [(value)]="leader.id" (selectionChange)="changeLeader($event)">
+                        <mat-option *ngFor="let member of allmember" [value]="member.id">
+                            {{member.lastName + ' ' + member.firstName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <div *ngIf="isLeader" class="d-flex flex-column align-self-center">
+            <form>
+                <mat-form-field>
+                    <input matInput name="job_hu" type="text" placeholder="Feladatkör magyarul"
+                           [(ngModel)]="leader.job_hu" required (change)="changedMember(leader)">
+                    <mat-error>Kötelező mező</mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div *ngIf="isLeader" class="d-flex flex-column align-self-center pr-5">
+            <form>
+                <mat-form-field>
+                    <input matInput name="job_hu" type="text" placeholder="Feladatkör angolul"
+                           [(ngModel)]="leader.job_en" required (change)="changedMember(leader)">
+                    <mat-error>Kötelező mező</mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+
+    <div translate class="section_title pb-2">
+        TEAM.members
+    </div>
+    <div *ngFor="let member of members; index as i" class="members d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column align-self-center ">
+            <div class="d-flex flex-row justify-content-between ">
+                <div class="d-flex flex-column align-self-center ">
+                    <form>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Név</mat-label>
+                            <mat-select [(value)]="member.id">
+                                <mat-option *ngFor="let memberOption of allmember" [value]="memberOption.id">
+                                    {{memberOption.lastName + ' ' + memberOption.firstName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center pl-4">
+                    <mat-icon label="Tag eltávolítása" (click)="deleteMemberFromTeam(member.id)"
+                              class="add-icon align-self-center">remove_circle
+                    </mat-icon>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isLeader" class="d-flex flex-column align-self-center">
+            <form>
+                <mat-form-field>
+                    <input matInput name="job_hu" type="text" placeholder="Feladatkör magyarul"
+                           [(ngModel)]="member.job_hu" required (change)="changedMember(member)">
+                    <mat-error>Kötelező mező</mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div *ngIf="isLeader" class="d-flex flex-column align-self-center pr-5">
+            <form>
+                <mat-form-field>
+                    <input matInput name="job_hu" type="text" placeholder="Feladatkör angolul"
+                           [(ngModel)]="member.job_en" required (change)="changedMember(member)">
+                    <mat-error>Kötelező mező</mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-between">
+        <!--    <div class="d-flex flex-column align-self-center pl-4">-->
+        <!--        <mat-icon label="Tag eltávolítása" (click)="deleteMemberFromTeam(member.id)" class="add-icon align-self-center">add_circle-->
+        <!--        </mat-icon>-->
+        <!--    </div>-->
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Új tag hozzáadása</mat-label>
+                <mat-select (selectionChange)="addMember($event)">
+                    <mat-option *ngFor="let member of allmember" [value]="member.id">
+                        {{member.lastName + ' ' + member.firstName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,376 @@
+<div *ngIf="leaders" class="team-boss ">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center ">
+        <div class="jumbotron p-0">
+            <h1 translate class="title pb-4"
+                [translateParams]="{ management_hu: leaders?.name_hu, management_en: leaders?.name_en}">
+                MEMBERS.management</h1>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                                   [(ngModel)]="leaders.name_hu" required (change)="changedTeamName(leaders)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                                   [(ngModel)]="leaders.name_en" required (change)="changedTeamName(leaders)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <app-team-editgroup-panel *ngIf="leaders.members"
+                                      [members]="leaders.members"
+                                      [leader]="leaders.leader"
+                                      [isLeader]="true"
+                                      [teamId]="leaders.id"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, leaders.id)"
+                                      class="col-lg-6 col-md-6 col-12 col-sm-12"
+            ></app-team-editgroup-panel>
+
+
+        </div>
+    </div>
+</div>
+<div *ngIf="electronics" class="team-electr">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron p-0">
+            <h1 translate class="title pb-4"
+                [translateParams]="{ electronic_hu: electronics?.name_hu, electronic_en: electronics?.name_en}">
+                MEMBERS.electronic</h1>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div translate class="description col-  pb-lg-4 pb-md-4 pb-0"
+                         [translateParams]="{ electronic_desc_hu: electronics.description_hu, electronic_desc_en: electronics.description_en}">
+                        MEMBERS.electronicDesc
+                    </div>
+                </div>
+            </div>
+            <!--            <div translate class="section_title pb-2">-->
+            <!--                TEAM.nameOfTeam-->
+            <!--            </div>-->
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                                   [(ngModel)]="electronics.name_hu" required (change)="changedTeamName(electronics)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                                   [(ngModel)]="electronics.name_en" required (change)="changedTeamName(electronics)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <!--            <div translate class="section_title pb-2">-->
+            <!--                TEAM.descriptionOfTeam-->
+            <!--            </div>-->
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása magyarul"
+                                      [(ngModel)]="electronics.description_hu" required
+                                      (change)="changedTeamDescription(electronics)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása angolul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása angolul"
+                                      [(ngModel)]="electronics.description_en" required
+                                      (change)="changedTeamDescription(electronics)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+
+            <app-team-editgroup-panel *ngIf="electronics.members"
+                                      [members]="electronics.members"
+                                      [leader]="electronics.leader"
+                                      [teamId]="electronics.id"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, electronics.id)"
+                                      class="col-lg-6 col-md-6 col-12 col-sm-12"
+            ></app-team-editgroup-panel>
+
+
+        </div>
+    </div>
+</div>
+<div *ngIf="economics" class="team-econ">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron p-0">
+            <h1 translate class="title pb-4"
+                [translateParams]="{ economic_hu: economics?.name_hu, economic_en: economics?.name_en}">
+                MEMBERS.economic</h1>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div translate class="description col- "
+                         [translateParams]="{ economic_desc_hu: economics.description_hu, economic_desc_en: economics.description_en}">
+                        MEMBERS.economicDesc
+                    </div>
+                </div>
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                                   [(ngModel)]="economics.name_hu" required (change)="changedTeamName(economics)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                                   [(ngModel)]="economics.name_en" required (change)="changedTeamName(economics)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása magyarul"
+                                      [(ngModel)]="economics.description_hu" required
+                                      (change)="changedTeamDescription(economics)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása angolul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása angolul"
+                                      [(ngModel)]="economics.description_en" required
+                                      (change)="changedTeamDescription(economics)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <app-team-editgroup-panel *ngIf="economics.members"
+                                      [members]="economics.members"
+                                      [leader]="economics.leader"
+                                      [teamId]="economics.id"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, economics.id)"
+                                      class="col-lg-6 col-md-6 col-12 col-sm-12"
+            ></app-team-editgroup-panel>
+        </div>
+    </div>
+</div>
+<div *ngIf="mechatronicsMaterial && mechatronicsSimulation" class="team-mech">
+    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
+        <div class="jumbotron p-0 ">
+            <h1 translate class="title pb-4"
+                [translateParams]="{ mechanical_hu: mechatronics?.name_hu, mechanical_en: mechatronics?.name_en}">
+                MEMBERS.mechanical</h1>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 ">
+                    <div translate class="description col-  pb-1"
+                         [translateParams]="{ mechanical_desc_hu: mechatronics.description_hu, mechanical_desc_en: mechatronics.description_en}">
+                        MEMBERS.mechanicalDesc
+                    </div>
+                    <div translate class="description col-  pb-1"
+                         [translateParams]="{ material_desc_hu: mechatronicsMaterial.description_hu, material_desc_en: mechatronicsMaterial.description_en}">
+                        MEMBERS.materialDesc
+                    </div>
+                    <div translate class="description col-  pt-0"
+                         [translateParams]="{ simulation_desc_hu: mechatronicsSimulation.description_hu, simulation_desc_en: mechatronicsSimulation.description_en}">
+                        MEMBERS.simulationDesc
+                    </div>
+                </div>
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                                   [(ngModel)]="mechatronics.name_hu" required (change)="changedTeamName(mechatronics)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                                   [(ngModel)]="mechatronics.name_en" required (change)="changedTeamName(mechatronics)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása magyarul"
+                                      [(ngModel)]="mechatronics.description_hu" required
+                                      (change)="changedTeamDescription(mechatronics)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_en" type="text" placeholder="Csapat leírása angolul"
+                                      [(ngModel)]="mechatronics.description_en" required
+                                      (change)="changedTeamDescription(mechatronics)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Anyagtechnológiai alcsoport leírása magyarul"
+                                      [(ngModel)]="mechatronicsMaterial.description_hu" required
+                                      (change)="changedTeamDescription(mechatronicsMaterial)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_en" type="text" placeholder="Anyagtechnológiai alcsoport leírása angolul"
+                                      [(ngModel)]="mechatronicsMaterial.description_en" required
+                                      (change)="changedTeamDescription(mechatronicsMaterial)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Szimulációs alcsoport leírása magyarul"
+                                      [(ngModel)]="mechatronicsSimulation.description_hu" required
+                                      (change)="changedTeamDescription(mechatronicsSimulation)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field style="width: 400px;" class="example-full-width">
+                            <mat-label>Csapat leírása magyarul</mat-label>
+                            <textarea rows="5" cols="40" matInput name="description_en" type="text" placeholder="Szimulációs alcsoport leírása angolul"
+                                      [(ngModel)]="mechatronicsSimulation.description_en" required
+                                      (change)="changedTeamDescription(mechatronicsSimulation)"></textarea>
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+
+            <h2 translate class="title subtitle pb-lg-4 pb-md-4 pb-1 "
+                [translateParams]="{ material_hu: mechatronicsMaterial?.name_hu, material_en: mechatronicsMaterial?.name_en}">
+                MEMBERS.material</h2>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                                   [(ngModel)]="mechatronicsMaterial.name_hu" required
+                                   (change)="changedTeamName(mechatronicsMaterial)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                                   [(ngModel)]="mechatronicsMaterial.name_en" required
+                                   (change)="changedTeamName(mechatronicsMaterial)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <app-team-editgroup-panel *ngIf="mechatronicsMaterial.members"
+                                      [members]="mechatronicsMaterial.members"
+                                      [leader]="mechatronicsMaterial.leader"
+                                      [teamId]="mechatronicsMaterial.id"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, mechatronicsMaterial.id)"
+                                      class="col-lg-6 col-md-6 col-12 col-sm-12"
+            ></app-team-editgroup-panel>
+
+
+            <h2 translate class="title subtitle pb-lg-4 pb-md-4 pb-1"
+                [translateParams]="{ simulation_hu: mechatronicsSimulation?.name_hu, simulation_en: mechatronicsSimulation?.name_en}">
+                MEMBERS.simulation</h2>
+            <div class="leader d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                                   [(ngModel)]="mechatronicsSimulation.name_hu" required
+                                   (change)="changedTeamName(mechatronicsSimulation)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="d-flex flex-column align-self-center">
+                    <form>
+                        <mat-form-field [style.width.px]=400>
+                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                                   [(ngModel)]="mechatronicsSimulation.name_en" required
+                                   (change)="changedTeamName(mechatronicsSimulation)">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <app-team-editgroup-panel *ngIf="mechatronicsSimulation.members"
+                                      [members]="mechatronicsSimulation.members"
+                                      [leader]="mechatronicsSimulation.leader"
+                                      [teamId]="mechatronicsSimulation.id"
+                                      (onChange)="onChange($event)"
+                                      (onChangedLeaderOfTeam)="onChangedLeaderOfTeam($event, mechatronicsSimulation.id)"
+                                      class="col-lg-6 col-md-6 col-12 col-sm-12"
+            ></app-team-editgroup-panel>
+        </div>
+    </div>
+</div>
+
+
+

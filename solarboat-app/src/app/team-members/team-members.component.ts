@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Member} from '../model/member';
-// import AOS from 'aos';
 
 @Component({
   selector: 'app-team-members',

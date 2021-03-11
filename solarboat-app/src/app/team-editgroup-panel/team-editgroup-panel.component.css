@@ -1,0 +1,14 @@
+.section_title{
+    font-family: 'Roboto Medium';
+    font-size: 1rem;
+    margin: 0;
+}
+.add-icon {
+    transform: scale(1.5);
+    transition: transform 0.3s ease;
+}
+.add-icon:hover {
+    transform: scale(2);
+    opacity:1;
+    cursor: pointer;
+}

@@ -55,6 +55,16 @@
     "title":"contact us",
     "madeBy":"designed by Sára Sinkó and Virág Dörner"
   },
+  "TEAM":{
+    "team":"Our team",
+    "userview": "User view",
+    "editmembers": "Edit members",
+    "editteams": "Edit groups",
+    "leader": "Team leader",
+    "members": "Members",
+    "nameOfTeam": "Name of team",
+    "descriptionOfTeam": "Description of team"
+  },
   "MEMBERS":{
     "management":"{{management_en}}",
     "economic": "{{economic_en}}",

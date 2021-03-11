@@ -34,9 +34,9 @@
   },
   "SPONSORS":{
     "sponsors":"szponzorok",
-    "main":"Fő szponzoraink",
-    "top":"Kiemelt szponzoraink",
-    "other":"Szponzoraink",
+    "main":"Gigawatt szponzoraink",
+    "top":"Megawatt szponzoraink",
+    "other":"Kilowatt szponzoraink",
     "partners":"Tudományos partnereink",
     "uni":"Budapesti Műszaki és Gazdaságtudományi Egyetem"
   },
@@ -54,6 +54,16 @@
   "FOOTER":{
     "title":"elérhetőségek",
     "madeBy":"készítette: Sinkó Sára és Dörner Virág"
+  },
+  "TEAM":{
+    "team":"Csapatunk",
+    "userview": "Felhasználói nézet",
+    "editmembers": "Csapattagok kezelése",
+    "editteams": "Csoportok módosítása",
+    "leader": "Csapat vezetője",
+    "members": "Csapattagok",
+    "nameOfTeam": "Csapat neve",
+    "descriptionOfTeam": "Csapat leírása"
   },
   "MEMBERS":{
     "management":"{{management_hu}}",
@@ -73,6 +83,42 @@
     "mechanicalDesc": "{{mechanical_desc_hu}}",
     "materialDesc": "{{material_desc_hu}}",
     "simulationDesc": "{{simulation_desc_hu}}"
+  },
+  "STATISTICS":{
+    "batterySoC":"Akkumulátor töltöttsége",
+    "batteryTemp":"Akkumulátor hőmérséklete",
+    "battery":"Akkumulátor",
+    "motor":"Motor",
+    "motorTemp": "Motor hőmérséklete",
+    "datas":"ADATOK",
+    "boatIsNotOperating":"A hajó jelenleg nem üzemel.",
+    "realTime":"Valós idejű statisztika",
+    "previousStatistics":"Korábbi statisztikák",
+    "options": "Opciók",
+    "downloadAll":"Összes letöltése",
+    "downloadOne":"Kiválasztott letöltése",
+    "deleteAll": "Összes törlése",
+    "deleteOne": "Kiválasztott törlése",
+    "average":"Átlag",
+    "maximum":"Maximum",
+    "minimum":"Minimum",
+    "batteryIn":"Akkumulátor be",
+    "batteryOut":"Akkumulátor ki",
+    "motorSoC":"Motor töltöttsége?",
+    "tilt":"Dőlésszög",
+    "x": "X",
+    "y":"Y",
+    "z":"Z",
+    "compass":"Iránytű",
+    "acceleration":"Gyorsulás",
+    "errors":"Hibaüzenetek:",
+    "date":"Dátum",
+    "deleteData":"Adatok törlése",
+    "confirm":"Biztos, hogy törölni szeretnéd?",
+    "cancel":"Mégse",
+    "delete":"Törlés",
+    "stateOfCharge":"Töltésállapot",
+    "temperature":"Hőmérséklet"
 
   }
 }

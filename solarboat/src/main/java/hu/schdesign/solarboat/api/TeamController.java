@@ -40,31 +40,31 @@ public class TeamController {
         return teamService.addTeam(team);
     }*/
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping(path = "{teamId}/members/{memberId}")
     public Team addMember(@PathVariable("teamId") Long teamId, @PathVariable("memberId") Long memberId) {
         return this.teamService.addMember(teamId, memberId);
     }
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{teamId}/members/{memberId}")
     public Team deleteMember(@PathVariable("teamId") Long teamId, @PathVariable("memberId") Long memberId) {
         return this.teamService.deleteMember(teamId, memberId);
     }
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @PutMapping(path = "{teamId}/description")
     public Team updateDescription(@PathVariable("teamId") Long teamId, @Valid @RequestBody TeamTexts texts) {
         return this.teamService.updateDescription(teamId, texts.getText_hu(), texts.getText_en());
     }
 
-    //@Secured("ROLE_ADMIN")
-    @PutMapping(path = "{teamId}/title")
+    @Secured("ROLE_ADMIN")
+    @PutMapping(path = "{teamId}/name")
     public Team updateTitle(@PathVariable("teamId") Long teamId, @Valid @RequestBody TeamTexts texts) {
         return this.teamService.updateTitle(teamId, texts.getText_hu(), texts.getText_en());
     }
 
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @PutMapping(path = "{teamId}/leader/{memberId}")
     public Team updateLeader(@PathVariable("teamId") Long teamId, @PathVariable("memberId") Long memberId) {
         return this.teamService.updateLeader(teamId, memberId);

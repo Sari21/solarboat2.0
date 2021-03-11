@@ -55,6 +55,16 @@
     "title":"elérhetőségek",
     "madeBy":"készítette: Sinkó Sára és Dörner Virág"
   },
+  "TEAM":{
+    "team":"Csapatunk",
+    "userview": "Felhasználói nézet",
+    "editmembers": "Csapattagok kezelése",
+    "editteams": "Csoportok módosítása",
+    "leader": "Csapat vezetője",
+    "members": "Csapattagok",
+    "nameOfTeam": "Csapat neve",
+    "descriptionOfTeam": "Csapat leírása"
+  },
   "MEMBERS":{
     "management":"{{management_hu}}",
     "economic": "{{economic_hu}}",
@@ -73,7 +83,6 @@
     "mechanicalDesc": "{{mechanical_desc_hu}}",
     "materialDesc": "{{material_desc_hu}}",
     "simulationDesc": "{{simulation_desc_hu}}"
-
   },
   "STATISTICS":{
     "batterySoC":"Akkumulátor töltöttsége",
