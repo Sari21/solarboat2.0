@@ -33,10 +33,10 @@
   },
   "SPONSORS":{
     "sponsors":"sponsors",
-    "main":"Gold level sponsors",
-    "top":"Silver level sponsors",
-    "other":"Bronze level sponsors ",
-    "partners":"scientific partners",
+    "main":"Gigawatt sponsors",
+    "top":"Megawatt sponsors",
+    "other":"Kilowatt sponsors ",
+    "partners":"Scientific partners",
     "uni":"Budapest University of Technology and Economics"
   },
   "GALLERY":{
@@ -54,6 +54,16 @@
   "FOOTER":{
     "title":"contact us",
     "madeBy":"designed by Sára Sinkó and Virág Dörner"
+  },
+  "TEAM":{
+    "team":"Our team",
+    "userview": "User view",
+    "editmembers": "Edit members",
+    "editteams": "Edit groups",
+    "leader": "Team leader",
+    "members": "Members",
+    "nameOfTeam": "Name of team",
+    "descriptionOfTeam": "Description of team"
   },
   "MEMBERS":{
     "management":"{{management_en}}",
@@ -73,5 +83,37 @@
     "mechanicalDesc": "{{mechanical_desc_en}}",
     "materialDesc": "{{material_desc_en}}",
     "simulationDesc": "{{simulation_desc_en}}"
+  },
+  "STATISTICS":{
+    "datas":"DATAS",
+    "realTime":"Real time statistics",
+    "boatIsNotOperating":"The boat is not operating now.",
+    "previousStatistics":"Previous statistics",
+    "options": "Options",
+    "downloadAll":"Download all",
+    "downloadOne":"Download one",
+    "deleteAll": "Delete all",
+    "deleteOne": "Delete one",
+    "average":"Average",
+    "maximum":"Maximum",
+    "minimum":"Minimum",
+    "batteryIn":"Battery in",
+    "batteryOut":"Battery out",
+    "batterySoC":"Battery SoC",
+    "batteryTemp":"Battery temperature",
+    "battery":"Battery",
+    "motor":"Motor",
+    "motorRpM": "Motor RpM",
+    "motorTemp":"Motor temperature",
+    "tilt":"Tilt",
+    "x": "X",
+    "y":"Y",
+    "z":"Z",
+    "compass":"Compass",
+    "acceleration":"Acceleration",
+    "errors":"Errors",
+    "date":"Date",
+    "stateOfCharge":"State of charge",
+    "temperature":"Temperature"
   }
 }
