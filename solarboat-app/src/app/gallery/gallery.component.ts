@@ -1,10 +1,12 @@
 import { PictureService } from "../shared/picture.service";
-import { Component, OnInit, Output } from "@angular/core";
+import { Component, OnInit, Output, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { TokenStorageService } from "../auth/token-storage.service";
 
 import { GalleryPicture } from "../model/gallery-picture";
+import { GalleryPictureRequest } from "../model/gallery-picture-request";
+
 
 // import AOS from 'aos';
 
@@ -21,7 +23,7 @@ export class GalleryComponent implements OnInit {
   ) {
   }
   @Output() gallery: GalleryPicture[];
-  newPicture: GalleryPicture;
+  newPicture: GalleryPictureRequest;
   failed = false;
   errorMessage = "";
   picturesSelected = false;
@@ -29,61 +31,55 @@ export class GalleryComponent implements OnInit {
   smallPic = false;
   public authority: string;
   public roles: string[];
-  ngOnInit(): void {
-    // AOS.init();
-    this.checkAuth();
-    this.loadGallery();
-    this.newPicture = new GalleryPicture();
-  }
+  public largeWidth: boolean;
   fileToUpload: File;
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    this.newPicture.picture = files.item(0).name;
-    this.pic = true;
-    if (this.pic && this.smallPic) {
-      this.picturesSelected = true;
-    }
+  files: File[] = [];
+ngOnInit(): void {
+  // AOS.init();
+  this.checkAuth();
+  this.loadGallery();
+  this.newPicture = new GalleryPictureRequest();
+  this.largeWidth = (window.innerWidth < 768) ? false : true;
   }
-  smallFileToUpload: File;
-  handleSmallFileInput(files: FileList) {
-    this.smallFileToUpload = files.item(0);
-    this.newPicture.smallPicture = files.item(0).name;
-    this.smallPic = true;
-    if (this.pic && this.smallPic) {
-      this.picturesSelected = true;
-    }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.largeWidth = (window.innerWidth < 768) ? false : true;
+    console.log(this.largeWidth);
   }
+  // handleFileInput(files: FileList) {
+  //   this.fileToUpload = files.item(0);
+  //   this.newPicture.picture = files.item(0);
+  //   console.log(this.newPicture);
+  //   this.pic = true;
+  //   if (this.pic) {
+  //     this.picturesSelected = true;
+  //   }
+  // }
+  onSelect(event) {
+    if(this.files.length > 0){
+      this.files = [];
+    }
+    this.files.push(...event.addedFiles);
+    this.newPicture.picture = this.files[0];
+    this.picturesSelected = true;
+  }
+  onRemove(event) {
+    this.files.splice(this.files.indexOf(event), 1);
+    this.picturesSelected = false;
 
-  uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload, "gallery").subscribe(
-      (data) => {
-        this.fileToUpload = null;
-      },
-      (error) => {
-        // console.log(error);
-      }
-    );
-    this.pictureService.postFile(this.smallFileToUpload, "gallery").subscribe(
-      (data) => {
-        this.smallFileToUpload = null;
-      },
-      (error) => {
-        // console.log(error);
-      }
-    );
   }
   uploadGalleryPicture(empForm: any) {
     if (this.newPicture.title_hu == null ) {
-      this.newPicture.title_hu = ' ';
+      //this.newPicture.title_hu = ' ';
     }
     if (this.newPicture.title_en == null) {
-      this.newPicture.title_en = ' ';
+      //this.newPicture.title_en = ' ';
     }
     this.pictureService.postGalleryPicture(this.newPicture).subscribe(
       (data) => {
         // do something, if upload success
-        this.uploadFileToActivity();
-        this.newPicture = new GalleryPicture();
+        //this.uploadFileToActivity();
+        this.newPicture = new GalleryPictureRequest();
         this.gallery.push(data);
         //this.loadGallery();
       },
@@ -140,6 +136,6 @@ export class GalleryComponent implements OnInit {
     }
   }
   isEnabled(form: boolean){
-    return (form && this.smallFileToUpload && this.fileToUpload);
+    return (form && this.fileToUpload);
   }
 }

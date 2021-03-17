@@ -4,7 +4,7 @@
     <div class="card mb-5 mt-5 col-11 col-md-6 col-lg-6 col-sm-10" id="sponsor-form" *ngIf="authority == 'admin'">
       <h2 class="title pb-3">Új szponzor hozzáadása</h2>
       <div>
-        <form (ngSubmit)="onSubmit($event)" #loginForm="ngForm">
+        <form (ngSubmit)="onSubmit($event)" #sponsorForm="ngForm">
           <div class="row">
             <div class="col-11 col-md-6 col-lg-6 col-sm-10">
               <div class="form-group">
@@ -48,7 +48,7 @@
 
 
           <a class="btn" (click)="onSubmit($event)" href="javascript:void(0)" [ngClass]="{
-              disabled: !loginForm.form.valid || files == []
+              disabled: !sponsorForm.form.valid || files == []
             }"><span>Feltöltés</span></a>
           <div [hidden]="!failed" class="alert alert-danger mt-3">
             {{ errorMessage }}

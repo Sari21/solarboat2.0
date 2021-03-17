@@ -7,7 +7,7 @@
                 <div class="valami card mb-5 mr-3 ml-3" id="galleryform">
                     <h2 class="title pb-3">Új kép hozzáadása</h2>
                     <div>
-                        <form #loginForm="ngForm">
+                        <form #galleryForm="ngForm">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -25,25 +25,34 @@
                                                name="title_en" [ngClass]="{'failed': failed }">
 
                                     </div>
-                                    <div class="form-group">
-                                        <label for="file">Nagy fotó</label>
+                                    <!-- <div class="form-group">
+                                        <label for="file">Fénykép</label>
                                         <input type="file" required id="file" class="form-control"
                                                (change)="handleFileInput($event.target.files)"
                                                [ngClass]="{'failed': failed }"/>
-                                    </div>
-                                    <div class="form-group">
+                                    </div> -->
+                                    <div class="col-11 col-md-6 col-lg-6 col-sm-10">
+                                        <label for="file">Kép</label>
+                                        <ngx-dropzone (change)="onSelect($event)">
+                                          <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
+                                          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" >
+                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                          </ngx-dropzone-preview>
+                                        </ngx-dropzone>
+                                      </div>
+                                    <!-- <div class="form-group">
                                         <label for="smallfile">Kis fotó</label>
                                         <input type="file" required id="smallfile" class="form-control"
                                                (change)="handleSmallFileInput($event.target.files)"
                                                [ngClass]="{'failed': failed }"/>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>
 
                             <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
-                            <a class="btn" (click)="uploadGalleryPicture(loginForm)" href="javascript:void(0)"
-                               [ngClass]="{'disabled': !isEnabled(loginForm.form.valid) }"><span>Feltöltés</span></a>
+                            <a class="btn" (click)="uploadGalleryPicture(galleryForm)" href="javascript:void(0)"
+                               [ngClass]="{'disabled': !galleryForm.form.valid || files == [] }"><span>Feltöltés</span></a>
 
                             <div [hidden]="!failed" class="alert alert-danger mt-3">
                                 {{errorMessage}}
@@ -67,17 +76,33 @@
                     </div>
                 </div>
 
-                <div class="justify-content-center d-flex mb-5">
+                <div class="justify-content-center d-flex mb-5" *ngIf="largeWidth">
                     <div class="gallery justify-content-center" id="photos">
                         <div *ngFor="let img of gallery" class="picture">
 
                             <a (click)="clickMethod(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
 
                             <a href="{{img.picture}}" data-lightbox="gallery">
-                                <div class="img-wrap">
+                                <div class="img-wrap" >
                                     <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}"/>
                                 </div>
                             </a>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="justify-content-center d-flex mb-5" *ngIf="!largeWidth">
+                    <div class="gallery justify-content-center" id="photos">
+                        <div *ngFor="let img of gallery" class="picture">
+
+                            <a (click)="clickMethod(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
+
+                            <a href="{{img.smallPicture}}" data-lightbox="gallery">
+                                <div class="img-wrap" >
+                                    <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}"/>
+                                </div>
+                            </a>
+                           
                         </div>
                     </div>
                 </div>

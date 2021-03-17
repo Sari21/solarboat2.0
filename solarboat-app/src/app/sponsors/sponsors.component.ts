@@ -126,7 +126,6 @@ export class SponsorsComponent implements OnInit {
     }
   }
   onSelect(event) {
-    console.log(event);
     if(this.files.length > 0){
       this.files = [];
     }
@@ -135,7 +134,6 @@ export class SponsorsComponent implements OnInit {
     console.log(this.newSponsor);
   }
   onRemove(event) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   checkAuth() {

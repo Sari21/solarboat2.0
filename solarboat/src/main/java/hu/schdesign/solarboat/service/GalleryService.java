@@ -2,7 +2,7 @@ package hu.schdesign.solarboat.service;
 
 import hu.schdesign.solarboat.dao.GalleryRepository;
 import hu.schdesign.solarboat.model.GalleryPicture;
-import hu.schdesign.solarboat.model.GalleryPictureRequest;
+import hu.schdesign.solarboat.model.UploadGalleryPictureReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,17 +24,21 @@ public class GalleryService {
         this.galleryRepository = galleryRepository;
         this.fileStorageService = fileStorageService;
     }
-   /* public GalleryPicture addPicture(GalleryPicture galleryPicture){
-        return galleryRepository.save(galleryPicture);
-    }*/
-    public GalleryPicture addPicture(GalleryPictureRequest galleryPictureRequest) throws IOException {
+//    public GalleryPicture addGalleryPicture(GalleryPicture galleryPicture){
+//        return galleryRepository.save(galleryPicture);
+//    }
+    public GalleryPicture addPicture(MultipartFile file, String titleHu, String titleEn) throws IOException {
         GalleryPicture newGalleryPicture = new GalleryPicture();
-        newGalleryPicture.setTitle_en(galleryPictureRequest.getTitle_en());
-        newGalleryPicture.setTitle_hu(galleryPictureRequest.getTitle_hu());
-        MultipartFile picture = fileStorageService.resizeImage(galleryPictureRequest.getFile(), this.PATH, this.PICTURE_WIDTH);
-        MultipartFile smallPicture = fileStorageService.resizeImage(galleryPictureRequest.getFile(), this.PATH, this.SMALL_PICTURE_WIDTH);
+        newGalleryPicture.setTitle_en(titleEn);
+        newGalleryPicture.setTitle_hu(titleHu);
+        MultipartFile picture = null;
+        MultipartFile smallPicture = null;
+
+            picture = fileStorageService.resizeImage(file, this.PATH, this.PICTURE_WIDTH);
+            smallPicture = fileStorageService.resizeImage(file, this.PATH, this.SMALL_PICTURE_WIDTH);
+
         newGalleryPicture.setPicture(fileStorageService.storeResizedFile(picture, "gallery", ""));
-        newGalleryPicture.setPicture(fileStorageService.storeResizedFile(smallPicture, "gallery", "small"));
+        newGalleryPicture.setSmallPicture(fileStorageService.storeResizedFile(smallPicture, "gallery", "small"));
         return galleryRepository.save(newGalleryPicture);
     }
     public void deletePictureById(Long id){

@@ -5,6 +5,7 @@ import hu.schdesign.solarboat.Exceptions.FileStorageException;
 import hu.schdesign.solarboat.Exceptions.MyFileNotFoundException;
 import hu.schdesign.solarboat.Exceptions.NotAnImageException;
 import hu.schdesign.solarboat.FileStorageProperties;
+import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import retrofit2.http.Multipart;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,6 +27,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service
@@ -50,12 +54,17 @@ public class FileStorageService {
         if (!file.getContentType().contains("image")) {
             return null;
         }
-        BufferedImage originalImage = ImageIO.read(file.getInputStream());
+        BufferedImage tempImage = ImageIO.read(file.getInputStream());
+        BufferedImage originalImage = new BufferedImage(tempImage.getWidth(null), tempImage.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Image image = ImageIO.read(file.getInputStream());
+        originalImage.getGraphics().drawImage(image, 0, 0 , null);
+        originalImage.getGraphics().dispose();
         if (originalImage.getWidth() > width) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(Scalr.resize(originalImage, width), "jpg", baos);
             baos.flush();
-            return new MockMultipartFile(file.getOriginalFilename(), baos.toByteArray());
+            MultipartFile newFile = new MockMultipartFile(file.getName(), file.getOriginalFilename(), file.getContentType(), baos.toByteArray());
+            return newFile;
         }
         return file;
     }
@@ -72,14 +81,17 @@ public class FileStorageService {
             throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
         }
         // Normalize file name
-        String concatFilename = file.getOriginalFilename();
-        if (concatFilename.isEmpty()) {
+        String concatFilename = FilenameUtils.removeExtension(file.getOriginalFilename());
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        if(concatFilename.isEmpty()){
             concatFilename = "";
         }
         if (!name.isEmpty()) {
             concatFilename = concatFilename + "_" + name;
         }
-        concatFilename = concatFilename + "_" + LocalDateTime.now().toString();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        concatFilename = concatFilename + "_" + timestamp.getTime() + "." + extension;
+        System.out.println(concatFilename);
         String fileName = StringUtils.cleanPath(concatFilename);
 
         try {

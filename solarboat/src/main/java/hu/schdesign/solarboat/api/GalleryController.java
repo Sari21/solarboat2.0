@@ -1,8 +1,7 @@
 package hu.schdesign.solarboat.api;
 
-import hu.schdesign.solarboat.UploadFileResponse;
 import hu.schdesign.solarboat.model.GalleryPicture;
-import hu.schdesign.solarboat.model.GalleryPictureRequest;
+import hu.schdesign.solarboat.model.UploadGalleryPictureReply;
 import hu.schdesign.solarboat.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URI;
@@ -27,24 +27,42 @@ public class GalleryController {
         this.galleryService = galleryService;
     }
 
- /*   @Secured("ROLE_ADMIN")
+/*    @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public GalleryPicture addPicture(@Validated @RequestBody GalleryPicture galleryPicture){
-        return galleryService.addPicture(galleryPicture);
+    public GalleryPicture addGalleryPicture(@Validated @RequestBody GalleryPicture galleryPicture){
+        return galleryService.addGalleryPicture(galleryPicture);
     }*/
     @Secured("ROLE_ADMIN")
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<GalleryPicture> addPicture(@Validated @RequestBody GalleryPictureRequest galleryPicture) throws URISyntaxException, IOException {
-                GalleryPicture picture = galleryService.addPicture(galleryPicture);
-                if(picture.getPicture().isEmpty() || picture.getSmallPicture().isEmpty()){
-                    HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.setLocation(new URI("/uploadFile"));
-                    responseHeaders.set("Error", "The file is not an image");
-                    return new ResponseEntity<GalleryPicture>(null, responseHeaders, HttpStatus.BAD_REQUEST);
-                }
+    @PostMapping()//(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<GalleryPicture> addPicture(@RequestParam("file") MultipartFile file, @RequestParam("title_hu") String titleHu, @RequestParam("title_en")String titleEn) throws URISyntaxException {
+        if(file == null){
+             if (!file.getContentType().contains("image")){
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.setLocation(new URI("/uploadFile"));
+            responseHeaders.set("Error", "The file is not an image");
+            return new ResponseEntity<>(null, responseHeaders, HttpStatus.BAD_REQUEST);
+            }
+        }
+        System.out.println(file.getContentType());
+        System.out.println(file.getName());
+        System.out.println(file.getOriginalFilename());
+          System.out.println(titleEn);
+        System.out.println(titleHu);
+        GalleryPicture picture = null;
+        try {
+            picture = galleryService.addPicture(file, titleHu, titleEn);
+        } catch (IOException e) {
+            e.printStackTrace();
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.setLocation(new URI("/uploadFile"));
+            responseHeaders.set("Error", "The file is not an image");
+            return new ResponseEntity<>(null, responseHeaders, HttpStatus.BAD_REQUEST);
+
+        }
+
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setLocation(new URI("uploadFile"));
-        return new ResponseEntity<>(picture,responseHeaders ,HttpStatus.CREATED);
+        return new ResponseEntity<>(picture, responseHeaders ,HttpStatus.CREATED);
     }
     @Secured("ROLE_ADMIN")
     @PutMapping
