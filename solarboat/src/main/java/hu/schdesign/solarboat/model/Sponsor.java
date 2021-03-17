@@ -22,19 +22,21 @@ public class Sponsor {
     private String link;
     @NotNull
     private String picture;
-
     private  int rowNumb;
     @NotNull
     private SponsorGroup groupId;
+    private int orderNumber;
 
 
     public Sponsor(@JsonProperty("name") String name, @JsonProperty("link") String link,
-                   @JsonProperty("group") SponsorGroup group, @JsonProperty("picture") String picture, @JsonProperty("row") int rowNumb){
+                   @JsonProperty("group") SponsorGroup group, @JsonProperty("picture") String picture, @JsonProperty("row") int rowNumb
+    , @JsonProperty("orderNumber") int orderNumber){
         this.name = name;
         this.link = link;
         this.picture = picture;
         this.groupId = group;
         this.rowNumb = rowNumb;
+        this.orderNumber = orderNumber;
 
     }
 
@@ -44,10 +46,14 @@ public class Sponsor {
         this.picture = null;
         this.groupId = null;
         this.rowNumb = 0;
+        this.orderNumber = 0;
     }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,17 +80,27 @@ public class Sponsor {
         this.picture = picture;
     }
 
-    public SponsorGroup getGroup() {
-        return groupId;
-    }
-
-    public void setGroup(SponsorGroup group) {
-        this.groupId = group;
-    }
-
-    public int getRow() {
+    public int getRowNumb() {
         return rowNumb;
     }
 
+    public void setRowNumb(int rowNumb) {
+        this.rowNumb = rowNumb;
+    }
 
+    public SponsorGroup getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(SponsorGroup groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }

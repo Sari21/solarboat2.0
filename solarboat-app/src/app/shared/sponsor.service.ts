@@ -3,6 +3,7 @@ import { Sponsor } from "../model/sponsor";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {Globals} from '../globals';
+import { AllSponsors } from "../model/all-sponsors";
 
 @Injectable({
   providedIn: "root",
@@ -10,8 +11,8 @@ import {Globals} from '../globals';
 export class SponsorService {
   private BASE_URL = this.globals.BASE_URL + "/api/sponsor";
   constructor(private http: HttpClient, public globals: Globals) {}
-  getSponsors(): Observable<Sponsor[]> {
-    return this.http.get<Sponsor[]>(this.BASE_URL);
+  getSponsors(): Observable<AllSponsors> {
+    return this.http.get<AllSponsors>(this.BASE_URL);
   }
   postSponsor(sponsor: Sponsor) :Observable<Sponsor>{
     return <Observable<Sponsor>> this.http.post(this.BASE_URL, sponsor);

@@ -52,6 +52,7 @@ import { CompassComponent } from "./compass/compass.component";
 import { MileageComponent } from "./mileage/mileage.component";
 import { WavesComponent } from "./waves/waves.component";
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -108,6 +109,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     ReactiveFormsModule,
     NgxDropzoneModule,
+    DragDropModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

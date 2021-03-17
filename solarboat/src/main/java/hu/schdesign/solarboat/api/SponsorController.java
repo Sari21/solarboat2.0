@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.api;
 
+import hu.schdesign.solarboat.model.AllSponsors;
 import hu.schdesign.solarboat.model.Sponsor;
 import hu.schdesign.solarboat.service.SponsorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,13 @@ public class SponsorController {
         return sponsorService.addSponsor(sponsor);
     }
     @GetMapping
-    public Iterable<Sponsor> getAllSponsors(){
+    public AllSponsors getAllSponsors(){
         return sponsorService.getAllSponsors();
     }
+//    @GetMapping
+//    public Iterable<Sponsor> getAllSponsors(){
+//        return sponsorService.getAllSponsors();
+//    }
     @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "{id}")
     public void deleteSponsorById(@PathVariable("id") Long id){
