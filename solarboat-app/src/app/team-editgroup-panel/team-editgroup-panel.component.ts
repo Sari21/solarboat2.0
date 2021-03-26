@@ -1,12 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Member} from '../model/member';
-import {Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
-import {News} from '../model/news';
 import {MatSelectChange} from '@angular/material/select';
+import {ToastrService} from "ngx-toastr";
 
 interface Food {
     value: string;
@@ -28,7 +25,7 @@ export class TeamEditgroupPanelComponent implements OnInit {
     allmember: Member[];
     selected = null;
 
-    constructor(private http: HttpClient, private apiService: TeamService) {
+    constructor(private apiService: TeamService, private toastr: ToastrService,) {
     }
 
     ngOnInit() {
@@ -42,36 +39,55 @@ export class TeamEditgroupPanelComponent implements OnInit {
             (res) => {
                 // tslint:disable-next-line:prefer-const
                 let data: any = res;
-                <Member[]> data.forEach((element) => {
+                <Member[]>data.forEach((element) => {
                     this.allmember.push(element);
                 });
             },
             (err) => {
-                alert('get error');
+                this.showError(err.message, 'Tagok sikertelen lekérése');
             }
         );
     }
 
     deleteMemberFromTeam(memberId: number) {
         this.apiService.removeMemberFromTeam(memberId, this.teamId).subscribe((data) => {
-            this.onChange.emit(memberId);
-        });
+                this.onChange.emit(memberId);
+                this.showSuccess('Tag sikeres eltávolítása');
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen eltávolítás');
+            });
     }
 
     addMember($event: MatSelectChange) {
         this.apiService.addMemberToTeam($event.value, this.teamId).subscribe((data) => {
-            this.onChange.emit($event.value);
-        });
+                this.onChange.emit($event.value);
+                this.showSuccess('Tag sikeresen hozzáadva  csapathoz');
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen hozzáadás');
+            });
     }
 
     changedMember(member: Member) {
         this.apiService.updateMember(member).subscribe((data) => {
-            // this.onChange.emit($event.value);
-        });
+                this.showSuccess('Sikeres mentés');
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen mentés');
+            });
     }
 
     changeLeader($event: MatSelectChange) {
         console.log($event);
         this.onChangedLeaderOfTeam.emit($event.value);
+    }
+
+    showSuccess(message) {
+        this.toastr.success(message);
+    }
+
+    showError(message, title) {
+        this.toastr.error(message, title);
     }
 }

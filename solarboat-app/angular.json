@@ -24,7 +24,8 @@
               "src/styles-app-loading.css",
               "src/custom-theme.scss",
               "src/styles.css",
-              "src/lightbox.min.css"
+              "src/lightbox.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": ["lightbox-plus-jquery.min.js"]
           },

@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Team} from '../model/team';
-import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
-import {News} from '../model/news';
-
-// import * as data from '../../assets/team/team.json';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-team-userview',
@@ -19,7 +16,7 @@ export class TeamUserviewComponent implements OnInit {
     mechatronicsMaterial: Team;
     mechatronicsSimulation: Team;
 
-    constructor(private http: HttpClient, private apiService: TeamService) {
+    constructor(private toastr: ToastrService, private apiService: TeamService) {
     }
 
     ngOnInit(): void {
@@ -52,15 +49,13 @@ export class TeamUserviewComponent implements OnInit {
                 });
             },
             (err) => {
-                alert('get error');
+                this.showError(err.message, 'Csapatok lekérése hiba');
             }
         );
-        // this.leaders = data.leaders;
-        // this.electronics = data.electronics;
-        // this.economics = data.economics;
-        // this.mechatronics = data.mechatronics;
-        // this.mechatronicsMaterial = data.mechatronics_material;
-        // this.mechatronicsSimulation = data.mechatronics_simulation;
+    }
+
+    showError(message, title) {
+        this.toastr.error(message, title);
     }
 
 }

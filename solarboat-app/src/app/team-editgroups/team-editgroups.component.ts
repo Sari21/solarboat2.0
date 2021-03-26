@@ -3,6 +3,7 @@ import {Team} from '../model/team';
 import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
 import {TeamTexts} from "../model/team-texts";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-team-editgroups',
@@ -19,7 +20,7 @@ export class TeamEditgroupsComponent implements OnInit {
     mechatronicsSimulation: Team;
 
 
-    constructor(private http: HttpClient, private apiService: TeamService) {
+    constructor(private toastr: ToastrService, private apiService: TeamService) {
     }
 
     ngOnInit(): void {
@@ -52,7 +53,7 @@ export class TeamEditgroupsComponent implements OnInit {
                 });
             },
             (err) => {
-                alert('get error');
+                this.showError(err.message, 'Csapatok sikertelen lekérése');
             }
         );
     }
@@ -63,20 +64,40 @@ export class TeamEditgroupsComponent implements OnInit {
 
     onChangedLeaderOfTeam(memberId: number, teamId: number) {
         this.apiService.updateLeaderOfTeam(memberId, teamId).subscribe((data) => {
-            this.ngOnInit();
-        });
+                this.showSuccess('Sikeres mentés');
+                this.ngOnInit();
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen mentés');
+            });
     }
 
     changedTeamDescription(team: Team) {
         const texts = new TeamTexts(team.description_hu, team.description_en);
         this.apiService.updateDescriptionOfTeam(team.id, texts).subscribe((data) => {
-        });
+                this.showSuccess('Sikeres mentés');
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen mentés');
+            });
     }
 
     changedTeamName(team: Team) {
-        const texts = new TeamTexts( team.name_hu, team.name_en);
+        const texts = new TeamTexts(team.name_hu, team.name_en);
         this.apiService.updateNameOfTeam(team.id, texts).subscribe((data) => {
-        });
+                this.showSuccess('Sikeres mentés');
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen mentés');
+            });
+    }
+
+    showSuccess(message) {
+        this.toastr.success(message);
+    }
+
+    showError(message, title) {
+        this.toastr.error(message, title);
     }
 }
 

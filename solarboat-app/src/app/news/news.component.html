@@ -9,70 +9,74 @@
                     <h2 class="title pb-3" id="form-title">Új hír hozzáadása</h2>
                     <div>
                         <form #AddForm="ngForm">
-                            <div class="localization-tabs">
-                                <ul ngbNav #nav="ngbNav" class="nav-tabs">
-                                    <li ngbNavItem>
-                                        <a ngbNavLink>Magyar</a>
-                                        <ng-template ngbNavContent>
-                                            <div class="row">
-                                                <div class="col-md-6 col-lg-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="title">Cím</label>
-                                                        <input type="text" class="form-control" id="title"
-                                                               required
-                                                               [(ngModel)]="form.title" name="title"
-                                                               [ngClass]="{'failed': failed }">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12 col-12">
-                                                    <div class="form-group">
-                                                        <label for="content">Tartalom</label>
-                                                        <angular-editor id="content"
-                                                                        required
-                                                                        [(ngModel)]="form.content"
-                                                                        name="content"
-                                                                        [ngClass]="{'failed': failed }"
-                                                                        [config]="config"
-                                                        ></angular-editor>
-                                                    </div>
+                            <mat-tab-group mat-align-tabs="start">
+                                <mat-tab label="MAGYAR" class="pt-3">
+                                    <div class="container p-3 ">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <!--                                                    <label for="title">Cím</label>-->
+                                                    <!--                                                    <input type="text" class="form-control" id="title"-->
+                                                    <!--                                                           required-->
+                                                    <!--                                                           [(ngModel)]="form.title" name="title"-->
+                                                    <!--                                                           [ngClass]="{'failed': failed }">-->
+                                                    <mat-form-field [style.width.px]=400>
+                                                        <input matInput name="title" type="text" id="title"
+                                                               [(ngModel)]="form.title" required placeholder="Cím">
+                                                        <mat-error>Kötelező mező</mat-error>
+                                                    </mat-form-field>
                                                 </div>
                                             </div>
-
-                                        </ng-template>
-                                    </li>
-                                    <li id="english-tab" ngbNavItem>
-                                        <a ngbNavLink>Angol</a>
-                                        <ng-template ngbNavContent>
-                                            <div class="row">
-                                                <div class="col-md-6 col-lg-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="title_en">Title</label>
-                                                        <input type="text" class="form-control" id="title_en"
-                                                               required
-                                                               [(ngModel)]="form.title_en" name="title_en"
-                                                               [ngClass]="{'failed': failed }">
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-lg-12 col-12">
-                                                    <div class="form-group">
-                                                        <label for="content_en">Content</label>
-                                                        <angular-editor id="content_en"
-                                                                        required
-                                                                        [(ngModel)]="form.content_en"
-                                                                        name="content_en"
-                                                                        [ngClass]="{'failed': failed }"
-                                                                        [config]="config"
-                                                        ></angular-editor>
-                                                    </div>
+                                            <div class="col-md-12 col-lg-12 col-12">
+                                                <div class="form-group">
+                                                    <!--                                                    <label for="content">Tartalom</label>-->
+                                                    <angular-editor id="content"
+                                                                    required
+                                                                    [(ngModel)]="form.content"
+                                                                    name="content"
+                                                                    [ngClass]="{'failed': failed }"
+                                                                    [config]="config"
+                                                    ></angular-editor>
                                                 </div>
                                             </div>
-                                        </ng-template>
-                                    </li>
-                                </ul>
-                                <div [ngbNavOutlet]="nav" class="localization-tab-content"></div>
-                            </div>
+                                        </div>
+                                    </div>
+                                </mat-tab>
 
+                                <mat-tab label="ANGOL" class="pt-3">
+                                    <div class="container p-3 ">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 col-12">
+                                                <div class="form-group">
+                                                    <!--                                                    <label for="title_en">Title</label>-->
+                                                    <!--                                                    <input type="text" class="form-control" id="title_en"-->
+                                                    <!--                                                           required-->
+                                                    <!--                                                           [(ngModel)]="form.title_en" name="title_en"-->
+                                                    <!--                                                           [ngClass]="{'failed': failed }">-->
+                                                    <mat-form-field [style.width.px]=400>
+                                                        <input matInput name="title_en" type="text" id="title_en"
+                                                               [(ngModel)]="form.title_en" required placeholder="Title">
+                                                        <mat-error>Kötelező mező</mat-error>
+                                                    </mat-form-field>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-lg-12 col-12">
+                                                <div class="form-group">
+                                                    <!--                                                    <label for="content_en">Content</label>-->
+                                                    <angular-editor id="content_en"
+                                                                    required
+                                                                    [(ngModel)]="form.content_en"
+                                                                    name="content_en"
+                                                                    [ngClass]="{'failed': failed }"
+                                                                    [config]="config"
+                                                    ></angular-editor>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
 
                             <div class="col-md-6 col-lg-6 col-12 pb-2">
 
@@ -88,18 +92,29 @@
                             <div class="col-md-6 col-lg-6 col-12 pb-2">
 
                                 <div class="form-group">
-                                    <label class="col-12" for="date">Dátum (opcionális)</label>
-                                    <input id="date"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="YYYY-MM-DD"
-                                           [(ngModel)]="form.date" name="date"
-                                           [ngClass]="{'failed': failed }">
+                                    <!--                                    <label class="col-12" for="date">Dátum (opcionális)</label>-->
+                                    <!--                                    <input id="date"-->
+                                    <!--                                           type="text"-->
+                                    <!--                                           class="form-control"-->
+                                    <!--                                           placeholder="YYYY-MM-DD"-->
+                                    <!--                                           [(ngModel)]="form.date" name="date"-->
+                                    <!--                                           [ngClass]="{'failed': failed }">-->
+                                    <mat-form-field >
+                                        <mat-label>Dátum</mat-label>
+                                        <input matInput  name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
+                                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                                        <mat-datepicker #date></mat-datepicker>
+<!--                                        <input matInput name="date" type="text" id="date" [formControl]="dateFormControl"-->
+<!--                                               [(ngModel)]="form.date" placeholder="YYYY-MM-DD">-->
+                                        <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>
+                                    </mat-form-field>
+
                                 </div>
                             </div>
 
                             <div class="row justify-content-end">
-                                <a class="btn mr-4" id="submit-btn" (click)="onSubmit(AddForm, $event)" href="javascript:void(0)"
+                                <a class="btn mr-4" id="submit-btn" (click)="onSubmit(AddForm, $event)"
+                                   href="javascript:void(0)"
                                    [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
 
                                 <div [hidden]="!failed"

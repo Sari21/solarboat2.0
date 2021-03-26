@@ -33,9 +33,6 @@ public class NewsController {
     @Secured("ROLE_ADMIN")
     @PostMapping(consumes = "application/json")
     public News addNews(@Valid @RequestBody News news) {
-        if (news.getPicture() == null) {
-//            System.out.println("nincs kep");
-        }
         return newsService.addNews(news);
 
     }

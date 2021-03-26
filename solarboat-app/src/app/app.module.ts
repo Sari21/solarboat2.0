@@ -59,6 +59,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import {ToastrModule} from 'ngx-toastr';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -100,36 +103,39 @@ export function HttpLoaderFactory(http: HttpClient) {
     TeamEditgroupPanelComponent,
   ],
   // tslint:disable-next-line:max-line-length
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    NgbModule,
-    MatTooltipModule,
-    MatIconModule,
-    BrowserAnimationsModule,
-    MDBBootstrapModule,
-    ScrollToModule.forRoot(),
-    NgxChartsModule,
-    CommonModule,
-    JwtModule,
-    AngularEditorModule,
-    MatTabsModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        NgbModule,
+        MatTooltipModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        MDBBootstrapModule,
+        ScrollToModule.forRoot(),
+        NgxChartsModule,
+        CommonModule,
+        JwtModule,
+        AngularEditorModule,
+        MatTabsModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient],
+            },
+        }),
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
 
   bootstrap: [AppComponent],
 

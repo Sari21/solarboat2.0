@@ -3,8 +3,9 @@ import {News} from '../model/news';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {NewsService} from '../shared/news.service';
-import {Globals} from '../globals';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
+import {ToastrService} from 'ngx-toastr';
+
 // import AOS from 'aos';
 
 @Component({
@@ -13,10 +14,11 @@ import {AngularEditorConfig} from '@kolkov/angular-editor';
     styleUrls: ['./news-preview.component.css']
 })
 export class NewsPreviewComponent implements OnInit {
-    constructor(private globals: Globals, private apiService: NewsService,
+    constructor( private apiService: NewsService, private toastr: ToastrService,
                 private modalService: NgbModal, pictureService: PictureService) {
         this.pictureService = pictureService;
     }
+
     // tslint:disable-next-line:variable-name
     shortArticleEn: string;
     shortArticleHu: string;
@@ -66,8 +68,6 @@ export class NewsPreviewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // AOS.init();
-
         this.shortArticleHu = this.decodeEntities(this.news.content_hu.replace(/<[^>]+>/g, ''));
         this.shortArticleHu = this.shortArticleHu.substring(0, 100) + '...';
         this.shortArticleEn = this.decodeEntities(this.news.content_en.replace(/<[^>]+>/g, ''));
@@ -87,7 +87,14 @@ export class NewsPreviewComponent implements OnInit {
     delete(id: number) {
         this.onRemove.emit(this.news);
         // TODO: kép törlése
-        this.apiService.deleteNews(id);
+        this.apiService.deleteNews(id).subscribe(
+            (res) => {
+                this.showSuccess('Sikeres törlés');
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen törlés');
+            }
+        );
     }
 
     onSubmit(empForm: any, id: number) {
@@ -112,11 +119,19 @@ export class NewsPreviewComponent implements OnInit {
             picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : this.news.picture
 
         };
-        this.apiService.putNews(o);
-        this.modalService.dismissAll('put');
-        this.form = empForm;
-        this.form.reset();
-        this.ngOnInit();
+        this.apiService.putNews(o).subscribe(
+            (res) => {
+                this.showSuccess('Hír módosítva');
+                this.modalService.dismissAll('put');
+                this.form = empForm;
+                this.form.reset();
+                this.ngOnInit();
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen módosítás');
+            }
+        );
+
     }
 
     handleFileInput(files: FileList) {
@@ -129,5 +144,13 @@ export class NewsPreviewComponent implements OnInit {
         }, error => {
             // console.log(error);
         });
+    }
+
+    showSuccess(message) {
+        this.toastr.success(message);
+    }
+
+    showError(message, title) {
+        this.toastr.error(message, title);
     }
 }

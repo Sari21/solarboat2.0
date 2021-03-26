@@ -15,4 +15,18 @@ export class AchievementService {
     );
   }
 
+  addAchievement(o: Object) {
+    return this.http
+        .post(this.globals.BASE_URL + "/api/achievement", o);
+  }
+
+  deleteAchievement(id: number) {
+    return this.http
+        .delete(this.globals.BASE_URL + '/api/achievement/'.concat(id.toString()));
+  }
+
+  updateAchievement(o: Object) {
+    return this.http
+        .put(this.globals.BASE_URL + "/api/achievement", o);
+  }
 }

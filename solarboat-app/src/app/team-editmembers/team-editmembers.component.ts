@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {TeamService} from '../shared/team.service';
 import {Member} from '../model/member';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {NgForm} from '@angular/forms';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-team-editmembers',
@@ -20,7 +20,7 @@ export class TeamEditmembersComponent implements OnInit {
     errorMessage = '';
     fileToUpload: File = null;
 
-    constructor(private http: HttpClient, private apiService: TeamService, private modalService: NgbModal,
+    constructor(private toastr: ToastrService, private apiService: TeamService, private modalService: NgbModal,
                 private pictureService: PictureService) {
     }
 
@@ -34,12 +34,12 @@ export class TeamEditmembersComponent implements OnInit {
             (res) => {
                 // tslint:disable-next-line:prefer-const
                 let data: any = res;
-                <Member[]> data.forEach((element) => {
+                <Member[]>data.forEach((element) => {
                     this.members.push(element);
                 });
             },
             (err) => {
-                alert('get error');
+                this.showError(err.message, 'Csapattagok lekérése hiba');
             }
         );
     }
@@ -61,8 +61,12 @@ export class TeamEditmembersComponent implements OnInit {
             this.fileToUpload = null;
         }
         this.apiService.updateMember(this.form).subscribe((data) => {
-            this.getMembers();
-        });
+                this.showSuccess('Sikeres mentés');
+                this.getMembers();
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen mentés');
+            });
         this.modalService.dismissAll('put');
         this.form = null;
 
@@ -74,8 +78,12 @@ export class TeamEditmembersComponent implements OnInit {
             this.uploadFileToActivity();
 
             this.apiService.addMember(this.form).subscribe((data) => {
-                this.members.push(data);
-            });
+                    this.members.push(data);
+                    this.showSuccess('Sikeres mentés');
+                },
+                (err) => {
+                    this.showError(err.message, 'Sikertelen törlés');
+                });
             this.modalService.dismissAll('put');
             this.form = null;
             this.fileToUpload = null;
@@ -96,10 +104,21 @@ export class TeamEditmembersComponent implements OnInit {
 
     deleteMember(id: any) {
         this.apiService.deleteMember(id).subscribe((data) => {
-            console.log(data);
-            this.getMembers();
-        });
+                this.showSuccess('Sikeres törlés');
+                this.getMembers();
+            },
+            (err) => {
+                this.showError(err.message, 'Sikertelen törlés');
+            });
         this.modalService.dismissAll('put');
         this.form = null;
+    }
+
+    showSuccess(message) {
+        this.toastr.success(message);
+    }
+
+    showError(message, title) {
+        this.toastr.error(message, title);
     }
 }

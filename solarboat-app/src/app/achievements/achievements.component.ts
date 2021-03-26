@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { AchievementService } from "../shared/achievement.service";
 import { Achievement } from "../model/achievement";
-import {News} from '../model/news';
 import {PictureService} from '../shared/picture.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Globals} from '../globals';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: "app-achievements",
@@ -24,8 +23,8 @@ export class AchievementsComponent implements OnInit {
   fileToUpload: File = null;
   authority: string;
   roles: string[];
-  constructor(private globals: Globals, private http: HttpClient, private achievementService: AchievementService,
-              private tokenStorage: TokenStorageService, pictureService: PictureService) {
+  constructor(private globals: Globals, private achievementService: AchievementService,
+              private tokenStorage: TokenStorageService, pictureService: PictureService,private toastr: ToastrService) {
     this.pictureService = pictureService;
     this.form.place_en = '1st place';
     this.form.place_hu = '1. helyezés';
@@ -48,21 +47,15 @@ export class AchievementsComponent implements OnInit {
         this.isLastPage = data.last;
       },
       (err) => {
-        alert("get error");
+        this.showError(err.message, 'Eredmények sikertelen lekérése');
       }
     );
   }
 
-  // public sortby(date: string) {
-  //   return this.achievements.sort((a, b) =>
-  //     a[date] < b[date] ? 1 : a[date] === b[date] ? 0 : -1
-  //   );
-  // }
-
   onDeleteAchievement(a: Achievement) {
     this.achievements = this.achievements.filter(rowObj => rowObj.id !== a.id);
   }
-  //post
+
   onSubmit(empForm: any) {
     if (this.form.place_hu == null) {
       this.form.place_hu = ' ';
@@ -84,10 +77,15 @@ export class AchievementsComponent implements OnInit {
         isLast: false,
           picture: '../../assets/achievement/' + this.fileToUpload.name
     };
-    const b = this.http
-        .post(this.globals.BASE_URL + "/api/achievement", o)
-        .subscribe((data) => {
-        });
+    this.achievementService.addAchievement(o).subscribe(
+        (res) => {
+          this.showSuccess('Sikeres mentés');
+        },
+        (err) => {
+          this.showError(err.message, 'Sikertelen mentés');
+        }
+    );
+
     this.pushAchievement();
     this.form = empForm;
     this.form.reset();
@@ -101,6 +99,7 @@ export class AchievementsComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
       // do something, if upload success
     }, error => {
+      this.showError(error.message, 'Képfeltöltés hiba');
     });
   }
   private pushAchievement() {
@@ -151,5 +150,12 @@ export class AchievementsComponent implements OnInit {
         return true;
       });
     }
+  }
+  showSuccess(message) {
+    this.toastr.success(message);
+  }
+
+  showError(message, title) {
+    this.toastr.error(message, title);
   }
 }
