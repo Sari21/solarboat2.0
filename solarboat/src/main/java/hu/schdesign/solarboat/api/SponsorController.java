@@ -46,4 +46,9 @@ public class SponsorController {
     public Iterable<Sponsor> changeAllSponsors(@Valid @RequestBody Iterable<Sponsor> newSponsors){
         return this.sponsorService.changeAllSponsors(newSponsors);
     }
+    @Secured("ROLE_ADMIN")
+    @PutMapping(path = "updateorder")
+    public AllSponsors updateOrder(@RequestBody ArrayList<Sponsor> sponsors){
+        return sponsorService.updateOrder(sponsors);
+    }
 }

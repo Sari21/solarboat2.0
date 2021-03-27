@@ -5,4 +5,5 @@ export class Sponsor {
   picture: string;
   row: number;
   id: number;
+  orderNumber: number;
 }

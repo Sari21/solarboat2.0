@@ -25,6 +25,7 @@ export class SponsorsComponent implements OnInit {
     this.getSponsors();
   }
   allSponsors: AllSponsors;
+  sponsorListToUpdateOrder: Sponsor[];
   main: Sponsor[] = [];
   top: Sponsor[] = [];
   other: Sponsor[] = [];
@@ -206,14 +207,44 @@ export class SponsorsComponent implements OnInit {
 
   dropMain(event: CdkDragDrop<Sponsor[]>) {
     moveItemInArray(this.allSponsors.main, event.previousIndex, event.currentIndex);
+    this.updateSponsors();
   }
   dropTop(event: CdkDragDrop<Sponsor[]>) {
     moveItemInArray(this.allSponsors.top, event.previousIndex, event.currentIndex);
+    this.updateSponsors();
   }
   dropOther(event: CdkDragDrop<Sponsor[]>) {
     moveItemInArray(this.allSponsors.other, event.previousIndex, event.currentIndex);
+    this.updateSponsors();
   }
   dropPartner(event: CdkDragDrop<Sponsor[]>) {
     moveItemInArray(this.allSponsors.partner, event.previousIndex, event.currentIndex);
+    this.updateSponsors();
+  }
+  updateSponsors(){
+    this.sponsorListToUpdateOrder = [];
+    this.setOrderNumber(this.allSponsors.main);
+    this.setOrderNumber( this.allSponsors.top);    
+    this.setOrderNumber( this.allSponsors.other);
+    this.setOrderNumber( this.allSponsors.partner);
+ 
+    this.sponsorService.updateOrder(this.sponsorListToUpdateOrder).subscribe(
+      (data) => {
+        // do something, if upload success
+      },
+      (error) => {
+         console.log(error);
+      }
+    );
+  }
+
+  setOrderNumber(sponsorsToAdd: Sponsor[]){
+    let i = 0;
+    sponsorsToAdd.forEach(s => {
+      s.orderNumber = i;
+      i++;
+      this.sponsorListToUpdateOrder.push(s);
+    })
+
   }
 }

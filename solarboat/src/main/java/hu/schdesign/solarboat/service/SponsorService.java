@@ -67,4 +67,10 @@ public class SponsorService {
         return sponsorRepository.saveAll(newSponsors);
     }
 
+    public AllSponsors updateOrder(ArrayList<Sponsor> sponsors){
+      sponsorRepository.saveAll(sponsors);
+      return this.getAllSponsors();
+
+    }
+
 }
