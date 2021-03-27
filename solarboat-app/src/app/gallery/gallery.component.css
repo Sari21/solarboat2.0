@@ -23,7 +23,7 @@
   object-fit: cover;*/
 }
 .gallery img:hover {
-  filter: grayscale(70%);
+  filter: contrast(110%);
   transform: scale(1.05);
   border-radius: 15px;
 }
@@ -105,8 +105,14 @@
     -webkit-column-count: 1;
     column-count: 1;
   }
-
-
-  
-  
+}
+@media only screen and (min-width: 768px){
+  .small-width > *{
+    display: none;
+  }
+}
+@media  (max-width: 769px){
+  .large-width > *{
+    display: none;
+  }
 }

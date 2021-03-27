@@ -51,6 +51,8 @@ import { ConfirmComponent } from "./confirm/confirm.component";
 import { CompassComponent } from "./compass/compass.component";
 import { MileageComponent } from "./mileage/mileage.component";
 import { WavesComponent } from "./waves/waves.component";
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TeamUserviewComponent } from './team-userview/team-userview.component';
 import { TeamEditmembersComponent } from './team-editmembers/team-editmembers.component';
 import { TeamEditgroupsComponent } from './team-editgroups/team-editgroups.component';
@@ -136,6 +138,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatDatepickerModule,
         MatNativeDateModule
     ],
+    DragDropModule,
+    NgxDropzoneModule,
 
   bootstrap: [AppComponent],
 
