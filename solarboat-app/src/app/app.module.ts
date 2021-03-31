@@ -136,10 +136,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatSelectModule,
         MatInputModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        DragDropModule,
+        NgxDropzoneModule
     ],
-    DragDropModule,
-    NgxDropzoneModule,
 
   bootstrap: [AppComponent],
 
