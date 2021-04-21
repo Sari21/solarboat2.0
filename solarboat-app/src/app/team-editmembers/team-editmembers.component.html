@@ -33,20 +33,20 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-12">
                     <div class="form-group">
-                        <label for="lastName">Vezetéknév</label>
-                        <input type="text" class="form-control" id="lastName"
-                               required
-                               [(ngModel)]="form.lastName" name="lastName"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field>
+                            <input matInput name="lastName" type="text" id="lastName"
+                                   [(ngModel)]="form.lastName" required placeholder="Vezetéknév">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12">
                     <div class="form-group">
-                        <label for="firstName">Keresztnév</label>
-                        <input type="text" class="form-control" id="firstName"
-                               required
-                               [(ngModel)]="form.firstName" name="firstName"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field>
+                            <input matInput name="firstName" type="text" id="firstName"
+                                   [(ngModel)]="form.firstName" required placeholder="Keresztnév">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12 pb-2">
@@ -63,12 +63,10 @@
                 <div class="col-md-6 col-lg-6 col-12 pb-2">
 
                     <div class="form-group">
-                        <label class="col-12" for="linkedin">Linkedin link</label>
-                        <input id="linkedin"
-                               type="text"
-                               class="form-control"
-                               [(ngModel)]="form.linkedin" name="linkedin"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field>
+                            <input matInput name="linkedin" type="text" id="linkedin"
+                                   [(ngModel)]="form.linkedin" placeholder="Linkedin link">
+                        </mat-form-field>
                     </div>
                 </div>
 
@@ -103,20 +101,20 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-12">
                     <div class="form-group">
-                        <label for="lastName1">Vezetéknév</label>
-                        <input type="text" class="form-control" id="lastName1"
-                               required
-                               [(ngModel)]="form.lastName" name="lastName1"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field>
+                            <input matInput name="lastName" type="text" id="lastName"
+                                   [(ngModel)]="form.lastName" required placeholder="Vezetéknév">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12">
                     <div class="form-group">
-                        <label for="firstName1">Keresztnév</label>
-                        <input type="text" class="form-control" id="firstName1"
-                               required
-                               [(ngModel)]="form.firstName" name="firstName1"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field>
+                            <input matInput name="firstName" type="text" id="firstName"
+                                   [(ngModel)]="form.firstName" required placeholder="Keresztnév">
+                            <mat-error>Kötelező mező</mat-error>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12 pb-2">
@@ -134,12 +132,10 @@
                 <div class="col-md-6 col-lg-6 col-12 pb-2">
 
                     <div class="form-group">
-                        <label class="col-12" for="linkedin1">Linkedin link</label>
-                        <input id="linkedin1"
-                               type="text"
-                               class="form-control"
-                               [(ngModel)]="form.linkedin" name="linkedin1"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field>
+                            <input matInput name="linkedin" type="url" id="linkedin"
+                                   [(ngModel)]="form.linkedin" placeholder="Linkedin link">
+                        </mat-form-field>
                     </div>
                 </div>
 

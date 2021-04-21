@@ -1,248 +1,259 @@
 <app-nav-bar></app-nav-bar>
 <div class="d-flex justify-content-center row sponsorsFull m-0 p-0 col-12">
-  <div class="form col-12 d-flex justify-content-center row m-0 p-0 sponsorsFull">
-    <div class="card mb-5 mt-5 col-11 col-md-6 col-lg-6 col-sm-10" id="sponsor-form" *ngIf="authority == 'admin'">
-      <h2 class="title pb-3">Új szponzor hozzáadása</h2>
-      <div>
-        <form (ngSubmit)="onSubmit($event)" #sponsorForm="ngForm">
-          <div class="row">
-            <div class="col-11 col-md-6 col-lg-6 col-sm-10">
-              <div class="form-group">
-                <label for="name">Név</label>
-                <input type="text" class="form-control" id="name" required [(ngModel)]="newSponsor.name" name="name"
-                  [ngClass]="{ failed: failed }" />
-              </div>
-              <div class="form-group">
-                <label for="link">Weblap cím</label>
-                <input type="url" class="form-control" id="link" required [(ngModel)]="newSponsor.link" name="link"
-                  [ngClass]="{ failed: failed }" />
-              </div>
-              <label for="group">Típus</label>
-              <select [(ngModel)]="newSponsor.group" name="group" id="group" class="ml-3">
-                <option *ngFor="let item of types" [ngValue]="item">
-                  {{ item }}
-                </option>
-              </select>
+    <div class="form col-12 d-flex justify-content-center row m-0 p-0 sponsorsFull">
+        <div class="card mb-5 mt-5 col-11 col-md-6 col-lg-6 col-sm-10" id="sponsor-form" *ngIf="authority == 'admin'">
+            <h2 class="title pb-3">Új szponzor hozzáadása</h2>
+            <div>
+                <form (ngSubmit)="onSubmit($event)" #sponsorForm="ngForm">
+                    <div class="row">
+                        <div class="col-11 col-md-6 col-lg-6 col-sm-10">
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput name="name" type="text" id="name"
+                                           [(ngModel)]="newSponsor.name" required placeholder="Név">
+                                    <mat-error>Kötelező mező</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput name="link" type="url" id="link"
+                                           [(ngModel)]="newSponsor.link" required placeholder="Weblap link">
+                                    <mat-error>Kötelező mező</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="from-group">
+                                <mat-form-field>
+                                    <mat-label>Típus</mat-label>
+                                    <mat-select [(value)]="newSponsor.group" name="group" id="group">
+                                        <mat-option *ngFor="let item of types" [value]="item">
+                                          {{ item }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput name="row" type="number" min="0" step="1" id="row"
+                                           [(ngModel)]="newSponsor.row" required placeholder="Sor">
+                                    <mat-error>Kötelező mező</mat-error>
+                                    <mat-hint>Hányadik sorban jelenjen meg 0-tól számolva</mat-hint>
+                                </mat-form-field>
+                            </div>
 
-              <div class="form-group">
-                <label for="link">Sor</label>
-                <input type="number" min="0" step="1" class="form-control" id="row" [(ngModel)]="newSponsor.row"
-                  name="row" [ngClass]="{ failed: failed }" />
-              </div>
-            
-            </div>
-            <div class="col-11 col-md-6 col-lg-6 col-sm-10">
-              <label for="file">Kép</label>
-              <ngx-dropzone (change)="onSelect($event)">
-                <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
-                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                </ngx-dropzone-preview>
-              </ngx-dropzone>
-            </div>
-          </div>
+                        </div>
+                        <div class="col-11 col-md-6 col-lg-6 col-sm-10">
+                            <label for="file">Kép</label>
+                            <ngx-dropzone (change)="onSelect($event)">
+                                <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
+                                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
+                                                      (removed)="onRemove(f)">
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-preview>
+                            </ngx-dropzone>
+                        </div>
+                    </div>
 
-          <a class="btn" (click)="onSubmit($event)" href="javascript:void(0)" [ngClass]="{
+                    <a class="btn" (click)="onSubmit($event)" href="javascript:void(0)" [ngClass]="{
               disabled: !sponsorForm.form.valid || files == []
             }"><span>Feltöltés</span></a>
-          <div [hidden]="!failed" class="alert alert-danger mt-3">
-            {{ errorMessage }}
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-12 p-0 m-0"  *ngIf="allSponsors && authority == 'admin'">
-    <div class="d-flex justify-content-center sponsors pb-5 m-0" >
-      <div class="title col-md-9 col-11">
-        <h3 translate class="title pb-5">SPONSORS.main</h3>
-        <div class="d-flex justify-content-center flex-wrap col-md-12">
-          <div cdkDropList (cdkDropListDropped)="dropMain($event)">
-            <div *ngFor="let sponsor of allSponsors.main" class="col-6 col-md-4" cdkDrag>
-              <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor)" href="javascript:void(0)"
-                class="close">&times;</a>
-              <div class="img-wrap">
-                <a href="{{ sponsor.link }}" target="blank">
-                  <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-                </a>
-              </div>
+                    <div [hidden]="!failed" class="alert alert-danger mt-3">
+                        {{ errorMessage }}
+                    </div>
+                </form>
             </div>
-          </div>
-          
         </div>
-      </div>
     </div>
-    <div class="d-flex justify-content-center sponsors pb-4 sponsorsFull">
-      <div class="col-md-9 col-11">
-        <h3 translate class="pb-5 pt-5 title">SPONSORS.top</h3>
-        <div class="d-flex justify-content-center flex-wrap col-md-12">
-          <div cdkDropList (cdkDropListDropped)="dropTop($event)">
-          <div *ngFor="let sponsor of allSponsors.top" class="col-6 col-md-3" cdkDrag>
-            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-              class="close">&times;</a>
-            <div class="img-wrap">
-              <a href="{{ sponsor.link }}" target="blank">
-                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-              </a>
+
+    <div class="col-12 p-0 m-0" *ngIf="allSponsors && authority == 'admin'">
+        <div class="d-flex justify-content-center sponsors pb-5 m-0">
+            <div class="title col-md-9 col-11">
+                <h3 translate class="title pb-5">SPONSORS.main</h3>
+                <div class="d-flex justify-content-center flex-wrap col-md-12">
+                    <div cdkDropList (cdkDropListDropped)="dropMain($event)">
+                        <div *ngFor="let sponsor of allSponsors.main" class="col-6 col-md-4" cdkDrag>
+                            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor)" href="javascript:void(0)"
+                               class="close">&times;</a>
+                            <div class="img-wrap">
+                                <a href="{{ sponsor.link }}" target="blank">
+                                    <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-center sponsors pb-4">
-      <div class="col-md-9 col-11">
-        <h3 translate class="pb-5 pt-5 title">SPONSORS.other</h3>
-        <div class="d-flex align-content-start flex-wrap col-md-12">
-          <div cdkDropList (cdkDropListDropped)="dropOther($event)">
-          <div *ngFor="let sponsor of allSponsors.other" class="col-4 col-md-2" cdkDrag>
-            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-              class="close">&times;</a>
-            <div class="img-wrap">
-              <a href="{{ sponsor.link }}" target="blank">
-                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-              </a>
+        <div class="d-flex justify-content-center sponsors pb-4 sponsorsFull">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.top</h3>
+                <div class="d-flex justify-content-center flex-wrap col-md-12">
+                    <div cdkDropList (cdkDropListDropped)="dropTop($event)">
+                        <div *ngFor="let sponsor of allSponsors.top" class="col-6 col-md-3" cdkDrag>
+                            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                               class="close">&times;</a>
+                            <div class="img-wrap">
+                                <a href="{{ sponsor.link }}" target="blank">
+                                    <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center sponsors pb-4" >
-      <div class="col-md-9 col-11">
-        <h3 translate class="pb-5 pt-5 title">SPONSORS.partners</h3>
-        <div class="d-flex align-content-center flex-column flex-wrap col-md-12">
-          <div cdkDropList (cdkDropListDropped)="dropPartner($event)">
-          <div *ngFor="let sponsor of allSponsors.partner" class="col-6 col-md-5" cdkDrag>
-            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-              class="close">&times;</a>
-            <div class="img-wrap">
-              <a href="{{ sponsor.link }}" target="blank">
-                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-              </a>
+
+        <div class="d-flex justify-content-center sponsors pb-4">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.other</h3>
+                <div class="d-flex align-content-start flex-wrap col-md-12">
+                    <div cdkDropList (cdkDropListDropped)="dropOther($event)">
+                        <div *ngFor="let sponsor of allSponsors.other" class="col-4 col-md-2" cdkDrag>
+                            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                               class="close">&times;</a>
+                            <div class="img-wrap">
+                                <a href="{{ sponsor.link }}" target="blank">
+                                    <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center sponsors pb-4">
-      <div class="col-md-9 col-11">
-        <h3 translate class="pb-5 pt-5 title">SPONSORS.uni</h3>
-
-        <div class="d-flex justify-content-center flex-wrap col-md-12">
-          <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
-            <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}" />
-          </a>
-        </div>
-        <div *ngFor="let sponsors of uni" class="d-flex justify-content-center flex-wrap col-md-12">
-          <div *ngFor="let sponsor of sponsors" class="col-3 col-md-2">
-            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-              class="close">&times;</a>
-            <div class="img-wrap">
-              <a href="{{ sponsor.link }}" target="blank">
-                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-              </a>
+        <div class="d-flex justify-content-center sponsors pb-4">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.partners</h3>
+                <div class="d-flex align-content-center flex-column flex-wrap col-md-12">
+                    <div cdkDropList (cdkDropListDropped)="dropPartner($event)">
+                        <div *ngFor="let sponsor of allSponsors.partner" class="col-6 col-md-5" cdkDrag>
+                            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                               class="close">&times;</a>
+                            <div class="img-wrap">
+                                <a href="{{ sponsor.link }}" target="blank">
+                                    <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="d-flex justify-content-center sponsors pb-4">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.uni</h3>
 
-
-<div class="col-12 p-0 m-0"  *ngIf="allSponsors && authority != 'admin'">
-  <div class="d-flex justify-content-center sponsors pb-5 m-0" >
-    <div class="title col-md-9 col-11">
-      <h3 translate class="title pb-5">SPONSORS.main</h3>
-      <div class="d-flex justify-content-center flex-wrap col-md-12">
-          <div *ngFor="let sponsor of allSponsors.main" class="col-6 col-md-4" >
-            <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor)" href="javascript:void(0)"
-              class="close">&times;</a>
-            <div class="img-wrap">
-              <a href="{{ sponsor.link }}" target="blank">
-                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-              </a>
+                <div class="d-flex justify-content-center flex-wrap col-md-12">
+                    <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
+                        <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}"/>
+                    </a>
+                </div>
+                <div *ngFor="let sponsors of uni" class="d-flex justify-content-center flex-wrap col-md-12">
+                    <div *ngFor="let sponsor of sponsors" class="col-3 col-md-2">
+                        <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                           class="close">&times;</a>
+                        <div class="img-wrap">
+                            <a href="{{ sponsor.link }}" target="blank">
+                                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center sponsors pb-4 sponsorsFull">
-    <div class="col-md-9 col-11">
-      <h3 translate class="pb-5 pt-5 title">SPONSORS.top</h3>
-      <div class="d-flex justify-content-center flex-wrap col-md-12">
-        <div *ngFor="let sponsor of allSponsors.top" class="col-6 col-md-3">
-          <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-            class="close">&times;</a>
-          <div class="img-wrap">
-            <a href="{{ sponsor.link }}" target="blank">
-              <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-            </a>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="d-flex justify-content-center sponsors pb-4">
-    <div class="col-md-9 col-11">
-      <h3 translate class="pb-5 pt-5 title">SPONSORS.other</h3>
 
-      <div class="d-flex align-content-start flex-wrap col-md-12">
-        <div *ngFor="let sponsor of allSponsors.other" class="col-4 col-md-2">
-          <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-            class="close">&times;</a>
-          <div class="img-wrap">
-            <a href="{{ sponsor.link }}" target="blank">
-              <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center sponsors pb-4" >
-    <div class="col-md-9 col-11">
-      <h3 translate class="pb-5 pt-5 title">SPONSORS.partners</h3>
-      <div class="d-flex align-content-center flex-column flex-wrap col-md-12">
-        <div *ngFor="let sponsor of allSponsors.partner" class="col-6 col-md-5">
-          <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-            class="close">&times;</a>
-          <div class="img-wrap">
-            <a href="{{ sponsor.link }}" target="blank">
-              <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center sponsors pb-4">
-    <div class="col-md-9 col-11">
-      <h3 translate class="pb-5 pt-5 title">SPONSORS.uni</h3>
+    <div class="col-12 p-0 m-0" *ngIf="allSponsors && authority != 'admin'">
+        <div class="d-flex justify-content-center sponsors pb-5 m-0">
+            <div class="title col-md-9 col-11">
+                <h3 translate class="title pb-5">SPONSORS.main</h3>
+                <div class="d-flex justify-content-center flex-wrap col-md-12">
+                    <div *ngFor="let sponsor of allSponsors.main" class="col-6 col-md-4">
+                        <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor)" href="javascript:void(0)"
+                           class="close">&times;</a>
+                        <div class="img-wrap">
+                            <a href="{{ sponsor.link }}" target="blank">
+                                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                            </a>
+                        </div>
+                    </div>
 
-      <div class="d-flex justify-content-center flex-wrap col-md-12">
-        <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
-          <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}" />
-        </a>
-      </div>
-      <div *ngFor="let sponsors of uni" class="d-flex justify-content-center flex-wrap col-md-12">
-        <div *ngFor="let sponsor of sponsors" class="col-3 col-md-2">
-          <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
-            class="close">&times;</a>
-          <div class="img-wrap">
-            <a href="{{ sponsor.link }}" target="blank">
-              <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12" />
-            </a>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="d-flex justify-content-center sponsors pb-4 sponsorsFull">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.top</h3>
+                <div class="d-flex justify-content-center flex-wrap col-md-12">
+                    <div *ngFor="let sponsor of allSponsors.top" class="col-6 col-md-3">
+                        <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                           class="close">&times;</a>
+                        <div class="img-wrap">
+                            <a href="{{ sponsor.link }}" target="blank">
+                                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center sponsors pb-4">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.other</h3>
+
+                <div class="d-flex align-content-start flex-wrap col-md-12">
+                    <div *ngFor="let sponsor of allSponsors.other" class="col-4 col-md-2">
+                        <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                           class="close">&times;</a>
+                        <div class="img-wrap">
+                            <a href="{{ sponsor.link }}" target="blank">
+                                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center sponsors pb-4">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.partners</h3>
+                <div class="d-flex align-content-center flex-column flex-wrap col-md-12">
+                    <div *ngFor="let sponsor of allSponsors.partner" class="col-6 col-md-5">
+                        <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                           class="close">&times;</a>
+                        <div class="img-wrap">
+                            <a href="{{ sponsor.link }}" target="blank">
+                                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center sponsors pb-4">
+            <div class="col-md-9 col-11">
+                <h3 translate class="pb-5 pt-5 title">SPONSORS.uni</h3>
+
+                <div class="d-flex justify-content-center flex-wrap col-md-12">
+                    <a href="{{ bme.link }}" target="blank" class="col-7 col-md-5">
+                        <img class="col-12" src="{{ bme.picture }}" alt="{{ bme.name }}"/>
+                    </a>
+                </div>
+                <div *ngFor="let sponsors of uni" class="d-flex justify-content-center flex-wrap col-md-12">
+                    <div *ngFor="let sponsor of sponsors" class="col-3 col-md-2">
+                        <a *ngIf="authority == 'admin'" (click)="clickMethod(sponsor.id)" href="javascript:void(0)"
+                           class="close">&times;</a>
+                        <div class="img-wrap">
+                            <a href="{{ sponsor.link }}" target="blank">
+                                <img src="{{ sponsor.picture }}" alt="{{ sponsor.name }}" class="col-12"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </div>
 <app-footer></app-footer>

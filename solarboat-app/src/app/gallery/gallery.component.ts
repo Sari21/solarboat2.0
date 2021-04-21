@@ -1,141 +1,161 @@
-import { PictureService } from "../shared/picture.service";
-import { Component, OnInit, Output, HostListener } from "@angular/core";
-import { Router } from "@angular/router";
+import {PictureService} from "../shared/picture.service";
+import {Component, OnInit, Output, HostListener} from "@angular/core";
+import {Router} from "@angular/router";
 
-import { TokenStorageService } from "../auth/token-storage.service";
+import {TokenStorageService} from "../auth/token-storage.service";
 
-import { GalleryPicture } from "../model/gallery-picture";
-import { GalleryPictureRequest } from "../model/gallery-picture-request";
+import {GalleryPicture} from "../model/gallery-picture";
+import {GalleryPictureRequest} from "../model/gallery-picture-request";
+import {ToastrService} from "ngx-toastr";
 
 
 // import AOS from 'aos';
 
 @Component({
-  selector: "app-gallery",
-  templateUrl: "./gallery.component.html",
-  styleUrls: ["./gallery.component.css"],
+    selector: "app-gallery",
+    templateUrl: "./gallery.component.html",
+    styleUrls: ["./gallery.component.css"],
 })
 export class GalleryComponent implements OnInit {
-  constructor(
-    private pictureService: PictureService,
-    private router: Router,
-    private tokenStorage: TokenStorageService
-  ) {
-  }
-  @Output() gallery: GalleryPicture[];
-  newPicture: GalleryPictureRequest;
-  failed = false;
-  errorMessage = "";
-  picturesSelected = false;
-  pic = false;
-  smallPic = false;
-  public authority: string;
-  public roles: string[];
-  public largeWidth: boolean;
-  fileToUpload: File;
-  files: File[] = [];
-ngOnInit(): void {
-  // AOS.init();
-  this.checkAuth();
-  this.loadGallery();
-  this.newPicture = new GalleryPictureRequest();
-  this.largeWidth = (window.innerWidth < 768) ? false : true;
-  }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.largeWidth = (window.innerWidth < 768) ? false : true;
-    console.log(this.largeWidth);
-  }
-  // handleFileInput(files: FileList) {
-  //   this.fileToUpload = files.item(0);
-  //   this.newPicture.picture = files.item(0);
-  //   console.log(this.newPicture);
-  //   this.pic = true;
-  //   if (this.pic) {
-  //     this.picturesSelected = true;
-  //   }
-  // }
-  onSelect(event) {
-    if(this.files.length > 0){
-      this.files = [];
+    constructor(
+        private pictureService: PictureService,
+        private router: Router,
+        private tokenStorage: TokenStorageService,
+        private toastr: ToastrService,
+    ) {
     }
-    this.files.push(...event.addedFiles);
-    this.newPicture.picture = this.files[0];
-    this.picturesSelected = true;
-  }
-  onRemove(event) {
-    this.files.splice(this.files.indexOf(event), 1);
-    this.picturesSelected = false;
 
-  }
-  uploadGalleryPicture(empForm: any) {
-    if (this.newPicture.title_hu == null ) {
-      //this.newPicture.title_hu = ' ';
-    }
-    if (this.newPicture.title_en == null) {
-      //this.newPicture.title_en = ' ';
-    }
-    this.pictureService.postGalleryPicture(this.newPicture).subscribe(
-      (data) => {
-        // do something, if upload success
-        //this.uploadFileToActivity();
+    @Output() gallery: GalleryPicture[];
+    newPicture: GalleryPictureRequest;
+    picturesSelected = false;
+    pic = false;
+    smallPic = false;
+    public authority: string;
+    public roles: string[];
+    public largeWidth: boolean;
+    fileToUpload: File;
+    files: File[] = [];
+
+    ngOnInit(): void {
+        // AOS.init();
+        this.checkAuth();
+        this.loadGallery();
         this.newPicture = new GalleryPictureRequest();
-        this.gallery.push(data);
-        //this.loadGallery();
-      },
-      (error) => {
-        // console.log(error);
-      }
-    );
-    empForm.reset();
-  }
+        this.largeWidth = (window.innerWidth < 768) ? false : true;
+    }
 
-  loadGallery() {
-    this.pictureService.getGallery().subscribe((res) => {
-      this.gallery = res;
-      this.gallery.forEach((s) => {
-        s.picture = "./assets/gallery/".concat(s.picture);
-      });
-      this.gallery.forEach(
-        (s) => (s.smallPicture = "./assets/gallery/".concat(s.smallPicture))
-      );
-    });
-  }
-  delete(id: number) {
-   
-    this.pictureService.deleteGalleryPicture(id).subscribe(
-      (data) => {
-        var du = this.gallery.find((a) => a.id == id);
-        const index = this.gallery.indexOf(du, 0);
-        if (index > -1) {
-          this.gallery.splice(index, 1);
-        }
-      },
-      (error) => {
-        // console.log(error);
-      }
-    );
-  }
-  clickMethod(id: number) {
-    if (confirm("Are you sure to delete " + id.toString())) {
-      this.delete(id);
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.largeWidth = (window.innerWidth < 768) ? false : true;
+        console.log(this.largeWidth);
     }
-  }
-  checkAuth() {
-    this.authority = undefined;
-    if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
-      this.roles.every((role) => {
-        if (role === "ROLE_ADMIN") {
-          this.authority = "admin";
-          return false;
+
+    // handleFileInput(files: FileList) {
+    //   this.fileToUpload = files.item(0);
+    //   this.newPicture.picture = files.item(0);
+    //   console.log(this.newPicture);
+    //   this.pic = true;
+    //   if (this.pic) {
+    //     this.picturesSelected = true;
+    //   }
+    // }
+    onSelect(event) {
+        if (this.files.length > 0) {
+            this.files = [];
         }
-        this.authority = "user";
-        return true;
-      });
+        this.files.push(...event.addedFiles);
+        this.newPicture.picture = this.files[0];
+        this.picturesSelected = true;
     }
-  }
-  isEnabled(form: boolean){
-    return (form && this.fileToUpload);
-  }
+
+    onRemove(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.picturesSelected = false;
+
+    }
+
+    uploadGalleryPicture(empForm: any) {
+        if (this.newPicture.title_hu == null) {
+            //this.newPicture.title_hu = ' ';
+        }
+        if (this.newPicture.title_en == null) {
+            //this.newPicture.title_en = ' ';
+        }
+        this.pictureService.postGalleryPicture(this.newPicture).subscribe(
+            (data) => {
+                // do something, if upload success
+                //this.uploadFileToActivity();
+                this.newPicture = new GalleryPictureRequest();
+                this.gallery.push(data);
+                //this.loadGallery();
+                this.showSuccess('Sikeres mentés');
+            },
+            (error) => {
+                this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+            }
+        );
+        empForm.reset();
+    }
+
+    loadGallery() {
+        this.pictureService.getGallery().subscribe((res) => {
+            this.gallery = res;
+            this.gallery.forEach((s) => {
+                s.picture = "./assets/gallery/".concat(s.picture);
+            });
+            this.gallery.forEach(
+                (s) => (s.smallPicture = "./assets/gallery/".concat(s.smallPicture))
+            );
+        });
+    }
+
+    delete(id: number) {
+
+        this.pictureService.deleteGalleryPicture(id).subscribe(
+            (data) => {
+                var du = this.gallery.find((a) => a.id == id);
+                const index = this.gallery.indexOf(du, 0);
+                if (index > -1) {
+                    this.gallery.splice(index, 1);
+                }
+              this.showSuccess('Sikeres törlés');
+            },
+            (error) => {
+                this.showError(error.message, 'Sikertelen képtörlés');
+            }
+        );
+    }
+
+    clickMethod(id: number) {
+        if (confirm("Are you sure to delete " + id.toString())) {
+            this.delete(id);
+        }
+    }
+
+    checkAuth() {
+        this.authority = undefined;
+        if (this.tokenStorage.getToken()) {
+            this.roles = this.tokenStorage.getAuthorities();
+            this.roles.every((role) => {
+                if (role === "ROLE_ADMIN") {
+                    this.authority = "admin";
+                    return false;
+                }
+                this.authority = "user";
+                return true;
+            });
+        }
+    }
+
+    isEnabled(form: boolean) {
+        return (form && this.fileToUpload);
+    }
+
+    showSuccess(message) {
+        this.toastr.success(message);
+    }
+
+    showError(message, title) {
+        this.toastr.error(message, title);
+    }
 }

@@ -34,7 +34,6 @@
                                                                     required
                                                                     [(ngModel)]="form.content"
                                                                     name="content"
-                                                                    [ngClass]="{'failed': failed }"
                                                                     [config]="config"
                                                     ></angular-editor>
                                                 </div>
@@ -68,7 +67,6 @@
                                                                     required
                                                                     [(ngModel)]="form.content_en"
                                                                     name="content_en"
-                                                                    [ngClass]="{'failed': failed }"
                                                                     [config]="config"
                                                     ></angular-editor>
                                                 </div>
@@ -92,20 +90,11 @@
                             <div class="col-md-6 col-lg-6 col-12 pb-2">
 
                                 <div class="form-group">
-                                    <!--                                    <label class="col-12" for="date">Dátum (opcionális)</label>-->
-                                    <!--                                    <input id="date"-->
-                                    <!--                                           type="text"-->
-                                    <!--                                           class="form-control"-->
-                                    <!--                                           placeholder="YYYY-MM-DD"-->
-                                    <!--                                           [(ngModel)]="form.date" name="date"-->
-                                    <!--                                           [ngClass]="{'failed': failed }">-->
                                     <mat-form-field >
                                         <mat-label>Dátum</mat-label>
                                         <input matInput  name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
                                         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                                         <mat-datepicker #date></mat-datepicker>
-<!--                                        <input matInput name="date" type="text" id="date" [formControl]="dateFormControl"-->
-<!--                                               [(ngModel)]="form.date" placeholder="YYYY-MM-DD">-->
                                         <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>
                                     </mat-form-field>
 
@@ -116,11 +105,6 @@
                                 <a class="btn mr-4" id="submit-btn" (click)="onSubmit(AddForm, $event)"
                                    href="javascript:void(0)"
                                    [ngClass]="{'disabled': !AddForm.form.valid }"><span>Feltöltés</span></a>
-
-                                <div [hidden]="!failed"
-                                     class="alert alert-danger mt-3">
-                                    {{errorMessage}}
-                                </div>
                             </div>
 
                         </form>

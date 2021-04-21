@@ -24,8 +24,6 @@ export class NewsComponent implements OnInit {
     public roles: string[];
     public authority: string;
     form: any = {};
-    failed = false;
-    errorMessage = '';
     pictureService: PictureService;
     fileToUpload: File = null;
     config: AngularEditorConfig = {
