@@ -82,7 +82,7 @@ export class AchievementsComponent implements OnInit {
           this.pushAchievement(res);
         },
         (err) => {
-          this.showError(err.message, 'Sikertelen mentés');
+          this.showError(err.error.message, 'Sikertelen mentés');
         }
     );
 
@@ -99,7 +99,7 @@ export class AchievementsComponent implements OnInit {
     this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
       // do something, if upload success
     }, error => {
-      this.showError(error.message, 'Képfeltöltés hiba');
+      this.showError(error.error.message, 'Képfeltöltés hiba');
     });
   }
   private pushAchievement(object) {

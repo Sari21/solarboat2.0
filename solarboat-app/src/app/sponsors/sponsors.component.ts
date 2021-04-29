@@ -119,7 +119,7 @@ export class SponsorsComponent implements OnInit {
                 this.splitSponsors();
             },
             (error) => {
-                this.showError(error.message, 'Sikertelen mentés');
+                this.showError(error.error.message, 'Sikertelen mentés');
             }
         );
     }
@@ -136,7 +136,7 @@ export class SponsorsComponent implements OnInit {
             },
             (error) => {
                 // console.log(error);
-                this.showError(error.message, 'Sikertelen fájlfeltöltés');
+                this.showError(error.error.message, 'Sikertelen fájlfeltöltés');
             }
         );
     }
@@ -174,7 +174,7 @@ export class SponsorsComponent implements OnInit {
                 // this.splitSponsores();
             },
             (error) => {
-                this.showError(error.message, 'Sikertelen törlés');
+                this.showError(error.error.message, 'Sikertelen törlés');
             }
         );
     }
@@ -255,7 +255,7 @@ export class SponsorsComponent implements OnInit {
             },
             (error) => {
                 console.log(error);
-                this.showError(error.message, 'Sikertelen sorrend módosítás');
+                this.showError(error.error.message, 'Sikertelen sorrend módosítás');
             }
         );
     }

@@ -49,7 +49,7 @@ export class TeamUserviewComponent implements OnInit {
                 });
             },
             (err) => {
-                this.showError(err.message, 'Csapatok lekérése hiba');
+                this.showError(err.error.message, 'Csapatok lekérése hiba');
             }
         );
     }

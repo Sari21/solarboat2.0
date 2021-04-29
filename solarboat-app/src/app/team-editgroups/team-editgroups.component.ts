@@ -53,7 +53,7 @@ export class TeamEditgroupsComponent implements OnInit {
                 });
             },
             (err) => {
-                this.showError(err.message, 'Csapatok sikertelen lekérése');
+                this.showError(err.error.message, 'Csapatok sikertelen lekérése');
             }
         );
     }
@@ -68,7 +68,7 @@ export class TeamEditgroupsComponent implements OnInit {
                 this.ngOnInit();
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen mentés');
+                this.showError(err.error.message, 'Sikertelen mentés');
             });
     }
 
@@ -78,7 +78,7 @@ export class TeamEditgroupsComponent implements OnInit {
                 this.showSuccess('Sikeres mentés');
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen mentés');
+                this.showError(err.error.message, 'Sikertelen mentés');
             });
     }
 
@@ -88,7 +88,7 @@ export class TeamEditgroupsComponent implements OnInit {
                 this.showSuccess('Sikeres mentés');
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen mentés');
+                this.showError(err.error.message, 'Sikertelen mentés');
             });
     }
 

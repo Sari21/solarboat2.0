@@ -39,7 +39,7 @@ export class TeamEditmembersComponent implements OnInit {
                 });
             },
             (err) => {
-                this.showError(err.message, 'Csapattagok lekérése hiba');
+                this.showError(err.error.message, 'Csapattagok lekérése hiba');
             }
         );
     }
@@ -65,7 +65,7 @@ export class TeamEditmembersComponent implements OnInit {
                 this.getMembers();
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen mentés');
+                this.showError(err.error.message, 'Sikertelen mentés');
             });
         this.modalService.dismissAll('put');
         this.form = null;
@@ -82,7 +82,7 @@ export class TeamEditmembersComponent implements OnInit {
                     this.showSuccess('Sikeres mentés');
                 },
                 (err) => {
-                    this.showError(err.message, 'Sikertelen törlés');
+                    this.showError(err.error.message, 'Sikertelen törlés');
                 });
             this.modalService.dismissAll('put');
             this.form = null;
@@ -108,7 +108,7 @@ export class TeamEditmembersComponent implements OnInit {
                 this.getMembers();
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen törlés');
+                this.showError(err.error.message, 'Sikertelen törlés');
             });
         this.modalService.dismissAll('put');
         this.form = null;

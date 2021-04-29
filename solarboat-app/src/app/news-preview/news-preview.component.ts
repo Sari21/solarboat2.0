@@ -92,7 +92,7 @@ export class NewsPreviewComponent implements OnInit {
                 this.showSuccess('Sikeres törlés');
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen törlés');
+                this.showError(err.error.message, 'Sikertelen törlés');
             }
         );
     }
@@ -128,7 +128,7 @@ export class NewsPreviewComponent implements OnInit {
                 this.ngOnInit();
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen módosítás');
+                this.showError(err.error.message, 'Sikertelen módosítás');
             }
         );
 

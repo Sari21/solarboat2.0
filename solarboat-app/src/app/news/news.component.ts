@@ -79,8 +79,9 @@ export class NewsComponent implements OnInit {
                 this.fileToUpload = null;
             },
             (err) => {
-                console.log(err)
-                this.showError(err.message, 'Sikertelen mentés');
+                console.log(err);
+                console.log(err.error.message);
+                this.showError(err.error.message, 'Sikertelen mentés');
             });
     }
 
@@ -128,7 +129,8 @@ export class NewsComponent implements OnInit {
                 this.isLastPage = data.last;
             },
             (err) => {
-                this.showError(err.message, 'Hírek sikertelen lekérése');
+                console.log(err);
+                this.showError(err.error.message, 'Hírek sikertelen lekérése');
             }
         );
     }

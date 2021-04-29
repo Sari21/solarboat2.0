@@ -44,7 +44,7 @@ export class TeamEditgroupPanelComponent implements OnInit {
                 });
             },
             (err) => {
-                this.showError(err.message, 'Tagok sikertelen lekérése');
+                this.showError(err.error.message, 'Tagok sikertelen lekérése');
             }
         );
     }
@@ -55,7 +55,7 @@ export class TeamEditgroupPanelComponent implements OnInit {
                 this.showSuccess('Tag sikeres eltávolítása');
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen eltávolítás');
+                this.showError(err.error.message, 'Sikertelen eltávolítás');
             });
     }
 
@@ -65,7 +65,7 @@ export class TeamEditgroupPanelComponent implements OnInit {
                 this.showSuccess('Tag sikeresen hozzáadva  csapathoz');
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen hozzáadás');
+                this.showError(err.error.message, 'Sikertelen hozzáadás');
             });
     }
 
@@ -74,7 +74,7 @@ export class TeamEditgroupPanelComponent implements OnInit {
                 this.showSuccess('Sikeres mentés');
             },
             (err) => {
-                this.showError(err.message, 'Sikertelen mentés');
+                this.showError(err.error.message, 'Sikertelen mentés');
             });
     }
 

@@ -118,10 +118,10 @@ export class GalleryComponent implements OnInit {
                 if (index > -1) {
                     this.gallery.splice(index, 1);
                 }
-              this.showSuccess('Sikeres törlés');
+                this.showSuccess('Sikeres törlés');
             },
             (error) => {
-                this.showError(error.message, 'Sikertelen képtörlés');
+                this.showError(error.error.message, 'Sikertelen képtörlés');
             }
         );
     }
