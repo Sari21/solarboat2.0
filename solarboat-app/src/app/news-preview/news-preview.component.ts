@@ -83,8 +83,8 @@ export class NewsPreviewComponent implements OnInit {
         this.form.date = this.news.date;
     }
 
-    openContent(content, edit) {
-        this.modalService.open(content, {scrollable: true, centered: true, size: edit ? 'lg' : 'md'});
+    openContent(content, lg) {
+        this.modalService.open(content, {scrollable: true, centered: true, size: lg ? 'lg' : 'md'});
     }
 
     delete(id: number) {
@@ -159,10 +159,11 @@ export class NewsPreviewComponent implements OnInit {
     }
 
     formatDate(date) {
-        const mm = date.getMonth() + 1; // getMonth() is zero-based
-        const dd = date.getDate();
+        const newDate = new Date(date);
+        const mm = newDate.getMonth() + 1; // getMonth() is zero-based
+        const dd = newDate.getDate();
 
-        const resultDate = [date.getFullYear(),
+        const resultDate = [newDate.getFullYear(),
             (mm > 9 ? '' : '0') + mm,
             (dd > 9 ? '' : '0') + dd
         ].join('-');
