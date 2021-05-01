@@ -23,10 +23,13 @@ export class AchievementComponent implements OnInit {
     @Input() authority: string;
     @Input() achievement: Achievement;
     @Output() onRemove = new EventEmitter<Achievement>();
+    maxDate: Date;
 
     constructor(private globals: Globals, private apiService: AchievementService,
                 private modalService: NgbModal, pictureService: PictureService, private toastr: ToastrService) {
         this.pictureService = pictureService;
+        const currentYear = new Date().getFullYear();
+        this.maxDate = new Date(currentYear + 1, 11, 31);
     }
 
     ngOnInit(): void {
@@ -61,44 +64,28 @@ export class AchievementComponent implements OnInit {
         this.achievement.location_hu = this.form.location_hu;
         this.achievement.title_en = this.form.title_en;
         this.achievement.location_en = this.form.location_en;
-        this.achievement.date = this.form.date;
+        this.achievement.date = this.form.date ? this.globals.formatDate(this.form.date) : this.achievement.date;
         this.achievement.place_hu = this.form.place_hu;
         this.achievement.place_en = this.form.place_en;
         const achievementId = id;
-        let o: Object;
         if (this.fileToUpload != null) {
             this.achievement.picture = '../../assets/achievement/' + this.fileToUpload.name;
             this.uploadFileToActivity();
-            o = {
-                id: achievementId,
-                title_hu: this.form.title_hu,
-                location_hu: this.form.location_hu,
-                title_en: this.form.title_en,
-                location_en: this.form.location_en,
-                description_hu: "leírás",
-                description_en: "description",
-                date: this.form.date,
-                place_hu: this.form.place_hu,
-                place_en: this.form.place_en,
-                isLast: false,
-                picture: '../../assets/achievement/' + this.fileToUpload.name
-            };
-        } else {
-            o = {
-                id: achievementId,
-                title_hu: this.form.title_hu,
-                location_hu: this.form.location_hu,
-                title_en: this.form.title_en,
-                location_en: this.form.location_en,
-                description_hu: "leírás",
-                description_en: "description",
-                date: this.form.date,
-                place_hu: this.form.place_hu,
-                place_en: this.form.place_en,
-                isLast: false,
-                picture: this.achievement.picture
-            };
         }
+        const o = {
+            id: achievementId,
+            title_hu: this.form.title_hu,
+            location_hu: this.form.location_hu,
+            title_en: this.form.title_en,
+            location_en: this.form.location_en,
+            description_hu: "leiras",
+            description_en: "description",
+            date: this.form.date ? this.globals.formatDate(this.form.date) : this.achievement.date,
+            place_hu: this.form.place_hu,
+            place_en: this.form.place_en,
+            isLast: false,
+            picture: this.fileToUpload != null ? '../../assets/achievement/' + this.fileToUpload.name : this.achievement.picture
+        };
         this.apiService.updateAchievement(o).subscribe(
             (res) => {
                 this.showSuccess('Sikeres mentés');

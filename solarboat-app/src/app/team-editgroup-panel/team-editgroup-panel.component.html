@@ -18,7 +18,7 @@
         <div *ngIf="isLeader" class="d-flex flex-column align-self-center">
             <form>
                 <mat-form-field>
-                    <input matInput name="job_hu" type="text" placeholder="Feladatkör magyarul"
+                    <input matInput maxlength="50" minlength="2" name="job_hu" type="text" placeholder="Feladatkör magyarul"
                            [(ngModel)]="leader.job_hu" required (change)="changedMember(leader)">
                     <mat-error>Kötelező mező</mat-error>
                 </mat-form-field>
@@ -28,7 +28,7 @@
         <div *ngIf="isLeader" class="d-flex flex-column align-self-center pr-5">
             <form>
                 <mat-form-field>
-                    <input matInput name="job_hu" type="text" placeholder="Feladatkör angolul"
+                    <input matInput maxlength="50" minlength="2" name="job_hu" type="text" placeholder="Feladatkör angolul"
                            [(ngModel)]="leader.job_en" required (change)="changedMember(leader)">
                     <mat-error>Kötelező mező</mat-error>
                 </mat-form-field>
@@ -64,7 +64,7 @@
         <div *ngIf="isLeader" class="d-flex flex-column align-self-center">
             <form>
                 <mat-form-field>
-                    <input matInput name="job_hu" type="text" placeholder="Feladatkör magyarul"
+                    <input matInput maxlength="50" minlength="2" name="job_hu" type="text" placeholder="Feladatkör magyarul"
                            [(ngModel)]="member.job_hu" required (change)="changedMember(member)">
                     <mat-error>Kötelező mező</mat-error>
                 </mat-form-field>
@@ -74,7 +74,7 @@
         <div *ngIf="isLeader" class="d-flex flex-column align-self-center pr-5">
             <form>
                 <mat-form-field>
-                    <input matInput name="job_hu" type="text" placeholder="Feladatkör angolul"
+                    <input matInput maxlength="50" minlength="2" name="job_hu" type="text" placeholder="Feladatkör angolul"
                            [(ngModel)]="member.job_en" required (change)="changedMember(member)">
                     <mat-error>Kötelező mező</mat-error>
                 </mat-form-field>

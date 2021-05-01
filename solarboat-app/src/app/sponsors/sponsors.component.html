@@ -9,7 +9,7 @@
                         <div class="col-11 col-md-6 col-lg-6 col-sm-10">
                             <div class="form-group">
                                 <mat-form-field>
-                                    <input matInput name="name" type="text" id="name"
+                                    <input matInput maxlength="100" minlength="2" name="name" type="text" id="name"
                                            [(ngModel)]="newSponsor.name" required placeholder="Név">
                                     <mat-error>Kötelező mező</mat-error>
                                 </mat-form-field>
@@ -26,23 +26,24 @@
                                     <mat-label>Típus</mat-label>
                                     <mat-select [(value)]="newSponsor.group" name="group" id="group">
                                         <mat-option *ngFor="let item of types" [value]="item">
-                                          {{ item }}
+                                            {{ item }}
                                         </mat-option>
                                     </mat-select>
+                                    <mat-hint>Melyik szponzorcsoportba tartozzon</mat-hint>
                                 </mat-form-field>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pt-4">
                                 <mat-form-field>
+                                    <mat-label>Sor</mat-label>
                                     <input matInput name="row" type="number" min="0" step="1" id="row"
-                                           [(ngModel)]="newSponsor.row" required placeholder="Sor">
-                                    <mat-error>Kötelező mező</mat-error>
+                                           [(ngModel)]="newSponsor.row" required>
                                     <mat-hint>Hányadik sorban jelenjen meg 0-tól számolva</mat-hint>
+                                    <mat-error>Kötelező mező</mat-error>
                                 </mat-form-field>
                             </div>
 
                         </div>
-                        <div class="col-11 col-md-6 col-lg-6 col-sm-10">
-                            <label for="file">Kép</label>
+                        <div class="col-11 col-md-6 col-lg-6 col-sm-10 pt-4">
                             <ngx-dropzone (change)="onSelect($event)">
                                 <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
                                 <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
@@ -50,14 +51,15 @@
                                     <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                                 </ngx-dropzone-preview>
                             </ngx-dropzone>
+                            <div class="pt-3">
+                                <mat-card>Információ a képfeltöltésről: fájlformátum, méret, háttér stb..</mat-card>
+                            </div>
                         </div>
                     </div>
-
-                    <a class="btn" (click)="onSubmit($event)" href="javascript:void(0)" [ngClass]="{
+                    <div class="row pt-3">
+                        <a class="btn" (click)="onSubmit($event)" href="javascript:void(0)" [ngClass]="{
               disabled: !sponsorForm.form.valid || files == []
             }"><span>Feltöltés</span></a>
-                    <div [hidden]="!failed" class="alert alert-danger mt-3">
-                        {{ errorMessage }}
                     </div>
                 </form>
             </div>

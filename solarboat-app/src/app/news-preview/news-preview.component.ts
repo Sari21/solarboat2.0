@@ -14,9 +14,11 @@ import {ToastrService} from 'ngx-toastr';
     styleUrls: ['./news-preview.component.css']
 })
 export class NewsPreviewComponent implements OnInit {
-    constructor( private apiService: NewsService, private toastr: ToastrService,
+    constructor(private apiService: NewsService, private toastr: ToastrService,
                 private modalService: NgbModal, pictureService: PictureService) {
         this.pictureService = pictureService;
+        const currentYear = new Date().getFullYear();
+        this.maxDate = new Date(currentYear + 1, 11, 31);
     }
 
     // tslint:disable-next-line:variable-name
@@ -52,6 +54,7 @@ export class NewsPreviewComponent implements OnInit {
             ]
         ]
     };
+    maxDate: Date;
 
     decodeEntities(str) {
         // this prevents any overhead from creating the object each time
@@ -115,7 +118,8 @@ export class NewsPreviewComponent implements OnInit {
             content_hu: this.form.content,
             title_en: this.form.title_en,
             content_en: this.form.content_en,
-            date: this.form.date.replace(/\./g, '-'),
+            // date: this.form.date.replace(/\./g, '-'),
+            date: this.form.date ? this.formatDate(this.form.date) : null,
             picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : this.news.picture
 
         };
@@ -152,5 +156,17 @@ export class NewsPreviewComponent implements OnInit {
 
     showError(message, title) {
         this.toastr.error(message, title);
+    }
+
+    formatDate(date) {
+        const mm = date.getMonth() + 1; // getMonth() is zero-based
+        const dd = date.getDate();
+
+        const resultDate = [date.getFullYear(),
+            (mm > 9 ? '' : '0') + mm,
+            (dd > 9 ? '' : '0') + dd
+        ].join('-');
+
+        return resultDate;
     }
 }

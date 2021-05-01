@@ -8,7 +8,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                            <input matInput maxlength="50" minlength="2" name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
                                    [(ngModel)]="leaders.name_hu" required (change)="changedTeamName(leaders)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -17,7 +17,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                            <input matInput maxlength="50" minlength="2" name="name_en" type="text" placeholder="Csapat neve angolul"
                                    [(ngModel)]="leaders.name_en" required (change)="changedTeamName(leaders)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -59,7 +59,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                            <input matInput maxlength="50" minlength="2" name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
                                    [(ngModel)]="electronics.name_hu" required (change)="changedTeamName(electronics)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -68,7 +68,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                            <input matInput maxlength="50" minlength="2" name="name_en" type="text" placeholder="Csapat neve angolul"
                                    [(ngModel)]="electronics.name_en" required (change)="changedTeamName(electronics)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -83,7 +83,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása magyarul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_hu" type="text" placeholder="Csapat leírása magyarul"
                                       [(ngModel)]="electronics.description_hu" required
                                       (change)="changedTeamDescription(electronics)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -94,7 +94,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása angolul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása angolul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2" name="description_hu" type="text" placeholder="Csapat leírása angolul"
                                       [(ngModel)]="electronics.description_en" required
                                       (change)="changedTeamDescription(electronics)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -134,7 +134,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                            <input matInput maxlength="50" minlength="2" name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
                                    [(ngModel)]="economics.name_hu" required (change)="changedTeamName(economics)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -143,7 +143,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                            <input matInput maxlength="50" minlength="2" name="name_en" type="text" placeholder="Csapat neve angolul"
                                    [(ngModel)]="economics.name_en" required (change)="changedTeamName(economics)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -155,7 +155,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása magyarul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_hu" type="text" placeholder="Csapat leírása magyarul"
                                       [(ngModel)]="economics.description_hu" required
                                       (change)="changedTeamDescription(economics)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -166,7 +166,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása angolul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása angolul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_hu" type="text" placeholder="Csapat leírása angolul"
                                       [(ngModel)]="economics.description_en" required
                                       (change)="changedTeamDescription(economics)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -211,7 +211,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                            <input matInput maxlength="50" minlength="2" name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
                                    [(ngModel)]="mechatronics.name_hu" required (change)="changedTeamName(mechatronics)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -220,7 +220,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                            <input matInput maxlength="50" minlength="2" name="name_en" type="text" placeholder="Csapat neve angolul"
                                    [(ngModel)]="mechatronics.name_en" required (change)="changedTeamName(mechatronics)">
                             <mat-error>Kötelező mező</mat-error>
                         </mat-form-field>
@@ -232,7 +232,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Csapat leírása magyarul"
+                            <textarea rows="5" cols="40" matInput  maxlength="2000000" minlength="2"  name="description_hu" type="text" placeholder="Csapat leírása magyarul"
                                       [(ngModel)]="mechatronics.description_hu" required
                                       (change)="changedTeamDescription(mechatronics)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -243,7 +243,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_en" type="text" placeholder="Csapat leírása angolul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_en" type="text" placeholder="Csapat leírása angolul"
                                       [(ngModel)]="mechatronics.description_en" required
                                       (change)="changedTeamDescription(mechatronics)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -256,7 +256,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Anyagtechnológiai alcsoport leírása magyarul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_hu" type="text" placeholder="Anyagtechnológiai alcsoport leírása magyarul"
                                       [(ngModel)]="mechatronicsMaterial.description_hu" required
                                       (change)="changedTeamDescription(mechatronicsMaterial)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -267,7 +267,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_en" type="text" placeholder="Anyagtechnológiai alcsoport leírása angolul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_en" type="text" placeholder="Anyagtechnológiai alcsoport leírása angolul"
                                       [(ngModel)]="mechatronicsMaterial.description_en" required
                                       (change)="changedTeamDescription(mechatronicsMaterial)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -280,7 +280,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_hu" type="text" placeholder="Szimulációs alcsoport leírása magyarul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_hu" type="text" placeholder="Szimulációs alcsoport leírása magyarul"
                                       [(ngModel)]="mechatronicsSimulation.description_hu" required
                                       (change)="changedTeamDescription(mechatronicsSimulation)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -291,7 +291,7 @@
                     <form>
                         <mat-form-field style="width: 400px;" class="example-full-width">
                             <mat-label>Csapat leírása magyarul</mat-label>
-                            <textarea rows="5" cols="40" matInput name="description_en" type="text" placeholder="Szimulációs alcsoport leírása angolul"
+                            <textarea rows="5" cols="40" matInput maxlength="2000000" minlength="2"  name="description_en" type="text" placeholder="Szimulációs alcsoport leírása angolul"
                                       [(ngModel)]="mechatronicsSimulation.description_en" required
                                       (change)="changedTeamDescription(mechatronicsSimulation)"></textarea>
                             <mat-error>Kötelező mező</mat-error>
@@ -307,7 +307,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                            <input matInput maxlength="50" minlength="2" name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
                                    [(ngModel)]="mechatronicsMaterial.name_hu" required
                                    (change)="changedTeamName(mechatronicsMaterial)">
                             <mat-error>Kötelező mező</mat-error>
@@ -317,7 +317,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                            <input matInput maxlength="50" minlength="2" name="name_en" type="text" placeholder="Csapat neve angolul"
                                    [(ngModel)]="mechatronicsMaterial.name_en" required
                                    (change)="changedTeamName(mechatronicsMaterial)">
                             <mat-error>Kötelező mező</mat-error>
@@ -342,7 +342,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
+                            <input matInput maxlength="50" minlength="2" name="name_hu" type="text" placeholder="Csapat neve magyarul" width="100%"
                                    [(ngModel)]="mechatronicsSimulation.name_hu" required
                                    (change)="changedTeamName(mechatronicsSimulation)">
                             <mat-error>Kötelező mező</mat-error>
@@ -352,7 +352,7 @@
                 <div class="d-flex flex-column align-self-center">
                     <form>
                         <mat-form-field [style.width.px]=400>
-                            <input matInput name="name_en" type="text" placeholder="Csapat neve angolul"
+                            <input matInput maxlength="50" minlength="2" name="name_en" type="text" placeholder="Csapat neve angolul"
                                    [(ngModel)]="mechatronicsSimulation.name_en" required
                                    (change)="changedTeamName(mechatronicsSimulation)">
                             <mat-error>Kötelező mező</mat-error>

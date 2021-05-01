@@ -1,5 +1,6 @@
 package hu.schdesign.solarboat.service;
 
+import hu.schdesign.solarboat.Exceptions.CustomMessageApiException;
 import hu.schdesign.solarboat.dao.MemberRepository;
 import hu.schdesign.solarboat.dao.TeamRepository;
 import hu.schdesign.solarboat.model.Member;
@@ -52,7 +53,7 @@ public class TeamService {
             Optional<Team> optTeam = teamRepository.findById(teamId);
             if (optTeam.isPresent()) {
                 optTeam.get().deleteMember(optMemb.get());
-                Team modifiedTeam =  teamRepository.saveAndFlush(optTeam.get());
+                Team modifiedTeam = teamRepository.saveAndFlush(optTeam.get());
                 return modifiedTeam;
             }
         }
@@ -99,9 +100,9 @@ public class TeamService {
         Map<Long, Long> teamMemberPairsToRemove = new HashMap<>();
         for (Team team : teams) {
             if (team.getLeader() != null && team.getLeader().getId() == id) {
-                // TODO hibakezelés (@ExceptionHandler?)
-                // Ez a csapattag jelenlegn nem törölhető, mert vezetője a team.getTitle_hu() csapatnak.
-                // Csak a vezető lecsérélése után törölhető a tagok közül.
+                throw new CustomMessageApiException(
+                        "Ez a csapattag jelenleg nem törölhető, mert vezetője a " + team.getName_hu() +
+                        "-nak. Csak a vezető lecsérélése után törölhető a tagok közül.");
             }
             Iterable<Member> members = team.getMembers();
             for (Member member : members) {
@@ -111,8 +112,8 @@ public class TeamService {
             }
         }
 
-        for(Map.Entry<Long, Long> entry : teamMemberPairsToRemove.entrySet()) {
-            this.deleteMember(entry.getKey(),entry.getValue());
+        for (Map.Entry<Long, Long> entry : teamMemberPairsToRemove.entrySet()) {
+            this.deleteMember(entry.getKey(), entry.getValue());
         }
     }
 

@@ -15,10 +15,10 @@ public class Team {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     @NotNull
-    @Size(min=2, max=30)
+    @Size(min=2, max=50)
     private String name_hu;
     @NotNull
-    @Size(min=2, max=30)
+    @Size(min=2, max=50)
     private String name_en;
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Member> members;

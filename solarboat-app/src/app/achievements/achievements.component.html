@@ -16,7 +16,7 @@
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
                                                 <mat-form-field >
-                                                    <input matInput name="location_hu" type="text" id="location_hu"
+                                                    <input matInput name="location_hu" maxlength="50" minlength="2" type="text" id="location_hu"
                                                            [(ngModel)]="form.location_hu" required placeholder="Helyszín">
                                                     <mat-error>Kötelező mező</mat-error>
                                                     <mat-hint>Város vagy ország neve</mat-hint>
@@ -34,7 +34,7 @@
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
                                                 <mat-form-field >
-                                                    <input matInput name="title_hu" type="text" id="title_hu"
+                                                    <input matInput maxlength="50" minlength="2" name="title_hu" type="text" id="title_hu"
                                                            [(ngModel)]="form.title_hu" required placeholder="Verseny/rendezvény neve">
                                                     <mat-error>Kötelező mező</mat-error>
                                                 </mat-form-field>
@@ -49,7 +49,7 @@
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
                                                 <mat-form-field >
-                                                    <input matInput name="location_en" type="text" id="location_en"
+                                                    <input matInput maxlength="50" minlength="2" name="location_en" type="text" id="location_en"
                                                            [(ngModel)]="form.location_en" required placeholder="Location">
                                                     <mat-error>Required field</mat-error>
                                                     <mat-hint>Name of city or country</mat-hint>
@@ -67,7 +67,7 @@
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
                                                 <mat-form-field >
-                                                    <input matInput name="title_en" type="text" id="title_en"
+                                                    <input matInput maxlength="50" minlength="2" name="title_en" type="text" id="title_en"
                                                            [(ngModel)]="form.title_en" required placeholder="Title of achievement/competition">
                                                     <mat-error>Required field</mat-error>
                                                 </mat-form-field>
@@ -83,7 +83,7 @@
                                 <div class="form-group">
                                     <mat-form-field >
                                         <mat-label>Dátum</mat-label>
-                                        <input matInput  name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
+                                        <input matInput [max]="maxDate" name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
                                         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                                         <mat-datepicker #date></mat-datepicker>
 <!--                                        <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>-->

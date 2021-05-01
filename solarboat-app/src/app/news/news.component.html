@@ -21,7 +21,7 @@
                                                     <!--                                                           [(ngModel)]="form.title" name="title"-->
                                                     <!--                                                           [ngClass]="{'failed': failed }">-->
                                                     <mat-form-field [style.width.px]=400>
-                                                        <input matInput name="title" type="text" id="title"
+                                                        <input matInput maxlength="50" minlength="2" name="title" type="text" id="title"
                                                                [(ngModel)]="form.title" required placeholder="Cím">
                                                         <mat-error>Kötelező mező</mat-error>
                                                     </mat-form-field>
@@ -53,7 +53,7 @@
                                                     <!--                                                           [(ngModel)]="form.title_en" name="title_en"-->
                                                     <!--                                                           [ngClass]="{'failed': failed }">-->
                                                     <mat-form-field [style.width.px]=400>
-                                                        <input matInput name="title_en" type="text" id="title_en"
+                                                        <input matInput maxlength="50" minlength="2" name="title_en" type="text" id="title_en"
                                                                [(ngModel)]="form.title_en" required placeholder="Title">
                                                         <mat-error>Kötelező mező</mat-error>
                                                     </mat-form-field>
@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <mat-form-field >
                                         <mat-label>Dátum</mat-label>
-                                        <input matInput  name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
+                                        <input matInput [max]="maxDate" name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
                                         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                                         <mat-datepicker #date></mat-datepicker>
                                         <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>

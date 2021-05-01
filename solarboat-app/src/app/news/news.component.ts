@@ -16,6 +16,8 @@ export class NewsComponent implements OnInit {
     constructor(private apiService: NewsService, private toastr: ToastrService,
                 private tokenStorage: TokenStorageService, pictureService: PictureService, private globals: Globals) {
         this.pictureService = pictureService;
+        const currentYear = new Date().getFullYear();
+        this.maxDate = new Date(currentYear + 1, 11, 31);
     }
 
     allnews: News[] = [];
@@ -48,6 +50,7 @@ export class NewsComponent implements OnInit {
             ]
         ]
     };
+    maxDate: Date;
 
     ngOnInit(): void {
         this.getNews();
@@ -66,14 +69,13 @@ export class NewsComponent implements OnInit {
             content_hu: this.form.content,
             title_en: this.form.title_en,
             content_en: this.form.content_en,
-            date: this.form.date ? this.formatDate(this.form.date) : null,
+            date: this.form.date ? this.globals.formatDate(this.form.date) : null,
             picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : ''
         };
-        console.log(o);
         this.apiService.addNews(o).subscribe(
             (data) => {
                 this.showSuccess('Sikeres mentés');
-                this.pushNews();
+                this.pushNews(data);
                 this.form = empForm;
                 this.form.reset();
                 this.fileToUpload = null;
@@ -135,15 +137,15 @@ export class NewsComponent implements OnInit {
         );
     }
 
-    private pushNews() {
+    private pushNews(news) {
         let n: News;
         n = {
             id: 0,
-            title_hu: this.form.title,
-            content_hu: this.form.content,
-            title_en: this.form.title_en,
-            content_en: this.form.content_en,
-            date: this.form.date ? this.formatDate(this.form.date) : this.form.date,
+            title_hu: news.title,
+            content_hu: news.content,
+            title_en: news.title_en,
+            content_en: news.content_en,
+            date: news.date,
             picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : ''
         };
         this.allnews.unshift(n);
@@ -157,13 +159,6 @@ export class NewsComponent implements OnInit {
         this.toastr.error(message, title);
     }
 
-    formatDate(date) {
-        const mm = date.getMonth() + 1; // getMonth() is zero-based
-        const dd = date.getDate();
 
-        return [date.getFullYear(),
-            (mm > 9 ? '' : '0') + mm,
-            (dd > 9 ? '' : '0') + dd
-        ].join('-');
-    }
+
 }

@@ -77,8 +77,9 @@ public class News {
     }
 
     public String getDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-        return dtf.format(date);
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+//        return dtf.format(date);
+        return String.valueOf(date);
     }
 
     public String getPicture() {

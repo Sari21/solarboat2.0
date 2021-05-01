@@ -64,6 +64,7 @@ import {MatInputModule} from '@angular/material/input';
 import {ToastrModule} from 'ngx-toastr';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatCardModule} from "@angular/material/card";
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -138,7 +139,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatDatepickerModule,
         MatNativeDateModule,
         DragDropModule,
-        NgxDropzoneModule
+        NgxDropzoneModule,
+        MatCardModule
     ],
 
   bootstrap: [AppComponent],

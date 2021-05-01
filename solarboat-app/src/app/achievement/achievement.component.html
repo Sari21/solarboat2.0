@@ -22,7 +22,7 @@
         </div>
         <div class=" .d-block .d-md-none row col-12 date pt-lg-3 pt-md-3 mb-2 align-items-center">
             <mat-icon>calendar_today</mat-icon>
-            <p class="pl-1" translate [translateParams]="{date: achievement.date}">ACHIEVEMENTS.date</p>
+            <p class="pl-1" >{{achievement.date | date:'yyyy.MM.dd'}}</p>
         </div>
     </div>
     <!--
@@ -47,93 +47,85 @@
     </div>
     <div class="modal-body pb-5">
         <form #Form="ngForm">
-            <div class="localization-tabs">
-                <ul ngbNav #nav="ngbNav" class="nav-tabs">
-                    <li ngbNavItem>
-                        <a ngbNavLink>Magyar</a>
-                        <ng-template ngbNavContent>
-
-
-                            <div class="row">
-                                <div class="col-md-6 col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="location_hu">Helyszín</label>
-                                        <input type="text" class="form-control" id="location_hu"
-                                               placeholder="város vagy ország neve"
-                                               required
-                                               [(ngModel)]="form.location_hu" name="location_hu"
-                                               [ngClass]="{'failed': failed }">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="place_hu">Helyezés</label>
-                                        <input type="text" class="form-control" id="place_hu"
-                                               [(ngModel)]="form.place_hu" name="place_hu"
-                                               [ngClass]="{'failed': failed }">
-                                    </div>
+            <mat-tab-group mat-align-tabs="start">
+                <mat-tab label="MAGYAR" class="pt-3">
+                    <div class="container p-3 ">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-12">
+                                <div class="form-group">
+                                    <mat-form-field >
+                                        <input matInput name="location_hu" maxlength="50" minlength="2" type="text" id="location_hu"
+                                               [(ngModel)]="form.location_hu" required placeholder="Helyszín">
+                                        <mat-error>Kötelező mező</mat-error>
+                                        <mat-hint>Város vagy ország neve</mat-hint>
+                                    </mat-form-field>
                                 </div>
-                                <div class="col-md-6 col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="title_hu">Verseny/eredmény neve</label>
-                                        <input type="text" class="form-control" id="title_hu"
-                                               required
-                                               [(ngModel)]="form.title_hu" name="title_hu"
-                                               [ngClass]="{'failed': failed }">
-                                    </div>
+                                <div class="form-group">
+                                    <mat-form-field >
+                                        <input matInput name="place_hu" type="text" id="place_hu"
+                                               [(ngModel)]="form.place_hu" required placeholder="Helyezés">
+                                        <mat-error>Kötelező mező</mat-error>
+                                        <mat-hint>Példa: 1. helyezés</mat-hint>
+                                    </mat-form-field>
                                 </div>
                             </div>
-                        </ng-template>
-                    </li>
-                    <li ngbNavItem>
-                        <a ngbNavLink>Angol</a>
-                        <ng-template ngbNavContent>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="location_en">Location</label>
-                                        <input type="text" class="form-control" id="location_en"
-                                               placeholder="name of city or country"
-                                               required
-                                               [(ngModel)]="form.location_en" name="location_en"
-                                               [ngClass]="{'failed': failed }">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="place_en">Place </label>
-                                        <input type="text" class="form-control" id="place_en"
-                                               [(ngModel)]="form.place_en" name="place_en"
-                                               [ngClass]="{'failed': failed }">
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <label for="title_en">Title of achievement/competition</label>
-                                        <input type="text" class="form-control" id="title_en"
-                                               required
-                                               [(ngModel)]="form.title_en" name="title"
-                                               [ngClass]="{'failed': failed }">
-
-                                    </div>
+                            <div class="col-md-6 col-lg-6 col-12">
+                                <div class="form-group">
+                                    <mat-form-field >
+                                        <input matInput maxlength="50" minlength="2" name="title_hu" type="text" id="title_hu"
+                                               [(ngModel)]="form.title_hu" required placeholder="Verseny/rendezvény neve">
+                                        <mat-error>Kötelező mező</mat-error>
+                                    </mat-form-field>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="ANGOL" class="pt-3">
+                    <div class="container p-3 ">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-12">
+                                <div class="form-group">
+                                    <mat-form-field >
+                                        <input matInput maxlength="50" minlength="2" name="location_en" type="text" id="location_en"
+                                               [(ngModel)]="form.location_en" required placeholder="Location">
+                                        <mat-error>Required field</mat-error>
+                                        <mat-hint>Name of city or country</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field >
+                                        <input matInput name="place_en" type="text" id="place_en"
+                                               [(ngModel)]="form.place_en" required placeholder="Place">
+                                        <mat-error>Required field</mat-error>
+                                        <mat-hint>Example: 4th place</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-12">
+                                <div class="form-group">
+                                    <mat-form-field >
+                                        <input matInput maxlength="50" minlength="2" name="title_en" type="text" id="title_en"
+                                               [(ngModel)]="form.title_en" required placeholder="Title of achievement/competition">
+                                        <mat-error>Required field</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
 
-                        </ng-template>
-                    </li>
-                </ul>
-                <div [ngbNavOutlet]="nav" class="localization-tab-content"></div>
-            </div>
-
-            <div class="row pl-1">
+            <div class="row pl-3">
                 <div class="col-md-6 col-lg-6 col-12">
                     <div class="form-group">
-                        <label for="date">Dátum</label>
-                        <input id="date"
-                               required
-                               type="text"
-                               class="form-control"
-                               placeholder="YYYY-MM-DD"
-                               [(ngModel)]="form.date" name="date"
-                               [ngClass]="{'failed': failed }">
+                        <mat-form-field >
+                            <mat-label>Dátum</mat-label>
+                            <input matInput [max]="maxDate" name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
+                            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                            <mat-datepicker #date></mat-datepicker>
+                            <!--                                        <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>-->
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12">
