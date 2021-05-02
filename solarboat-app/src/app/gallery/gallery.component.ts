@@ -23,9 +23,10 @@ export class GalleryComponent implements OnInit {
     private pictureService: PictureService,
     private router: Router,
     private tokenStorage: TokenStorageService,
-    private videoService: VideoService
-  ) {
-  }
+    private videoService: VideoService,
+    private toastr: ToastrService
+    ) {
+ }
   @Output() gallery: GalleryPicture[];
   newPicture: GalleryPictureRequest;
   @Output() videos: Video[];
@@ -54,46 +55,6 @@ ngOnInit(): void {
     this.largeWidth = (window.innerWidth < 768) ? false : true;
     console.log(this.largeWidth);
   }
-  // handleFileInput(files: FileList) {
-  //   this.fileToUpload = files.item(0);
-  //   this.newPicture.picture = files.item(0);
-  //   console.log(this.newPicture);
-  //   this.pic = true;
-  //   if (this.pic) {
-  //     this.picturesSelected = true;
-  //   }
-  // }
-  onSelect(event) {
-    if(this.files.length > 0){
-      this.files = [];
-        private toastr: ToastrService,
-    }
-
-    @Output() gallery: GalleryPicture[];
-    newPicture: GalleryPictureRequest;
-    picturesSelected = false;
-    pic = false;
-    smallPic = false;
-    public authority: string;
-    public roles: string[];
-    public largeWidth: boolean;
-    fileToUpload: File;
-    files: File[] = [];
-
-    ngOnInit(): void {
-        // AOS.init();
-        this.checkAuth();
-        this.loadGallery();
-        this.newPicture = new GalleryPictureRequest();
-        this.largeWidth = (window.innerWidth < 768) ? false : true;
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        this.largeWidth = (window.innerWidth < 768) ? false : true;
-        console.log(this.largeWidth);
-    }
-
     // handleFileInput(files: FileList) {
     //   this.fileToUpload = files.item(0);
     //   this.newPicture.picture = files.item(0);
@@ -202,10 +163,8 @@ ngOnInit(): void {
     showError(message, title) {
         this.toastr.error(message, title);
     }
-  }
-  isEnabled(form: boolean){
-    return (form && this.fileToUpload);
-  }
+  
+
   uploadVideo(empForm: any){
     this.videoService.postVideoLink(this.newVideo).subscribe(
       (data) => {
