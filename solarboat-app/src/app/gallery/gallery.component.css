@@ -78,6 +78,13 @@
     column-count: 4;
   }
 }*/
+
+.mathint {
+  text-align: justify;
+  position: relative;
+  color: aqua;
+}
+
 @media (max-width: 1200px) {
   #photos {
     -moz-column-count: 4;

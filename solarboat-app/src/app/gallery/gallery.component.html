@@ -1,83 +1,86 @@
 <app-nav-bar></app-nav-bar>
 <div class="gallery">
-    <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
-        <div class="jumbotron col-12 ">
-            <h1 translate class="title pb-3">GALLERY.gallery</h1>
-            <div class=" container col-lg-7 col-md-10 col-12 col-sm-12 mt-5 " *ngIf="authority == 'admin' ">
-                <div class="card mb-5 mr-3 ml-3 galleryform" id="galleryform">
-                    <h2 class="title pb-3">Új kép hozzáadása</h2>
-                    <div>
-                        <form #galleryForm="ngForm">
-                            <mat-tab-group mat-align-tabs="start">
-                                <mat-tab label="MAGYAR">
-                                    <div class="col-md-6 col-lg-6 col-12 pt-3">
-                                        <div class="form-group">
-                                            <mat-form-field >
-                                                <input matInput name="title" type="text" id="title"
-                                                       [(ngModel)]="newPicture.title_hu"placeholder="Cím">
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                </mat-tab>
+    <div class="container col-12 col-sm-12 col-lg-8 col-md-11 align-items-center ">
+        <h1 translate class="title pb-lg-4 pb-md-4 pb-0">GALLERY.gallery</h1>
+        <div class="container col-lg-10 col-md-12 col-12 col-sm-12 mt-5 ">
 
-                                <mat-tab label="ANGOL" class="pt-3">
-                                    <div class="col-md-6 col-lg-6 col-12 pt-3">
-                                        <div class="form-group">
-                                            <mat-form-field >
-                                                <input matInput name="title_en" type="text" id="title_en"
-                                                       [(ngModel)]="newPicture.title_en" placeholder="Title">
+                <div class=" align-items-start justify-content-center col-12 d-flex" *ngIf="authority == 'admin' ">
+                    <div class=" col-12 col-sm-12 col-md-7 card mb-5 mr-3 ml-3 galleryform " id="galleryform">
+                        <h2 class="title pb-3">Új kép hozzáadása</h2>
+                        <div>
+                            <form #galleryForm="ngForm">
+                                <mat-tab-group mat-align-tabs="start">
+                                    <mat-tab label="MAGYAR">
+                                        <div class="form-group pt-3">
+                                            <mat-form-field class="col-8 p-0">
+                                                <input matInput name="title" type="text" id="title"
+                                                    [(ngModel)]="newPicture.title_hu" placeholder="Cím" required>
+                                                <mat-error>Kötelező mező</mat-error>
                                             </mat-form-field>
                                         </div>
-                                    </div>
-                                </mat-tab>
-                            </mat-tab-group>
-                            <div class="row">
-                                <!-- <div class="form-group">
+                                    </mat-tab>
+                                    <mat-tab label="ANGOL" class="pt-3">
+                                        <div class="form-group pt-3">
+                                            <mat-form-field class="col-8 p-0">
+                                                <input matInput name="title_en" type="text" id="title_en"
+                                                    [(ngModel)]="newPicture.title_en" placeholder="Title" required>
+                                            </mat-form-field>
+                                            <mat-error>Kötelező mező</mat-error>
+                                        </div>
+                                    </mat-tab>
+                                </mat-tab-group>
+                                <div class="row">
+                                    <!-- <div class="form-group">
                                     <label for="file">Fénykép</label>
                                     <input type="file" required id="file" class="form-control"
                                            (change)="handleFileInput($event.target.files)"
                                            [ngClass]="{'failed': failed }"/>
                                 </div> -->
-                                <div class="col-11 col-md-6 col-lg-6 col-sm-10 pb-4 pl-3">
-                                    <ngx-dropzone (change)="onSelect($event)">
-                                        <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
-                                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
-                                                              (removed)="onRemove(f)">
-                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                                        </ngx-dropzone-preview>
-                                    </ngx-dropzone>
-                                </div>
-                                <!-- <div class="form-group">
+                                    <div class="col-11 col-md-6 col-lg-6 col-sm-10 pb-4 pl-3 ">
+                                        <ngx-dropzone (change)="onSelect($event)">
+                                            <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
+                                            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
+                                                (removed)="onRemove(f)">
+                                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                            </ngx-dropzone-preview>
+                                        </ngx-dropzone>
+                                    </div>
+                                    <!-- <div class="form-group">
                                     <label for="smallfile">Kis fotó</label>
                                     <input type="file" required id="smallfile" class="form-control"
                                            (change)="handleSmallFileInput($event.target.files)"
                                            [ngClass]="{'failed': failed }"/>
                                 </div> -->
-                            </div>
+                                </div>
 
-                            <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
-                            <a class="btn" (click)="uploadGalleryPicture(galleryForm)" href="javascript:void(0)"
-                               [ngClass]="{'disabled': !galleryForm.form.valid || files == [] }"><span>Feltöltés</span></a>
+                                <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
+                                <a class="btn" (click)="uploadGalleryPicture(galleryForm)" href="javascript:void(0)"
+                                    [ngClass]="{'disabled': !galleryForm.form.valid || files == [] }"><span>Feltöltés</span></a>
 
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div class="card mb-5 mr-3 ml-3 galleryform" id="videoform">
+              
+                <div class="col-12 col-sm-12 col-md-5 card mb-5 mr-3 ml-3 galleryform" id="videoform">
                     <h2 class="title pb-3">Új videó hozzáadása</h2>
                     <div>
                         <form #videoForm="ngForm">
-                            <div class="col-md-6 col-lg-6 col-12 pt-3">
-                                    <div class="form-group">
-                                        <label for="videolink">Videó linkje</label>
-                                        <input type="text" class="form-control" id="link"
-                                               [(ngModel)]="newVideo.link"
-                                               name="link" [ngClass]="{'videoFailed': videoFailed }">
-                                    </div>
+                            <div class="form-group">
+                                <mat-form-field class="col-8 p-0">
+                                    <input matInput name="link" type="text" id="link" class="form-control" id="link"
+                                        [(ngModel)]="newVideo.link" placeholder="Videó linkje" required>
+                                    <mat-hint class="mathint pb-3">Innen másold be a linket: Youtube - megosztás -
+                                        beágyazás
+                                        - src tag
+                                        linkje. Tehát így kezdődjön: https://www.youtube.com/embed/...</mat-hint>
+                                    <mat-error>Kötelező mező</mat-error>
+                                </mat-form-field>
                             </div>
                             <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
-                            <a class="btn" (click)="uploadVideo(videoForm)" href="javascript:void(0)"
-                               [ngClass]="{'disabled': !videoForm.form.valid }"><span>Feltöltés</span></a>
+                            <div class="d-flex align-content-end flex-wrap pt-3"><a class="btn"
+                                    (click)="uploadVideo(videoForm)" href="javascript:void(0)"
+                                    [ngClass]="{'disabled': !videoForm.form.valid }"><span>Feltöltés</span></a></div>
 
                             <div [hidden]="!videoFailed" class="alert alert-danger mt-3">
                                 {{errorMessage}}
@@ -86,18 +89,26 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="align-items-center justify-content-center col-12 d-flex flex-column">
-                <div class="row col-12">
+                <div class="row col-12 align-items-center justify-content-center">
+                    <div *ngFor="let video of videos"
+                        class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-lg-3 pb-md-3">
+                        <iframe class="p-3 " width="560" height="315" [src]="(video.link) | safe" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+
                     <div class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-lg-3 pb-md-3">
                         <iframe class="p-3 " width="560" height="315" src="https://www.youtube.com/embed/ezgTLqlOhzs"
-                                frameborder="0"
-                                allow=" encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            frameborder="0" allow=" encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </div>
                     <div class="d-flex justify-content-center col-12 col-lg-6 col-md-6 p-3 mb-3">
                         <iframe class="p-3" width="560" height="315" src="https://www.youtube.com/embed/xFjTQf9uCsM"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </div>
                 </div>
 
@@ -109,7 +120,7 @@
 
                             <a href="{{img.picture}}" data-lightbox="gallery">
                                 <div class="img-wrap">
-                                    <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}"/>
+                                    <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}" />
                                 </div>
                             </a>
 
@@ -124,7 +135,7 @@
 
                             <a href="{{img.smallPicture}}" data-lightbox="gallery">
                                 <div class="img-wrap">
-                                    <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}"/>
+                                    <img src="{{img.smallPicture}}" alt="{{ img.title_hu }}" />
                                 </div>
                             </a>
                         </div>
@@ -132,7 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>
+ 
 </div>
 
 <app-footer></app-footer>

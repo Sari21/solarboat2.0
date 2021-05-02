@@ -1,14 +1,13 @@
 import {PictureService} from "../shared/picture.service";
-import {Component, OnInit, Output, HostListener} from "@angular/core";
+import {Component, OnInit, Output, HostListener, Pipe, PipeTransform} from "@angular/core";
 import {Router} from "@angular/router";
-
 import {TokenStorageService} from "../auth/token-storage.service";
-
 import {GalleryPicture} from "../model/gallery-picture";
 import {GalleryPictureRequest} from "../model/gallery-picture-request";
 import {ToastrService} from "ngx-toastr";
 import { Video } from "../model/video";
 import { VideoService} from "../shared/video.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 
 // import AOS from 'aos';
@@ -167,7 +166,6 @@ ngOnInit(): void {
   
 
   uploadVideo(empForm: any){
-      console.log(this.newVideo);
     this.videoService.postVideoLink(this.newVideo).subscribe(
       (data) => {
         this.newVideo = new Video();
@@ -182,6 +180,7 @@ ngOnInit(): void {
   loadVideos() {
     this.videoService.getAllLinks().subscribe((res) => {
         this.videos = res;
+        console.log(this.videos);
     });
 }
 
