@@ -46,6 +46,7 @@ ngOnInit(): void {
   // AOS.init();
   this.checkAuth();
   this.loadGallery();
+  this.loadVideos();
   this.newPicture = new GalleryPictureRequest();
   this.newVideo = new Video();
   this.largeWidth = (window.innerWidth < 768) ? false : true;
@@ -166,6 +167,7 @@ ngOnInit(): void {
   
 
   uploadVideo(empForm: any){
+      console.log(this.newVideo);
     this.videoService.postVideoLink(this.newVideo).subscribe(
       (data) => {
         this.newVideo = new Video();
@@ -176,4 +178,11 @@ ngOnInit(): void {
     );
     empForm.reset();
   }
+
+  loadVideos() {
+    this.videoService.getAllLinks().subscribe((res) => {
+        this.videos = res;
+    });
+}
+
 }

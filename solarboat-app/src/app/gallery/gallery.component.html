@@ -3,8 +3,8 @@
     <div class="container col-12 col-sm-12 col-lg-10 col-md-11 align-items-center">
         <div class="jumbotron col-12 ">
             <h1 translate class="title pb-3">GALLERY.gallery</h1>
-            <div class=" container col-lg-7 col-md-10 col-12 col-sm-12 mt-5" *ngIf="authority == 'admin' ">
-                <div class="valami card mb-5 mr-3 ml-3" id="galleryform">
+            <div class=" container col-lg-7 col-md-10 col-12 col-sm-12 mt-5 " *ngIf="authority == 'admin' ">
+                <div class="card mb-5 mr-3 ml-3 galleryform" id="galleryform">
                     <h2 class="title pb-3">Új kép hozzáadása</h2>
                     <div>
                         <form #galleryForm="ngForm">
@@ -63,19 +63,17 @@
                         </form>
                     </div>
                 </div>
-                <div class="valami card mb-5 mr-3 ml-3" id="videoform">
+                <div class="card mb-5 mr-3 ml-3 galleryform" id="videoform">
                     <h2 class="title pb-3">Új videó hozzáadása</h2>
                     <div>
                         <form #videoForm="ngForm">
-                            <div class="row">
-                                <div class="col-12">
+                            <div class="col-md-6 col-lg-6 col-12 pt-3">
                                     <div class="form-group">
                                         <label for="videolink">Videó linkje</label>
                                         <input type="text" class="form-control" id="link"
                                                [(ngModel)]="newVideo.link"
                                                name="link" [ngClass]="{'videoFailed': videoFailed }">
                                     </div>
-                            </div>
                             </div>
                             <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
                             <a class="btn" (click)="uploadVideo(videoForm)" href="javascript:void(0)"
