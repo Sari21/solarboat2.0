@@ -6,10 +6,11 @@ export class Globals {
        // BASE_URL = 'https://solarboatteam.hu';
 
         formatDate(date) {
-                const mm = date.getMonth() + 1; // getMonth() is zero-based
-                const dd = date.getDate();
+                const newDate = new Date(date);
+                const mm = newDate.getMonth() + 1; // getMonth() is zero-based
+                const dd = newDate.getDate();
 
-                const resultDate = [date.getFullYear(),
+                const resultDate = [newDate.getFullYear(),
                         (mm > 9 ? '' : '0') + mm,
                         (dd > 9 ? '' : '0') + dd
                 ].join('-');
