@@ -1,14 +1,13 @@
 import {PictureService} from "../shared/picture.service";
-import {Component, OnInit, Output, HostListener} from "@angular/core";
+import {Component, OnInit, Output, HostListener, Pipe, PipeTransform} from "@angular/core";
 import {Router} from "@angular/router";
-
 import {TokenStorageService} from "../auth/token-storage.service";
-
 import {GalleryPicture} from "../model/gallery-picture";
 import {GalleryPictureRequest} from "../model/gallery-picture-request";
 import {ToastrService} from "ngx-toastr";
 import { Video } from "../model/video";
 import { VideoService} from "../shared/video.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 
 // import AOS from 'aos';
@@ -46,6 +45,7 @@ ngOnInit(): void {
   // AOS.init();
   this.checkAuth();
   this.loadGallery();
+  this.loadVideos();
   this.newPicture = new GalleryPictureRequest();
   this.newVideo = new Video();
   this.largeWidth = (window.innerWidth < 768) ? false : true;
@@ -176,4 +176,12 @@ ngOnInit(): void {
     );
     empForm.reset();
   }
+
+  loadVideos() {
+    this.videoService.getAllLinks().subscribe((res) => {
+        this.videos = res;
+        console.log(this.videos);
+    });
+}
+
 }

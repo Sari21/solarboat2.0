@@ -4,7 +4,7 @@
         <div class="card mb-5 mt-5 col-11 col-md-6 col-lg-6 col-sm-10" id="sponsor-form" *ngIf="authority == 'admin'">
             <h2 class="title pb-3">Új szponzor hozzáadása</h2>
             <div>
-                <form (ngSubmit)="onSubmit($event)" #sponsorForm="ngForm">
+                <form  (ngSubmit)="onSubmit($event)" #sponsorForm="ngForm">
                     <div class="row">
                         <div class="col-11 col-md-6 col-lg-6 col-sm-10">
                             <div class="form-group">
@@ -32,13 +32,13 @@
                                     <mat-hint>Melyik szponzorcsoportba tartozzon</mat-hint>
                                 </mat-form-field>
                             </div>
-                            <div class="form-group pt-4">
+                            <div class="form-group pt-4" *ngIf="(newSponsor.group == 'UNI')">
                                 <mat-form-field>
                                     <mat-label>Sor</mat-label>
                                     <input matInput name="row" type="number" min="0" step="1" id="row"
-                                           [(ngModel)]="newSponsor.row" required>
-                                    <mat-hint>Hányadik sorban jelenjen meg 0-tól számolva</mat-hint>
-                                    <mat-error>Kötelező mező</mat-error>
+                                           [(ngModel)]="newSponsor.row" >
+                                    <mat-hint>Hányadik sorban jelenjen meg 0-tól számolva, ha az UNI csoportba tartozik</mat-hint>
+                                    <!-- <mat-error>Kötelező mező</mat-error> -->
                                 </mat-form-field>
                             </div>
 
