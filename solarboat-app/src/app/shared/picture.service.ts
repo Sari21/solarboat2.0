@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {GalleryPicture} from "../model/gallery-picture";
 import {GalleryPictureRequest} from "../model/gallery-picture-request";
-
 import {Globals} from '../globals';
 
 @Injectable({
@@ -38,15 +37,6 @@ export class PictureService {
     formData.append('file', picture.picture);
     formData.append('title_en', picture.title_en);
     formData.append('title_hu', picture.title_hu);
-    
-    
-    console.log(picture);
-    // const file: FormData = new FormData();
-    // file.append('file', picture.picture, picture.picture.name);
-    // var galleryPictureRequest = {
-    //   "title_hu": picture.title_hu,
-    //   "title_en": picture.title_en
-    // }
     return <Observable<GalleryPicture>>this.http.post(this.BASE_URL.concat("/api/gallery"), formData);
   }
 
@@ -56,4 +46,5 @@ export class PictureService {
   deletePicture(filename: string){
     return this.http.delete(this.BASE_URL.concat("/deleteFile/").concat(filename));
   }
+
 }

@@ -63,6 +63,30 @@
                         </form>
                     </div>
                 </div>
+                <div class="valami card mb-5 mr-3 ml-3" id="videoform">
+                    <h2 class="title pb-3">Új videó hozzáadása</h2>
+                    <div>
+                        <form #videoForm="ngForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="videolink">Videó linkje</label>
+                                        <input type="text" class="form-control" id="link"
+                                               [(ngModel)]="newVideo.link"
+                                               name="link" [ngClass]="{'videoFailed': videoFailed }">
+                                    </div>
+                            </div>
+                            </div>
+                            <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
+                            <a class="btn" (click)="uploadVideo(videoForm)" href="javascript:void(0)"
+                               [ngClass]="{'disabled': !videoForm.form.valid }"><span>Feltöltés</span></a>
+
+                            <div [hidden]="!videoFailed" class="alert alert-danger mt-3">
+                                {{errorMessage}}
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="align-items-center justify-content-center col-12 d-flex flex-column">
                 <div class="row col-12">

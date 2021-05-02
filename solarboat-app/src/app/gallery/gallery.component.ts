@@ -7,6 +7,8 @@ import {TokenStorageService} from "../auth/token-storage.service";
 import {GalleryPicture} from "../model/gallery-picture";
 import {GalleryPictureRequest} from "../model/gallery-picture-request";
 import {ToastrService} from "ngx-toastr";
+import { Video } from "../model/video";
+import { VideoService} from "../shared/video.service";
 
 
 // import AOS from 'aos';
@@ -17,12 +19,54 @@ import {ToastrService} from "ngx-toastr";
     styleUrls: ["./gallery.component.css"],
 })
 export class GalleryComponent implements OnInit {
-    constructor(
-        private pictureService: PictureService,
-        private router: Router,
-        private tokenStorage: TokenStorageService,
+  constructor(
+    private pictureService: PictureService,
+    private router: Router,
+    private tokenStorage: TokenStorageService,
+    private videoService: VideoService
+  ) {
+  }
+  @Output() gallery: GalleryPicture[];
+  newPicture: GalleryPictureRequest;
+  @Output() videos: Video[];
+  newVideo: Video;
+  failed = false;
+  videoFailed = false;
+  errorMessage = "";
+  picturesSelected = false;
+  pic = false;
+  smallPic = false;
+  public authority: string;
+  public roles: string[];
+  public largeWidth: boolean;
+  fileToUpload: File;
+  files: File[] = [];
+ngOnInit(): void {
+  // AOS.init();
+  this.checkAuth();
+  this.loadGallery();
+  this.newPicture = new GalleryPictureRequest();
+  this.newVideo = new Video();
+  this.largeWidth = (window.innerWidth < 768) ? false : true;
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.largeWidth = (window.innerWidth < 768) ? false : true;
+    console.log(this.largeWidth);
+  }
+  // handleFileInput(files: FileList) {
+  //   this.fileToUpload = files.item(0);
+  //   this.newPicture.picture = files.item(0);
+  //   console.log(this.newPicture);
+  //   this.pic = true;
+  //   if (this.pic) {
+  //     this.picturesSelected = true;
+  //   }
+  // }
+  onSelect(event) {
+    if(this.files.length > 0){
+      this.files = [];
         private toastr: ToastrService,
-    ) {
     }
 
     @Output() gallery: GalleryPicture[];
@@ -158,4 +202,19 @@ export class GalleryComponent implements OnInit {
     showError(message, title) {
         this.toastr.error(message, title);
     }
+  }
+  isEnabled(form: boolean){
+    return (form && this.fileToUpload);
+  }
+  uploadVideo(empForm: any){
+    this.videoService.postVideoLink(this.newVideo).subscribe(
+      (data) => {
+        this.newVideo = new Video();
+        this.videos.push(data);
+      },
+      (error) => {
+      }
+    );
+    empForm.reset();
+  }
 }
