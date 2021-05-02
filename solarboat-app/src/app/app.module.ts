@@ -65,6 +65,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from "@angular/material/card";
+import { SafePipe } from './pipes/safe.pipe';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -104,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TeamEditmembersComponent,
     TeamEditgroupsComponent,
     TeamEditgroupPanelComponent,
+    SafePipe,
   ],
   // tslint:disable-next-line:max-line-length
     imports: [

@@ -14,7 +14,7 @@ export class VideoService {
   BASE_URL = this.globals.BASE_URL;
 
   postVideoLink(video: Video):  Observable<Video> {
-    return <Observable<Video>> (this.http.post(this.BASE_URL.concat("/api/videolink"), video));
+    return <Observable<Video>> this.http.post(this.BASE_URL.concat("/api/videolink"), video);
   }
   getAllLinks(): Observable<Video[]> {
     return <Observable<Video[]>>(
