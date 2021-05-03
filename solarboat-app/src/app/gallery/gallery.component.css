@@ -81,8 +81,8 @@
 
 .mathint {
   text-align: justify;
-  position: relative;
-  color: aqua;
+  position: static;
+  height: fit-content;
 }
 
 @media (max-width: 1200px) {
