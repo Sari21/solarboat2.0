@@ -114,7 +114,7 @@ ngOnInit(): void {
         });
     }
 
-    delete(id: number) {
+    deletePicture(id: number) {
 
         this.pictureService.deleteGalleryPicture(id).subscribe(
             (data) => {
@@ -131,9 +131,14 @@ ngOnInit(): void {
         );
     }
 
-    clickMethod(id: number) {
+    confirmDeletingPicture(id: number) {
         if (confirm("Are you sure to delete " + id.toString())) {
-            this.delete(id);
+            this.deletePicture(id);
+        }
+    }
+    confirmDeletingVideo(id: number) {
+        if (confirm("Biztos, hogy törölni szeretnéd ezt a videót?")) {
+            this.deleteVideo(id);
         }
     }
 
@@ -182,6 +187,21 @@ ngOnInit(): void {
         this.videos = res;
         console.log(this.videos);
     });
+}
+deleteVideo(id : number){
+    this.videoService.deleteVideo(id).subscribe(
+        (data) => {
+            var du = this.videos.find((a) => a.id == id);
+            const index = this.videos.indexOf(du, 0);
+            if (index > -1) {
+                this.videos.splice(index, 1);
+            }
+            this.showSuccess('Sikeres törlés');
+        },
+        (error) => {
+            this.showError(error.error.message, 'Sikertelen képtörlés');
+        }
+    );
 }
 
 }

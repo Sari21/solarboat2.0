@@ -93,6 +93,6 @@ public class FileController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping(path = "/deleteFile")
     public void deleteFile(@RequestBody String fileName) {
-        this.fileStorageService.deleteFile(fileName);
+       // this.fileStorageService.deleteFile(fileName);
     }
 }

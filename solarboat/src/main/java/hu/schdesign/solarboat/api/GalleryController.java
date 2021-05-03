@@ -1,7 +1,7 @@
 package hu.schdesign.solarboat.api;
 
 import hu.schdesign.solarboat.model.GalleryPicture;
-import hu.schdesign.solarboat.model.UploadGalleryPictureReply;
+import hu.schdesign.solarboat.service.FileStorageService;
 import hu.schdesign.solarboat.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class GalleryController {
     private final GalleryService galleryService;
     @Autowired
-    GalleryController(GalleryService galleryService){
+    GalleryController(GalleryService galleryService, FileStorageService fileStorageService){
         this.galleryService = galleryService;
     }
 
@@ -43,11 +43,6 @@ public class GalleryController {
             return new ResponseEntity<>(null, responseHeaders, HttpStatus.BAD_REQUEST);
             }
         }
-        System.out.println(file.getContentType());
-        System.out.println(file.getName());
-        System.out.println(file.getOriginalFilename());
-          System.out.println(titleEn);
-        System.out.println(titleHu);
         GalleryPicture picture = null;
         try {
             picture = galleryService.addPicture(file, titleHu, titleEn);

@@ -1,11 +1,12 @@
 package hu.schdesign.solarboat.service;
 
 
+
 import hu.schdesign.solarboat.Exceptions.FileStorageException;
 import hu.schdesign.solarboat.Exceptions.MyFileNotFoundException;
-import hu.schdesign.solarboat.Exceptions.NotAnImageException;
 import hu.schdesign.solarboat.FileStorageProperties;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.tika.Tika;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -14,15 +15,16 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import retrofit2.http.Multipart;
+
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +32,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 
 @Service
 public class FileStorageService {
@@ -52,16 +55,19 @@ public class FileStorageService {
 
     public MultipartFile resizeImage(MultipartFile file, String path, int width) throws IOException {
         if (!file.getContentType().contains("image")) {
-            return null;
+            throw new RuntimeException("Rossz fájlformátum!");
         }
         BufferedImage tempImage = ImageIO.read(file.getInputStream());
         BufferedImage originalImage = new BufferedImage(tempImage.getWidth(null), tempImage.getHeight(null), BufferedImage.TYPE_INT_RGB);
-        Image image = ImageIO.read(file.getInputStream());
+        InputStream is = file.getInputStream();
+        Image image = ImageIO.read(is);
         originalImage.getGraphics().drawImage(image, 0, 0 , null);
         originalImage.getGraphics().dispose();
         if (originalImage.getWidth() > width) {
+
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(Scalr.resize(originalImage, width), "jpg", baos);
+            String ext = file.getContentType().contains("png") ? "png" : "jpg";
+            ImageIO.write(Scalr.resize(originalImage, width), ext, baos);
             baos.flush();
             MultipartFile newFile = new MockMultipartFile(file.getName(), file.getOriginalFilename(), file.getContentType(), baos.toByteArray());
             return newFile;
@@ -160,14 +166,15 @@ public class FileStorageService {
         }
     }
 
-    public void deleteFile(String fileName) {
+    public void deleteFile(String fileName, String path) {
         try {
-            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Path filePath = Paths.get(this.path + "/" + path + "/" + fileName)
+                    .toAbsolutePath().normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
             if (resource.exists()) {
                 File file = new File(filePath.toString());
-                file.delete();
+                boolean b = file.delete();
 
             } else {
                 throw new MyFileNotFoundException("File not found " + fileName);

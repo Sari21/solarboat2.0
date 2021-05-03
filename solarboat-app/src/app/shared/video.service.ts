@@ -21,7 +21,7 @@ export class VideoService {
       this.http.get(this.BASE_URL + "/api/videolink")
     );
   }
-  deleteGalleryPicture(id: number){
+  deleteVideo(id: number){
     return this.http.delete(this.BASE_URL.concat("/api/videolink/").concat(id.toString()));
   }
 

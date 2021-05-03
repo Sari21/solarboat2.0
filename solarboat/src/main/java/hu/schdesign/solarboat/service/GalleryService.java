@@ -43,6 +43,9 @@ public class GalleryService {
     }
     public void deletePictureById(Long id){
         //TODO magát a képet is kitörölni
+        GalleryPicture gp = galleryRepository.findById(id).orElseThrow(() -> new RuntimeException("Nincs ilyen kép!"));
+        fileStorageService.deleteFile(gp.getPicture(), PATH);
+        fileStorageService.deleteFile(gp.getSmallPicture(), PATH);
         galleryRepository.deleteById(id);
     }
     public Iterable<GalleryPicture> getAllPictures(){

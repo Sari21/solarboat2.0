@@ -51,21 +51,21 @@ import { ConfirmComponent } from "./confirm/confirm.component";
 import { CompassComponent } from "./compass/compass.component";
 import { MileageComponent } from "./mileage/mileage.component";
 import { WavesComponent } from "./waves/waves.component";
-import { NgxDropzoneModule } from 'ngx-dropzone';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { TeamUserviewComponent } from './team-userview/team-userview.component';
-import { TeamEditmembersComponent } from './team-editmembers/team-editmembers.component';
-import { TeamEditgroupsComponent } from './team-editgroups/team-editgroups.component';
-import { TeamEditgroupPanelComponent } from './team-editgroup-panel/team-editgroup-panel.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {ToastrModule} from 'ngx-toastr';
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import { MatNativeDateModule } from '@angular/material/core';
-import {MatCardModule} from "@angular/material/card";
-import { SafePipe } from './pipes/safe.pipe';
+import { NgxDropzoneModule } from "ngx-dropzone";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { TeamUserviewComponent } from "./team-userview/team-userview.component";
+import { TeamEditmembersComponent } from "./team-editmembers/team-editmembers.component";
+import { TeamEditgroupsComponent } from "./team-editgroups/team-editgroups.component";
+import { TeamEditgroupPanelComponent } from "./team-editgroup-panel/team-editgroup-panel.component";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
+import { ToastrModule } from "ngx-toastr";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatCardModule } from "@angular/material/card";
+import { SafePipe } from "./pipes/safe.pipe";
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -108,42 +108,42 @@ export function HttpLoaderFactory(http: HttpClient) {
     SafePipe,
   ],
   // tslint:disable-next-line:max-line-length
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        NgbModule,
-        MatTooltipModule,
-        MatIconModule,
-        BrowserAnimationsModule,
-        MDBBootstrapModule,
-        ScrollToModule.forRoot(),
-        NgxChartsModule,
-        CommonModule,
-        JwtModule,
-        AngularEditorModule,
-        MatTabsModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        ToastrModule.forRoot(),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
-        }),
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        DragDropModule,
-        NgxDropzoneModule,
-        MatCardModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
+    MatTooltipModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MDBBootstrapModule,
+    ScrollToModule.forRoot(),
+    NgxChartsModule,
+    CommonModule,
+    JwtModule,
+    AngularEditorModule,
+    MatTabsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DragDropModule,
+    NgxDropzoneModule,
+    MatCardModule,
+  ],
 
   bootstrap: [AppComponent],
 
