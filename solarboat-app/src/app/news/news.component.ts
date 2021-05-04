@@ -81,8 +81,6 @@ export class NewsComponent implements OnInit {
                 this.fileToUpload = null;
             },
             (err) => {
-                console.log(err);
-                console.log(err.error.message);
                 this.showError(err.error.message, 'Sikertelen mentés');
             });
     }
