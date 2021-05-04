@@ -18,7 +18,8 @@ export class TeamEditmembersComponent implements OnInit {
     form: any = {};
     failed = false;
     errorMessage = '';
-    fileToUpload: File = null;
+    files: File[] = [];
+    picturesSelected = false;
 
     constructor(private toastr: ToastrService, private apiService: TeamService, private modalService: NgbModal,
                 private pictureService: PictureService) {
@@ -55,11 +56,22 @@ export class TeamEditmembersComponent implements OnInit {
     }
 
     onSubmit(EditForm: NgForm) {
-        if (this.fileToUpload) {
-            this.form.picture = '../../assets/members/' + this.fileToUpload.name;
-            this.uploadFileToActivity();
-            this.fileToUpload = null;
+        if (this.picturesSelected) {
+            this.pictureService.postFile(this.form.picture, 'members').subscribe(
+                (data) => {
+                    this.form.picture = '../../assets/members/' + this.form.picture.name;
+                    this.updateMember();
+                },
+                (error) => {
+                    this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+                }
+            );
+        } else {
+            this.updateMember();
         }
+    }
+
+    updateMember() {
         this.apiService.updateMember(this.form).subscribe((data) => {
                 this.showSuccess('Sikeres mentés');
                 this.getMembers();
@@ -69,38 +81,33 @@ export class TeamEditmembersComponent implements OnInit {
             });
         this.modalService.dismissAll('put');
         this.form = null;
-
+        this.files = [];
     }
 
     onSubmitAddForm(AddForm: any) {
-        if (this.fileToUpload) {
-            this.form.picture = '../../assets/members/' + this.fileToUpload.name;
-            this.uploadFileToActivity();
-
-            this.apiService.addMember(this.form).subscribe((data) => {
-                    this.members.push(data);
-                    this.showSuccess('Sikeres mentés');
-                },
-                (err) => {
-                    this.showError(err.error.message, 'Sikertelen törlés');
-                });
-            this.modalService.dismissAll('put');
-            this.form = null;
-            this.fileToUpload = null;
-        }
+        this.pictureService.postFile(this.form.picture, 'members').subscribe(
+            (data) => {
+                this.form.picture = '../../assets/members/' + this.form.picture.name;
+                this.addMember();
+            },
+            (error) => {
+                this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+            }
+        );
     }
 
-
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
+    addMember() {
+        this.apiService.addMember(this.form).subscribe((data) => {
+                this.members.push(data);
+                this.showSuccess('Sikeres mentés');
+                this.modalService.dismissAll('put');
+                this.form = null;
+                this.files = [];
+            },
+            (err) => {
+                this.showError(err.error.message, 'Sikertelen törlés');
+            });
     }
-
-    uploadFileToActivity() {
-        this.pictureService.postFile(this.fileToUpload, 'members').subscribe(data => {
-        }, error => {
-        });
-    }
-
 
     deleteMember(id: any) {
         this.apiService.deleteMember(id).subscribe((data) => {
@@ -120,5 +127,20 @@ export class TeamEditmembersComponent implements OnInit {
 
     showError(message, title) {
         this.toastr.error(message, title);
+    }
+
+    onSelectFile(event) {
+        if (this.files.length > 0) {
+            this.files = [];
+        }
+        this.files.push(...event.addedFiles);
+        this.form.picture = this.files[0];
+        this.picturesSelected = true;
+    }
+
+    onRemoveFile(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.picturesSelected = false;
+
     }
 }

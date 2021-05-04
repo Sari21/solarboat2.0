@@ -5,7 +5,6 @@ import {PictureService} from '../shared/picture.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Globals} from '../globals';
 import {ToastrService} from "ngx-toastr";
-import {GalleryPictureRequest} from "../model/gallery-picture-request";
 
 @Component({
   selector: "app-achievements",
@@ -75,7 +74,7 @@ export class AchievementsComponent implements OnInit {
       location_hu: this.form.location_hu,
       title_en: this.form.title_en,
       location_en: this.form.location_en,
-      date: this.form.date ? this.globals.formatDate(this.form.date): null,
+      date: this.form.date ? this.globals.formatDate(this.form.date) : null,
       description_hu: "leírás",
       description_en: "description",
       place_hu: this.form.place_hu,
