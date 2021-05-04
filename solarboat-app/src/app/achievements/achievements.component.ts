@@ -20,12 +20,13 @@ export class AchievementsComponent implements OnInit {
   failed = false;
   errorMessage = '';
   pictureService: PictureService;
-  fileToUpload: File = null;
   authority: string;
   roles: string[];
   maxDate: Date;
+  files: File[] = [];
+  picturesSelected = false;
   constructor(private globals: Globals, private achievementService: AchievementService,
-              private tokenStorage: TokenStorageService, pictureService: PictureService,private toastr: ToastrService) {
+              private tokenStorage: TokenStorageService, pictureService: PictureService, private toastr: ToastrService) {
     this.pictureService = pictureService;
     const currentYear = new Date().getFullYear();
     this.maxDate = new Date(currentYear + 1, 11, 31);
@@ -58,25 +59,28 @@ export class AchievementsComponent implements OnInit {
   }
 
   onSubmit(empForm: any) {
-    if (this.form.place_hu == null) {
-      this.form.place_hu = ' ';
-    }
-    if (this.form.place_en == null) {
-      this.form.place_en = ' ';
-    }
-    // this.uploadFileToActivity();
+    this.pictureService.postFile(this.form.picture, 'achievement').subscribe(
+        (data) => {
+          this.saveAchievement(empForm);
+        },
+        (error) => {
+          this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+        }
+    );
+  }
+  private saveAchievement(empForm) {
     const o: Object = {
-        title_hu: this.form.title_hu,
-        location_hu: this.form.location_hu,
-        title_en: this.form.title_en,
-        location_en: this.form.location_en,
-        date: this.form.date ? this.globals.formatDate(this.form.date): null,
-        description_hu: "leírás",
-        description_en: "description",
-        place_hu: this.form.place_hu,
-        place_en: this.form.place_en,
-        isLast: false,
-        picture: '../../assets/achievement/' + this.fileToUpload.name
+      title_hu: this.form.title_hu,
+      location_hu: this.form.location_hu,
+      title_en: this.form.title_en,
+      location_en: this.form.location_en,
+      date: this.form.date ? this.globals.formatDate(this.form.date) : null,
+      description_hu: "leírás",
+      description_en: "description",
+      place_hu: this.form.place_hu,
+      place_en: this.form.place_en,
+      isLast: false,
+      picture: '../../assets/achievement/' + this.form.picture.name
     };
     this.achievementService.addAchievement(o).subscribe(
         (res) => {
@@ -87,23 +91,10 @@ export class AchievementsComponent implements OnInit {
           this.showError(err.error.message, 'Sikertelen mentés');
         }
     );
-
-
     this.form = empForm;
-    this.form.reset();
-    this.fileToUpload = null;
+    this.files = [];
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-  }
-  uploadFileToActivity() {
-    this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
-      // do something, if upload success
-    }, error => {
-      this.showError(error.error.message, 'Képfeltöltés hiba');
-    });
-  }
   private pushAchievement(object) {
     this.achievements.unshift(object);
   }
@@ -127,5 +118,20 @@ export class AchievementsComponent implements OnInit {
 
   showError(message, title) {
     this.toastr.error(message, title);
+  }
+
+  onSelectFile(event) {
+    if (this.files.length > 0) {
+      this.files = [];
+    }
+    this.files.push(...event.addedFiles);
+    this.form.picture = this.files[0];
+    this.picturesSelected = true;
+  }
+
+  onRemoveFile(event) {
+    this.files.splice(this.files.indexOf(event), 1);
+    this.picturesSelected = false;
+
   }
 }

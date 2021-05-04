@@ -5,6 +5,8 @@ import {PictureService} from '../shared/picture.service';
 import {NewsService} from '../shared/news.service';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {ToastrService} from 'ngx-toastr';
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 // import AOS from 'aos';
 
@@ -15,7 +17,8 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class NewsPreviewComponent implements OnInit {
     constructor(private apiService: NewsService, private toastr: ToastrService,
-                private modalService: NgbModal, pictureService: PictureService) {
+                private modalService: NgbModal, pictureService: PictureService,
+                private dialog: MatDialog) {
         this.pictureService = pictureService;
         const currentYear = new Date().getFullYear();
         this.maxDate = new Date(currentYear + 1, 11, 31);
@@ -88,16 +91,24 @@ export class NewsPreviewComponent implements OnInit {
     }
 
     delete(id: number) {
-        this.onRemove.emit(this.news);
-        // TODO: kép törlése
-        this.apiService.deleteNews(id).subscribe(
-            (res) => {
-                this.showSuccess('Sikeres törlés');
-            },
-            (err) => {
-                this.showError(err.error.message, 'Sikertelen törlés');
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni a hírt?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.onRemove.emit(this.news);
+                // TODO: kép törlése
+                this.apiService.deleteNews(id).subscribe(
+                    (res) => {
+                        this.showSuccess('Sikeres törlés');
+                    },
+                    (err) => {
+                        this.showError(err.error.message, 'Sikertelen törlés');
+                    }
+                );
             }
-        );
+        });
     }
 
     onSubmit(empForm: any, id: number) {

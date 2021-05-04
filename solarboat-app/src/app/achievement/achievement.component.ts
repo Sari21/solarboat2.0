@@ -5,6 +5,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AchievementService} from '../shared/achievement.service';
 import {Globals} from '../globals';
 import {ToastrService} from "ngx-toastr";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 // import AOS from 'aos';
 
@@ -14,23 +16,27 @@ import {ToastrService} from "ngx-toastr";
     styleUrls: ['./achievement.component.css']
 })
 export class AchievementComponent implements OnInit {
-    form: any = {};
-    failed = false;
-    errorMessage = '';
-    pictureService: PictureService;
-    fileToUpload: File = null;
 
-    @Input() authority: string;
-    @Input() achievement: Achievement;
-    @Output() onRemove = new EventEmitter<Achievement>();
-    maxDate: Date;
-
-    constructor(private globals: Globals, private apiService: AchievementService,
+    constructor(private globals: Globals, private apiService: AchievementService, private dialog: MatDialog,
                 private modalService: NgbModal, pictureService: PictureService, private toastr: ToastrService) {
         this.pictureService = pictureService;
         const currentYear = new Date().getFullYear();
         this.maxDate = new Date(currentYear + 1, 11, 31);
     }
+
+    form: any = {};
+    failed = false;
+    errorMessage = '';
+    pictureService: PictureService;
+    files: File[] = [];
+    picturesSelected = false;
+
+    @Input() authority: string;
+    @Input() achievement: Achievement;
+    @Output() onRemove = new EventEmitter<Achievement>();
+    maxDate: Date;
+    animal: string;
+    name: string;
 
     ngOnInit(): void {
         this.form.title_hu = this.achievement.title_hu;
@@ -43,16 +49,24 @@ export class AchievementComponent implements OnInit {
     }
 
     delete(id: number) {
-        this.onRemove.emit(this.achievement);
-        //TODO: kép törlése
-        this.apiService.deleteAchievement(id).subscribe(
-            (res) => {
-                this.showSuccess('Sikeres törlés');
-            },
-            (err) => {
-                this.showError(err.message, 'Sikertelen törlés');
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni az eredményt?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.onRemove.emit(this.achievement);
+                // TODO: kép törlése
+                this.apiService.deleteAchievement(id).subscribe(
+                    (res) => {
+                        this.showSuccess('Sikeres törlés');
+                    },
+                    (err) => {
+                        this.showError(err.message, 'Sikertelen törlés');
+                    }
+                );
             }
-        );
+        });
     }
 
     openContent(longContent) {
@@ -68,11 +82,7 @@ export class AchievementComponent implements OnInit {
         this.achievement.place_hu = this.form.place_hu;
         this.achievement.place_en = this.form.place_en;
         const achievementId = id;
-        if (this.fileToUpload != null) {
-            this.achievement.picture = '../../assets/achievement/' + this.fileToUpload.name;
-            this.uploadFileToActivity();
-        }
-        const o = {
+        const achievement = {
             id: achievementId,
             title_hu: this.form.title_hu,
             location_hu: this.form.location_hu,
@@ -84,9 +94,24 @@ export class AchievementComponent implements OnInit {
             place_hu: this.form.place_hu,
             place_en: this.form.place_en,
             isLast: false,
-            picture: this.fileToUpload != null ? '../../assets/achievement/' + this.fileToUpload.name : this.achievement.picture
+            picture: this.files.length > 0 ? '../../assets/achievement/' + this.files[0].name : this.achievement.picture
         };
-        this.apiService.updateAchievement(o).subscribe(
+        if (this.files.length > 0) {
+            this.pictureService.postFile(this.form.picture, 'achievement').subscribe(
+                (data) => {
+                    this.updateAchievement(achievement);
+                },
+                (error) => {
+                    this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+                }
+            );
+        } else {
+            this.updateAchievement(achievement);
+        }
+    }
+
+    private updateAchievement(achievement) {
+        this.apiService.updateAchievement(achievement).subscribe(
             (res) => {
                 this.showSuccess('Sikeres mentés');
             },
@@ -95,19 +120,6 @@ export class AchievementComponent implements OnInit {
             }
         );
         this.modalService.dismissAll('put');
-        this.form = empForm;
-        this.form.reset();
-    }
-
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
-    }
-
-    uploadFileToActivity() {
-        this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
-            // do something, if upload success
-        }, error => {
-        });
     }
 
     showSuccess(message) {
@@ -116,5 +128,32 @@ export class AchievementComponent implements OnInit {
 
     showError(message, title) {
         this.toastr.error(message, title);
+    }
+
+    onSelectFile(event) {
+        if (this.files.length > 0) {
+            this.files = [];
+        }
+        this.files.push(...event.addedFiles);
+        this.form.picture = this.files[0];
+        this.picturesSelected = true;
+    }
+
+    onRemoveFile(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.picturesSelected = false;
+
+    }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '250px',
+            data: 'Biztosan ki szeretnéd törölni?'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            console.log(result);
+        });
     }
 }

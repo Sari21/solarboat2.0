@@ -118,6 +118,15 @@
 
             <div class="row pl-3">
                 <div class="col-md-6 col-lg-6 col-12">
+                    <ngx-dropzone (change)="onSelectFile($event)" accept="image/jpeg,image/jpg,image/png">
+                        <ngx-dropzone-label>Húzd ide az új képet a cseréhez!</ngx-dropzone-label>
+                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
+                                              (removed)="onRemoveFile(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                    </ngx-dropzone>
+                </div>
+                <div class="col-md-6 col-lg-6 col-12">
                     <div class="form-group">
                         <mat-form-field >
                             <mat-label>Dátum</mat-label>
@@ -128,24 +137,10 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6 col-12">
-                    <div class="form-group pt-4 pb-3">
-                        <label for="file">Kép</label>
-                        <input type="file"
-                               id="file"
-                               [(ngModel)]="form.file" name="file"
-                               (change)="handleFileInput($event.target.files)">
-                    </div>
-                </div>
             </div>
             <div class="row justify-content-end pr-3">
                 <a class="btn" (click)="onSubmit(EditForm, achievement.id)"
                    href="javascript:void(0)"><span>Feltöltés</span></a>
-
-                <div [hidden]="!failed"
-                     class="alert alert-danger mt-3">
-                    {{errorMessage}}
-                </div>
             </div>
         </form>
     </div>

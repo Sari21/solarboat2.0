@@ -6,6 +6,7 @@ import {PictureService} from '../shared/picture.service';
 import {Globals} from '../globals';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {ToastrService} from 'ngx-toastr';
+import {GalleryPictureRequest} from "../model/gallery-picture-request";
 
 @Component({
     selector: 'app-news',
@@ -51,10 +52,14 @@ export class NewsComponent implements OnInit {
         ]
     };
     maxDate: Date;
+    files: File[] = [];
+    newPicture: GalleryPictureRequest;
+    picturesSelected = false;
 
     ngOnInit(): void {
         this.getNews();
         this.checkAuth();
+        this.newPicture = new GalleryPictureRequest();
     }
 
     onSubmit(empForm: any, event: Event) {
@@ -157,6 +162,18 @@ export class NewsComponent implements OnInit {
         this.toastr.error(message, title);
     }
 
+    onSelectFile(event) {
+        if (this.files.length > 0) {
+            this.files = [];
+        }
+        this.files.push(...event.addedFiles);
+        this.form.picture = this.files[0];
+        this.picturesSelected = true;
+    }
 
+    onRemoveFile(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.picturesSelected = false;
 
+    }
 }

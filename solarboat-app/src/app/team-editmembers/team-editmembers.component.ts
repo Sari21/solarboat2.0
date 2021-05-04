@@ -5,6 +5,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from "ngx-toastr";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: 'app-team-editmembers',
@@ -18,10 +20,11 @@ export class TeamEditmembersComponent implements OnInit {
     form: any = {};
     failed = false;
     errorMessage = '';
-    fileToUpload: File = null;
+    files: File[] = [];
+    picturesSelected = false;
 
     constructor(private toastr: ToastrService, private apiService: TeamService, private modalService: NgbModal,
-                private pictureService: PictureService) {
+                private pictureService: PictureService, private dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -55,11 +58,22 @@ export class TeamEditmembersComponent implements OnInit {
     }
 
     onSubmit(EditForm: NgForm) {
-        if (this.fileToUpload) {
-            this.form.picture = '../../assets/members/' + this.fileToUpload.name;
-            this.uploadFileToActivity();
-            this.fileToUpload = null;
+        if (this.picturesSelected) {
+            this.pictureService.postFile(this.form.picture, 'members').subscribe(
+                (data) => {
+                    this.form.picture = '../../assets/members/' + this.form.picture.name;
+                    this.updateMember();
+                },
+                (error) => {
+                    this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+                }
+            );
+        } else {
+            this.updateMember();
         }
+    }
+
+    updateMember() {
         this.apiService.updateMember(this.form).subscribe((data) => {
                 this.showSuccess('Sikeres mentés');
                 this.getMembers();
@@ -69,49 +83,52 @@ export class TeamEditmembersComponent implements OnInit {
             });
         this.modalService.dismissAll('put');
         this.form = null;
-
+        this.files = [];
     }
 
     onSubmitAddForm(AddForm: any) {
-        if (this.fileToUpload) {
-            this.form.picture = '../../assets/members/' + this.fileToUpload.name;
-            this.uploadFileToActivity();
-
-            this.apiService.addMember(this.form).subscribe((data) => {
-                    this.members.push(data);
-                    this.showSuccess('Sikeres mentés');
-                },
-                (err) => {
-                    this.showError(err.error.message, 'Sikertelen törlés');
-                });
-            this.modalService.dismissAll('put');
-            this.form = null;
-            this.fileToUpload = null;
-        }
+        this.pictureService.postFile(this.form.picture, 'members').subscribe(
+            (data) => {
+                this.form.picture = '../../assets/members/' + this.form.picture.name;
+                this.addMember();
+            },
+            (error) => {
+                this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+            }
+        );
     }
 
-
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
-    }
-
-    uploadFileToActivity() {
-        this.pictureService.postFile(this.fileToUpload, 'members').subscribe(data => {
-        }, error => {
-        });
-    }
-
-
-    deleteMember(id: any) {
-        this.apiService.deleteMember(id).subscribe((data) => {
-                this.showSuccess('Sikeres törlés');
-                this.getMembers();
+    addMember() {
+        this.apiService.addMember(this.form).subscribe((data) => {
+                this.members.push(data);
+                this.showSuccess('Sikeres mentés');
+                this.modalService.dismissAll('put');
+                this.form = null;
+                this.files = [];
             },
             (err) => {
                 this.showError(err.error.message, 'Sikertelen törlés');
             });
-        this.modalService.dismissAll('put');
-        this.form = null;
+    }
+
+    deleteMember(id: any) {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni a csapattagot?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.apiService.deleteMember(id).subscribe((data) => {
+                        this.showSuccess('Sikeres törlés');
+                        this.getMembers();
+                    },
+                    (err) => {
+                        this.showError(err.error.message, 'Sikertelen törlés');
+                    });
+                this.modalService.dismissAll('put');
+                this.form = null;
+            }
+        });
     }
 
     showSuccess(message) {
@@ -120,5 +137,20 @@ export class TeamEditmembersComponent implements OnInit {
 
     showError(message, title) {
         this.toastr.error(message, title);
+    }
+
+    onSelectFile(event) {
+        if (this.files.length > 0) {
+            this.files = [];
+        }
+        this.files.push(...event.addedFiles);
+        this.form.picture = this.files[0];
+        this.picturesSelected = true;
+    }
+
+    onRemoveFile(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.picturesSelected = false;
+
     }
 }

@@ -36,7 +36,7 @@
                                            [ngClass]="{'failed': failed }"/>
                                 </div> -->
                                 <div class="col-11 col-md-6 col-lg-6 col-sm-10 pb-4 pl-3">
-                                    <ngx-dropzone (change)="onSelect($event)">
+                                    <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png">
                                         <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
                                         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
                                             (removed)="onRemove(f)">
@@ -96,7 +96,7 @@
                     <iframe class="p-3" width="432" height="260" [src]="video.link | safe" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
-                    <a (click)="confirmDeletingVideo(video.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
+                    <a (click)="deleteVideo(video.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
                 </div>
 
             </div>
@@ -104,7 +104,7 @@
             <div class="justify-content-center d-flex mb-5" *ngIf="largeWidth">
                 <div class="gallery justify-content-center" id="photos">
                     <div *ngFor="let img of gallery" class="picture">
-                        <a (click)="confirmDeletingPicture(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
+                        <a (click)="deletePicture(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
 
                         <a href="{{ img.picture }}" data-lightbox="gallery">
                             <div class="img-wrap">
@@ -117,7 +117,7 @@
             <div class="justify-content-center d-flex mb-5" *ngIf="!largeWidth">
                 <div class="gallery justify-content-center" id="photos">
                     <div *ngFor="let img of gallery" class="picture">
-                        <a (click)="confirmDeletingPicture(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
+                        <a (click)="deletePicture(img.id)" class="close" *ngIf="authority == 'admin'">&times;</a>
 
                         <a href="{{ img.smallPicture }}" data-lightbox="gallery">
                             <div class="img-wrap">
