@@ -5,6 +5,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AchievementService} from '../shared/achievement.service';
 import {Globals} from '../globals';
 import {ToastrService} from "ngx-toastr";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 // import AOS from 'aos';
 
@@ -14,6 +16,14 @@ import {ToastrService} from "ngx-toastr";
     styleUrls: ['./achievement.component.css']
 })
 export class AchievementComponent implements OnInit {
+
+    constructor(private globals: Globals, private apiService: AchievementService, private dialog: MatDialog,
+                private modalService: NgbModal, pictureService: PictureService, private toastr: ToastrService) {
+        this.pictureService = pictureService;
+        const currentYear = new Date().getFullYear();
+        this.maxDate = new Date(currentYear + 1, 11, 31);
+    }
+
     form: any = {};
     failed = false;
     errorMessage = '';
@@ -25,13 +35,8 @@ export class AchievementComponent implements OnInit {
     @Input() achievement: Achievement;
     @Output() onRemove = new EventEmitter<Achievement>();
     maxDate: Date;
-
-    constructor(private globals: Globals, private apiService: AchievementService,
-                private modalService: NgbModal, pictureService: PictureService, private toastr: ToastrService) {
-        this.pictureService = pictureService;
-        const currentYear = new Date().getFullYear();
-        this.maxDate = new Date(currentYear + 1, 11, 31);
-    }
+    animal: string;
+    name: string;
 
     ngOnInit(): void {
         this.form.title_hu = this.achievement.title_hu;
@@ -44,16 +49,25 @@ export class AchievementComponent implements OnInit {
     }
 
     delete(id: number) {
-        this.onRemove.emit(this.achievement);
-        //TODO: kép törlése
-        this.apiService.deleteAchievement(id).subscribe(
-            (res) => {
-                this.showSuccess('Sikeres törlés');
-            },
-            (err) => {
-                this.showError(err.message, 'Sikertelen törlés');
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni az eredményt?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(result);
+            if (result) {
+                this.onRemove.emit(this.achievement);
+                // TODO: kép törlése
+                this.apiService.deleteAchievement(id).subscribe(
+                    (res) => {
+                        this.showSuccess('Sikeres törlés');
+                    },
+                    (err) => {
+                        this.showError(err.message, 'Sikertelen törlés');
+                    }
+                );
             }
-        );
+        });
     }
 
     openContent(longContent) {
@@ -86,7 +100,7 @@ export class AchievementComponent implements OnInit {
         if (this.files.length > 0) {
             this.pictureService.postFile(this.form.picture, 'achievement').subscribe(
                 (data) => {
-                    this.updateAchievement( achievement);
+                    this.updateAchievement(achievement);
                 },
                 (error) => {
                     this.showError(error.message, 'Hiba a fájlfeltöltéskor');
@@ -130,5 +144,17 @@ export class AchievementComponent implements OnInit {
         this.files.splice(this.files.indexOf(event), 1);
         this.picturesSelected = false;
 
+    }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '250px',
+            data: 'Biztosan ki szeretnéd törölni?'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            console.log(result);
+        });
     }
 }

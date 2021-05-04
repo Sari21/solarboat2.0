@@ -1,0 +1,6 @@
+.mat-button{
+    outline: none;
+}
+.mat-button:focus{
+    outline: none;
+}
