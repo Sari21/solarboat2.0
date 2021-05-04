@@ -5,9 +5,11 @@ import {TokenStorageService} from "../auth/token-storage.service";
 import {GalleryPicture} from "../model/gallery-picture";
 import {GalleryPictureRequest} from "../model/gallery-picture-request";
 import {ToastrService} from "ngx-toastr";
-import { Video } from "../model/video";
-import { VideoService} from "../shared/video.service";
-import { DomSanitizer } from "@angular/platform-browser";
+import {Video} from "../model/video";
+import {VideoService} from "../shared/video.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 
 // import AOS from 'aos';
@@ -18,43 +20,48 @@ import { DomSanitizer } from "@angular/platform-browser";
     styleUrls: ["./gallery.component.css"],
 })
 export class GalleryComponent implements OnInit {
-  constructor(
-    private pictureService: PictureService,
-    private router: Router,
-    private tokenStorage: TokenStorageService,
-    private videoService: VideoService,
-    private toastr: ToastrService
+    constructor(
+        private pictureService: PictureService,
+        private router: Router,
+        private tokenStorage: TokenStorageService,
+        private videoService: VideoService,
+        private toastr: ToastrService,
+        private dialog: MatDialog
     ) {
- }
-  @Output() gallery: GalleryPicture[];
-  newPicture: GalleryPictureRequest;
-  @Output() videos: Video[];
-  newVideo: Video;
-  failed = false;
-  videoFailed = false;
-  errorMessage = "";
-  picturesSelected = false;
-  // pic = false;
-  // smallPic = false;
-  public authority: string;
-  public roles: string[];
-  public largeWidth: boolean;
-  fileToUpload: File;
-  files: File[] = [];
-ngOnInit(): void {
-  // AOS.init();
-  this.checkAuth();
-  this.loadGallery();
-  this.loadVideos();
-  this.newPicture = new GalleryPictureRequest();
-  this.newVideo = new Video();
-  this.largeWidth = (window.innerWidth < 768) ? false : true;
-  }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.largeWidth = (window.innerWidth < 768) ? false : true;
-    console.log(this.largeWidth);
-  }
+    }
+
+    @Output() gallery: GalleryPicture[];
+    newPicture: GalleryPictureRequest;
+    @Output() videos: Video[];
+    newVideo: Video;
+    failed = false;
+    videoFailed = false;
+    errorMessage = "";
+    picturesSelected = false;
+    // pic = false;
+    // smallPic = false;
+    public authority: string;
+    public roles: string[];
+    public largeWidth: boolean;
+    fileToUpload: File;
+    files: File[] = [];
+
+    ngOnInit(): void {
+        // AOS.init();
+        this.checkAuth();
+        this.loadGallery();
+        this.loadVideos();
+        this.newPicture = new GalleryPictureRequest();
+        this.newVideo = new Video();
+        this.largeWidth = (window.innerWidth < 768) ? false : true;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.largeWidth = (window.innerWidth < 768) ? false : true;
+        console.log(this.largeWidth);
+    }
+
     // handleFileInput(files: FileList) {
     //   this.fileToUpload = files.item(0);
     //   this.newPicture.picture = files.item(0);
@@ -115,32 +122,34 @@ ngOnInit(): void {
     }
 
     deletePicture(id: number) {
-
-        this.pictureService.deleteGalleryPicture(id).subscribe(
-            (data) => {
-                var du = this.gallery.find((a) => a.id == id);
-                const index = this.gallery.indexOf(du, 0);
-                if (index > -1) {
-                    this.gallery.splice(index, 1);
-                }
-                this.showSuccess('Sikeres törlés');
-            },
-            (error) => {
-                this.showError(error.error.message, 'Sikertelen képtörlés');
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni a képet?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.pictureService.deleteGalleryPicture(id).subscribe(
+                    (data) => {
+                        const du = this.gallery.find((a) => a.id === id);
+                        const index = this.gallery.indexOf(du, 0);
+                        if (index > -1) {
+                            this.gallery.splice(index, 1);
+                        }
+                        this.showSuccess('Sikeres törlés');
+                    },
+                    (error) => {
+                        this.showError(error.error.message, 'Sikertelen képtörlés');
+                    }
+                );
             }
-        );
+        });
     }
 
-    confirmDeletingPicture(id: number) {
-        if (confirm("Are you sure to delete " + id.toString())) {
-            this.deletePicture(id);
-        }
-    }
-    confirmDeletingVideo(id: number) {
-        if (confirm("Biztos, hogy törölni szeretnéd ezt a videót?")) {
-            this.deleteVideo(id);
-        }
-    }
+    // confirmDeletingVideo(id: number) {
+    //     if (confirm("Biztos, hogy törölni szeretnéd ezt a videót?")) {
+    //         this.deleteVideo(id);
+    //     }
+    // }
 
     checkAuth() {
         this.authority = undefined;
@@ -157,9 +166,9 @@ ngOnInit(): void {
         }
     }
 
-    isEnabled(form: boolean) {
-        return (form && this.fileToUpload);
-    }
+    // isEnabled(form: boolean) {
+    //     return (form && this.fileToUpload);
+    // }
 
     showSuccess(message) {
         this.toastr.success(message);
@@ -168,40 +177,49 @@ ngOnInit(): void {
     showError(message, title) {
         this.toastr.error(message, title);
     }
-  
 
-  uploadVideo(empForm: any){
-    this.videoService.postVideoLink(this.newVideo).subscribe(
-      (data) => {
-        this.newVideo = new Video();
-        this.videos.push(data);
-      },
-      (error) => {
-      }
-    );
-    empForm.reset();
-  }
 
-  loadVideos() {
-    this.videoService.getAllLinks().subscribe((res) => {
-        this.videos = res;
-        console.log(this.videos);
-    });
-}
-deleteVideo(id : number){
-    this.videoService.deleteVideo(id).subscribe(
-        (data) => {
-            var du = this.videos.find((a) => a.id == id);
-            const index = this.videos.indexOf(du, 0);
-            if (index > -1) {
-                this.videos.splice(index, 1);
+    uploadVideo(empForm: any) {
+        this.videoService.postVideoLink(this.newVideo).subscribe(
+            (data) => {
+                this.newVideo = new Video();
+                this.videos.push(data);
+            },
+            (error) => {
             }
-            this.showSuccess('Sikeres törlés');
-        },
-        (error) => {
-            this.showError(error.error.message, 'Sikertelen képtörlés');
-        }
-    );
-}
+        );
+        empForm.reset();
+    }
+
+    loadVideos() {
+        this.videoService.getAllLinks().subscribe((res) => {
+            this.videos = res;
+            console.log(this.videos);
+        });
+    }
+
+    deleteVideo(id: number) {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni a képet?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.videoService.deleteVideo(id).subscribe(
+                    (data) => {
+                        var du = this.videos.find((a) => a.id == id);
+                        const index = this.videos.indexOf(du, 0);
+                        if (index > -1) {
+                            this.videos.splice(index, 1);
+                        }
+                        this.showSuccess('Sikeres törlés');
+                    },
+                    (error) => {
+                        this.showError(error.error.message, 'Sikertelen képtörlés');
+                    }
+                );
+            }
+        });
+    }
 
 }

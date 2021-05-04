@@ -54,7 +54,6 @@ export class AchievementComponent implements OnInit {
             data: 'Biztosan ki szeretnéd törölni az eredményt?'
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
             if (result) {
                 this.onRemove.emit(this.achievement);
                 // TODO: kép törlése

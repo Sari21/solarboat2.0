@@ -5,6 +5,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PictureService} from '../shared/picture.service';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from "ngx-toastr";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: 'app-team-editmembers',
@@ -22,7 +24,7 @@ export class TeamEditmembersComponent implements OnInit {
     picturesSelected = false;
 
     constructor(private toastr: ToastrService, private apiService: TeamService, private modalService: NgbModal,
-                private pictureService: PictureService) {
+                private pictureService: PictureService, private dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -110,15 +112,23 @@ export class TeamEditmembersComponent implements OnInit {
     }
 
     deleteMember(id: any) {
-        this.apiService.deleteMember(id).subscribe((data) => {
-                this.showSuccess('Sikeres törlés');
-                this.getMembers();
-            },
-            (err) => {
-                this.showError(err.error.message, 'Sikertelen törlés');
-            });
-        this.modalService.dismissAll('put');
-        this.form = null;
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztosan ki szeretnéd törölni a csapattagot?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.apiService.deleteMember(id).subscribe((data) => {
+                        this.showSuccess('Sikeres törlés');
+                        this.getMembers();
+                    },
+                    (err) => {
+                        this.showError(err.error.message, 'Sikertelen törlés');
+                    });
+                this.modalService.dismissAll('put');
+                this.form = null;
+            }
+        });
     }
 
     showSuccess(message) {

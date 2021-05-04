@@ -7,6 +7,8 @@ import {AllSponsors} from "../model/all-sponsors";
 import {BreadcrumbModule} from "angular-bootstrap-md";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ToastrService} from "ngx-toastr";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 // import AOS from 'aos';
 @Component({
@@ -19,7 +21,8 @@ export class SponsorsComponent implements OnInit {
         private sponsorService: SponsorService,
         private pictureService: PictureService,
         private tokenStorage: TokenStorageService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private dialog: MatDialog
     ) {
     }
 
@@ -137,55 +140,49 @@ export class SponsorsComponent implements OnInit {
     }
 
     delete(sponsor: Sponsor) {
-        this.sponsorService.deleteSponsor(sponsor.id).subscribe(
-            (data) => {
-                this.showSuccess('Sikeres törlés');
-                switch (sponsor.group) {
-                    case "main":
-                        this.allSponsors.main.splice(this.allSponsors.main.indexOf(sponsor), 1);
-                        break;
-                    case "top":
-                        this.allSponsors.top.splice(this.allSponsors.top.indexOf(sponsor), 1);
-                        break;
-                    case "other":
-                        this.allSponsors.other.splice(this.allSponsors.other.indexOf(sponsor), 1);
-                        break;
-                    case "partner":
-                        this.allSponsors.partner.splice(this.allSponsors.partner.indexOf(sponsor), 1);
-                        break;
-                    case "uni":
-                        this.allSponsors.uni.splice(this.allSponsors.uni.indexOf(sponsor), 1);
-                        this.splitSponsors();
-                        break;
-                    default:
-                        break;
-                }
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '300px',
+            data: 'Biztos, hogy törölni szeretnéd a következő szponzort: ' + sponsor.name + '?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.sponsorService.deleteSponsor(sponsor.id).subscribe(
+                    (data) => {
+                        this.showSuccess('Sikeres törlés');
+                        switch (sponsor.group) {
+                            case "main":
+                                this.allSponsors.main.splice(this.allSponsors.main.indexOf(sponsor), 1);
+                                break;
+                            case "top":
+                                this.allSponsors.top.splice(this.allSponsors.top.indexOf(sponsor), 1);
+                                break;
+                            case "other":
+                                this.allSponsors.other.splice(this.allSponsors.other.indexOf(sponsor), 1);
+                                break;
+                            case "partner":
+                                this.allSponsors.partner.splice(this.allSponsors.partner.indexOf(sponsor), 1);
+                                break;
+                            case "uni":
+                                this.allSponsors.uni.splice(this.allSponsors.uni.indexOf(sponsor), 1);
+                                this.splitSponsors();
+                                break;
+                            default:
+                                break;
+                        }
 
-                // var du = this.allSponsors.find((a) => a.id == id);
-                // const index = this.allSponsors.indexOf(du, 0);
-                // if (index > -1) {
-                //   this.allSponsors.splice(index, 1);
-                // }
-                // this.splitSponsores();
-            },
-            (error) => {
-                this.showError(error.error.message, 'Sikertelen törlés');
+                        // var du = this.allSponsors.find((a) => a.id == id);
+                        // const index = this.allSponsors.indexOf(du, 0);
+                        // if (index > -1) {
+                        //   this.allSponsors.splice(index, 1);
+                        // }
+                        // this.splitSponsores();
+                    },
+                    (error) => {
+                        this.showError(error.error.message, 'Sikertelen törlés');
+                    }
+                );
             }
-        );
-    }
-
-    clickMethod(sponsor: Sponsor) {
-        // var name: string;
-        // this.allSponsors.forEach((t) => {
-        //   if (t.id == id) name = t.name;
-        // });
-        if (
-            confirm(
-                "Biztos, hogy törölni szeretnéd a következő szponzort: " + sponsor.name + "?"
-            )
-        ) {
-            this.delete(sponsor);
-        }
+        });
     }
 
     onSelect(event) {
