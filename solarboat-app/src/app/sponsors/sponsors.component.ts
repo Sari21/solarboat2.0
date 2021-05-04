@@ -68,7 +68,7 @@ export class SponsorsComponent implements OnInit {
                 this.splitSponsors();
             },
             (err) => {
-                alert("get error");
+                this.showError("Nem sikerült a szponzorok lekérése", 'Error');
             }
         );
     }
@@ -82,7 +82,7 @@ export class SponsorsComponent implements OnInit {
         this.uni = [];
         for (let i = 2; i < 10; i++) {
             let t: Sponsor[] = this.allSponsors.uni.filter(
-                (s) => s.group == "UNI" && s.row == i
+                (s) => s.group === "UNI" && s.row === i
             );
             if (t != undefined) {
                 this.uni.push(t);
@@ -91,11 +91,21 @@ export class SponsorsComponent implements OnInit {
     }
 
     onSubmit(event: Event) {
-        event.preventDefault();
+        this.pictureService.postSponsorLogo(this.files[0]).subscribe(
+            (data) => {
+                event.preventDefault();
+                this.addSponsor();
+            },
+            (error) => {
+                this.showError(error.error.message, 'Sikertelen fájlfeltöltés');
+            }
+        );
+    }
+
+    addSponsor() {
         this.sponsorService.postSponsor(this.newSponsor).subscribe(
             (data) => {
                 this.showSuccess('Sikeres mentés');
-                this.uploadFileToActivity();
                 switch (data.group) {
                     case "main":
                         this.allSponsors.main.push(data);
@@ -117,26 +127,11 @@ export class SponsorsComponent implements OnInit {
                         break;
                 }
                 this.splitSponsors();
+                this.files = [];
+                this.newSponsor = new Sponsor();
             },
             (error) => {
                 this.showError(error.error.message, 'Sikertelen mentés');
-            }
-        );
-    }
-
-    // handleFileInput(files: FileList) {
-    //   this.fileToUpload = this.files[0];
-    //   this.newSponsor.picture = this.files[0].name;
-    // }
-    uploadFileToActivity() {
-        this.pictureService.postSponsorLogo(this.files[0]).subscribe(
-            (data) => {
-                // do something, if upload success
-                this.showSuccess('Sikeres fájlfeltöltés');
-            },
-            (error) => {
-                // console.log(error);
-                this.showError(error.error.message, 'Sikertelen fájlfeltöltés');
             }
         );
     }

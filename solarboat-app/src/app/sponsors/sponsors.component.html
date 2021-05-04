@@ -44,7 +44,7 @@
 
                         </div>
                         <div class="col-11 col-md-6 col-lg-6 col-sm-10 pt-4">
-                            <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/svg+xml">
+                            <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png">
                                 <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
                                 <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
                                                       (removed)="onRemove(f)">
@@ -52,7 +52,7 @@
                                 </ngx-dropzone-preview>
                             </ngx-dropzone>
                             <div class="pt-3">
-                                <mat-card>Információ a képfeltöltésről: fájlformátum, méret, háttér stb..</mat-card>
+                                <mat-card>Csak jpg, jpeg és pgn fájltípus tölthető fel. Információ a képfeltöltésről: fájlformátum, méret, háttér stb..</mat-card>
                             </div>
                         </div>
                     </div>
