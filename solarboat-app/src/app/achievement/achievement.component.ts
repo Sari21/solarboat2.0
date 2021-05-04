@@ -18,7 +18,8 @@ export class AchievementComponent implements OnInit {
     failed = false;
     errorMessage = '';
     pictureService: PictureService;
-    fileToUpload: File = null;
+    files: File[] = [];
+    picturesSelected = false;
 
     @Input() authority: string;
     @Input() achievement: Achievement;
@@ -68,11 +69,7 @@ export class AchievementComponent implements OnInit {
         this.achievement.place_hu = this.form.place_hu;
         this.achievement.place_en = this.form.place_en;
         const achievementId = id;
-        if (this.fileToUpload != null) {
-            this.achievement.picture = '../../assets/achievement/' + this.fileToUpload.name;
-            this.uploadFileToActivity();
-        }
-        const o = {
+        const achievement = {
             id: achievementId,
             title_hu: this.form.title_hu,
             location_hu: this.form.location_hu,
@@ -84,9 +81,24 @@ export class AchievementComponent implements OnInit {
             place_hu: this.form.place_hu,
             place_en: this.form.place_en,
             isLast: false,
-            picture: this.fileToUpload != null ? '../../assets/achievement/' + this.fileToUpload.name : this.achievement.picture
+            picture: this.files.length > 0 ? '../../assets/achievement/' + this.files[0].name : this.achievement.picture
         };
-        this.apiService.updateAchievement(o).subscribe(
+        if (this.files.length > 0) {
+            this.pictureService.postFile(this.form.picture, 'achievement').subscribe(
+                (data) => {
+                    this.updateAchievement( achievement);
+                },
+                (error) => {
+                    this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+                }
+            );
+        } else {
+            this.updateAchievement(achievement);
+        }
+    }
+
+    private updateAchievement(achievement) {
+        this.apiService.updateAchievement(achievement).subscribe(
             (res) => {
                 this.showSuccess('Sikeres mentés');
             },
@@ -95,19 +107,6 @@ export class AchievementComponent implements OnInit {
             }
         );
         this.modalService.dismissAll('put');
-        this.form = empForm;
-        this.form.reset();
-    }
-
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
-    }
-
-    uploadFileToActivity() {
-        this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
-            // do something, if upload success
-        }, error => {
-        });
     }
 
     showSuccess(message) {
@@ -116,5 +115,20 @@ export class AchievementComponent implements OnInit {
 
     showError(message, title) {
         this.toastr.error(message, title);
+    }
+
+    onSelectFile(event) {
+        if (this.files.length > 0) {
+            this.files = [];
+        }
+        this.files.push(...event.addedFiles);
+        this.form.picture = this.files[0];
+        this.picturesSelected = true;
+    }
+
+    onRemoveFile(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+        this.picturesSelected = false;
+
     }
 }

@@ -62,7 +62,6 @@ export class AchievementsComponent implements OnInit {
   onSubmit(empForm: any) {
     this.pictureService.postFile(this.form.picture, 'achievement').subscribe(
         (data) => {
-          console.log('postfile ended');
           this.saveAchievement(empForm);
         },
         (error) => {
@@ -71,12 +70,6 @@ export class AchievementsComponent implements OnInit {
     );
   }
   private saveAchievement(empForm) {
-    if (this.form.place_hu == null) {
-      this.form.place_hu = ' ';
-    }
-    if (this.form.place_en == null) {
-      this.form.place_en = ' ';
-    }
     const o: Object = {
       title_hu: this.form.title_hu,
       location_hu: this.form.location_hu,
@@ -101,19 +94,8 @@ export class AchievementsComponent implements OnInit {
     );
     this.form = empForm;
     this.files = [];
-    this.form.reset();
   }
 
-  // handleFileInput(files: FileList) {
-  //   this.fileToUpload = files.item(0);
-  // }
-  // uploadFileToActivity() {
-  //   this.pictureService.postFile(this.fileToUpload, 'achievement').subscribe(data => {
-  //     // do something, if upload success
-  //   }, error => {
-  //     this.showError(error.error.message, 'Képfeltöltés hiba');
-  //   });
-  // }
   private pushAchievement(object) {
     this.achievements.unshift(object);
   }
