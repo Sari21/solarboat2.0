@@ -4,14 +4,14 @@ export class SignUpInfo {
   email: string;
   role: string[];
   password: string;
-  admin: boolean;
 
   constructor(
     name: string,
     username: string,
     email: string,
     password: string,
-    admin: boolean
+    admin: boolean,
+    editor: boolean
   ) {
     this.name = name;
     this.username = username;
@@ -20,6 +20,9 @@ export class SignUpInfo {
     this.role = ["user"];
     if (admin) {
       this.role.push("admin");
+    }
+    if(editor){
+      this.role.push("editor");
     }
   }
 }
