@@ -34,7 +34,6 @@ export class TokenStorageService {
   }
 
   public saveAuthorities(authorities: string[]) {
-    console.log(authorities);
     window.sessionStorage.removeItem(AUTHORITIES_KEY);
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
@@ -47,7 +46,6 @@ export class TokenStorageService {
         this.roles.push(authority.authority);
       });
     }
-    console.log(this.roles);
     return this.roles;
   }
 }

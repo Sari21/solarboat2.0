@@ -4,7 +4,7 @@
 
       <h1 class="title mt-5 mb-5">Felhasználók</h1>
       <a class="btn " href="javascript:void(0)"  routerLink="/signup">
-        <span>  Új felhasználó</span>
+        <span>Új felhasználó</span>
       </a>
 
     <div class="justify-content-center d-flex">
@@ -13,7 +13,7 @@
           <th class="col-3">Név</th>
           <th class="col-3">Felhasználónév</th>
           <th class="col-3">E-mail</th>
-          <th class="col-3">Admin</th>
+          <th class="col-3">Szerepkörök</th>
           <th class="col-1"></th>
         </tr>
         <tr *ngFor="let user of users">
@@ -21,7 +21,7 @@
           <td class="col-3">{{ user.username }}</td>
           <td class="col-3">{{ user.email }}</td>
           <td class="col-3">
-            <p *ngFor="let role of user.roles">{{ role.name }}</p>
+            <p *ngFor="let role of user.roles">{{ role }}</p>
           </td>
           <td class="col-3" (click)="open(content, user.id)"><i class="fas fa-edit p-2"></i></td>
           <td class="col-3" (click)="confirmDelete(user.id, user.name)">
@@ -34,6 +34,7 @@
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
+  <div class="p-3">
   <div class="modal-header">
     <h4 class="modal-title">Felhasználó</h4>
     <button type="button" class="close" aria-label="Close" (click)="close()">
@@ -71,13 +72,24 @@
     type="checkbox"
     id="admin"
     name="admin"
-    [(ngModel)]="selectedUser.isAdmin"
-    [checked]="selectedUser.isAdmin"
+    [(ngModel)]="this.isAdmin"
+    [checked]="this.isAdmin"
   />
+  <div class="row">
+  <label for="editor">Szerkesztő?</label>
+  <input
+    type="checkbox"
+    id="editor"
+    name="editor"
+    [(ngModel)]="this.isEditor"
+    [checked]="this.isEditor"
+  />
+</div>
 
   <div class="modal-footer">
     <button type="submit" class="brk-btn" (click)="submit()">Mentés</button>
     <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
   </div>
+</div>
 </ng-template>
 <app-footer></app-footer>

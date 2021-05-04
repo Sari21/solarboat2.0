@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient, public globals: Globals) {}
 
-  getUsers(): Observable<User[]> {
-    return <Observable<User[]>>this.http.get(this.BASE_URL);
+  getUsers(): Observable<any[]> {
+    return <Observable<any[]>>this.http.get(this.BASE_URL);
   }
   updateUser(user: User){
     var v = {
