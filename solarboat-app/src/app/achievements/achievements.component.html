@@ -15,15 +15,17 @@
                                     <div class="row">
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
-                                                <mat-form-field >
-                                                    <input matInput name="location_hu" maxlength="50" minlength="2" type="text" id="location_hu"
-                                                           [(ngModel)]="form.location_hu" required placeholder="Helyszín">
+                                                <mat-form-field>
+                                                    <input matInput name="location_hu" maxlength="50" minlength="2"
+                                                           type="text" id="location_hu"
+                                                           [(ngModel)]="form.location_hu" required
+                                                           placeholder="Helyszín">
                                                     <mat-error>Kötelező mező</mat-error>
                                                     <mat-hint>Város vagy ország neve</mat-hint>
                                                 </mat-form-field>
                                             </div>
                                             <div class="form-group">
-                                                <mat-form-field >
+                                                <mat-form-field>
                                                     <input matInput name="place_hu" type="text" id="place_hu"
                                                            [(ngModel)]="form.place_hu" required placeholder="Helyezés">
                                                     <mat-error>Kötelező mező</mat-error>
@@ -33,9 +35,11 @@
                                         </div>
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
-                                                <mat-form-field >
-                                                    <input matInput maxlength="50" minlength="2" name="title_hu" type="text" id="title_hu"
-                                                           [(ngModel)]="form.title_hu" required placeholder="Verseny/rendezvény neve">
+                                                <mat-form-field>
+                                                    <input matInput maxlength="50" minlength="2" name="title_hu"
+                                                           type="text" id="title_hu"
+                                                           [(ngModel)]="form.title_hu" required
+                                                           placeholder="Verseny/rendezvény neve">
                                                     <mat-error>Kötelező mező</mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -48,15 +52,17 @@
                                     <div class="row">
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
-                                                <mat-form-field >
-                                                    <input matInput maxlength="50" minlength="2" name="location_en" type="text" id="location_en"
-                                                           [(ngModel)]="form.location_en" required placeholder="Location">
+                                                <mat-form-field>
+                                                    <input matInput maxlength="50" minlength="2" name="location_en"
+                                                           type="text" id="location_en"
+                                                           [(ngModel)]="form.location_en" required
+                                                           placeholder="Location">
                                                     <mat-error>Required field</mat-error>
                                                     <mat-hint>Name of city or country</mat-hint>
                                                 </mat-form-field>
                                             </div>
                                             <div class="form-group">
-                                                <mat-form-field >
+                                                <mat-form-field>
                                                     <input matInput name="place_en" type="text" id="place_en"
                                                            [(ngModel)]="form.place_en" required placeholder="Place">
                                                     <mat-error>Required field</mat-error>
@@ -66,9 +72,11 @@
                                         </div>
                                         <div class="col-md-6 col-lg-6 col-12">
                                             <div class="form-group">
-                                                <mat-form-field >
-                                                    <input matInput maxlength="50" minlength="2" name="title_en" type="text" id="title_en"
-                                                           [(ngModel)]="form.title_en" required placeholder="Title of achievement/competition">
+                                                <mat-form-field>
+                                                    <input matInput maxlength="50" minlength="2" name="title_en"
+                                                           type="text" id="title_en"
+                                                           [(ngModel)]="form.title_en" required
+                                                           placeholder="Title of achievement/competition">
                                                     <mat-error>Required field</mat-error>
                                                 </mat-form-field>
                                             </div>
@@ -80,30 +88,31 @@
 
                         <div class="row pl-3">
                             <div class="col-md-6 col-lg-6 col-12">
-                                <div class="form-group">
-                                    <mat-form-field >
-                                        <mat-label>Dátum</mat-label>
-                                        <input matInput [max]="maxDate" name="date" [matDatepicker]="date" [(ngModel)]="form.date" id="date">
-                                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-                                        <mat-datepicker #date></mat-datepicker>
-<!--                                        <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>-->
-                                    </mat-form-field>
-                                </div>
+                                <ngx-dropzone (change)="onSelectFile($event)" accept="image/jpeg,image/jpg,image/png">
+                                    <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
+                                                          (removed)="onRemoveFile(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
                             </div>
                             <div class="col-md-6 col-lg-6 col-12">
-                                <div class="form-group pt-4 pb-3">
-                                    <label for="file">Kép</label>
-                                    <input type="file"
-                                           id="file"
-                                           [(ngModel)]="form.file" name="file"
-                                           (change)="handleFileInput($event.target.files)">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Dátum</mat-label>
+                                        <input matInput [max]="maxDate" name="date" [matDatepicker]="date"
+                                               [(ngModel)]="form.date" id="date">
+                                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                                        <mat-datepicker #date></mat-datepicker>
+                                        <!--                                        <mat-hint>Üresen hagyva a mai dátummal lesz elmentve</mat-hint>-->
+                                    </mat-form-field>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row justify-content-end pr-3">
                             <a class="btn" (click)="onSubmit(AddForm)" href="javascript:void(0)"
-                               [ngClass]="{'disabled': !AddForm.form.valid || fileToUpload==null}"><span>Feltöltés</span></a>
+                               [ngClass]="{'disabled': !AddForm.form.valid || files == []}"><span>Feltöltés</span></a>
 
                             <div [hidden]="!failed"
                                  class="alert alert-danger mt-3">
@@ -117,7 +126,7 @@
         <div class="row justify-content-center">
             <ul class="timeline col-12 col-sm-12 col-lg-8 col-md-11 ">
                 <li *ngFor="let achievement of achievements ">
-<!--                <li *ngFor="let achievement of sortby('date') ">-->
+                    <!--                <li *ngFor="let achievement of sortby('date') ">-->
                     <app-achievement [achievement]="achievement" [authority]="authority"
                                      (onRemove)="onDeleteAchievement($event)"></app-achievement>
                 </li>

@@ -34,8 +34,8 @@ export class GalleryComponent implements OnInit {
   videoFailed = false;
   errorMessage = "";
   picturesSelected = false;
-  pic = false;
-  smallPic = false;
+  // pic = false;
+  // smallPic = false;
   public authority: string;
   public roles: string[];
   public largeWidth: boolean;

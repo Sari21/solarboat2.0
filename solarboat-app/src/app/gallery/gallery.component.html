@@ -36,7 +36,7 @@
                                            [ngClass]="{'failed': failed }"/>
                                 </div> -->
                                 <div class="col-11 col-md-6 col-lg-6 col-sm-10 pb-4 pl-3">
-                                    <ngx-dropzone (change)="onSelect($event)">
+                                    <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png">
                                         <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
                                         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
                                             (removed)="onRemove(f)">
