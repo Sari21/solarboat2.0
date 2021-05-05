@@ -34,7 +34,7 @@ public class FileController {
         this.fileStorageService = fileStorageService;
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured("ROLE_USER")
     @PostMapping("/uploadFile")
     public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("path") String path) throws URISyntaxException {
         String fileName = fileStorageService.storeFile(file, path);
@@ -65,7 +65,7 @@ public class FileController {
                   .collect(Collectors.toList());
       }
       */
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured("ROLE_USER")
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
@@ -90,7 +90,7 @@ public class FileController {
                 .body(resource);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured("ROLE_USER")
     @DeleteMapping(path = "/deleteFile")
     public void deleteFile(@RequestBody String fileName) {
        // this.fileStorageService.deleteFile(fileName);

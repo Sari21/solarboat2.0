@@ -32,7 +32,7 @@ public class GalleryController {
     public GalleryPicture addGalleryPicture(@Validated @RequestBody GalleryPicture galleryPicture){
         return galleryService.addGalleryPicture(galleryPicture);
     }*/
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PostMapping()//(consumes = "application/json", produces = "application/json")
     public ResponseEntity<GalleryPicture> addPicture(@RequestParam("file") MultipartFile file, @RequestParam("title_hu") String titleHu, @RequestParam("title_en")String titleEn) throws URISyntaxException {
         if(file == null){
@@ -59,7 +59,7 @@ public class GalleryController {
         responseHeaders.setLocation(new URI("uploadFile"));
         return new ResponseEntity<>(picture, responseHeaders ,HttpStatus.CREATED);
     }
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PutMapping
     public GalleryPicture updatePicture(@Validated @RequestBody GalleryPicture galleryPicture){
         return galleryService.updatePicture(galleryPicture);
@@ -72,7 +72,7 @@ public class GalleryController {
     public Optional<GalleryPicture> getPictureById(@PathVariable("id") Long id){
         return galleryService.getPictureById(id);
     }
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @DeleteMapping(path = "{id}")
     public void deletePicture(@PathVariable("id") Long id){
         galleryService.deletePictureById(id);

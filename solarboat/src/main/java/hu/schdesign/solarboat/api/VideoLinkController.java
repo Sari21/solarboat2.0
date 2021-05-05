@@ -26,7 +26,7 @@ public class VideoLinkController {
         return ResponseEntity.ok(videoLinkService.getAllLinks());
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PostMapping
     public ResponseEntity<VideoLink>  addVideoLink(@RequestBody VideoLink link){
         return ResponseEntity.ok(videoLinkService.addVideoLink(link));
@@ -43,7 +43,7 @@ public class VideoLinkController {
 
         return ResponseEntity.ok(link.get());
     }
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         if (!videoLinkService.findLinkById(id).isPresent()) {

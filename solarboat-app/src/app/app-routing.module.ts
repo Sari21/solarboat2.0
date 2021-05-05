@@ -19,16 +19,15 @@ const routes: Routes = [
   { path: "team", component: TeamComponent },
   { path: "mainpage", component: MainpageComponent },
   { path: "news", component: NewsComponent },
-  { path: "sponsors", component: SponsorsComponent,   canActivate: [AuthGuardService],},
-  { path: "boatdata", component: DataVisualizationComponent },
+  { path: "sponsors", component: SponsorsComponent},
+  { path: "boatdata", component: DataVisualizationComponent, canActivate: [AuthGuardService] },
   {
     path: "achievements",
     component: AchievementsComponent,
-    canActivate: [AuthGuardService],
-    data: { roles: [RoleType.Admin] }
+    canActivate: [AuthGuardService]
   },
   { path: "admin", redirectTo: "/auth/login" },
-  { path: "users", component: UsersComponent },
+  { path: "users", component: UsersComponent, canActivate: [AuthGuardService], data: { roles: [RoleType.Admin] }},
   { path: "", redirectTo: "/mainpage", pathMatch: "full" },
   { path: "**", redirectTo: "/mainpage", pathMatch: "full" },
 ];

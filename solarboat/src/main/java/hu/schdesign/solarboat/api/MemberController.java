@@ -41,19 +41,19 @@ public class MemberController {
         return memberService.getMemberById(id);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public Member addMember(@RequestBody Member member) {
         return memberService.addMember(member);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PutMapping(path = "{id}")
     public Member updateMember(@RequestBody Member member) {
         return memberService.updateMember(member);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @DeleteMapping(path = "{id}")
     public void deleteMemberById(@PathVariable("id") Long id) {
         teamService.deleteMemberFromEveryTeamIfNotLeader(id);
