@@ -1,0 +1,561 @@
+{
+    "main": [
+        {
+            "name": "amphenol",
+            "link": "https://www.amphenol-icc.com/?__cf_chl_jschl_tk__=c616d5738b5ae373e84ec50a2be1f3954a146f0f-1593333443-0-ATkcyfra1cfd910iHLJva7Zt2gCMGPA16AeIa2njoe9gudmGAaWNsV371tfV4uBO7ASQdXx4YnAjkJ2Hr3FuGaOVF5N6bbwdOQncrNsftSF1yYLtL-dX05p3kQsneWoy94CSqKh8amuy8MwTbbUMdDK3Rsov4XkhydqSAhM8tzPFVa0jrKX77lBSQYF_fsm9ZHOH--cBGusdiObto00QfKjDzRxytptY35MDkIwbOuHke0hLZwMlEX36Y2ZCAsqHE_BO4LK-dyhxailMII_NG0ozTwrWplr63Tr-0UIwR98v8LWhKW0rKQTKo85VMwKJR66Y14FqKMxkCczu6j-ahD8&fbclid=IwAR1VD5IU75YVZJgyBpfzN8YZzgmnsB8dFtL6vh6YU0OSqqMR30AyrqKeAfE",
+            "picture": "amphenol.png",
+            "row": 1,
+            "orderNumber": 0,
+            "id": 84,
+            "groupId": "MAIN"
+        },
+        {
+            "name": "bg",
+            "link": "http://afteam.hu/",
+            "picture": "bg.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 85,
+            "groupId": "MAIN"
+        },
+        {
+            "name": "porsche",
+            "link": "https://www.porschehungaria.hu/",
+            "picture": "porsche.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 86,
+            "groupId": "MAIN"
+        }
+    ],
+    "top": [
+        {
+            "name": "furukawa",
+            "link": "http://www.feti.hu/",
+            "picture": "furukawa.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 89,
+            "groupId": "TOP"
+        },
+        {
+            "name": "boatshow",
+            "link": "https://boatshow.hu/",
+            "picture": "boatshow.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 90,
+            "groupId": "TOP"
+        },
+        {
+            "name": "liion",
+            "link": "https://www.li-ion.hu/",
+            "picture": "liion.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 91,
+            "groupId": "TOP"
+        },
+        {
+            "name": "st",
+            "link": "https://snt.hu/",
+            "picture": "st.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 92,
+            "groupId": "TOP"
+        },
+        {
+            "name": "easturn",
+            "link": "https://easturn.hu/",
+            "picture": "easturn.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 93,
+            "groupId": "TOP"
+        },
+        {
+            "name": "zoltek",
+            "link": "https://zoltek.com/",
+            "picture": "zoltek.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 94,
+            "groupId": "TOP"
+        },
+        {
+            "name": "ansys",
+            "link": "https://www.econengineering.com/hu/",
+            "picture": "ansys.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 95,
+            "groupId": "TOP"
+        },
+        {
+            "name": "varinex",
+            "link": "https://www.varinex.hu/",
+            "picture": "varinex.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 96,
+            "groupId": "TOP"
+        },
+        {
+            "name": "dwa",
+            "link": "https://www.dasweltauto.hu/",
+            "picture": "dwa.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 97,
+            "groupId": "TOP"
+        },
+        {
+            "name": "Solbian",
+            "link": "https://www.solbian.eu/en/?fbclid=IwAR1Ry01bAKMXodH6KGihoxTwQDyQrfai4pvPp3Uw2bAuNyZ9AlxjjY5nYk4",
+            "picture": "solbian.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 148,
+            "groupId": "TOP"
+        },
+        {
+            "name": "FOXCONN",
+            "link": "https://www.foxconn.hu/",
+            "picture": "foxconn.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 154,
+            "groupId": "TOP"
+        }
+    ],
+    "other": [
+        {
+            "name": "titan",
+            "link": "https://www.etiweb.hu/",
+            "picture": "titan.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 98,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "controllers",
+            "link": "http://www.mgm-controllers.com/",
+            "picture": "controllers.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 99,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "econ",
+            "link": "https://www.econengineering.com/hu/",
+            "picture": "econ.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 100,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "harting",
+            "link": "https://www.harting.com/US/en",
+            "picture": "harting.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 101,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "gross",
+            "link": "https://www.schrauben-gross.com/hu/home.html",
+            "picture": "gross.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 102,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "novia",
+            "link": "https://novia.hu/",
+            "picture": "novia.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 103,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "henkel",
+            "link": "https://www.henkel.hu/",
+            "picture": "henkel.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 104,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "grobelox",
+            "link": "http://grobelox.hu/",
+            "picture": "grobelox.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 105,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "polokozpont",
+            "link": "https://www.polokozpont.hu/",
+            "picture": "polokozpont.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 106,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "digital_ocean",
+            "link": "https://www.digitalocean.com/",
+            "picture": "digital_ocean.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 107,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "flaar",
+            "link": "http://flaar18.hu/rolunk/",
+            "picture": "flaar.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 108,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "pauger",
+            "link": "https://www.paugercarbon.com/",
+            "picture": "pauger.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 109,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "xxl_feny",
+            "link": "https://xxl-feny-kft.business.site/",
+            "picture": "xxl_feny.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 110,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "national_instruments",
+            "link": "https://www.ni.com/fr-fr.html",
+            "picture": "national_instruments.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 111,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "knorr-bremse",
+            "link": "https://www.knorr-bremse.hu/hu/",
+            "picture": "knorr-bremse.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 112,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "analog_devices",
+            "link": "https://www.analog.com/en/index.html",
+            "picture": "analog_devices.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 113,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "fiber",
+            "link": " ",
+            "picture": "fiber.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 114,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "korrekt",
+            "link": "http://www.korrektnyomda.hu/",
+            "picture": "korrekt.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 115,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "lomex",
+            "link": "https://lomex.hu/hu/homepage",
+            "picture": "lomex.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 116,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "tomkom",
+            "link": "https://radioberlet.hu/",
+            "picture": "tomkom.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 117,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "myactioncam",
+            "link": "https://myactioncam.hu/",
+            "picture": "myactioncam.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 118,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "gurit",
+            "link": "https://www.gurit.com/",
+            "picture": "gurit.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 119,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "sonima",
+            "link": "https://sonima.net/en/company/contact/projekt-ungarn/index.html",
+            "picture": "sonima.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 120,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "kompozitor",
+            "link": "http://kompozitor.hu/",
+            "picture": "kompozitor.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 121,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "lakner",
+            "link": "https://laknerponyva.hu/",
+            "picture": "lakner.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 122,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "intertechnika",
+            "link": "http://intertechnika.eu/",
+            "picture": "intertechnika.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 123,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "ptc",
+            "link": "https://www.ptc.com/",
+            "picture": "ptc.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 124,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "unipcb",
+            "link": "http://www.unipcb.hu/",
+            "picture": "unipcb.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 125,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "forcam",
+            "link": "http://www.forcam.hu/",
+            "picture": "forcam.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 126,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "rosso",
+            "link": "https://www.facebook.com/rossodekor/",
+            "picture": "rosso.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 127,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "skyfol",
+            "link": "https://www.skyfol.hu/",
+            "picture": "skyfol.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 128,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "martin_metals",
+            "link": "https://www.metalproduct.hu/",
+            "picture": "martin_metals.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 129,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "modul",
+            "link": "http://modul-fogaskerek.hu/",
+            "picture": "modul.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 130,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "igus",
+            "link": "https://www.igus.hu/?clid=Cj0KCQjwiILsBRCGARIsAHKQWLNy3TF28-P19VdH3u4745YawOUNb9lBXrzZol0jv1moqSvkRjD5MBYaAqdzEALw_wcB",
+            "picture": "igus.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 131,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "autopro",
+            "link": "https://autopro.hu/?gclid=Cj0KCQjwiILsBRCGARIsAHKQWLPPwbT4ll9nVn6cioy0x-oRbSjdL0QWCVtxCfj9FwQpzdo7UEEln28aAgvNEALw_wcB",
+            "picture": "autopro.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 132,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "pikas",
+            "link": "http://www.pikas.at/cms/",
+            "picture": "pikas.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 133,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "gigavac",
+            "link": "https://www.gigavac.com/",
+            "picture": "gigavac.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 134,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "Powerbelt",
+            "link": "https://www.powerbelt.hu/",
+            "picture": "powerbelt.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 146,
+            "groupId": "OTHER"
+        },
+        {
+            "name": "Védőfelszerelések.hu",
+            "link": "https://vedofelszerelesek.hu/",
+            "picture": "vedofelszerelesek.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 153,
+            "groupId": "OTHER"
+        }
+    ],
+    "partner": [
+        {
+            "name": "Energiatudományi Kutatóközpont",
+            "link": "https://www.ek-cer.hu/",
+            "picture": "centre_for_energy_research.png",
+            "row": 0,
+            "orderNumber": 0,
+            "id": 150,
+            "groupId": "PARTNER"
+        }
+    ],
+    "uni": [
+        {
+            "name": "BME",
+            "link": "http://www.bme.hu/",
+            "picture": "bme.png",
+            "row": 1,
+            "orderNumber": 0,
+            "id": 83,
+            "groupId": "UNI"
+        },
+        {
+            "name": "mvk",
+            "link": "http://ehk.bme.hu/",
+            "picture": "mvk.png",
+            "row": 2,
+            "orderNumber": 0,
+            "id": 136,
+            "groupId": "UNI"
+        },
+        {
+            "name": "ehk",
+            "link": "http://ehk.bme.hu/",
+            "picture": "ehk.png",
+            "row": 2,
+            "orderNumber": 0,
+            "id": 137,
+            "groupId": "UNI"
+        },
+        {
+            "name": "gpk",
+            "link": "https://gpk.bme.hu/hu/",
+            "picture": "gpk.png",
+            "row": 3,
+            "orderNumber": 0,
+            "id": 138,
+            "groupId": "UNI"
+        },
+        {
+            "name": "aut",
+            "link": "https://www.aut.bme.hu/",
+            "picture": "aut.png",
+            "row": 4,
+            "orderNumber": 0,
+            "id": 140,
+            "groupId": "UNI"
+        },
+        {
+            "name": "gt3",
+            "link": "http://gt3.bme.hu/",
+            "picture": "gt3.png",
+            "row": 4,
+            "orderNumber": 0,
+            "id": 141,
+            "groupId": "UNI"
+        },
+        {
+            "name": "Anyagtudomány és Technológia Tanszék",
+            "link": "http://www.att.bme.hu/",
+            "picture": "att.png",
+            "row": 4,
+            "orderNumber": 0,
+            "id": 149,
+            "groupId": "UNI"
+        }
+    ]
+}

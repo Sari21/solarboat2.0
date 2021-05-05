@@ -38,7 +38,7 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PostMapping(consumes = "application/json")
     public News addNews(@Valid @RequestBody News news, Errors errors) {
         if (errors.hasErrors()) {
@@ -89,13 +89,13 @@ public class NewsController {
         return newsService.getPage(0, 2);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @DeleteMapping(path = "{id}")
     public void deleteNewsById(@PathVariable("id") Long id) {
         newsService.deleteNewsById(id);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_EDITOR")
     @PutMapping()
     public void updateNewsById(@Valid @RequestBody News news) {
         newsService.updateNews(news);

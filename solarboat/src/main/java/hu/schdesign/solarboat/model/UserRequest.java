@@ -1,31 +1,45 @@
-package hu.schdesign.solarboat.message.Request;
+package hu.schdesign.solarboat.model;
 
-import hu.schdesign.solarboat.model.RoleName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
-public class SignUpForm {
+public class UserRequest {
+
+    private Long id;
+
     @NotBlank
-    @Size(min = 3, max = 50)
+    @Size(min=3, max = 50)
     private String name;
 
     @NotBlank
-    @Size(min = 3, max = 50)
+    @Size(min=3, max = 50)
     private String username;
 
+    @NaturalId
     @NotBlank
-    @Size(max = 60)
+    @Size(max = 50)
     @Email
     private String email;
 
-    private Set<RoleName> role;
-
-    @NotBlank
-    @Size(min = 6, max = 40)
+    @Size(min=6, max = 100)
     private String password;
+
+    private Set<RoleName> roles = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -59,11 +73,11 @@ public class SignUpForm {
         this.password = password;
     }
 
-    public Set<RoleName> getRole() {
-        return role;
+    public Set<RoleName> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<RoleName> role) {
-        this.role = role;
+    public void setRoles(Set<RoleName> roles) {
+        this.roles = roles;
     }
 }

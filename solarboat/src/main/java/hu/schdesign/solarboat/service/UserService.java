@@ -3,14 +3,13 @@ package hu.schdesign.solarboat.service;
 import hu.schdesign.solarboat.dao.RoleRepository;
 import hu.schdesign.solarboat.dao.UserRepository;
 import hu.schdesign.solarboat.model.Role;
+import hu.schdesign.solarboat.model.RoleName;
 import hu.schdesign.solarboat.model.User;
+import hu.schdesign.solarboat.model.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -27,34 +26,54 @@ public class UserService {
     public Optional<User> getUserById(long id){
         return this.userRepository.findById(id);
     }
-    public User updateUser(User newUser)
-    {
-        Optional<User> oldUser = this.userRepository.findById(newUser.getId());
-        if(oldUser.isPresent()){
-            if(newUser.getPassword() != null){
-                oldUser.get().setPassword(newUser.getPassword());
-            }
-            oldUser.get().setUsername(newUser.getUsername());
-            oldUser.get().setName(newUser.getName());
-            oldUser.get().setEmail(newUser.getEmail());
+    public User updateUser(UserRequest newUser) {
+        User oldUser = this.userRepository.findById(newUser.getId()).orElseThrow(() ->
+        {
+            throw new RuntimeException("Nincs ilyen felhasználó");
+        });
 
-            Set<Role> newRoles = new HashSet<Role>();
-            oldUser.get().clearRoles();
-            for(Role r : newUser.getRoles()){
-                Optional<Role> tmprole = this.roleRepository.findByName(r.getName());
-                if(tmprole.isPresent()){
-                    newRoles.add(tmprole.get());
-                }
+        boolean newIsAdmin = newUser.getRoles().contains(RoleName.ROLE_ADMIN);
+        Role oldRole = oldUser.getRoles().stream().filter(x -> x.getName().equals(RoleName.ROLE_ADMIN)).findFirst().orElse(null);
+
+        if (!newIsAdmin && oldRole != null) {
+            List<User> admins = userRepository.findAllAdmin(RoleName.ROLE_ADMIN);
+            if (admins.size() == 1) {
+                throw new RuntimeException("Nem lehet módosítani az utolsó admint!");
             }
-            oldUser.get().setRoles(newRoles);
-            return this.userRepository.save(oldUser.get());
         }
-        return null;
+        oldUser.setUsername(newUser.getUsername());
+        oldUser.setName(newUser.getName());
+        oldUser.setEmail(newUser.getEmail());
+
+        Set<Role> newRoles = new HashSet<Role>();
+        oldUser.clearRoles();
+
+        newUser.getRoles().forEach(role -> {
+            Role tempRole = roleRepository.findByName(role)
+                    .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
+            newRoles.add(tempRole);
+//            for(Role r : newUser.getRoles()){
+//                Role tmprole = this.roleRepository.findByName(r.getName()).orElseThrow(() -> {throw new RuntimeException("Nincs ilyen szerepkör");});
+//                newRoles.add(tmprole);
+//            }
+        });
+            oldUser.setRoles(newRoles);
+            return this.userRepository.save(oldUser);
     }
     public User addUser(User user){
         return this.userRepository.save(user);
     }
     public void deleteUserById(long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Nincs felhasználó ilyen id-val!"));
+        Role isAdmin = user.getRoles().stream().filter(x -> x.getName().equals(RoleName.ROLE_ADMIN)).findFirst().orElse(null);
+
+        if(isAdmin != null){
+            List<User> admins = userRepository.findAllAdmin(RoleName.ROLE_ADMIN);
+            if(admins.size() == 1){
+                throw new RuntimeException("Nem lehet kitörölni az utolsó admint!");
+            }
+        }
+
         this.userRepository.deleteById(id);
     }
 }

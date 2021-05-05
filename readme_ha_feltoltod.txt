@@ -1,0 +1,3 @@
+-sponsoroknak kell order number
+-adminnak be kell állítani, hogy legyen user joga is
+-fel kell venni az editor rolet is

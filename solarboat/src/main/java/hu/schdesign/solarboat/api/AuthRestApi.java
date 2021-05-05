@@ -83,6 +83,9 @@ public class AuthRestApi {
 //        Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 //                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find. Run POST request /api/auth/setup/roles first!"));
 //        roles.add(adminRole);
+//        Role uesrRole = roleRepository.findByName(RoleName.ROLE_USER)
+//                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find. Run POST request /api/auth/setup/roles first!"));
+//        roles.add(uesrRole);
 //
 //        user.setRoles(roles);
 //        userRepository.save(user);
@@ -122,26 +125,26 @@ public class AuthRestApi {
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRole();
+        Set<RoleName> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
         strRoles.forEach(role -> {
-            switch (role) {
-                case "admin":
-                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+//            switch (role) {
+//                case "admin":
+                    Role adminRole = roleRepository.findByName(role)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
                     roles.add(adminRole);
-                    break;
-                case "editor":
-                    Role pmRole = roleRepository.findByName(RoleName.ROLE_EDITOR)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
-                    roles.add(pmRole);
-                    break;
-                default:
-                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
-                    roles.add(userRole);
-            }
+//                    break;
+//                case "editor":
+//                    Role pmRole = roleRepository.findByName(RoleName.ROLE_EDITOR)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
+//                    roles.add(pmRole);
+//                    break;
+//                default:
+//                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
+//                    roles.add(userRole);
+//            }
         });
 
         user.setRoles(roles);

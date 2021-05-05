@@ -2,10 +2,10 @@
 <div class="justify-content-center d-flex users">
   <div class="col-10">
 
-      <h1 class="title mt-5 mb-5">Felhasználók</h1>
-      <a class="btn " href="javascript:void(0)"  routerLink="/signup">
-        <span>Új felhasználó</span>
-      </a>
+    <h1 class="title mt-5 mb-5">Felhasználók</h1>
+    <a class="btn " href="javascript:void(0)" routerLink="/signup">
+      <span>Új felhasználó</span>
+    </a>
 
     <div class="justify-content-center d-flex">
       <table class="col-12 m-5">
@@ -35,61 +35,32 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="p-3">
-  <div class="modal-header">
-    <h4 class="modal-title">Felhasználó</h4>
-    <button type="button" class="close" aria-label="Close" (click)="close()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+    <div class="modal-header">
+      <h4 class="modal-title">Felhasználó</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
-  <label for="name">Név</label>
-  <textarea
-    required
-    id="name"
-    class="form-control"
-    [(ngModel)]="selectedUser.name"
-  >
+    <label for="name">Név</label>
+    <textarea required id="name" class="form-control" [(ngModel)]="selectedUser.name">
   </textarea>
 
-  <label for="username">Felhasználónév</label>
-  <input
-    required
-    id="username"
-    type="text"
-    class="form-control"
-    [(ngModel)]="selectedUser.username"
-  />
-  <label for="email">Email</label>
-  <input
-    required
-    id="email"
-    type="text"
-    class="form-control"
-    [(ngModel)]="selectedUser.email"
-  />
-  <label for="admin">Admin?</label>
-  <input
-    type="checkbox"
-    id="admin"
-    name="admin"
-    [(ngModel)]="this.isAdmin"
-    [checked]="this.isAdmin"
-  />
-  <div class="row">
-  <label for="editor">Szerkesztő?</label>
-  <input
-    type="checkbox"
-    id="editor"
-    name="editor"
-    [(ngModel)]="this.isEditor"
-    [checked]="this.isEditor"
-  />
-</div>
+    <label for="username">Felhasználónév</label>
+    <input required id="username" type="text" class="form-control" [(ngModel)]="selectedUser.username" />
+    <label for="email">Email</label>
+    <input required id="email" type="text" class="form-control" [(ngModel)]="selectedUser.email" />
+    <label for="admin">Admin?</label>
+    <input type="checkbox" id="admin" name="admin" [(ngModel)]="this.isAdmin" [checked]="this.isAdmin" />
+    <div class="row">
+      <label for="editor">Szerkesztő?</label>
+      <input type="checkbox" id="editor" name="editor" [(ngModel)]="this.isEditor" [checked]="this.isEditor" />
+    </div>
 
-  <div class="modal-footer">
-    <button type="submit" class="brk-btn" (click)="submit()">Mentés</button>
-    <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+    <div class="modal-footer">
+      <button type="submit" class="brk-btn" (click)="submit()">Mentés</button>
+      <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+    </div>
   </div>
-</div>
 </ng-template>
 <app-footer></app-footer>

@@ -1,3 +1,5 @@
+import { RoleType } from "../model/role-type.enum";
+
 export class SignUpInfo {
   name: string;
   username: string;
@@ -17,12 +19,12 @@ export class SignUpInfo {
     this.username = username;
     this.email = email;
     this.password = password;
-    this.role = ["user"];
+    this.role = [RoleType.User];
     if (admin) {
-      this.role.push("admin");
+      this.role.push(RoleType.Admin);
     }
     if(editor){
-      this.role.push("editor");
+      this.role.push(RoleType.Editor);
     }
   }
 }
