@@ -8,8 +8,6 @@ import {ToastrService} from 'ngx-toastr';
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
-// import AOS from 'aos';
-
 @Component({
     selector: 'app-news-preview',
     templateUrl: './news-preview.component.html',
@@ -24,14 +22,10 @@ export class NewsPreviewComponent implements OnInit {
         this.maxDate = new Date(currentYear + 1, 11, 31);
     }
 
-    // tslint:disable-next-line:variable-name
     shortArticleEn: string;
     shortArticleHu: string;
     form: any = {};
-    failed = false;
-    errorMessage = '';
     pictureService: PictureService;
-    fileToUpload: File = null;
     @Input() authority: string;
     @Input() news: News;
     @Output() onRemove = new EventEmitter<News>();
@@ -40,24 +34,34 @@ export class NewsPreviewComponent implements OnInit {
         spellcheck: true,
         height: '15rem',
         minHeight: '5rem',
-        placeholder: 'Enter text here...',
+        placeholder: 'Hír szövege...',
         translate: 'no',
         defaultParagraphSeparator: 'p',
-        defaultFontName: 'Arial',
+        defaultFontName: 'Roboto',
+        fonts: [
+            {class: 'arial', name: 'Arial'},
+            {class: 'times-new-roman', name: 'Times New Roman'},
+            {class: 'calibri', name: 'Calibri'},
+            {class: 'Roboto', name: 'Roboto'},
+            {class: 'KelsonSans-Normal', name: 'KelsonSans-Normal'},
+            {class: 'KelsonSans-Light', name: 'KelsonSans-Light'},
+            {class: 'KelsonSans-Bold', name: 'KelsonSans-Bold'}
+        ],
         toolbarHiddenButtons: [
             [
                 'textColor',
                 'backgroundColor',
                 'customClasses',
-                'link',
                 'unlink',
-                'insertImage',
+                'link',
                 'insertVideo',
+                'insertImage',
                 'insertHorizontalRule'
             ]
         ]
     };
     maxDate: Date;
+    files: File[] = [];
 
     decodeEntities(str) {
         // this prevents any overhead from creating the object each time
@@ -116,49 +120,33 @@ export class NewsPreviewComponent implements OnInit {
         this.news.content_hu = this.form.content;
         this.news.title_en = this.form.title_en;
         this.news.content_en = this.form.content_en;
-        this.news.date = this.form.date ? this.form.date : this.news.date;
-        const newsId = id;
-        if (this.fileToUpload) {
-            this.news.picture = '../../assets/news/' + this.fileToUpload.name;
-            // console.log('kep modositas');
-            this.uploadFileToActivity();
+        this.news.date = this.form.date ? this.formatDate(this.form.date) : this.formatDate(this.news.date);
+        this.news.pictures = this.files.length > 0 ? this.getImageUris() : this.news.pictures;
+        if (this.files.length > 0) {
+            this.pictureService.postMultipleFiles(this.files, 'news').subscribe(
+                (data) => {
+                    this.updateNews(empForm, this.news);
+                },
+                (error) => {
+                    this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+                }
+            );
+        } else {
+            this.updateNews(empForm, this.news);
         }
-        const o = {
-            id: newsId,
-            title_hu: this.form.title,
-            content_hu: this.form.content,
-            title_en: this.form.title_en,
-            content_en: this.form.content_en,
-            // date: this.form.date.replace(/\./g, '-'),
-            date: this.form.date ? this.formatDate(this.form.date) : null,
-            picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : this.news.picture
-
-        };
-        this.apiService.putNews(o).subscribe(
+    }
+    private updateNews(empForm: any, news: News) {
+        this.apiService.putNews(news).subscribe(
             (res) => {
                 this.showSuccess('Hír módosítva');
                 this.modalService.dismissAll('put');
                 this.form = empForm;
-                this.form.reset();
-                this.ngOnInit();
+                // this.ngOnInit();
             },
             (err) => {
                 this.showError(err.error.message, 'Sikertelen módosítás');
             }
         );
-
-    }
-
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
-    }
-
-    uploadFileToActivity() {
-        this.pictureService.postFile(this.fileToUpload, 'news').subscribe(data => {
-            // do something, if upload success
-        }, error => {
-            // console.log(error);
-        });
     }
 
     showSuccess(message) {
@@ -180,5 +168,21 @@ export class NewsPreviewComponent implements OnInit {
         ].join('-');
 
         return resultDate;
+    }
+    onSelectFile(event) {
+        this.files.push(...event.addedFiles);
+    }
+
+    onRemoveFile(event) {
+        this.files.splice(this.files.indexOf(event), 1);
+
+    }
+
+    private getImageUris() {
+        let pictures: string[] = [];
+        for (let image of this.files) {
+            pictures.push('../../assets/news/' + image.name);
+        }
+        return pictures;
     }
 }

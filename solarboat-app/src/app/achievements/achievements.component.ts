@@ -61,6 +61,7 @@ export class AchievementsComponent implements OnInit {
   onSubmit(empForm: any) {
     this.pictureService.postFile(this.form.picture, 'achievement').subscribe(
         (data) => {
+
           this.saveAchievement(empForm);
         },
         (error) => {

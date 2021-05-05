@@ -3,15 +3,10 @@ package hu.schdesign.solarboat.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.ArrayList;
 
 @Entity
 @Table
@@ -20,7 +15,7 @@ public class News {
     private Long id;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
-    private String picture;
+    private ArrayList<String> pictures;
     @NotNull
     @Size(min=2, max=50)
     private String title_hu;
@@ -41,16 +36,16 @@ public class News {
         this.content_hu = null;
         this.title_en = null;
         this.content_en = null;
-        this.picture = null;
+        this.pictures = null;
         this.date = null;
     }
 
-    public News(@JsonProperty("date")LocalDate date, @JsonProperty("title_hu")String title_hu, @JsonProperty("content_hu") String content_hu, @JsonProperty("title_en")String title_en, @JsonProperty("content_en") String content_en, @JsonProperty("picture") String picture){
+    public News(@JsonProperty("date") LocalDate date, @JsonProperty("title_hu") String title_hu, @JsonProperty("content_hu") String content_hu, @JsonProperty("title_en") String title_en, @JsonProperty("content_en") String content_en, @JsonProperty("pictures")  ArrayList<String> pictures){
         this.title_hu = title_hu;
         this.content_hu = content_hu;
         this.title_en = title_en;
         this.content_en = content_en;
-        this.picture = picture;
+        this.pictures = pictures;
         this.date = LocalDate.now();
         if(date!= null){
             this.date = date;
@@ -82,12 +77,12 @@ public class News {
         return String.valueOf(date);
     }
 
-    public String getPicture() {
-        return picture;
+    public ArrayList<String> getPictures() {
+        return pictures;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictures(ArrayList<String> pictures) {
+        this.pictures = pictures;
     }
 
     public String getTitle_hu() {
