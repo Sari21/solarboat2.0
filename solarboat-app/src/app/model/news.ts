@@ -3,7 +3,7 @@ export class News {
     content_hu: string;
     title_en: string;
     content_en: string;
-    picture: string;
+    pictures: string[];
     id: number;
     date: string;
 }

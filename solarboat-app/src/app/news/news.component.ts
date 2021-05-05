@@ -6,7 +6,6 @@ import {PictureService} from '../shared/picture.service';
 import {Globals} from '../globals';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {ToastrService} from 'ngx-toastr';
-import {GalleryPictureRequest} from "../model/gallery-picture-request";
 
 @Component({
     selector: 'app-news',
@@ -28,78 +27,81 @@ export class NewsComponent implements OnInit {
     public authority: string;
     form: any = {};
     pictureService: PictureService;
-    fileToUpload: File = null;
     config: AngularEditorConfig = {
         editable: true,
         spellcheck: true,
         height: '15rem',
         minHeight: '5rem',
-        placeholder: 'Enter text here...',
+        placeholder: 'Hír szövege...',
         translate: 'no',
         defaultParagraphSeparator: 'p',
-        defaultFontName: 'Arial',
+        defaultFontName: 'Roboto',
+        fonts: [
+            {class: 'arial', name: 'Arial'},
+            {class: 'times-new-roman', name: 'Times New Roman'},
+            {class: 'calibri', name: 'Calibri'},
+            {class: 'Roboto', name: 'Roboto'},
+            {class: 'KelsonSans-Normal', name: 'KelsonSans-Normal'},
+            {class: 'KelsonSans-Light', name: 'KelsonSans-Light'},
+            {class: 'KelsonSans-Bold', name: 'KelsonSans-Bold'}
+        ],
         toolbarHiddenButtons: [
             [
                 'textColor',
                 'backgroundColor',
                 'customClasses',
-                'link',
                 'unlink',
-                'insertImage',
+                'link',
                 'insertVideo',
+                'insertImage',
                 'insertHorizontalRule'
             ]
         ]
     };
     maxDate: Date;
     files: File[] = [];
-    newPicture: GalleryPictureRequest;
-    picturesSelected = false;
 
     ngOnInit(): void {
         this.getNews();
         this.checkAuth();
-        this.newPicture = new GalleryPictureRequest();
     }
 
     onSubmit(empForm: any, event: Event) {
         event.preventDefault();
-        // tslint:disable-next-line:ban-types
-        let o: Object;
-        if (this.fileToUpload != null) {
-            this.uploadFileToActivity();
-        }
-        o = {
+        let news: Object;
+        news = {
             title_hu: this.form.title,
             content_hu: this.form.content,
             title_en: this.form.title_en,
             content_en: this.form.content_en,
             date: this.form.date ? this.globals.formatDate(this.form.date) : null,
-            picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : ''
+            pictures: this.files.length > 0 ? this.getImageUris() : null
         };
-        this.apiService.addNews(o).subscribe(
+        if (this.files.length > 0) {
+            this.pictureService.postMultipleFiles(this.files, 'news').subscribe(
+                (data) => {
+                    this.saveNews(empForm, news);
+                },
+                (error) => {
+                    this.showError(error.message, 'Hiba a fájlfeltöltéskor');
+                }
+            );
+        } else {
+            this.saveNews(empForm, news);
+        }
+    }
+
+    private saveNews(empForm: any, news) {
+        this.apiService.addNews(news).subscribe(
             (data) => {
                 this.showSuccess('Sikeres mentés');
                 this.pushNews(data);
                 this.form = empForm;
-                this.form.reset();
-                this.fileToUpload = null;
+                this.files = null;
             },
             (err) => {
                 this.showError(err.error.message, 'Sikertelen mentés');
             });
-    }
-
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
-    }
-
-    uploadFileToActivity() {
-        this.pictureService.postFile(this.fileToUpload, 'news').subscribe(data => {
-            // do something, if upload success
-        }, error => {
-            // console.log(error);
-        });
     }
 
     checkAuth() {
@@ -143,13 +145,13 @@ export class NewsComponent implements OnInit {
     private pushNews(news) {
         let n: News;
         n = {
-            id: 0,
+            id: news.id,
             title_hu: news.title,
             content_hu: news.content,
             title_en: news.title_en,
             content_en: news.content_en,
             date: news.date,
-            picture: this.fileToUpload ? '../../assets/news/' + this.fileToUpload.name : ''
+            pictures: news.pictures
         };
         this.allnews.unshift(n);
     }
@@ -163,17 +165,19 @@ export class NewsComponent implements OnInit {
     }
 
     onSelectFile(event) {
-        if (this.files.length > 0) {
-            this.files = [];
-        }
         this.files.push(...event.addedFiles);
-        this.form.picture = this.files[0];
-        this.picturesSelected = true;
     }
 
     onRemoveFile(event) {
         this.files.splice(this.files.indexOf(event), 1);
-        this.picturesSelected = false;
 
+    }
+
+    private getImageUris() {
+        let pictures: string[] = [];
+        for (let image of this.files) {
+            pictures.push('../../assets/news/' + image.name);
+        }
+        return pictures;
     }
 }

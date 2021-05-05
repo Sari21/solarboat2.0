@@ -7,6 +7,8 @@
  ALTER TABLE db_solarboat.achievement CONVERT TO CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
 
 
+#  DROP TABLE db_solarboat.news;
+# ALTER TABLE db_solarboat.news DROP picture;
 # DROP TABLE db_solarboat.team_members;
 # DROP TABLE db_solarboat.team;
 # ALTER TABLE db_solarboat.member MODIFY job_hu NVARCHAR(50) NULL;

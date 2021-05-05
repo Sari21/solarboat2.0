@@ -76,22 +76,21 @@
                                     </div>
                                 </mat-tab>
                             </mat-tab-group>
-
-                            <div class="col-md-6 col-lg-6 col-12 pb-2">
-                                <ngx-dropzone (change)="onSelectFile($event)">
-                                    <ngx-dropzone-label>Húzd ide a képet!</ngx-dropzone-label>
-                                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
-                                                          (removed)="onRemoveFile(f)">
-                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                                    </ngx-dropzone-preview>
-                                </ngx-dropzone>
-                                <!--                                <div class="form-group">-->
-                                <!--                                    <label class="col-12" for="file">Kép (opcionális)</label>-->
-                                <!--                                    <input type="file"-->
-                                <!--                                           id="file"-->
-                                <!--                                           [(ngModel)]="form.file" name="file"-->
-                                <!--                                           (change)="handleFileInput($event.target.files)">-->
-                                <!--                                </div>-->
+                            <div class="row p-3 ">
+                                <div class="col-md-6 col-lg-6 col-12 pb-2">
+                                    <ngx-dropzone (change)="onSelectFile($event)">
+                                        <ngx-dropzone-label>Húzd ide a képet/képeket!</ngx-dropzone-label>
+                                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
+                                                              (removed)="onRemoveFile(f)">
+                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                        </ngx-dropzone-preview>
+                                    </ngx-dropzone>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-12 pb-2">
+                                    <mat-card>Csak fektetett, jpg, jpeg és pgn fájltípus tölthető fel. Több kép esetén
+                                        használjuk azonos méretarányú képeket!
+                                    </mat-card>
+                                </div>
                             </div>
 
                             <div class="col-md-6 col-lg-6 col-12 pb-2">
