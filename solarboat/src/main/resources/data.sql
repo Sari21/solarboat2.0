@@ -6,9 +6,9 @@
  ALTER TABLE db_solarboat.member CONVERT TO CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
  ALTER TABLE db_solarboat.achievement CONVERT TO CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
 
-
-#  DROP TABLE db_solarboat.news;
+#INSERT INTO db_solarboat.roles (name) VALUE ("ROLE_EDITOR");
 # ALTER TABLE db_solarboat.news DROP picture;
+ALTER TABLE db_solarboat.member MODIFY job_hu NVARCHAR(50) NULL;
 # DROP TABLE db_solarboat.team_members;
 # DROP TABLE db_solarboat.team;
-# ALTER TABLE db_solarboat.member MODIFY job_hu NVARCHAR(50) NULL;
+#  DROP TABLE db_solarboat.news;

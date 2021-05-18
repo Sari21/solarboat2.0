@@ -125,7 +125,7 @@ export class TeamEditmembersComponent implements OnInit {
                     (err) => {
                         this.showError(err.error.message, 'Sikertelen törlés');
                     });
-                this.modalService.dismissAll('put');
+                this.modalService.dismissAll('delete');
                 this.form = null;
             }
         });
