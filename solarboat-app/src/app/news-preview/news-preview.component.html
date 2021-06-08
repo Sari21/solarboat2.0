@@ -54,7 +54,7 @@
             <mat-icon class="bigger-icon">calendar_today</mat-icon>
             <div class="pl-1">{{news.date| date:'yyyy.MM.dd'}}</div>
         </div>
-        <div class="text-wrap col-12 p-0">
+        <div class="">
             <!--                        <p translate class="card-text mt-3 text-break" [translateParams]="{ content_en: news.content_en, content_hu: news.content_hu}">NEWS.content</p>-->
             <div [innerHTML]="'NEWS.content' | translate: {content_en: news.content_en, content_hu: news.content_hu}"></div>
         </div>
@@ -64,7 +64,7 @@
 <!--                <img [src]="news.picture" alt="picture" title="picture"/>-->
 <!--            </div>-->
 <!--        </div>-->
-        <mdb-carousel id="picture-slide" [animation]="'slide'" class="mt-4">
+        <mdb-carousel id="picture-slide" [animation]="'slide'"  [interval]="'0'" class="mt-4">
             <mdb-carousel-item *ngFor="let picture of news.pictures">
                 <img class="d-block w-100" [src]="picture">
             </mdb-carousel-item>
