@@ -146,24 +146,26 @@ export class SponsorsComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
+                console.log("itt vagyok");
                 this.sponsorService.deleteSponsor(sponsor.id).subscribe(
                     (data) => {
+                        console.log(data);
                         this.showSuccess('Sikeres törlés');
                         switch (sponsor.group) {
                             case "main":
-                                this.allSponsors.main.splice(this.allSponsors.main.indexOf(sponsor), 1);
+                                this.main.splice(this.main.indexOf(sponsor), 1);
                                 break;
                             case "top":
-                                this.allSponsors.top.splice(this.allSponsors.top.indexOf(sponsor), 1);
+                                this.top.splice(this.top.indexOf(sponsor), 1);
                                 break;
                             case "other":
-                                this.allSponsors.other.splice(this.allSponsors.other.indexOf(sponsor), 1);
+                                this.other.splice(this.other.indexOf(sponsor), 1);
                                 break;
                             case "partner":
-                                this.allSponsors.partner.splice(this.allSponsors.partner.indexOf(sponsor), 1);
+                                this.partner.splice(this.partner.indexOf(sponsor), 1);
                                 break;
                             case "uni":
-                                this.allSponsors.uni.splice(this.allSponsors.uni.indexOf(sponsor), 1);
+                                this.uni.splice(this.uni.indexOf(sponsor), 1);
                                 this.splitSponsors();
                                 break;
                             default:
