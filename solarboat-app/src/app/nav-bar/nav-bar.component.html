@@ -42,10 +42,7 @@
             </li>
 
             <li class="nav-item">
-                <a translate
-                   class="nav-link"
-                   routerLink="/achievements"
-                   routerLinkActive="active-link"
+                <a translate class="nav-link" routerLink="/achievements" routerLinkActive="active-link"
                 >NAV.achievements</a
                 >
             </li>
@@ -90,33 +87,33 @@
                 </label>
               </li>
             -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
+            <!--            <li class="nav-item dropdown">-->
+            <!--              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--                Dropdown-->
+            <!--              </a>-->
+            <!--              <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+            <!--                <a class="dropdown-item" href="#">Action</a>-->
+            <!--                <a class="dropdown-item" href="#">Another action</a>-->
+            <!--                <div class="dropdown-divider"></div>-->
+            <!--                <a class="dropdown-item" href="#">Something else here</a>-->
+            <!--              </div>-->
+            <!--            </li>-->
 
             <li *ngIf="authority" class="nav-item">
                 <a class="nav-link" routerLink="/mainpage" (click)="logout()">Logout</a>
             </li>
         </ul>
     </div>
-  <ul class="nav">
-    <li *ngIf=" translate.currentLang == 'en' ">
-      <a class="language" (click)="translate.use('hu')">
-        <img src="../../assets/i18n/hu.png" alt="language" title="en"/>
-      </a>
-    </li>
-    <li *ngIf=" translate.currentLang == 'hu' ">
-      <a class="language" (click)="translate.use('en')">
-        <img src="../../assets/i18n/en.png" alt="language" title="en"/>
-      </a>
-    </li>
-  </ul>
+    <ul class="nav">
+        <li *ngIf=" translate.currentLang == 'en' ">
+            <a class="language" (click)="translate.use('hu')">
+                <img src="../../assets/i18n/hu.png" alt="language" title="en"/>
+            </a>
+        </li>
+        <li *ngIf=" translate.currentLang == 'hu' ">
+            <a class="language" (click)="translate.use('en')">
+                <img src="../../assets/i18n/en.png" alt="language" title="en"/>
+            </a>
+        </li>
+    </ul>
 </nav>

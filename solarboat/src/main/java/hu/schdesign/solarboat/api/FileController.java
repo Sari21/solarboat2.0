@@ -61,25 +61,6 @@ public class FileController {
                 file.getContentType(), file.getSize()), responseHeaders, HttpStatus.CREATED);
     }
 
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
-//    @PostMapping("/uploadMultipleFiles")
-//    public void uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @RequestParam("path") String path) throws URISyntaxException {
-//        List<String> fileDowloadUris = new ArrayList<String>();
-//        for (MultipartFile file : files) {
-//            String fileName = fileStorageService.storeFile(file, path);
-//
-//            if (fileName == null) {
-//                throw new CustomMessageApiException("The file is not an image");
-//            }
-//
-//            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                    .path("/downloadFile/")
-//                    .path(fileName)
-//                    .toUriString();
-//            fileDowloadUris.add(fileDownloadUri);
-//        }
-//    }
-
     @PostMapping("/uploadMultipleFiles")
     public List<ResponseEntity<UploadFileResponse>> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @RequestParam("path") String path ) {
         return Arrays.asList(files)

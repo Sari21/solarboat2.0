@@ -68,11 +68,15 @@ public class AuthRestApi {
 //    }
     @PostMapping("/setup/admin")
     public ResponseEntity<?> setupAdmin() {
+
         //leellenőrzöm hogy létre lett-e már hozva ilyen felhasználó
         if (userRepository.existsByUsername("sbt-admin")) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
+
+        //hozzáadom az új szerepkört
+        roleRepository.save(new Role(RoleName.ROLE_EDITOR));
 
         //hozzáadom az admint
         //username: sbt-admin
@@ -87,6 +91,9 @@ public class AuthRestApi {
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find. Run POST request /api/auth/setup/roles first!"));
         roles.add(userRole);
+        Role editorRole = roleRepository.findByName(RoleName.ROLE_EDITOR)
+                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find. Run POST request /api/auth/setup/roles first!"));
+        roles.add(editorRole);
 
         user.setRoles(roles);
         userRepository.save(user);
