@@ -12,7 +12,7 @@
                                 <mat-tab label="MAGYAR">
                                     <div class="form-group pt-3">
                                         <mat-form-field class="col-8 p-0">
-                                            <input matInput name="title" type="text" id="title"
+                                            <input matInput name="title_hu" type="text" id="title_hu"
                                                 [(ngModel)]="newPicture.title_hu" placeholder="Cím" required />
                                             <mat-error>Kötelező mező</mat-error>
                                         </mat-form-field>
@@ -23,8 +23,8 @@
                                         <mat-form-field class="col-8 p-0">
                                             <input matInput name="title_en" type="text" id="title_en"
                                                 [(ngModel)]="newPicture.title_en" placeholder="Title" required />
+                                                <mat-error>Kötelező mező</mat-error>
                                         </mat-form-field>
-                                        <mat-error>Kötelező mező</mat-error>
                                     </div>
                                 </mat-tab>
                             </mat-tab-group>
@@ -54,8 +54,8 @@
 
                             <!-- <a class="btn" (click)="uploadFileToActivity()" href="javascript:void(0)" [ngClass]="{'disabled': !isEnabled(loginForm.form.valid)}" ><span>Feltöltés</span></a> -->
                           
-                            <a class="btn" (ngSubmit)="uploadGalleryPicture(galleryForm)" href="javascript:void(0)"
-                                [ngClass]="{ disabled: !galleryForm.form.valid || files == [] }"><span>Feltöltés</span></a>
+                            <a class="btn" (click)="uploadGalleryPicture(galleryForm)" href="javascript:void(0)"
+                                [ngClass]="{ disabled: !galleryForm.form.valid }"><span>Feltöltés</span></a>
                         </form>
                     </div>
                 </div>
